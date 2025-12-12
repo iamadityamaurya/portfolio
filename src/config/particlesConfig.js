@@ -291,7 +291,7 @@ export const particlesOptions = {
                 "mode": "delete",
                 "value": 0
             },
-            "value": 100
+            "value": 50
         },
         "opacity": {
             "value": {
@@ -331,7 +331,7 @@ export const particlesOptions = {
         "size": {
             "value": {
                 "min": 1,
-                "max": 3
+                "max": 5
             },
             "animation": {
                 "count": 0,
