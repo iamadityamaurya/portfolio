@@ -1,0 +1,60 @@
+# Portfolio Website Blueprint
+
+This document outlines the structure and content for a personal portfolio website.
+
+## 1. Home Page (Landing)
+**Goal:** Create a strong first impression and introduce who you are.
+- **Hero Section:**
+  - Large, bold typography with your name and title (e.g., "Creative Developer", "UI/UX Designer").
+        Aditya Kumar Maurya, Full Stack Developer, App Developer, 
+  - Short, punchy tagline or value proposition.
+  - Call to Action (CTA) buttons: "View Work" and "Contact Me".
+  - Dynamic background or hero image/3D element.
+- **Brief Intro:** A 2-3 sentence summary of your expertise.
+- **Featured Work Preview:** A carousel or grid showing 2-3 top projects.
+
+## 2. About Me Page
+**Goal:** Share your story, personality, and professional journey.
+- **Bio:** detailed introduction, your background, education, and what drives you.
+- **Photo:** Professional yet personable headshot or creative portrait.
+- **Experience/Timeline:** Visual timeline of your career highlights and roles.
+- **Personal Interests:** Brief section on hobbies or interests to humanize you.
+- **Resume Download:** Button to download PDF resume.
+
+## 3. Projects / Portfolio Page
+**Goal:** Showcase your best work with detailed case studies.
+- **Project Grid:** Filterable grid (e.g., by category: Web, Mobile, Design) of project thumbnails.
+- **Project Cards:** Each card includes:
+  - Project Title
+  - Short description
+  - Tech stack icons
+  - "View Project" link
+- **Case Study Detail (Template for each project):**
+  - **Overview:** Problem statement and solution.
+  - **Role:** What you did.
+  - **Tech Stack:** Tools and languages used.
+  - **Screenshots/Demo:** High-quality images or video walkthroughs.
+  - **Links:** GitHub repo and Live Demo.
+
+## 4. Skills & Expertise Page
+**Goal:** Highlight technical capabilities and tools.
+- **Technical Skills:** Categorized lists (e.g., Frontend, Backend, Tools) with proficiency bars or icons.
+- **Soft Skills:** Communication, Leadership, Problem Solving.
+- **Certifications:** Badges or list of completed courses/certs.
+- **Services (Optional):** If freelancing, list what you offer (e.g., "Website Design", "Consulting").
+
+## 5. Contact Page
+**Goal:** Make it easy for people to reach you.
+- **Contact Form:** Name, Email, Subject, Message fields.
+- **Direct Info:** Email address, Location (City/Country).
+- **Social Links:** LinkedIn, GitHub, Twitter/X, Behance, etc.
+- **Availability Status:** "Currently open to new opportunities" or "Booked until [Month]".
+
+## 6. Blog / Insights (Optional)
+**Goal:** Demonstrate thought leadership and share knowledge.
+- **Article List:** Recent posts with titles, dates, and excerpts.
+- **Categories/Tags:** To organize content.
+
+## Global Elements (Header/Footer)
+- **Navigation Bar:** Logo, Links to pages, Theme Toggle (Light/Dark mode).
+- **Footer:** Copyright, Social Links, Quick links.
