@@ -110,7 +110,6 @@ const ContactPage = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-20 text-center"
                 >
-                    <span className="text-emerald-400 font-mono text-sm tracking-wider uppercase mb-2 block">Contact</span>
                     <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 inline-block">
                         Get In Touch
                     </h2>
@@ -260,10 +259,10 @@ const ContactPage = () => {
                                         {React.cloneElement(link.icon, { className: "w-6 h-6" })}
                                     </div>
                                     <div className="flex flex-col relative flex-1 h-6 overflow-hidden">
-                                        <span className="font-bold text-lg absolute inset-0 flex items-center transition-all duration-500 ease-out delay-500 group-hover:-translate-x-12 group-hover:opacity-0 group-hover:delay-75">
+                                        <span className="font-bold text-lg absolute inset-0 flex items-center transition-all duration-300 ease-out group-hover:-translate-y-full group-hover:opacity-0">
                                             {link.name}
                                         </span>
-                                        <span className="font-medium text-sm md:text-base text-emerald-300/90 absolute inset-0 flex items-center transition-all duration-1000 ease-out -translate-x-40 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-hover:delay-500">
+                                        <span className="font-medium text-sm md:text-base text-emerald-300/90 absolute inset-0 flex items-center transition-all duration-300 ease-out translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
                                             {link.handle}
                                         </span>
                                     </div>

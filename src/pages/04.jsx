@@ -40,7 +40,7 @@ const SkillsPage = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-20 text-center"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 inline-block">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 inline-block">
                         Technologies I Know
                     </h2>
                     <p className="text-slate-400 text-lg max-w-2xl mx-auto">

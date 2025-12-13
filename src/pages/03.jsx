@@ -47,12 +47,12 @@ const ProjectsPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="mb-16 text-center md:text-left"
+                    className="mb-20 text-center"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 inline-block">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 inline-block">
                         Featured Projects
                     </h2>
-                    <p className="text-slate-400 text-lg max-w-2xl">
+                    <p className="text-slate-400 text-lg max-w-2xl mx-auto">
                         A showcase of my recent work, ranging from web applications to embedded systems.
                     </p>
                 </motion.div>

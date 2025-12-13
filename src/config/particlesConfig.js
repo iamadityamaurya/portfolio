@@ -34,7 +34,7 @@ export const particlesOptions = {
         "detectsOn": "window",
         "events": {
             "onClick": {
-                "enable": true,
+                "enable": false,
                 "mode": "push"
             },
             "onDiv": {
@@ -295,8 +295,8 @@ export const particlesOptions = {
         },
         "opacity": {
             "value": {
-                "min": 0.3,
-                "max": 0.8
+                "min": 0.1,
+                "max": 0.5
             },
             "animation": {
                 "count": 0,
@@ -463,7 +463,7 @@ export const particlesOptions = {
             "distance": 100,
             "enable": true,
             "frequency": 1,
-            "opacity": 1,
+            "opacity": 0.5,
             "shadow": {
                 "blur": 5,
                 "color": {
