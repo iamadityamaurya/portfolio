@@ -42,9 +42,9 @@ const DecodingText = ({ text, onComplete }) => {
                 currentIndex++;
                 currentLetterCode = 65;
             } else {
-                currentLetterCode += 1;
+                currentLetterCode += 2;
             }
-        }, 30);
+        }, 20);
 
         return () => clearInterval(interval);
     }, [text]); // Intentionally omitting onComplete to avoid re-running effect

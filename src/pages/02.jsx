@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Box, Cpu, Sparkles } from 'lucide-react';
+import { Box, Cpu, Sparkles, Briefcase, Rocket } from 'lucide-react';
 import profileImage from '../assets/755b323b46fad9c3f86784c55c858b74.jpg';
 
 const AboutPage = () => {
@@ -77,20 +77,31 @@ const AboutPage = () => {
                         </div>
 
                         {/* Stats / Highlights */}
-                        <div className="grid grid-cols-2 gap-6 pt-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-8">
                             <motion.div
-                                whileHover={{ y: -5, borderColor: 'rgba(52, 211, 153, 0.5)' }}
-                                className="p-4 rounded-2xl bg-[#0a0404]/50 border border-slate-800 transition-colors cursor-default"
+                                whileHover={{ scale: 1.02, backgroundColor: "rgba(16, 185, 129, 0.05)" }}
+                                className="p-4 rounded-xl bg-slate-900/40 border border-slate-800 flex items-center gap-4 transition-all hover:border-emerald-500/50 group cursor-default"
                             >
-                                <h4 className="text-3xl font-bold text-emerald-400">1+</h4>
-                                <p className="text-sm text-slate-400">Years Experience</p>
+                                <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors">
+                                    <Briefcase className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h4 className="text-2xl font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">1+</h4>
+                                    <p className="text-sm text-slate-400">Years Experience</p>
+                                </div>
                             </motion.div>
+
                             <motion.div
-                                whileHover={{ y: -5, borderColor: 'rgba(96, 165, 250, 0.5)' }}
-                                className="p-4 rounded-2xl bg-[#0a0404]/50 border border-slate-800 transition-colors cursor-default"
+                                whileHover={{ scale: 1.02, backgroundColor: "rgba(59, 130, 246, 0.05)" }}
+                                className="p-4 rounded-xl bg-slate-900/40 border border-slate-800 flex items-center gap-4 transition-all hover:border-blue-500/50 group cursor-default"
                             >
-                                <h4 className="text-3xl font-bold text-blue-400">4+</h4>
-                                <p className="text-sm text-slate-400">Projects Completed</p>
+                                <div className="p-3 rounded-lg bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-slate-950 transition-colors">
+                                    <Rocket className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h4 className="text-2xl font-bold text-slate-100 group-hover:text-blue-400 transition-colors">4+</h4>
+                                    <p className="text-sm text-slate-400">Projects Completed</p>
+                                </div>
                             </motion.div>
                         </div>
 
