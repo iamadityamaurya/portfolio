@@ -6,62 +6,28 @@ import aiFillerBanner from '../assets/project_png/ai-filler-showcase.png';
 import medScrapperBanner from '../assets/project_png/medscrapper-showcase.png';
 import restockerBanner from '../assets/project_png/restocker-showcase.png';
 import addyBitesBanner from '../assets/project_png/addybites-showcase-wide.png';
+import portfolioBanner from '../assets/project_png/image.png';
+import motiaBanner from '../assets/project_png/motia-showcase.png';
+import projectData from '../assets/project_data/data.json';
+
+const imageMap = {
+    "aiFillerBanner": aiFillerBanner,
+    "medScrapperBanner": medScrapperBanner,
+    "restockerBanner": restockerBanner,
+    "addyBitesBanner": addyBitesBanner,
+    "portfolioBanner": portfolioBanner,
+    "motiaBanner": motiaBanner
+};
 
 
 
 const AllProjectsPage = () => {
     // Extended projects list
-    const projects = [
-        {
-            id: 1,
-            title: "AI Filler for Google Form",
-            category: "Extension",
-            image: aiFillerBanner,
-            description: "A Chrome extension that uses AI to automatically fill Google Forms. Features a Vercel serverless backend for intelligent form processing and automation.",
-            tech: ["Chrome Extension", "JavaScript", "Vercel Serverless", "Gemini AI"],
-            links: {
-                demo: "https://chromewebstore.google.com/detail/ai-filler-for-google-form/hdkgiebcambianonfpchpdbebnlmaafn",
-                code: "https://github.com/addy1947/google_form"
-            },
-            featured: true
-        },
-        {
-            id: 2,
-            title: "MedScrapper",
-            category: "Full Stack",
-            image: medScrapperBanner,
-            description: "Stop overpaying for your health. We search top pharmacies like 1mg and Apollo to find you the best deals in seconds.",
-            tech: ["React", "TypeScript", "Prisma", "Gemini AI"],
-            links: {
-                demo: "https://medscrapper.vercel.app/",
-                code: "https://github.com/addy1947/med_scraper"
-            },
-            featured: true
-        },
-        {
-            id: 3,
-            title: "Restocker",
-            category: "Full Stack",
-            image: restockerBanner,
-            description: "AI-powered restaurant inventory management system. Helps reduce waste by 40% and eliminates stockouts with intelligent tracking.",
-            tech: ["React", "Tailwind CSS", "AI Analytics", "Gemini AI", "Chart.js"],
-            links: {
-                demo: "https://restocker.vercel.app/",
-                code: "https://github.com/addy1947/restocker_frontend"
-            },
-            featured: true
-        },
-        {
-            id: 4,
-            title: "AddyBites",
-            category: "Full Stack",
-            image: addyBitesBanner,
-            description: "A full-stack food ordering platform featuring seamless cart management, user authentication, and real-time order tracking.",
-            tech: ["React", "Node.js", "Express", "MongoDB"],
-            links: { demo: "https://addybites.vercel.app", code: "https://github.com/addy1947/addyBites" },
-            featured: true
-        },
-    ];
+
+    const projects = projectData.map(project => ({
+        ...project,
+        image: imageMap[project.image]
+    }));
 
     const [filter, setFilter] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');

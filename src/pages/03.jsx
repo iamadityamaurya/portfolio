@@ -4,35 +4,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Code, Layers, Zap, ArrowRight } from 'lucide-react';
 import aiFillerBanner from '../assets/project_png/ai-filler-showcase.png';
 import medScrapperBanner from '../assets/project_png/medscrapper-showcase.png';
+import restockerBanner from '../assets/project_png/restocker-showcase.png';
+import addyBitesBanner from '../assets/project_png/addybites-showcase-wide.png';
+import portfolioBanner from '../assets/project_png/image.png';
+import motiaBanner from '../assets/project_png/motia-showcase.png';
+import projectData from '../assets/project_data/data.json';
+
+const imageMap = {
+    "aiFillerBanner": aiFillerBanner,
+    "medScrapperBanner": medScrapperBanner,
+    "restockerBanner": restockerBanner,
+    "addyBitesBanner": addyBitesBanner,
+    "portfolioBanner": portfolioBanner,
+    "motiaBanner": motiaBanner
+};
 
 
 
 const ProjectsPage = () => {
-    const projects = [
-        {
-            id: 1,
-            title: "AI Filler for Google Form",
-            category: "Extension",
-            image: aiFillerBanner,
-            description: "A Chrome extension that uses AI to automatically fill Google Forms. Features a Vercel serverless backend for intelligent form processing and automation.",
-            tech: ["Chrome Extension", "JavaScript", "Vercel Serverless", "Gemini AI"],
-            links: {
-                demo: "https://chromewebstore.google.com/detail/ai-filler-for-google-form/hdkgiebcambianonfpchpdbebnlmaafn",
-                code: "https://github.com/addy1947/google_form"
-            },
-            featured: true
-        },
-        {
-            id: 2,
-            title: "MedScrapper",
-            category: "Full Stack",
-            image: medScrapperBanner,
-            description: "Stop overpaying for your health. We search top pharmacies like 1mg and Apollo to find you the best deals in seconds.",
-            tech: ["React", "TypeScript", "Prisma", "Gemini AI"],
-            links: { demo: "https://medscrapper.vercel.app/", code: "https://github.com/addy1947/med_scraper" },
-            featured: true
-        },
-    ];
+    const projects = projectData
+        .filter(p => p.main_page_show === true)
+        .map(project => ({
+            ...project,
+            image: imageMap[project.image]
+        }));
 
 
 

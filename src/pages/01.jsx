@@ -151,7 +151,7 @@ const HomePage = () => {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                        transition={{ duration: 0.5, delay: 0.8 }}
+                        transition={{ duration: 0.1, delay: 0 }}
                         className="text-lg md:text-xl text-slate-400 max-w-4xl mb-10 leading-relaxed mx-auto font-light"
                     >
                         {"I build fast, accessible, and visually striking digital experiences. Whether web or mobile, my apps are designed to solve real-world problems with clean code and great design."

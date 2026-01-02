@@ -99,7 +99,7 @@ const AboutPage = () => {
                                     <Rocket className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h4 className="text-2xl font-bold text-slate-100 group-hover:text-blue-400 transition-colors">4+</h4>
+                                    <h4 className="text-2xl font-bold text-slate-100 group-hover:text-blue-400 transition-colors">5+</h4>
                                     <p className="text-sm text-slate-400">Projects Completed</p>
                                 </div>
                             </motion.div>

@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "title": "AI Filler for Google Form",
+        "category": "Extension",
+        "image": "aiFillerBanner",
+        "description": "A Chrome extension that uses AI to automatically fill Google Forms. Features a Vercel serverless backend for intelligent form processing and automation.",
+        "tech": [
+            "Chrome Extension",
+            "JavaScript",
+            "Vercel Serverless",
+            "Gemini AI"
+        ],
+        "links": {
+            "demo": "https://chromewebstore.google.com/detail/ai-filler-for-google-form/hdkgiebcambianonfpchpdbebnlmaafn",
+            "code": "https://github.com/addy1947/google_form"
+        },
+        "featured": true,
+        "main_page_show":true
+    },
+    {
+        "id": 2,
+        "title": "MedScrapper",
+        "category": "Full Stack",
+        "image": "medScrapperBanner",
+        "description": "Stop overpaying for your health. We search top pharmacies like 1mg and Apollo to find you the best deals in seconds.",
+        "tech": [
+            "React",
+            "TypeScript",
+            "Prisma",
+            "Gemini AI"
+        ],
+        "links": {
+            "demo": "https://medscrapper.vercel.app/",
+            "code": "https://github.com/addy1947/med_scraper"
+        },
+        "featured": true
+    },
+    {
+        "id": 3,
+        "title": "Restocker",
+        "category": "Full Stack",
+        "image": "restockerBanner",
+        "description": "AI-powered restaurant inventory management system. Helps reduce waste by 40% and eliminates stockouts with intelligent tracking.",
+        "tech": [
+            "React",
+            "Tailwind CSS",
+            "AI Analytics",
+            "Gemini AI",
+            "Chart.js"
+        ],
+        "links": {
+            "demo": "https://restocker.vercel.app/",
+            "code": "https://github.com/addy1947/restocker_frontend"
+        },
+        "featured": true
+    },
+    {
+        "id": 4,
+        "title": "AddyBites",
+        "category": "Full Stack",
+        "image": "addyBitesBanner",
+        "description": "A full-stack food ordering platform featuring seamless cart management, user authentication, and real-time order tracking.",
+        "tech": [
+            "React",
+            "Node.js",
+            "Express",
+            "MongoDB"
+        ],
+        "links": {
+            "demo": "https://addybites.vercel.app",
+            "code": "https://github.com/addy1947/addyBites"
+        },
+        "featured": true
+    },
+    {
+        "id": 5,
+        "title": "Developer Portfolio",
+        "category": "Full Stack",
+        "image": "portfolioBanner",
+        "description": "My personal portfolio website built to showcase my projects and skills. Features a premium dark theme, glassmorphism effects, and smooth animations.",
+        "tech": [
+            "React",
+            "Tailwind CSS",
+            "Framer Motion",
+            "Vite"
+        ],
+        "links": {
+            "demo": "/",
+            "code": "https://github.com/addy1947/portfolio"
+        },
+        "featured": true
+    },
+    {
+        "id": 6,
+        "title": "Motia",
+        "category": "Full Stack",
+        "image": "motiaBanner",
+        "description": "Welcome to the Motia Onboarding Automation System, a comprehensive solution designed to streamline and automate the employee onboarding process. This project is a monorepo containing both the premium, event-driven backend and the aesthetic, user-friendly frontend.",
+        "tech": [
+            "Motia",
+            "React",
+            "JavaScript",
+            "Tailwind CSS",
+            "Vercel"
+        ],
+        "links": {
+            "demo": "https://motia-project.vercel.app/",
+            "code": "https://github.com/addy1947/motia_project"
+        },
+        "featured": true,
+        "main_page_show":true
+    }
+]
