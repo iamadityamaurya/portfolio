@@ -8,6 +8,7 @@ import restockerBanner from '../assets/project_png/restocker-showcase.png';
 import addyBitesBanner from '../assets/project_png/addybites-showcase-wide.png';
 import portfolioBanner from '../assets/project_png/image.png';
 import motiaBanner from '../assets/project_png/motia-showcase.png';
+import fireshieldBanner from '../assets/project_png/fireshield-showcase.png';
 import projectData from '../assets/project_data/data.json';
 
 const imageMap = {
@@ -16,7 +17,8 @@ const imageMap = {
     "restockerBanner": restockerBanner,
     "addyBitesBanner": addyBitesBanner,
     "portfolioBanner": portfolioBanner,
-    "motiaBanner": motiaBanner
+    "motiaBanner": motiaBanner,
+    "fireshieldBanner": fireshieldBanner
 };
 
 

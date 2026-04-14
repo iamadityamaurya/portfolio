@@ -1,5 +1,26 @@
 [
     {
+    "id": 7,
+    "title": "FireShield",
+    "category": "IoT",
+    "image": "fireshieldBanner",
+    "description": "A real-time smart home fire and gas safety system. An ESP32 microcontroller reads live sensor data and streams it to a mobile app via a Node.js backend. Features voice alerts, native push notifications, and a hardware buzzer for emergency situations.",
+    "tech": [
+        "React Native",
+        "Expo",
+        "Node.js",
+        "Socket.IO",
+        "ESP32",
+        "Arduino C++"
+    ],
+    "links": {
+        "demo": "https://fire-1-l13l.onrender.com/health",
+        "code": "https://github.com/addy1947/fire"
+    },
+    "featured": true,
+    "main_page_show": true
+},
+    {
         "id": 1,
         "title": "AI Filler for Google Form",
         "category": "Extension",
