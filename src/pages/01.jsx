@@ -68,8 +68,9 @@ const HomePage = () => {
 
 
     const titles = [
-        "Full Stack Developer",
-        "Android Developer",
+        "Full Stack & Android Developer",
+        "IoT & Embedded Developer",
+        "Robotics Enthusiast",
         "3x Hackathon Winner"
     ];
     const [index, setIndex] = useState(0);
