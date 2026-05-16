@@ -21,8 +21,13 @@ const SkillsPage = () => {
         { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
         { name: "Supabase", icon: "https://cdn.simpleicons.org/supabase/3ECF8E" },
         { name: "Firebase", icon: "https://cdn.simpleicons.org/firebase/FFCA28" },
+        { name: "C++", icon: "https://cdn.simpleicons.org/cplusplus/00599C" },
         { name: "C", icon: "https://cdn.simpleicons.org/c/A8B9CC" },
         { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB" },
+        { name: "ROS 2", icon: "https://cdn.simpleicons.org/ros/white" },
+        { name: "Arduino", icon: "https://cdn.simpleicons.org/arduino/00979D" },
+        { name: "Linux", icon: "https://cdn.simpleicons.org/linux/FCC624" },
+        { name: "Docker", icon: "https://cdn.simpleicons.org/docker/2496ED" },
         { name: "Onshape", icon: onshapeLogo }
     ];
 
@@ -56,8 +61,7 @@ const SkillsPage = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="group relative flex items-center justify-center p-6 bg-[#0a0404]/40 border border-slate-800 rounded-2xl hover:border-emerald-500/50 hover:bg-[#0a0404]/60 transition-all duration-300 w-40 h-40 shadow-lg hover:shadow-emerald-500/10 cursor-pointer overflow-hidden"
+                            className="group relative flex items-center justify-center p-6 bg-[#0a0404]/60 backdrop-blur-sm border border-slate-800 rounded-3xl hover:border-emerald-500/50 hover:bg-[#050202]/80 transition-all duration-300 w-40 h-40 shadow-lg hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] hover:-translate-y-2 cursor-pointer overflow-hidden"
                         >
                             <img
                                 src={tech.icon}

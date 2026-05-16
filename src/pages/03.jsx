@@ -26,6 +26,7 @@ const imageMap = {
 const ProjectsPage = () => {
     const projects = projectData
         .filter(p => p.main_page_show === true)
+        .slice(0, 2)
         .map(project => ({
             ...project,
             image: imageMap[project.image]
@@ -70,7 +71,7 @@ const ProjectsPage = () => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.3 }}
-                                className="group relative bg-[#0a0404]/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-colors flex flex-col"
+                                className="group relative bg-[#0a0404]/50 border border-slate-800 rounded-3xl overflow-hidden hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
                             >
                                 {/* Hover Glow */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

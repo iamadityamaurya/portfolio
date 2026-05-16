@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Mail, Github, Linkedin, ChevronDown } from 'lucide-react';
+import { ArrowRight, Mail, Github, Linkedin, ChevronDown, Trophy } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 const DecodingText = ({ text, onComplete }) => {
@@ -67,8 +68,9 @@ const HomePage = () => {
 
 
     const titles = [
-        { article: "a", role: "Full Stack Developer" },
-        { article: "an", role: "Android Developer" }
+        "Full Stack Developer",
+        "Android Developer",
+        "3x Hackathon Winner"
     ];
     const [index, setIndex] = useState(0);
 
@@ -91,10 +93,12 @@ const HomePage = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
+                        className="mb-8 flex justify-center"
                     >
-                        <h2 className="text-emerald-500 text-lg md:text-xl font-medium tracking-[0.2em] mb-5 flex items-center justify-center gap-4">
+                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-medium text-sm tracking-[0.2em] shadow-[0_0_15px_rgba(16,185,129,0.15)] backdrop-blur-sm">
+                            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite] shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
                             <DecodingText text="HELLO, I'M" onComplete={() => setIntroFinished(true)} />
-                        </h2>
+                        </div>
                     </motion.div>
 
                     {/* 2. Name - Word by Word */}
@@ -132,7 +136,6 @@ const HomePage = () => {
                         animate={introFinished ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
                     >
-                        <span>I am {titles[index].article}</span>
                         <AnimatePresence mode="wait">
                             <motion.h2
                                 key={index}
@@ -140,9 +143,9 @@ const HomePage = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.2, ease: "easeInOut" }}
-                                className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 inline-block"
+                                className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 inline-block whitespace-nowrap"
                             >
-                                {titles[index].role}
+                                {titles[index]}
                             </motion.h2>
                         </AnimatePresence>
                     </motion.div>
@@ -173,24 +176,41 @@ const HomePage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 1.0 }}
-                        className="flex flex-wrap justify-center gap-4"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full px-4"
                     >
+                        {/* Primary Button */}
                         <a
                             href="#projects"
-                            className="relative group px-10 py-4 bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 text-lg font-bold rounded-full overflow-hidden hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all hover:scale-105"
+                            className="relative group w-full sm:w-auto px-9 py-4 bg-emerald-500 text-slate-950 text-base md:text-lg font-bold rounded-full overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_40px_rgba(16,185,129,0.6)] transition-all hover:-translate-y-1.5"
                         >
-                            <span className="relative z-10 flex items-center gap-2">
+                            <span className="relative z-10 flex items-center justify-center gap-2">
                                 View Work
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" />
                             </span>
                             <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out skew-x-[-20deg]"></div>
                         </a>
 
+                        {/* Secondary Button - Hackathons */}
+                        <Link
+                            to="/hackathon-winning"
+                            className="relative group w-full sm:w-auto px-9 py-4 bg-[#0a0404]/80 text-yellow-400 text-base md:text-lg font-semibold rounded-full border border-yellow-500/30 hover:border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
+                        >
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                <Trophy className="w-5 h-5 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300" />
+                                Hackathons
+                            </span>
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500/0 via-yellow-500/10 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        </Link>
+
+                        {/* Tertiary Button - Contact */}
                         <a
                             href="#contact"
-                            className="px-10 py-4 border border-slate-700 text-slate-300 text-lg font-medium rounded-full bg-slate-900/40 backdrop-blur-sm hover:border-emerald-500/50 hover:bg-slate-900/60 hover:text-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] transition-all hover:scale-105"
+                            className="relative group w-full sm:w-auto px-9 py-4 bg-transparent text-slate-300 hover:text-emerald-400 text-base md:text-lg font-semibold rounded-full border border-slate-700 hover:border-emerald-500/50 hover:bg-[#0a0404]/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
                         >
-                            Contact Me
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                Contact Me
+                            </span>
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         </a>
                     </motion.div>
 
@@ -199,39 +219,28 @@ const HomePage = () => {
                         initial={{ opacity: 0 }}
                         animate={introFinished ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ duration: 0.5, delay: 1.2 }}
-                        className="mt-12 flex items-center justify-center gap-6 text-slate-400"
+                        className="mt-14 flex flex-wrap items-center justify-center gap-5 text-slate-400"
                     >
-                        <a
-                            href="https://github.com/addy1947"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center group hover:justify-start gap-0 hover:gap-3 hover:bg-slate-900/60 hover:backdrop-blur-md px-1 hover:pr-5 hover:pl-2 rounded-full transition-all duration-300 hover:border hover:border-slate-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] h-10 max-w-[40px] hover:max-w-[280px] overflow-hidden"
-                        >
-                            <Github className="w-8 h-8 min-w-[2rem] text-slate-400 group-hover:text-emerald-400 transition-colors duration-300" />
-                            <span className="max-w-0 group-hover:max-w-xs overflow-hidden opacity-0 group-hover:opacity-100 whitespace-nowrap text-sm font-medium text-slate-300 group-hover:text-emerald-50 transition-all duration-300 delay-75">
-                                github.com/addy1947
-                            </span>
-                        </a>
-                        <a
-                            href="https://www.linkedin.com/in/adityamaurya123"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center group hover:justify-start gap-0 hover:gap-3 hover:bg-slate-900/60 hover:backdrop-blur-md px-1 hover:pr-5 hover:pl-2 rounded-full transition-all duration-300 hover:border hover:border-slate-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] h-10 max-w-[40px] hover:max-w-[320px] overflow-hidden"
-                        >
-                            <Linkedin className="w-8 h-8 min-w-[2rem] text-slate-400 group-hover:text-emerald-400 transition-colors duration-300" />
-                            <span className="max-w-0 group-hover:max-w-xs overflow-hidden opacity-0 group-hover:opacity-100 whitespace-nowrap text-sm font-medium text-slate-300 group-hover:text-emerald-50 transition-all duration-300 delay-75">
-                                linkedin/adityamaurya123
-                            </span>
-                        </a>
-                        <a
-                            href="mailto:adityamaurya1947@gmail.com"
-                            className="flex items-center justify-center group hover:justify-start gap-0 hover:gap-3 hover:bg-slate-900/60 hover:backdrop-blur-md px-1 hover:pr-5 hover:pl-2 rounded-full transition-all duration-300 hover:border hover:border-slate-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] h-10 max-w-[40px] hover:max-w-[320px] overflow-hidden"
-                        >
-                            <Mail className="w-8 h-8 min-w-[2rem] text-slate-400 group-hover:text-emerald-400 transition-colors duration-300" />
-                            <span className="max-w-0 group-hover:max-w-xs overflow-hidden opacity-0 group-hover:opacity-100 whitespace-nowrap text-sm font-medium text-slate-300 group-hover:text-emerald-50 transition-all duration-300 delay-75">
-                                adityamaurya1947@gmail.com
-                            </span>
-                        </a>
+                        {[
+                            { icon: Github, text: "github.com/addy1947", href: "https://github.com/addy1947", color: "group-hover:text-white", border: "hover:border-white/50", glow: "hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]" },
+                            { icon: Linkedin, text: "linkedin/adityamaurya123", href: "https://www.linkedin.com/in/adityamaurya123", color: "group-hover:text-blue-400", border: "hover:border-blue-500/50", glow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]" },
+                            { icon: Mail, text: "adityamaurya1947@gmail.com", href: "mailto:adityamaurya1947@gmail.com", color: "group-hover:text-emerald-400", border: "hover:border-emerald-500/50", glow: "hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]" }
+                        ].map((link, idx) => (
+                            <a
+                                key={idx}
+                                href={link.href}
+                                target={link.text.includes('@') ? undefined : "_blank"}
+                                rel={link.text.includes('@') ? undefined : "noopener noreferrer"}
+                                className={`group flex items-center bg-[#0a0404]/50 border border-slate-800/80 backdrop-blur-md rounded-full p-3.5 transition-all duration-300 ease-out hover:-translate-y-1 ${link.border} ${link.glow}`}
+                            >
+                                <link.icon className={`w-5 h-5 shrink-0 text-slate-400 transition-colors duration-300 ${link.color}`} />
+                                <div className="grid grid-cols-[0fr] group-hover:grid-cols-[1fr] transition-all duration-300 ease-out">
+                                    <span className="overflow-hidden whitespace-nowrap text-sm font-medium text-slate-300 transition-colors duration-300 group-hover:text-slate-100">
+                                        <span className="pl-3 pr-1 block">{link.text}</span>
+                                    </span>
+                                </div>
+                            </a>
+                        ))}
                     </motion.div>
 
                 </div>

@@ -7,6 +7,7 @@ import SkillsPage from './pages/04';
 import ContactPage from './pages/05';
 
 import AllProjectsPage from './project/01';
+import HackathonPage from './hackathon/01';
 
 import GlobalParticles from './components/GlobalParticles';
 
@@ -26,6 +27,7 @@ function App() {
           </>
         } />
         <Route path="/project" element={<AllProjectsPage />} />
+        <Route path="/hackathon-winning" element={<HackathonPage />} />
       </Routes>
     </Router>
   );
