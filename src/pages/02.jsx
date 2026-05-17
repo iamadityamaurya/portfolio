@@ -69,11 +69,12 @@ const AboutPage = () => {
                             {renderWords("and a passionate developer. My journey started with a simple curiosity for how things work, which quickly evolved into a career crafting seamless digital experiences.")}
                         </div>
                         <div>
-                            {renderWords("I specialize in both")}
-                            {renderWords("Full Stack Web Development", "text-blue-400 font-medium")}
+                            {renderWords("I specialize in")}
+                            {renderWords("Full Stack Web,", "text-blue-400 font-medium")}
+                            {renderWords("Android App Development,", "text-blue-400 font-medium")}
                             {renderWords("and")}
-                            {renderWords("Android App Development.", "text-blue-400 font-medium")}
-                            {renderWords("I thrive on solving complex problems and turning innovative ideas into reality. Whether it's optimizing server performance or crafting a pixel-perfect UI, I bring dedication and technical precision to every project.")}
+                            {renderWords("Hardware & IoT Engineering.", "text-emerald-400 font-medium")}
+                            {renderWords("I thrive on solving complex problems-whether that means designing custom 3D-printed robotics, building ESP32-based smart home systems, or crafting scalable web backends. I bring deep technical precision from the physical hardware all the way to the cloud.")}
                         </div>
 
                         {/* Stats / Highlights */}
