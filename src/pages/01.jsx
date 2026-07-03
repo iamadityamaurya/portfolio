@@ -223,8 +223,8 @@ const HomePage = () => {
                         className="mt-14 flex flex-wrap items-center justify-center gap-5 text-slate-400"
                     >
                         {[
-                            { icon: Github, text: "github.com/addy1947", href: "https://github.com/addy1947", color: "group-hover:text-white", border: "hover:border-white/50", glow: "hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]" },
-                            { icon: Linkedin, text: "linkedin/adityamaurya123", href: "https://www.linkedin.com/in/adityamaurya123", color: "group-hover:text-blue-400", border: "hover:border-blue-500/50", glow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]" },
+                            { icon: Github, text: "github.com/iamadityamaurya", href: "https://github.com/iamadityamaurya", color: "group-hover:text-white", border: "hover:border-white/50", glow: "hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]" },
+                            { icon: Linkedin, text: "linkedin/iamadityamaurya", href: "https://www.linkedin.com/in/iamadityamaurya/", color: "group-hover:text-blue-400", border: "hover:border-blue-500/50", glow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]" },
                             { icon: Mail, text: "adityamaurya1947@gmail.com", href: "mailto:adityamaurya1947@gmail.com", color: "group-hover:text-emerald-400", border: "hover:border-emerald-500/50", glow: "hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]" }
                         ].map((link, idx) => (
                             <a

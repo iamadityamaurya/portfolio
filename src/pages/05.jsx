@@ -70,16 +70,16 @@ const ContactPage = () => {
         },
         {
             name: 'LinkedIn',
-            handle: 'linkedin/adityamaurya123',
-            url: 'https://www.linkedin.com/in/adityamaurya123',
+            handle: 'linkedin/iamadityamaurya',
+            url: 'https://www.linkedin.com/in/iamadityamaurya/',
             icon: <Linkedin className="w-5 h-5" />,
             hoverClass: 'hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400',
             iconBgClass: 'group-hover:bg-blue-500/20 group-hover:text-blue-400'
         },
         {
             name: 'GitHub',
-            handle: 'github/addy1947',
-            url: 'https://github.com/addy1947',
+            handle: 'github/iamadityamaurya',
+            url: 'https://github.com/iamadityamaurya',
             icon: <Github className="w-5 h-5" />,
             hoverClass: 'hover:bg-purple-500/10 hover:border-purple-500/50 hover:text-purple-400',
             iconBgClass: 'group-hover:bg-purple-500/20 group-hover:text-purple-400'

@@ -15,7 +15,7 @@
     ],
     "links": {
         "demo": "https://fire-1-l13l.onrender.com/health",
-        "code": "https://github.com/addy1947/fire"
+        "code": "https://github.com/iamadityamaurya/fire"
     },
     "featured": true,
     "main_page_show": true
@@ -34,7 +34,7 @@
         ],
         "links": {
             "demo": "https://chromewebstore.google.com/detail/ai-filler-for-google-form/hdkgiebcambianonfpchpdbebnlmaafn",
-            "code": "https://github.com/addy1947/google_form"
+            "code": "https://github.com/iamadityamaurya/google_form"
         },
         "featured": true,
         "main_page_show":true
@@ -53,7 +53,7 @@
         ],
         "links": {
             "demo": "https://medscrapper.vercel.app/",
-            "code": "https://github.com/addy1947/med_scraper"
+            "code": "https://github.com/iamadityamaurya/med_scraper"
         },
         "featured": true
     },
@@ -72,7 +72,7 @@
         ],
         "links": {
             "demo": "https://restocker.vercel.app/",
-            "code": "https://github.com/addy1947/restocker_frontend"
+            "code": "https://github.com/iamadityamaurya/restocker_frontend"
         },
         "featured": true
     },
@@ -90,7 +90,7 @@
         ],
         "links": {
             "demo": "https://addybites.vercel.app",
-            "code": "https://github.com/addy1947/addyBites"
+            "code": "https://github.com/iamadityamaurya/addyBites"
         },
         "featured": true
     },
@@ -108,7 +108,7 @@
         ],
         "links": {
             "demo": "/",
-            "code": "https://github.com/addy1947/portfolio"
+            "code": "https://github.com/iamadityamaurya/portfolio"
         },
         "featured": true
     },
@@ -127,7 +127,7 @@
         ],
         "links": {
             "demo": "https://motia-project.vercel.app/",
-            "code": "https://github.com/addy1947/motia_project"
+            "code": "https://github.com/iamadityamaurya/motia_project"
         },
         "featured": true,
         "main_page_show":true
