@@ -1,5 +1,23 @@
 [
     {
+        "id": 3,
+        "title": "Alpha Line Follower",
+        "category": "IoT",
+        "image": "lineFollowerBanner",
+        "description": "A high-speed autonomous line follower built around an Arduino Nano. It uses an 8-channel IR sensor array, a fixed-point PID controller, and direct AVR register control to make fast, stable steering decisions in real time.",
+        "tech": [
+            "Arduino Nano",
+            "ATmega328P",
+            "C++",
+            "8-Channel IR Array",
+            "Fixed-Point PID",
+            "EEPROM Tuning"
+        ],
+        "links": {},
+        "featured": true,
+        "main_page_show": true
+    },
+    {
         "id": 7,
         "title": "FireShield",
         "category": "IoT",
@@ -17,8 +35,7 @@
             "demo": "https://fire-1-l13l.onrender.com/health",
             "code": "https://github.com/iamadityamaurya/fire"
         },
-        "featured": true,
-        "main_page_show": true
+        "featured": true
     },
     {
         "id": 8,
@@ -57,7 +74,7 @@
         "featured": true
     },
     {
-        "id": 3,
+        "id": 10,
         "title": "Restocker",
         "category": "Full Stack",
         "image": "restockerBanner",
@@ -155,7 +172,7 @@
         "title": "Drive Stream Downloader",
         "category": "Extension",
         "image": "dsdBanner",
-        "description": "A Google Chrome extension designed to bypass player restrictions and download Google Drive videos that cannot be downloaded normally. It analyzes network streams to capture separate high-resolution video and audio tracks, providing a local FFmpeg command builder for instant remuxing.",
+        "description": "A Google Chrome extension designed to bypass player restrictions and download Google Drive videos that cannot be downloaded (blocked by Google to download). It analyzes network streams to capture separate high-resolution video and audio tracks, providing a local FFmpeg command builder for instant remuxing.",
         "tech": [
             "Chrome Extension",
             "JavaScript",
