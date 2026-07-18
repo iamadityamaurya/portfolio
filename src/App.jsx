@@ -27,6 +27,8 @@ const pageMetadata = {
   },
 };
 
+const siteUrl = 'https://iamadityamaurya.vercel.app';
+
 const setMetaContent = (selector, content) => {
   const element = document.querySelector(selector);
   if (element) element.setAttribute('content', content);
@@ -37,16 +39,16 @@ function SeoMeta() {
 
   useEffect(() => {
     const metadata = pageMetadata[pathname] ?? pageMetadata['/'];
-    const canonicalUrl = `${window.location.origin}${pathname}`;
+    const canonicalUrl = `${siteUrl}${pathname}`;
     document.title = metadata.title;
     setMetaContent('meta[name="description"]', metadata.description);
     setMetaContent('meta[property="og:title"]', metadata.title);
     setMetaContent('meta[property="og:description"]', metadata.description);
     setMetaContent('meta[property="og:url"]', canonicalUrl);
-    setMetaContent('meta[property="og:image"]', `${window.location.origin}/logo.svg`);
+    setMetaContent('meta[property="og:image"]', `${siteUrl}/logo.svg`);
     setMetaContent('meta[name="twitter:title"]', metadata.title);
     setMetaContent('meta[name="twitter:description"]', metadata.description);
-    setMetaContent('meta[name="twitter:image"]', `${window.location.origin}/logo.svg`);
+    setMetaContent('meta[name="twitter:image"]', `${siteUrl}/logo.svg`);
 
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
