@@ -9,6 +9,8 @@ import addyBitesBanner from '../assets/project_png/addybites-showcase-wide.png';
 import portfolioBanner from '../assets/project_png/image.png';
 import motiaBanner from '../assets/project_png/motia-showcase.png';
 import fireshieldBanner from '../assets/project_png/fireshield-showcase.png';
+import nexgenqueryBanner from '../assets/project_png/nexgenquery-showcase.png';
+import dsdBanner from '../assets/project_png/dsd-showcase.png';
 import projectData from '../assets/project_data/data.json';
 
 const imageMap = {
@@ -18,7 +20,9 @@ const imageMap = {
     "addyBitesBanner": addyBitesBanner,
     "portfolioBanner": portfolioBanner,
     "motiaBanner": motiaBanner,
-    "fireshieldBanner": fireshieldBanner
+    "fireshieldBanner": fireshieldBanner,
+    "nexgenqueryBanner": nexgenqueryBanner,
+    "dsdBanner": dsdBanner
 };
 
 

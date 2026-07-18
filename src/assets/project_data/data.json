@@ -1,27 +1,27 @@
 [
     {
-    "id": 7,
-    "title": "FireShield",
-    "category": "IoT",
-    "image": "fireshieldBanner",
-    "description": "A real-time smart home fire and gas safety system. An ESP32 microcontroller reads live sensor data and streams it to a mobile app via a Node.js backend. Features voice alerts, native push notifications, and a hardware buzzer for emergency situations.",
-    "tech": [
-        "React Native",
-        "Expo",
-        "Node.js",
-        "Socket.IO",
-        "ESP32",
-        "Arduino C++"
-    ],
-    "links": {
-        "demo": "https://fire-1-l13l.onrender.com/health",
-        "code": "https://github.com/iamadityamaurya/fire"
+        "id": 7,
+        "title": "FireShield",
+        "category": "IoT",
+        "image": "fireshieldBanner",
+        "description": "A real-time smart home fire and gas safety system. An ESP32 microcontroller reads live sensor data and streams it to a mobile app via a Node.js backend. Features voice alerts, native push notifications, and a hardware buzzer for emergency situations.",
+        "tech": [
+            "React Native",
+            "Expo",
+            "Node.js",
+            "Socket.IO",
+            "ESP32",
+            "Arduino C++"
+        ],
+        "links": {
+            "demo": "https://fire-1-l13l.onrender.com/health",
+            "code": "https://github.com/iamadityamaurya/fire"
+        },
+        "featured": true,
+        "main_page_show": true
     },
-    "featured": true,
-    "main_page_show": true
-},
     {
-        "id": 1,
+        "id": 8,
         "title": "AI Filler for Google Form",
         "category": "Extension",
         "image": "aiFillerBanner",
@@ -36,11 +36,10 @@
             "demo": "https://chromewebstore.google.com/detail/ai-filler-for-google-form/hdkgiebcambianonfpchpdbebnlmaafn",
             "code": "https://github.com/iamadityamaurya/google_form"
         },
-        "featured": true,
-        "main_page_show":true
+        "featured": true
     },
     {
-        "id": 2,
+        "id": 9,
         "title": "MedScrapper",
         "category": "Full Stack",
         "image": "medScrapperBanner",
@@ -129,7 +128,45 @@
             "demo": "https://motia-project.vercel.app/",
             "code": "https://github.com/iamadityamaurya/motia_project"
         },
+        "featured": true
+    },
+    {
+        "id": 1,
+        "title": "NexGenQuery",
+        "category": "Full Stack",
+        "image": "nexgenqueryBanner",
+        "description": "An interactive, premium client-side web application designed to load multiple CSV datasets, visually configure complex relational SQL queries through an intuitive wizard, preview highlighted SQL, and execute queries locally in the browser.",
+        "tech": [
+            "React",
+            "Tailwind CSS",
+            "Vite",
+            "Local SQL Engine",
+            "In-Memory CSV"
+        ],
+        "links": {
+            "demo": "https://nexgenquery.vercel.app/",
+            "code": "https://github.com/iamadityamaurya/nexgenquery"
+        },
         "featured": true,
-        "main_page_show":true
+        "main_page_show": true
+    },
+    {
+        "id": 2,
+        "title": "Drive Stream Downloader",
+        "category": "Extension",
+        "image": "dsdBanner",
+        "description": "A Google Chrome extension designed to bypass player restrictions and download Google Drive videos that cannot be downloaded normally. It analyzes network streams to capture separate high-resolution video and audio tracks, providing a local FFmpeg command builder for instant remuxing.",
+        "tech": [
+            "Chrome Extension",
+            "JavaScript",
+            "Manifest V3",
+            "FFmpeg",
+            "HTML/CSS"
+        ],
+        "links": {
+            "demo": "https://drive.google.com/drive/folders/148lG33yWUZCMRjr4oQzp1ACMO6MAe8Zi?usp=sharing",
+            "code": "https://github.com/iamadityamaurya/dvd_extension"
+        },
+        "featured": true
     }
 ]

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Code, Layers, Zap, Search, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,8 @@ import addyBitesBanner from '../assets/project_png/addybites-showcase-wide.png';
 import portfolioBanner from '../assets/project_png/image.png';
 import motiaBanner from '../assets/project_png/motia-showcase.png';
 import fireshieldBanner from '../assets/project_png/fireshield-showcase.png';
+import nexgenqueryBanner from '../assets/project_png/nexgenquery-showcase.png';
+import dsdBanner from '../assets/project_png/dsd-showcase.png';
 import projectData from '../assets/project_data/data.json';
 
 const imageMap = {
@@ -18,18 +20,26 @@ const imageMap = {
     "addyBitesBanner": addyBitesBanner,
     "portfolioBanner": portfolioBanner,
     "motiaBanner": motiaBanner,
-    "fireshieldBanner": fireshieldBanner
+    "fireshieldBanner": fireshieldBanner,
+    "nexgenqueryBanner": nexgenqueryBanner,
+    "dsdBanner": dsdBanner
 };
 
-
+const SectionLabel = ({ children }) => (
+    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase mb-3 select-none">
+        <span className="w-4 h-px bg-emerald-400" />
+        {children}
+        <span className="w-4 h-px bg-emerald-400" />
+    </span>
+);
 
 const AllProjectsPage = () => {
-    // Extended projects list
-
-    const projects = projectData.map(project => ({
-        ...project,
-        image: imageMap[project.image]
-    }));
+    const projects = projectData
+        .map(project => ({
+            ...project,
+            image: imageMap[project.image]
+        }))
+        .sort((a, b) => a.id - b.id);
 
     const [filter, setFilter] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
@@ -44,17 +54,34 @@ const AllProjectsPage = () => {
         return matchesCategory && matchesSearch;
     });
 
+    const [activeId, setActiveId] = useState(null);
+
+    // Automatically select the first project when filtered list changes
+    useEffect(() => {
+        if (filteredProjects.length > 0) {
+            const hasActive = filteredProjects.some(p => p.id === activeId);
+            if (!hasActive) {
+                setActiveId(filteredProjects[0].id);
+            }
+        } else {
+            setActiveId(null);
+        }
+    }, [filteredProjects, activeId]);
+
+    const activeProject = filteredProjects.find(p => p.id === activeId);
+
     return (
-        <div className="min-h-screen bg-transparent text-slate-50 relative selection:bg-emerald-500/30 selection:text-emerald-400">
+        <div className="min-h-screen bg-transparent text-slate-50 relative selection:bg-emerald-500/30 selection:text-emerald-400 antialiased font-sans">
             {/* Background Effects */}
             <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
-            <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-[#050202] via-transparent to-[#050202] pointer-events-none"></div>
+            <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-[#050202] via-[#050202]/95 to-[#050202] pointer-events-none"></div>
+            <div className="fixed top-0 right-0 w-[560px] h-[560px] bg-emerald-500/[0.06] blur-[140px] rounded-full pointer-events-none"></div>
 
-            <main className="container mx-auto px-6 py-12 relative z-10">
+            <main className="container mx-auto px-6 py-14 relative z-10 max-w-7xl">
                 {/* Header */}
-                <div className="mb-12">
-                    <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-emerald-400 mb-6 transition-colors font-medium">
-                        <ArrowLeft className="w-5 h-5" />
+                <div className="mb-14">
+                    <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-emerald-400 mb-8 transition-colors font-medium text-sm group">
+                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                         Back to Home
                     </Link>
 
@@ -62,138 +89,230 @@ const AllProjectsPage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
+                        className="flex flex-col items-start"
                     >
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 inline-block">
+                        <SectionLabel>Showcase</SectionLabel>
+                        <h1 className="text-5xl md:text-6xl font-bold mb-5 tracking-tight font-heading bg-gradient-to-b from-slate-50 to-slate-300 bg-clip-text text-transparent">
                             All Projects
                         </h1>
-                        <p className="text-slate-400 text-lg max-w-2xl">
+                        <p className="text-slate-400 text-base max-w-2xl leading-relaxed">
                             Explore my complete portfolio of coding projects, experiments, and open-source contributions.
                         </p>
                     </motion.div>
                 </div>
 
                 {/* Search and Filter */}
-                <div className="mb-12 space-y-6">
-                    {/* Search Bar */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="relative max-w-lg"
-                    >
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input
-                            type="text"
-                            placeholder="Search projects..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-xl bg-[#0a0404]/50 border border-slate-800 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all placeholder:text-slate-500"
-                        />
-                    </motion.div>
-
+                <div className="mb-10 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-b border-slate-900 pb-6">
                     {/* Filter Tabs */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="flex flex-wrap gap-2"
+                        transition={{ delay: 0.1 }}
+                        className="flex flex-wrap gap-2 order-2 md:order-1"
                     >
                         {categories.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setFilter(cat)}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${filter === cat
-                                    ? 'bg-emerald-500 text-[#050202] shadow-lg shadow-emerald-500/25'
-                                    : 'bg-[#0a0404] border border-slate-800 text-slate-400 hover:border-emerald-500/50 hover:text-emerald-400'
+                                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase transition-all duration-200 cursor-pointer border ${filter === cat
+                                    ? 'bg-emerald-500 text-slate-950 font-bold shadow-lg shadow-emerald-500/20 border-emerald-500'
+                                    : 'bg-[#060303]/40 border-slate-900 text-slate-400 hover:border-emerald-500/40 hover:text-emerald-400 hover:bg-slate-950/60'
                                     }`}
                             >
                                 {cat}
                             </button>
                         ))}
                     </motion.div>
+
+                    {/* Search Bar */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="relative w-full max-w-xs order-1 md:order-2 group"
+                    >
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-emerald-400 transition-colors" />
+                        <input
+                            type="text"
+                            placeholder="Search directory..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#060303]/40 border border-slate-900 text-slate-200 text-sm focus:border-emerald-500/60 focus:ring-4 focus:ring-emerald-500/[0.08] outline-none transition-all placeholder:text-slate-600"
+                        />
+                    </motion.div>
                 </div>
 
-                {/* Projects Grid */}
-                <motion.div
-                    layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                    <AnimatePresence mode='popLayout'>
-                        {filteredProjects.length > 0 ? (
-                            filteredProjects.map((project) => (
-                                <motion.div
-                                    layout
-                                    key={project.id}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="group relative bg-[#0a0404]/50 border border-slate-800 rounded-3xl overflow-hidden hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
-                                >
-                                    {/* Hover Glow */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Interactive Split View */}
+                {filteredProjects.length > 0 ? (
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        {/* Directory List (Left Column, 5 cols on lg) */}
+                        <div className="lg:col-span-5 space-y-3 max-h-[700px] overflow-y-auto pr-2 scrollbar-none">
+                            {filteredProjects.map((project) => {
+                                const isActive = project.id === activeId;
+                                return (
+                                    <button
+                                        key={project.id}
+                                        onClick={() => setActiveId(project.id)}
+                                        className={`relative w-full text-left p-5 rounded-2xl border transition-all duration-200 flex items-start gap-4 cursor-pointer group overflow-hidden ${isActive
+                                            ? 'bg-slate-900/60 border-emerald-500/20 text-slate-100 shadow-lg shadow-emerald-500/[0.04]'
+                                            : 'bg-[#060303]/40 border-slate-950 hover:bg-slate-950/60 hover:border-slate-800 text-slate-400 hover:text-slate-200'
+                                            }`}
+                                    >
+                                        {/* Active accent bar */}
+                                        <span
+                                            className={`absolute left-0 top-0 h-full w-[3px] bg-emerald-400 transition-transform duration-300 origin-top ${isActive ? 'scale-y-100' : 'scale-y-0'
+                                                }`}
+                                        />
 
-                                    {project.image && (
-                                        <div className="w-full aspect-video bg-slate-800/50 relative overflow-hidden">
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0404] to-transparent z-10 opacity-60" />
-                                            <img
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                        </div>
-                                    )}
+                                        {/* Monospace index number */}
+                                        <span className={`font-mono text-xs font-semibold select-none mt-0.5 shrink-0 ${isActive ? 'text-emerald-400' : 'text-slate-600 group-hover:text-slate-400'}`}>
+                                            {String(project.id).padStart(2, '0')}
+                                        </span>
 
-                                    <div className="p-6 relative z-10 flex flex-col flex-grow">
-                                        <div className="flex justify-between items-start mb-4">
-                                            {!project.image && (
-                                                <div className="p-2 rounded-lg bg-slate-800/50 text-emerald-400">
-                                                    {project.category.includes("Android") ? <Zap className="w-6 h-6" /> :
-                                                        project.category.includes("Web") ? <Layers className="w-6 h-6" /> :
-                                                            <Code className="w-6 h-6" />}
-                                                </div>
-                                            )}
-                                            <div className={`flex gap-3 ${project.image ? 'w-full justify-end' : ''}`}>
-                                                <a href={project.links.code} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                                                    <Github className="w-5 h-5" />
-                                                </a>
-                                                <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                                                    <ExternalLink className="w-5 h-5" />
-                                                </a>
+                                        <div className="flex-grow min-w-0">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <h3 className={`font-bold text-sm truncate transition-colors ${isActive ? 'text-slate-100 font-extrabold' : 'text-slate-300 group-hover:text-slate-200'}`}>
+                                                    {project.title}
+                                                </h3>
+                                                <span className={`text-[8px] font-mono font-bold tracking-wider px-1.5 py-0.5 rounded uppercase shrink-0 select-none ${project.category === 'Extension'
+                                                    ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                                    : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                                                    }`}>
+                                                    {project.category}
+                                                </span>
+                                            </div>
+
+                                            <p className="text-xs text-slate-500 line-clamp-2 mt-1.5 leading-relaxed">
+                                                {project.description}
+                                            </p>
+
+                                            <div className="flex flex-wrap gap-1.5 mt-3">
+                                                {project.tech.slice(0, 3).map((t, i) => (
+                                                    <span key={i} className="text-[9px] font-mono px-2 py-0.5 rounded bg-slate-950 border border-slate-900 text-slate-500 select-none">
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                                {project.tech.length > 3 && (
+                                                    <span className="text-[9px] font-mono text-slate-600 px-1 py-0.5 select-none">
+                                                        +{project.tech.length - 3} more
+                                                    </span>
+                                                )}
                                             </div>
                                         </div>
+                                    </button>
+                                );
+                            })}
+                        </div>
 
-                                        <h3 className="text-xl font-bold text-slate-100 mb-2 group-hover:text-emerald-400 transition-colors">
-                                            {project.title}
-                                        </h3>
+                        {/* Widescreen Spotlight Showcase (Right Column, 7 cols on lg) */}
+                        <div className="lg:col-span-7 lg:sticky lg:top-8 bg-slate-950/50 border border-slate-900 rounded-3xl p-6 md:p-9 min-h-[580px] flex flex-col justify-between overflow-hidden relative shadow-2xl shadow-black/40">
+                            {/* Ambient glow */}
+                            <div className="absolute -top-24 -right-24 w-72 h-72 bg-emerald-500/[0.07] blur-[100px] rounded-full pointer-events-none" />
 
-                                        <p className="text-slate-400 text-sm mb-6 flex-grow">
-                                            {project.description}
-                                        </p>
+                            {activeProject && (
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeProject.id}
+                                        initial={{ opacity: 0, scale: 0.98 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.98 }}
+                                        transition={{ duration: 0.25 }}
+                                        className="space-y-6 flex-grow flex flex-col justify-between relative"
+                                    >
+                                        <div>
+                                            {/* Spotlight Banner with absolute container */}
+                                            {activeProject.image ? (
+                                                <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border border-slate-800/80 bg-slate-950/85 relative group shadow-xl shadow-black/50">
+                                                    <img
+                                                        src={activeProject.image}
+                                                        alt={activeProject.title}
+                                                        className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
+                                                    <div className="absolute inset-0 ring-1 ring-inset ring-white/[0.04] pointer-events-none rounded-2xl" />
+                                                </div>
+                                            ) : (
+                                                <div className="w-full aspect-[16/10] rounded-2xl border border-slate-800/80 bg-slate-950/85 flex items-center justify-center relative shadow-xl shadow-black/50">
+                                                    <div className="p-6 rounded-full bg-slate-900/60 border border-slate-800 text-emerald-400">
+                                                        {activeProject.category.includes("Android") ? <Zap className="w-10 h-10" /> :
+                                                            activeProject.category.includes("Web") ? <Layers className="w-10 h-10" /> :
+                                                                <Code className="w-10 h-10" />}
+                                                    </div>
+                                                </div>
+                                            )}
 
-                                        <div className="flex flex-wrap gap-2 mt-auto">
-                                            {project.tech.map((t, i) => (
-                                                <span key={i} className="text-xs font-mono text-emerald-300 bg-emerald-500/10 px-2 py-1 rounded">
-                                                    {t}
+                                            {/* Spotlight Header info */}
+                                            <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
+                                                <h2 className="text-2xl font-extrabold tracking-tight text-slate-100">
+                                                    {activeProject.title}
+                                                </h2>
+
+                                                <span className="text-[10px] font-bold font-mono tracking-wider px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-emerald-400/90 select-none">
+                                                    SYSTEM: {activeProject.category}
                                                 </span>
-                                            ))}
+                                            </div>
+
+                                            {/* Description */}
+                                            <p className="text-sm text-slate-400 leading-relaxed font-sans mt-4">
+                                                {activeProject.description}
+                                            </p>
                                         </div>
-                                    </div>
-                                </motion.div>
-                            ))
-                        ) : (
-                            <div className="col-span-full text-center py-20">
-                                <p className="text-slate-400 text-lg">No projects found matching your criteria.</p>
-                                <button
-                                    onClick={() => { setFilter('All'); setSearchQuery(''); }}
-                                    className="mt-4 text-emerald-400 hover:underline"
-                                >
-                                    Clear filters
-                                </button>
-                            </div>
-                        )}
-                    </AnimatePresence>
-                </motion.div>
+
+                                        {/* Technical Stack Specifications */}
+                                        <div className="mt-8 border-t border-slate-900 pt-6 space-y-6">
+                                            <div>
+                                                <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-mono mb-3">
+                                                    Technologies Employed
+                                                </h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {activeProject.tech.map((t, i) => (
+                                                        <span key={i} className="text-[10px] font-mono font-medium px-2.5 py-1 rounded bg-emerald-500/5 border border-emerald-500/10 text-emerald-400/80 select-none">
+                                                            {t}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Spotlight Actions */}
+                                            <div className="flex justify-end gap-3 pt-5 border-t border-slate-900">
+                                                {activeProject.links.code && (
+                                                    <a
+                                                        href={activeProject.links.code}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-semibold bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors border border-slate-800 cursor-pointer"
+                                                    >
+                                                        <Github className="w-4 h-4" /> Source Repository
+                                                    </a>
+                                                )}
+                                                {activeProject.links.demo && (
+                                                    <a
+                                                        href={activeProject.links.demo}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-semibold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-colors shadow-md shadow-emerald-500/20 cursor-pointer"
+                                                    >
+                                                        <ExternalLink className="w-4 h-4" /> Live System
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </AnimatePresence>
+                            )}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="text-center py-24">
+                        <p className="text-slate-400 text-lg">No projects match the selected criteria.</p>
+                        <button
+                            onClick={() => { setFilter('All'); setSearchQuery(''); }}
+                            className="mt-4 text-emerald-400 hover:underline cursor-pointer"
+                        >
+                            Clear filters
+                        </button>
+                    </div>
+                )}
             </main>
         </div>
     );
