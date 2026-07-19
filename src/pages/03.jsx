@@ -51,12 +51,19 @@ const ProjectsPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="mb-20 text-center"
+                    className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 inline-block">
-                        Featured Projects
-                    </h2>
-                    
+                    <div className="text-left">
+                        <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">
+                            Featured Projects
+                        </h2>
+                    </div>
+                    <div className="shrink-0 self-start md:self-auto">
+                        <Link to="/project" className="group inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0a0404]/30 px-4 py-2 text-3xs font-semibold text-slate-450 hover:border-emerald-500/40 hover:text-emerald-400 transition-all">
+                            View All Projects
+                            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                        </Link>
+                    </div>
                 </motion.div>
 
 
@@ -131,12 +138,6 @@ const ProjectsPage = () => {
 
                     </AnimatePresence>
                 </motion.div>
-                <div className="mt-10 flex justify-center">
-                    <Link to="/project" className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-rose-950/80 to-violet-950/80 px-8 py-4 text-base font-bold text-slate-100 shadow-lg shadow-black/20 transition-all hover:-translate-y-1 hover:from-rose-900 hover:to-violet-900 hover:shadow-violet-950/50">
-                        View All Projects
-                        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                </div>
             </div>
         </section>
     );

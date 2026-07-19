@@ -113,10 +113,7 @@ const ContactPage = () => {
                     <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 inline-block">
                         Get In Touch
                     </h2>
-                    <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-                        Have a groundbreaking idea or just want to chat about tech? <br className="hidden md:block" />
-                        I'm always open to discussing new projects and opportunities.
-                    </p>
+                    
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
@@ -129,13 +126,13 @@ const ContactPage = () => {
                         className="lg:col-span-7 relative group"
                     >
                         {/* Card Glow Effect */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <div className="absolute -inset-px bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none"></div>
 
-                        <div className="relative p-8 sm:p-10 rounded-2xl bg-slate-800/90 border border-slate-700 backdrop-blur-xl shadow-2xl">
+                        <div className="relative p-8 sm:p-10 rounded-2xl bg-slate-900/50 border border-slate-850 backdrop-blur-xl shadow-2xl">
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label htmlFor="name" className="text-sm font-semibold text-slate-300 ml-1">Name</label>
+                                        <label htmlFor="name" className="text-sm font-semibold text-slate-350 ml-1">Name</label>
                                         <input
                                             type="text"
                                             id="name"
@@ -143,12 +140,12 @@ const ContactPage = () => {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all placeholder:text-slate-500"
+                                            className="w-full px-4.5 py-3.5 rounded-xl bg-slate-950/40 border border-slate-800 text-slate-100 outline-none transition-all placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80"
                                             placeholder="John Doe"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label htmlFor="email" className="text-sm font-semibold text-slate-300 ml-1">Email</label>
+                                        <label htmlFor="email" className="text-sm font-semibold text-slate-355 ml-1">Email</label>
                                         <input
                                             type="email"
                                             id="email"
@@ -156,14 +153,14 @@ const ContactPage = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all placeholder:text-slate-500"
+                                            className="w-full px-4.5 py-3.5 rounded-xl bg-slate-955/40 border border-slate-800 text-slate-100 outline-none transition-all placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80"
                                             placeholder="john@example.com"
                                         />
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label htmlFor="subject" className="text-sm font-semibold text-slate-300 ml-1">Subject</label>
+                                    <label htmlFor="subject" className="text-sm font-semibold text-slate-350 ml-1">Subject</label>
                                     <input
                                         type="text"
                                         id="subject"
@@ -171,13 +168,13 @@ const ContactPage = () => {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all placeholder:text-slate-500"
+                                        className="w-full px-4.5 py-3.5 rounded-xl bg-slate-950/40 border border-slate-800 text-slate-100 outline-none transition-all placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80"
                                         placeholder="Project Inquiry / Collaboration"
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-semibold text-slate-300 ml-1">Message</label>
+                                    <label htmlFor="message" className="text-sm font-semibold text-slate-355 ml-1">Message</label>
                                     <textarea
                                         id="message"
                                         name="message"
@@ -185,7 +182,7 @@ const ContactPage = () => {
                                         onChange={handleChange}
                                         required
                                         rows="6"
-                                        className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all resize-none placeholder:text-slate-500 leading-relaxed"
+                                        className="w-full px-4.5 py-3.5 rounded-xl bg-slate-950/40 border border-slate-800 text-slate-100 outline-none transition-all resize-none placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80 leading-relaxed"
                                         placeholder="Tell me about your project, goals, and timeline..."
                                     ></textarea>
                                 </div>
@@ -193,7 +190,7 @@ const ContactPage = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-4 px-8 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-slate-950 font-bold text-lg hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed group"
+                                    className="w-full py-3.5 px-8 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-base hover:shadow-lg hover:shadow-emerald-500/10 active:scale-[0.985] transition-all flex items-center justify-center gap-2.5 disabled:opacity-75 disabled:cursor-not-allowed group cursor-pointer"
                                 >
                                     {isSubmitting ? (
                                         <>
@@ -202,7 +199,7 @@ const ContactPage = () => {
                                         </>
                                     ) : (
                                         <>
-                                            <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                            <Send className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                                             <span>Send Message</span>
                                         </>
                                     )}
