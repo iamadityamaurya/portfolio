@@ -5,7 +5,7 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Outfit', sans-serif;
-    background-color: #050202;
+    background-color: #111827;
     color: #f8fafc;
   }
 
@@ -17,7 +17,7 @@
   ::selection {
     background-color: #10b981;
     /* Emerald-500 */
-    color: #050202;
+    color: #111827;
     /* Dark Reddish Black */
   }
 
@@ -26,7 +26,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #050202;
+    background: #111827;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -43,7 +43,7 @@
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #050202 inset !important;
+    -webkit-box-shadow: 0 0 0 30px #111827 inset !important;
     -webkit-text-fill-color: #cbd5e1 !important;
     transition: background-color 5000s ease-in-out 0s;
   }

@@ -103,7 +103,7 @@ const HomePage = () => {
                     </motion.div>
 
                     {/* 2. Name - Word by Word */}
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-none flex flex-wrap justify-center gap-x-4 drop-shadow-2xl tracking-tighter">
+                    <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold mb-6 leading-none flex flex-wrap justify-center gap-x-4 drop-shadow-2xl tracking-tighter">
                         {"Aditya Kumar Maurya".split(" ").map((word, i) => (
                             <motion.span
                                 key={i}
@@ -181,7 +181,7 @@ const HomePage = () => {
                     >
                         {/* Primary Button */}
                         <a
-                            href="#projects"
+                            href="/project"
                             className="relative group w-full sm:w-auto px-9 py-4 bg-emerald-500 text-slate-950 text-base md:text-lg font-bold rounded-full overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_40px_rgba(16,185,129,0.6)] transition-all hover:-translate-y-1.5"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
@@ -194,7 +194,7 @@ const HomePage = () => {
                         {/* Secondary Button - Hackathons */}
                         <Link
                             to="/hackathon-winning"
-                            className="relative group w-full sm:w-auto px-9 py-4 bg-[#0a0404]/80 text-yellow-400 text-base md:text-lg font-semibold rounded-full border border-yellow-500/30 hover:border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
+                            className="relative group w-full sm:w-auto px-9 py-4 bg-slate-800/90 text-yellow-400 text-base md:text-lg font-semibold rounded-full border border-yellow-500/30 hover:border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 <Trophy className="w-5 h-5 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300" />
@@ -206,7 +206,7 @@ const HomePage = () => {
                         {/* Tertiary Button - Contact */}
                         <a
                             href="#contact"
-                            className="relative group w-full sm:w-auto px-9 py-4 bg-transparent text-slate-300 hover:text-emerald-400 text-base md:text-lg font-semibold rounded-full border border-slate-700 hover:border-emerald-500/50 hover:bg-[#0a0404]/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
+                            className="relative group w-full sm:w-auto px-9 py-4 bg-slate-800/50 text-slate-200 hover:text-emerald-400 text-base md:text-lg font-semibold rounded-full border border-slate-600 hover:border-emerald-500/50 hover:bg-slate-700/70 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 Contact Me
@@ -232,7 +232,7 @@ const HomePage = () => {
                                 href={link.href}
                                 target={link.text.includes('@') ? undefined : "_blank"}
                                 rel={link.text.includes('@') ? undefined : "noopener noreferrer"}
-                                className={`group flex items-center bg-[#0a0404]/50 border border-slate-800/80 backdrop-blur-md rounded-full p-3.5 transition-all duration-300 ease-out hover:-translate-y-1 ${link.border} ${link.glow}`}
+                                className={`group flex items-center bg-slate-800/70 border border-slate-700/80 backdrop-blur-md rounded-full p-3.5 transition-all duration-300 ease-out hover:-translate-y-1 ${link.border} ${link.glow}`}
                             >
                                 <link.icon className={`w-5 h-5 shrink-0 text-slate-400 transition-colors duration-300 ${link.color}`} />
                                 <div className="grid grid-cols-[0fr] group-hover:grid-cols-[1fr] transition-all duration-300 ease-out">

@@ -7,10 +7,19 @@ const GlobalParticles = () => {
     const [init, setInit] = useState(false);
 
     useEffect(() => {
+        // Disable heavy particle effects on small screens to improve performance
+        if (typeof window !== 'undefined' && window.innerWidth < 640) {
+            // Don't initialize the engine on phones
+            setInit(false);
+            return;
+        }
+
         initParticlesEngine(async (engine) => {
             await loadFull(engine);
         }).then(() => {
             setInit(true);
+        }).catch(() => {
+            setInit(false);
         });
     }, []);
 
@@ -20,7 +29,7 @@ const GlobalParticles = () => {
         <Particles
             id="tsparticles-global"
             options={particlesOptions}
-            className="fixed inset-0 z-0 bg-[#050202] pointer-events-none"
+            className="fixed inset-0 z-0 bg-[#111827] pointer-events-none"
         />
     );
 };

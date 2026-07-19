@@ -131,7 +131,7 @@ const ContactPage = () => {
                         {/* Card Glow Effect */}
                         <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
 
-                        <div className="relative p-8 sm:p-10 rounded-2xl bg-[#0a0404]/90 border border-slate-800 backdrop-blur-xl shadow-2xl">
+                        <div className="relative p-8 sm:p-10 rounded-2xl bg-slate-800/90 border border-slate-700 backdrop-blur-xl shadow-2xl">
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
@@ -143,7 +143,7 @@ const ContactPage = () => {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-4 rounded-xl bg-[#050202]/50 border border-slate-800 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-[#0a0404]/80 outline-none transition-all placeholder:text-slate-600"
+                                            className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all placeholder:text-slate-500"
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -156,7 +156,7 @@ const ContactPage = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-4 rounded-xl bg-[#050202]/50 border border-slate-800 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-[#0a0404]/80 outline-none transition-all placeholder:text-slate-600"
+                                            className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all placeholder:text-slate-500"
                                             placeholder="john@example.com"
                                         />
                                     </div>
@@ -171,7 +171,7 @@ const ContactPage = () => {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-5 py-4 rounded-xl bg-[#050202]/50 border border-slate-800 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-[#0a0404]/80 outline-none transition-all placeholder:text-slate-600"
+                                        className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all placeholder:text-slate-500"
                                         placeholder="Project Inquiry / Collaboration"
                                     />
                                 </div>
@@ -185,7 +185,7 @@ const ContactPage = () => {
                                         onChange={handleChange}
                                         required
                                         rows="6"
-                                        className="w-full px-5 py-4 rounded-xl bg-[#050202]/50 border border-slate-800 text-slate-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-[#0a0404]/80 outline-none transition-all resize-none placeholder:text-slate-600 leading-relaxed"
+                                        className="w-full px-5 py-4 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:bg-slate-900 outline-none transition-all resize-none placeholder:text-slate-500 leading-relaxed"
                                         placeholder="Tell me about your project, goals, and timeline..."
                                     ></textarea>
                                 </div>
@@ -193,7 +193,7 @@ const ContactPage = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-4 px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-[#050202] font-bold text-lg hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed group"
+                                    className="w-full py-4 px-8 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-slate-950 font-bold text-lg hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed group"
                                 >
                                     {isSubmitting ? (
                                         <>
@@ -253,9 +253,9 @@ const ContactPage = () => {
                                     href={link.url}
                                     target={link.name === 'Email' ? undefined : "_blank"}
                                     rel={link.name === 'Email' ? undefined : "noopener noreferrer"}
-                                    className={`flex items-center gap-5 p-5 rounded-2xl bg-[#0a0404]/40 border border-slate-800/60 text-slate-300 transition-all group backdrop-blur-sm ${link.hoverClass}`}
+                                    className={`flex items-center gap-5 p-5 rounded-2xl bg-slate-800/60 border border-slate-700/70 text-slate-200 transition-all group backdrop-blur-sm ${link.hoverClass}`}
                                 >
-                                    <div className={`p-3 rounded-xl bg-[#050202]/80 text-slate-400 transition-colors shadow-inner z-10 relative ${link.iconBgClass}`}>
+                                    <div className={`p-3 rounded-xl bg-slate-900/80 text-slate-400 transition-colors shadow-inner z-10 relative ${link.iconBgClass}`}>
                                         {React.cloneElement(link.icon, { className: "w-6 h-6" })}
                                     </div>
                                     <div className="flex flex-col relative flex-1 h-6 overflow-hidden">

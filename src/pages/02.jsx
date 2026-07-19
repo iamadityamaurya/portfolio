@@ -101,7 +101,7 @@ const AboutPage = () => {
         },
         {
             icon: Briefcase,
-            value: '2+',
+            value: '1.5+',
             label: 'Years of Coding',
             colorClass: 'bg-emerald-500/10 text-emerald-400',
             borderClass: 'border-emerald-500/20 hover:border-emerald-400/50',
@@ -129,7 +129,7 @@ const AboutPage = () => {
         <section id="about" className="min-h-screen bg-transparent text-slate-50 py-24 px-6 relative overflow-hidden">
 
             {/* ── Background ── */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0a0404_0%,_#050202_60%)] -z-10" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#1e293b_0%,_#111827_60%)] -z-10" />
             <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-10" />
@@ -244,7 +244,7 @@ const AboutPage = () => {
 
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-slate-700/60 shadow-2xl group">
                                 {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#050202] via-transparent to-transparent opacity-70 z-10" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent opacity-70 z-10" />
 
                                 <img
                                     src={profileImage}
@@ -270,7 +270,7 @@ const AboutPage = () => {
                             viewport={{ once: true }}
                             className="w-full max-w-sm mx-auto"
                         >
-                            <div className="relative p-5 rounded-2xl bg-[#0a0404]/80 border border-slate-800 backdrop-blur-md overflow-hidden group hover:border-purple-500/40 transition-all hover:shadow-[0_0_25px_rgba(168,85,247,0.1)]">
+                            <div className="relative p-5 rounded-2xl bg-slate-800/80 border border-slate-700 backdrop-blur-md overflow-hidden group hover:border-purple-500/40 transition-all hover:shadow-[0_0_25px_rgba(168,85,247,0.1)]">
                                 {/* subtle glow */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

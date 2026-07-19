@@ -45,32 +45,29 @@ const SkillsPage = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-20 text-center"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 inline-block">
-                        Technologies I Know
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 inline-block">
+                        Tech Stack
                     </h2>
-                    <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                        My preferred stack for building scalable and performant applications.
-                    </p>
                 </motion.div>
 
                 {/* Tech Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 justify-items-center">
+                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-8 justify-items-center">
                     {technologies.map((tech, idx) => (
                         <motion.div
                             key={idx}
                             initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="group relative flex items-center justify-center p-6 bg-[#0a0404]/60 backdrop-blur-sm border border-slate-800 rounded-3xl hover:border-emerald-500/50 hover:bg-[#050202]/80 transition-all duration-300 w-40 h-40 shadow-lg hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] hover:-translate-y-2 cursor-pointer overflow-hidden"
+                            className="group relative flex items-center justify-center p-4 md:p-6 bg-slate-800/75 backdrop-blur-sm border border-slate-700 rounded-2xl md:rounded-3xl hover:border-emerald-500/50 hover:bg-slate-700/80 transition-all duration-300 w-24 h-24 md:w-40 md:h-40 shadow-lg hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] hover:-translate-y-2 cursor-pointer overflow-hidden"
                         >
                             <img
                                 src={tech.icon}
                                 alt={tech.name}
-                                className="w-16 h-16 transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-4"
+                                className="w-10 h-10 md:w-16 md:h-16 transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-2 md:group-hover:-translate-y-4"
                             />
 
-                            <div className="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-                                <span className="text-emerald-400 font-bold text-sm text-center px-2 pointer-events-none">
+                            <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 md:translate-y-4">
+                                <span className="text-emerald-400 font-bold text-[10px] md:text-sm text-center px-1 md:px-2 pointer-events-none truncate">
                                     {tech.name}
                                 </span>
                             </div>

@@ -71,7 +71,8 @@
             "demo": "https://medscrapper.vercel.app/",
             "code": "https://github.com/iamadityamaurya/med_scraper"
         },
-        "featured": true
+        "featured": true,
+        "main_page_show": true
     },
     {
         "id": 10,

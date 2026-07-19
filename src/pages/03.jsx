@@ -56,9 +56,7 @@ const ProjectsPage = () => {
                     <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 inline-block">
                         Featured Projects
                     </h2>
-                    <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                        A showcase of my recent work, ranging from web applications to embedded systems.
-                    </p>
+                    
                 </motion.div>
 
 
@@ -77,14 +75,14 @@ const ProjectsPage = () => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.3 }}
-                                className="group relative bg-[#0a0404]/50 border border-slate-800 rounded-3xl overflow-hidden hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
+                                className="group relative bg-slate-800/65 border border-slate-700/80 rounded-3xl overflow-hidden hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
                             >
                                 {/* Hover Glow */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                 {project.image && (
-                                    <div className="w-full aspect-video bg-slate-800/50 relative overflow-hidden">
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0404] to-transparent z-10 opacity-60" />
+                                    <div className="w-full aspect-video bg-slate-700/70 relative overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-800 to-transparent z-10 opacity-60" />
                                         <img
                                             src={project.image}
                                             alt={project.title}
@@ -102,14 +100,14 @@ const ProjectsPage = () => {
                                                         <Code className="w-6 h-6" />}
                                             </div>
                                         )}
-                                        <div className={`flex gap-3 ${project.image ? 'w-full justify-end' : ''}`}>
-                                            <a href={project.links.code} className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                        {(project.links?.code || project.links?.demo) && <div className={`flex gap-3 ${project.image ? 'w-full justify-end' : ''}`}>
+                                            {project.links?.code && <a href={project.links.code} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">
                                                 <Github className="w-5 h-5" />
-                                            </a>
-                                            <a href={project.links.demo} className="text-slate-400 hover:text-emerald-400 transition-colors">
+                                            </a>}
+                                            {project.links?.demo && <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors">
                                                 <ExternalLink className="w-5 h-5" />
-                                            </a>
-                                        </div>
+                                            </a>}
+                                        </div>}
                                     </div>
 
                                     <h3 className="text-xl font-bold text-slate-100 mb-2 group-hover:text-emerald-400 transition-colors">
@@ -131,25 +129,14 @@ const ProjectsPage = () => {
                             </motion.div>
                         ))}
 
-                        <motion.div
-                            layout
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3 }}
-                            className="group relative bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-colors flex flex-col items-center justify-center min-h-[400px]"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                            <Link to="/project" className="relative z-10 flex flex-col items-center gap-4 group-hover:scale-110 transition-transform duration-300">
-                                <div className="p-5 rounded-full bg-slate-800 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors shadow-lg shadow-black/20">
-                                    <ArrowRight className="w-8 h-8" />
-                                </div>
-                                <span className="font-bold text-xl text-slate-300 group-hover:text-emerald-400 transition-colors">Show All Projects</span>
-                            </Link>
-                        </motion.div>
                     </AnimatePresence>
                 </motion.div>
+                <div className="mt-10 flex justify-center">
+                    <Link to="/project" className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-rose-950/80 to-violet-950/80 px-8 py-4 text-base font-bold text-slate-100 shadow-lg shadow-black/20 transition-all hover:-translate-y-1 hover:from-rose-900 hover:to-violet-900 hover:shadow-violet-950/50">
+                        View All Projects
+                        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                </div>
             </div>
         </section>
     );
