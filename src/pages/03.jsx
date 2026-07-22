@@ -59,7 +59,7 @@ const ProjectsPage = () => {
                         </h2>
                     </div>
                     <div className="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 shrink-0">
-                        <Link to="/project" className="group inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0a0404]/30 px-4 py-2 text-xs font-semibold text-slate-455 hover:border-emerald-500/40 hover:text-emerald-400 transition-all">
+                        <Link to="/project" className="group inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-[#0a0404]/30 px-4 py-2 text-large font-semibold text-slate-455 hover:border-emerald-500/40 hover:text-emerald-400 transition-all">
                             View All Projects
                             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                         </Link>
