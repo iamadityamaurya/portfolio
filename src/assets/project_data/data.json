@@ -56,7 +56,7 @@
         "featured": true
     },
     {
-        "id": 9,
+        "id": 6,
         "title": "MedScrapper",
         "category": "Full Stack",
         "image": "medScrapperBanner",
@@ -94,7 +94,7 @@
         "featured": true
     },
     {
-        "id": 4,
+        "id": 11,
         "title": "AddyBites",
         "category": "Full Stack",
         "image": "addyBitesBanner",
@@ -130,7 +130,7 @@
         "featured": true
     },
     {
-        "id": 6,
+        "id": 9,
         "title": "Motia",
         "category": "Full Stack",
         "image": "motiaBanner",
@@ -186,5 +186,25 @@
             "code": "https://github.com/iamadityamaurya/dvd_extension"
         },
         "featured": true
+    },
+    {
+        "id": 4,
+        "title": "Telegram Unlimited Cloud Storage",
+        "category": "Full Stack",
+        "image": "unlimitedStorageBanner",
+        "description": "A full-stack cloud drive web application leveraging Telegram API (GramJS) to convert Telegram channels into free, unlimited cloud storage. Features interactive file & folder management, direct media streaming, token authentication, and multi-drive organization.",
+        "tech": [
+            "React",
+            "Vite",
+            "Tailwind CSS",
+            "Telegram API",
+            "GramJS",
+            "React Router"
+        ],
+        "links": {
+            "code": "https://github.com/iamadityamaurya/unlimited_storage"
+        },
+        "featured": true,
+        "main_page_show": true
     }
 ]

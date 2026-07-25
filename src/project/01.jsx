@@ -15,6 +15,7 @@ import fireshieldBanner from '../assets/project_png/fireshield-showcase.png';
 import nexgenqueryBanner from '../assets/project_png/nexgenquery-showcase.png';
 import dsdBanner from '../assets/project_png/dsd-showcase.png';
 import lineFollowerBanner from '../assets/project_png/line-follower-alpha.png';
+import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-showcase.png';
 import projectData from '../assets/project_data/data.json';
 
 const imageMap = {
@@ -28,6 +29,7 @@ const imageMap = {
     nexgenqueryBanner,
     dsdBanner,
     lineFollowerBanner,
+    unlimitedStorageBanner,
 };
 
 const categoryStyles = {
