@@ -70,28 +70,32 @@ const ContactPage = () => {
             handle: 'x/AdityaMaur43164',
             url: 'https://x.com/AdityaMaur43164',
             icon: Twitter,
-            color: 'hover:border-sky-500/50 hover:text-sky-300'
+            hoverClass: 'hover:bg-sky-500/10 hover:border-sky-500/50',
+            iconBgClass: 'group-hover:bg-sky-500/20 group-hover:text-sky-400'
         },
         {
             name: 'LinkedIn',
             handle: 'linkedin/iamadityamaurya',
             url: 'https://www.linkedin.com/in/iamadityamaurya/',
             icon: Linkedin,
-            color: 'hover:border-blue-500/50 hover:text-blue-300'
+            hoverClass: 'hover:bg-blue-500/10 hover:border-blue-500/50',
+            iconBgClass: 'group-hover:bg-blue-500/20 group-hover:text-blue-400'
         },
         {
             name: 'GitHub',
             handle: 'github/iamadityamaurya',
             url: 'https://github.com/iamadityamaurya',
             icon: Github,
-            color: 'hover:border-white/50 hover:text-white'
+            hoverClass: 'hover:bg-purple-500/10 hover:border-purple-500/50',
+            iconBgClass: 'group-hover:bg-purple-500/20 group-hover:text-purple-400'
         },
         {
             name: 'Email',
             handle: 'adityamaurya1947@gmail.com',
             url: 'mailto:adityamaurya1947@gmail.com',
             icon: Mail,
-            color: 'hover:border-emerald-500/50 hover:text-emerald-300'
+            hoverClass: 'hover:bg-rose-500/10 hover:border-rose-500/50',
+            iconBgClass: 'group-hover:bg-rose-500/20 group-hover:text-rose-400'
         }
     ];
 
@@ -261,28 +265,33 @@ const ContactPage = () => {
                                     return (
                                         <div
                                             key={link.name}
-                                            className={`p-4 rounded-2xl bg-slate-950/60 border border-slate-800/90 transition-all flex items-center justify-between group ${link.color}`}
+                                            className={`p-4 rounded-2xl bg-slate-950/60 border border-slate-800/90 transition-all flex items-center justify-between group cursor-pointer ${link.hoverClass}`}
                                         >
                                             <a
                                                 href={link.url}
                                                 target={link.name === 'Email' ? undefined : "_blank"}
                                                 rel={link.name === 'Email' ? undefined : "noopener noreferrer"}
-                                                className="flex items-center gap-3.5 min-w-0 flex-1"
+                                                className="flex items-center gap-4 min-w-0 flex-1"
                                             >
-                                                <div className="p-3 rounded-xl bg-white/5 group-hover:bg-white/10 text-slate-300 group-hover:text-white transition-colors shrink-0">
+                                                <div className={`p-3 rounded-xl bg-slate-900/90 text-slate-400 transition-colors shrink-0 ${link.iconBgClass}`}>
                                                     <Icon className="w-5 h-5" />
                                                 </div>
-                                                <div className="min-w-0">
-                                                    <div className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">{link.name}</div>
-                                                    <div className="text-xs font-mono text-slate-400 group-hover:text-emerald-400 truncate">
+                                                <div className="flex flex-col relative flex-1 h-7 overflow-hidden">
+                                                    <span className="font-bold text-base sm:text-lg absolute inset-0 flex items-center transition-all duration-300 ease-out group-hover:-translate-y-full group-hover:opacity-0 text-slate-200">
+                                                        {link.name}
+                                                    </span>
+                                                    <span className="font-mono font-medium text-xs sm:text-sm text-emerald-400 absolute inset-0 flex items-center transition-all duration-300 ease-out translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 truncate">
                                                         {link.handle}
-                                                    </div>
+                                                    </span>
                                                 </div>
                                             </a>
 
                                             <button
-                                                onClick={() => handleCopy(copyValue, link.name)}
-                                                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleCopy(copyValue, link.name);
+                                                }}
+                                                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0 ml-2 z-10"
                                                 title={`Copy ${link.name}`}
                                             >
                                                 {isCopied ? (
