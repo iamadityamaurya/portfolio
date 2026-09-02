@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import HomePage from './pages/01';
 import AboutPage from './pages/02';
 import ProjectsPage from './pages/03';
-import ExperiencePage from './pages/Experience';
 import SkillsPage from './pages/04';
+
 import ContactPage from './pages/05';
 
 import AllProjectsPage from './project/01';
@@ -77,12 +77,11 @@ function App() {
             <HomePage />
             <AboutPage />
             <ProjectsPage />
-            <ExperiencePage />
             <SkillsPage />
             <ContactPage />
-
           </>
         } />
+
         <Route path="/project" element={<AllProjectsPage />} />
         <Route path="/hackathon-winning" element={<HackathonPage />} />
       </Routes>
