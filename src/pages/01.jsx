@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Mail, Github, Linkedin, ChevronDown, Trophy } from 'lucide-react';
+import { ArrowRight, Mail, Github, Linkedin, ChevronDown, Trophy, Copy, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 
 
 const DecodingText = ({ text, onComplete }) => {
@@ -65,11 +66,17 @@ const DecodingText = ({ text, onComplete }) => {
 
 const HomePage = () => {
     const [introFinished, setIntroFinished] = useState(false);
+    const [copiedEmail, setCopiedEmail] = useState(false);
 
+    const copyEmail = () => {
+        navigator.clipboard.writeText('adityamaurya1947@gmail.com');
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2500);
+    };
 
     const titles = [
         "Full Stack & Android Developer",
-        "IoT & Embedded Developer",
+        "IoT & Embedded Systems Engineer",
         "Robotics Enthusiast",
         "3x Hackathon Winner"
     ];
@@ -112,7 +119,7 @@ const HomePage = () => {
                                 animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 transition={{
                                     duration: 0.5,
-                                    delay: (i * 0.15), // Sequential but faster and relative to trigger
+                                    delay: (i * 0.15),
                                     ease: "easeOut"
                                 }}
                             >
@@ -130,26 +137,31 @@ const HomePage = () => {
                         ))}
                     </h1>
 
-                    {/* 3. Titles/Role */}
+                    {/* 3. Titles/Role with Terminal Prompt Theme */}
                     <motion.div
-                        className="h-16 mb-8 flex items-center justify-center gap-3 text-2xl md:text-4xl lg:text-5xl font-bold text-slate-400"
+                        className="h-16 mb-8 flex items-center justify-center font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight"
                         initial={{ opacity: 0, x: -20 }}
                         animate={introFinished ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
                     >
                         <AnimatePresence mode="wait">
-                            <motion.h2
+                            <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 10 }}
+                                initial={{ opacity: 0, y: 12 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.2, ease: "easeInOut" }}
-                                className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 inline-block whitespace-nowrap"
+                                exit={{ opacity: 0, y: -12 }}
+                                transition={{ duration: 0.25, ease: "easeInOut" }}
+                                className="inline-flex items-center gap-2 text-slate-200"
                             >
-                                {titles[index]}
-                            </motion.h2>
+                                <span className="text-emerald-400 font-bold select-none">&gt;</span>
+                                <span className="text-slate-100 font-mono">
+                                    {titles[index]}
+                                </span>
+                                <span className="text-emerald-400 animate-pulse font-mono select-none">_</span>
+                            </motion.div>
                         </AnimatePresence>
                     </motion.div>
+
 
                     {/* 4. Description */}
                     <motion.p
@@ -172,48 +184,56 @@ const HomePage = () => {
                             ))}
                     </motion.p>
 
-                    {/* 5. Buttons */}
+                    {/* 5. Action Buttons */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 1.0 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full px-4"
+                        className="flex flex-wrap items-center justify-center gap-4 w-full px-2"
                     >
-                        {/* Primary Button */}
+                        {/* Primary Button - Explore Projects */}
                         <a
                             href="/project"
-                            className="relative group w-full sm:w-auto px-9 py-4 bg-emerald-500 text-slate-950 text-base md:text-lg font-bold rounded-full overflow-hidden shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_40px_rgba(16,185,129,0.6)] transition-all hover:-translate-y-1.5"
+                            className="group relative inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-emerald-500 text-slate-950 font-bold text-sm sm:text-base shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_45px_rgba(16,185,129,0.5)] hover:bg-emerald-400 transition-all duration-300 cursor-pointer overflow-hidden active:scale-95"
                         >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                                View Work
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                            <span className="relative z-10 flex items-center gap-2">
+                                Explore Projects
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </span>
-                            <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out skew-x-[-20deg]"></div>
                         </a>
 
                         {/* Secondary Button - Hackathons */}
                         <Link
                             to="/hackathon-winning"
-                            className="relative group w-full sm:w-auto px-9 py-4 bg-slate-800/90 text-yellow-400 text-base md:text-lg font-semibold rounded-full border border-yellow-500/30 hover:border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
+                            className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-400/70 text-amber-300 hover:text-amber-200 font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg shadow-amber-500/5 hover:shadow-amber-500/20 active:scale-95"
                         >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                                <Trophy className="w-5 h-5 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-300" />
-                                Hackathons
+                            <Trophy className="w-4 h-4 text-amber-400 group-hover:rotate-12 transition-transform" />
+                            <span>Hackathon Wins</span>
+                            <span className="px-1.5 py-0.5 rounded-md bg-amber-500/20 text-[11px] font-mono font-bold text-amber-300">
+                                3x
                             </span>
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-500/0 via-yellow-500/10 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         </Link>
 
-                        {/* Tertiary Button - Contact */}
-                        <a
-                            href="#contact"
-                            className="relative group w-full sm:w-auto px-9 py-4 bg-slate-800/50 text-slate-200 hover:text-emerald-400 text-base md:text-lg font-semibold rounded-full border border-slate-600 hover:border-emerald-500/50 hover:bg-slate-700/70 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] backdrop-blur-md transition-all hover:-translate-y-1.5 overflow-hidden"
+                        {/* Tertiary Button - Copy Email */}
+                        <button
+                            onClick={copyEmail}
+                            className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-slate-900/80 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-medium text-sm sm:text-base transition-all active:scale-95 cursor-pointer backdrop-blur-md"
+                            title="Click to copy email address"
                         >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                                Contact Me
-                            </span>
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        </a>
+                            {copiedEmail ? (
+                                <>
+                                    <Check className="w-4 h-4 text-emerald-400" />
+                                    <span className="text-emerald-400 font-medium">Email Copied!</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Copy className="w-4 h-4 text-slate-400" />
+                                    <span>Copy Email</span>
+                                </>
+                            )}
+                        </button>
                     </motion.div>
+
 
                     {/* 6. Social Links */}
                     <motion.div

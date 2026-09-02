@@ -124,7 +124,8 @@ const AllProjectsPage = () => {
     return (
         <div className="min-h-screen overflow-hidden bg-transparent text-slate-50 selection:bg-emerald-400/30 selection:text-emerald-100">
             <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_right,#64748b0b_1px,transparent_1px),linear-gradient(to_bottom,#64748b0b_1px,transparent_1px)] bg-[size:32px_32px]" />
-            <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_88%_10%,rgba(16,185,129,0.10),transparent_24%),radial-gradient(circle_at_12%_78%,rgba(56,189,248,0.10),transparent_32%),linear-gradient(#111827d9,#0f172af2)]" />
+            <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_88%_10%,rgba(16,185,129,0.10),transparent_24%),radial-gradient(circle_at_12%_78%,rgba(56,189,248,0.10),transparent_32%),linear-gradient(#05070de6,#070b14f2)]" />
+
 
             <main className="relative z-10 mx-auto max-w-7xl px-6 py-10 md:py-14">
                 <Link to="/" className="group inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-emerald-400"><ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> Back to home</Link>

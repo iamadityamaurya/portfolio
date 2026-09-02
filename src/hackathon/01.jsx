@@ -99,7 +99,8 @@ const HackathonsPage = () => {
     <div className="min-h-screen bg-transparent text-slate-50 relative selection:bg-emerald-500/30 selection:text-emerald-400 antialiased font-sans">
       {/* Background Effects */}
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
-      <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-[#050202] via-[#050202]/95 to-[#050202] pointer-events-none"></div>
+      <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-[#05070d] via-[#05070d]/95 to-[#05070d] pointer-events-none"></div>
+
 
       <main className="container mx-auto px-6 py-12 relative z-10 max-w-6xl">
         {/* Header */}

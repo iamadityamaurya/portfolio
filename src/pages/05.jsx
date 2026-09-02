@@ -126,13 +126,15 @@ const ContactPage = () => {
                         className="lg:col-span-7 relative group"
                     >
                         {/* Card Glow Effect */}
-                        <div className="absolute -inset-px bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none"></div>
+                        <div className="absolute -inset-px bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none"></div>
 
-                        <div className="relative p-8 sm:p-10 rounded-2xl bg-slate-900/50 border border-slate-850 backdrop-blur-xl shadow-2xl">
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label htmlFor="name" className="text-sm font-semibold text-slate-350 ml-1">Name</label>
+                        <div className="relative p-6 sm:p-9 rounded-3xl bg-[#0b101d]/85 border border-slate-800 backdrop-blur-xl shadow-2xl">
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div className="space-y-1.5">
+                                        <label htmlFor="name" className="text-xs font-mono font-semibold text-slate-300">
+                                            Your Name <span className="text-emerald-400">*</span>
+                                        </label>
                                         <input
                                             type="text"
                                             id="name"
@@ -140,12 +142,14 @@ const ContactPage = () => {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-4.5 py-3.5 rounded-xl bg-slate-950/40 border border-slate-800 text-slate-100 outline-none transition-all placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80"
-                                            placeholder="John Doe"
+                                            className="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all"
+                                            placeholder="e.g. Sarah Jenkins"
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <label htmlFor="email" className="text-sm font-semibold text-slate-355 ml-1">Email</label>
+                                    <div className="space-y-1.5">
+                                        <label htmlFor="email" className="text-xs font-mono font-semibold text-slate-300">
+                                            Email Address <span className="text-emerald-400">*</span>
+                                        </label>
                                         <input
                                             type="email"
                                             id="email"
@@ -153,14 +157,16 @@ const ContactPage = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-4.5 py-3.5 rounded-xl bg-slate-955/40 border border-slate-800 text-slate-100 outline-none transition-all placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80"
-                                            placeholder="john@example.com"
+                                            className="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all"
+                                            placeholder="sarah@company.com"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label htmlFor="subject" className="text-sm font-semibold text-slate-350 ml-1">Subject</label>
+                                <div className="space-y-1.5">
+                                    <label htmlFor="subject" className="text-xs font-mono font-semibold text-slate-300">
+                                        Subject / Project Intent <span className="text-emerald-400">*</span>
+                                    </label>
                                     <input
                                         type="text"
                                         id="subject"
@@ -168,39 +174,41 @@ const ContactPage = () => {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4.5 py-3.5 rounded-xl bg-slate-950/40 border border-slate-800 text-slate-100 outline-none transition-all placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80"
-                                        placeholder="Project Inquiry / Collaboration"
+                                        className="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all"
+                                        placeholder="Project Inquiry / Job Opportunity / Hardware Prototype"
                                     />
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-semibold text-slate-355 ml-1">Message</label>
+                                <div className="space-y-1.5">
+                                    <label htmlFor="message" className="text-xs font-mono font-semibold text-slate-300">
+                                        Message <span className="text-emerald-400">*</span>
+                                    </label>
                                     <textarea
                                         id="message"
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        rows="6"
-                                        className="w-full px-4.5 py-3.5 rounded-xl bg-slate-950/40 border border-slate-800 text-slate-100 outline-none transition-all resize-none placeholder:text-slate-600 focus:border-slate-600 focus:bg-slate-950/80 leading-relaxed"
-                                        placeholder="Tell me about your project, goals, and timeline..."
+                                        rows="5"
+                                        className="w-full px-4 py-3 rounded-xl bg-slate-950/60 border border-slate-800 text-sm text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all resize-none leading-relaxed"
+                                        placeholder="Hi Aditya, I'd like to discuss a project..."
                                     ></textarea>
                                 </div>
 
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-3.5 px-8 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-base hover:shadow-lg hover:shadow-emerald-500/10 active:scale-[0.985] transition-all flex items-center justify-center gap-2.5 disabled:opacity-75 disabled:cursor-not-allowed group cursor-pointer"
+                                    className="w-full py-3.5 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/20 transition-all active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? (
                                         <>
-                                            <Loader2 className="w-5 h-5 animate-spin" />
-                                            <span>Sending Message...</span>
+                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                            <span>Transmitting Message...</span>
                                         </>
                                     ) : (
                                         <>
-                                            <Send className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                                            <span>Send Message</span>
+                                            <Send className="w-4 h-4" />
+                                            <span>Send Transmission</span>
                                         </>
                                     )}
                                 </button>
@@ -227,6 +235,7 @@ const ContactPage = () => {
                             </form>
                         </div>
                     </motion.div>
+
 
                     {/* Social Links Sidebar */}
                     <motion.div

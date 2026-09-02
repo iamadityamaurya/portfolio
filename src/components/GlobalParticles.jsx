@@ -29,9 +29,10 @@ const GlobalParticles = () => {
         <Particles
             id="tsparticles-global"
             options={particlesOptions}
-            className="fixed inset-0 z-0 bg-[#111827] pointer-events-none"
+            className="fixed inset-0 z-0 bg-[#05070d] pointer-events-none"
         />
     );
+
 };
 
 export default GlobalParticles;

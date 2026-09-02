@@ -189,7 +189,7 @@
     },
     {
         "id": 4,
-        "title": "Telegram Unlimited Cloud Storage",
+        "title": "NexGenStorage",
         "category": "Full Stack",
         "image": "unlimitedStorageBanner",
         "description": "A full-stack cloud drive web application leveraging Telegram API (GramJS) to convert Telegram channels into free, unlimited cloud storage. Features interactive file & folder management, direct media streaming, token authentication, and multi-drive organization.",

@@ -125,11 +125,12 @@ const AboutPage = () => {
         
     ];
 
+
     return (
         <section id="about" className="min-h-screen bg-transparent text-slate-50 py-24 px-6 relative overflow-hidden">
 
             {/* ── Background ── */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#1e293b_0%,_#111827_60%)] -z-10" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0c1322_0%,_#05070d_70%)] -z-10" />
             <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-10" />
@@ -244,7 +245,8 @@ const AboutPage = () => {
 
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-slate-700/60 shadow-2xl group">
                                 {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent opacity-70 z-10" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#05070d] via-transparent to-transparent opacity-70 z-10" />
+
 
                                 <img
                                     src={profileImage}
@@ -305,6 +307,7 @@ const AboutPage = () => {
                     </motion.div>
 
                 </div>
+
             </div>
         </section>
     );
