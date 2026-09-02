@@ -1,3 +1,4 @@
+import bunkmaitBanner from '../assets/project_png/bunkmait-showcase.png';
 import aiFillerBanner from '../assets/project_png/ai-filler-showcase.png';
 import medScrapperBanner from '../assets/project_png/medscrapper-showcase.png';
 import restockerBanner from '../assets/project_png/restocker-showcase.png';
@@ -11,6 +12,30 @@ import lineFollowerBanner from '../assets/project_png/line-follower-alpha.png';
 import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-showcase.png';
 
 export const projectsData = [
+  {
+    id: 'bunkmait',
+    title: 'BunkMAIT — Attendance & Timetable Suite',
+    tagline: 'College attendance & timetable management suite with predictive analytics',
+    category: 'Full Stack',
+    categorySlug: 'fullstack',
+    badge: 'Production Web & Mobile',
+    image: bunkmaitBanner,
+    description: 'BunkMAIT solves attendance anxiety for college students by combining automated group timetables with predictive attendance analytics. Built with Next.js 16 on the web and Expo on mobile, it allows students to mark attendance per slot, simulate future bunk limits, manage extra makeup classes, view faculty cabin locations, and check course syllabi in one unified interface. Powered by Supabase PostgreSQL with strict RLS policies and optimized for offline-ready fast loading.',
+    fullDescription: 'BunkMAIT is an end-to-end college attendance tracking and timetable management ecosystem built for university students. It combines automated section-wise timetable generation with intelligent attendance calculations, allowing students to predict safe bunk allowances and required makeup classes to meet target thresholds (75%/80%). Featuring offline-first caching, Supabase Row-Level Security, syllabus downloads, and teacher directory lookups.',
+    highlights: [
+      'Next.js 16 App Router web client + cross-platform React Native / Expo mobile app',
+      'Real-time predictive attendance calculator with custom target simulations & safe bunk quotas',
+      'Automated section timetables, faculty cabin directory, and course syllabus repositories',
+      'Supabase PostgreSQL database with strict Row-Level Security (RLS) & OAuth authentication'
+    ],
+    tech: ['Next.js 16', 'React Native', 'Expo', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Framer Motion'],
+    links: {
+      demo: 'https://bunkmait.adityamaurya.dev/',
+    },
+    featured: true,
+    mainPageShow: true,
+    stat: 'Web & Mobile Suite'
+  },
   {
     id: 'alpha-line-follower',
     title: 'Alpha Line Follower',

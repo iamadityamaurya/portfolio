@@ -1,6 +1,30 @@
 [
     {
+        "id": 12,
+        "title": "BunkMAIT — Attendance & Timetable Suite",
+        "category": "Full Stack",
+        "image": "bunkmaitBanner",
+        "description": "BunkMAIT solves attendance anxiety for college students by combining automated group timetables with predictive attendance analytics. Built with Next.js 16 on the web and Expo on mobile, it allows students to mark attendance per slot, simulate future bunk limits, manage extra makeup classes, view faculty cabin locations, and check course syllabi in one unified interface.",
+        "tech": [
+            "Next.js 16",
+            "React Native",
+            "Expo",
+            "TypeScript",
+            "Supabase",
+            "PostgreSQL",
+            "Tailwind CSS",
+            "Framer Motion"
+        ],
+        "links": {
+            "demo": "https://bunkmait.adityamaurya.dev/",
+            "code": "https://github.com/iamadityamaurya"
+        },
+        "featured": true,
+        "main_page_show": true
+    },
+    {
         "id": 3,
+
         "title": "Alpha Line Follower",
         "category": "IoT",
         "image": "lineFollowerBanner",

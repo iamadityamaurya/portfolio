@@ -15,6 +15,7 @@ import GlobalParticles from './components/GlobalParticles';
 import Navbar from './components/Navbar';
 
 const pageMetadata = {
+  
   '/': {
     title: 'Aditya Kumar Maurya | Full-Stack & IoT Developer',
     description: 'Portfolio of Aditya Kumar Maurya, a full-stack, Android, IoT, and embedded systems developer.',
