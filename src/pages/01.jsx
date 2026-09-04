@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Mail, Github, Linkedin, ChevronDown, Trophy, Copy, Check } from 'lucide-react';
+import { ArrowRight, Mail, Github, Linkedin, ChevronDown, Trophy, Copy, Check, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
@@ -64,7 +64,7 @@ const DecodingText = ({ text, onComplete }) => {
 
 
 
-const HomePage = () => {
+const HomePage = ({ onOpenTerminal }) => {
     const [introFinished, setIntroFinished] = useState(false);
     const [copiedEmail, setCopiedEmail] = useState(false);
 
@@ -201,6 +201,19 @@ const HomePage = () => {
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </span>
                         </a>
+
+                        {/* Interactive Terminal CLI Button */}
+                        <button
+                            onClick={onOpenTerminal}
+                            className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#080d1a]/90 hover:bg-slate-900 border border-emerald-500/40 hover:border-emerald-400 text-emerald-400 hover:text-emerald-300 font-semibold text-sm sm:text-base transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.15)] hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] active:scale-95 cursor-pointer backdrop-blur-md font-mono"
+                            title="Launch interactive portfolio terminal CLI"
+                        >
+                            <Terminal className="w-4 h-4 text-emerald-400 group-hover:rotate-12 transition-transform" />
+                            <span>&gt;_ Terminal CLI</span>
+                            <span className="hidden md:inline-block px-1.5 py-0.5 rounded bg-emerald-500/20 text-[10px] text-emerald-300">
+                                `
+                            </span>
+                        </button>
 
                         {/* Secondary Button - Hackathons */}
                         <Link
