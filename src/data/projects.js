@@ -14,7 +14,7 @@ import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-show
 export const projectsData = [
   {
     id: 'bunkmait',
-    title: 'BunkMAIT — Attendance & Timetable Suite',
+    title: 'BunkMAIT - Attendance & Timetable Suite',
     tagline: 'College attendance & timetable management suite with predictive analytics',
     category: 'Full Stack',
     categorySlug: 'fullstack',

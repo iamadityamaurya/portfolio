@@ -149,9 +149,6 @@ export const AllProjectsPage = () => {
                                                             {project.stat}
                                                         </span>
                                                     )}
-                                                    <span className="text-xs font-mono text-slate-500 ml-auto">
-                                                        PROJECT #{String(index + 1).padStart(2, '0')}
-                                                    </span>
                                                 </div>
 
                                                 <div>

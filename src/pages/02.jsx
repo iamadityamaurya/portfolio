@@ -118,11 +118,11 @@ const AboutPage = () => {
     ];
 
     const hobbies = [
-        { icon: Box,       label: '3D Designing (Onshape)',    colorClass: 'bg-slate-700/40 text-slate-300', borderClass: 'border-slate-700 hover:border-slate-500' },
-        { icon: Cpu,       label: 'IoT & Embedded Systems',    colorClass: 'bg-blue-500/10 text-blue-400',       borderClass: 'border-blue-500/20 hover:border-blue-400/50' },
-        { icon: Bot,       label: 'Robotics & ROS 2',          colorClass: 'bg-cyan-500/10 text-cyan-400',       borderClass: 'border-cyan-500/20 hover:border-cyan-400/50' },
-        { icon: Layers,    label: '3D Printing',               colorClass: 'bg-rose-500/10 text-rose-400',       borderClass: 'border-rose-500/20 hover:border-rose-400/50' },
-        
+        { icon: Box, label: '3D Designing (Onshape)', colorClass: 'bg-slate-700/40 text-slate-300', borderClass: 'border-slate-700 hover:border-slate-500' },
+        { icon: Cpu, label: 'IoT & Embedded Systems', colorClass: 'bg-blue-500/10 text-blue-400', borderClass: 'border-blue-500/20 hover:border-blue-400/50' },
+        { icon: Bot, label: 'Robotics & ROS 2', colorClass: 'bg-cyan-500/10 text-cyan-400', borderClass: 'border-cyan-500/20 hover:border-cyan-400/50' },
+        { icon: Layers, label: '3D Printing', colorClass: 'bg-rose-500/10 text-rose-400', borderClass: 'border-rose-500/20 hover:border-rose-400/50' },
+
     ];
 
 
@@ -150,7 +150,7 @@ const AboutPage = () => {
                         My Journey &amp; Expertise
                     </h2>
                     <p className="text-slate-400 mt-4 text-lg max-w-xl mx-auto">
-                        From circuit boards to cloud backends — I build end-to-end.
+                        From circuit boards to cloud backends - I build end-to-end.
                     </p>
                 </motion.div>
 
@@ -179,7 +179,7 @@ const AboutPage = () => {
                                 <span className="text-blue-400 font-medium">Full Stack Web</span>,{' '}
                                 <span className="text-sky-400 font-medium">Android App Development</span>, and{' '}
                                 <span className="text-cyan-400 font-medium">Hardware &amp; IoT Engineering</span>.
-                                I thrive on solving complex problems — from designing custom 3D-printed robotics and
+                                I thrive on solving complex problems - from designing custom 3D-printed robotics and
                                 ESP32-based smart home systems, to building scalable web backends.
                             </p>
                             <p>
