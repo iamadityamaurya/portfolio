@@ -57,7 +57,7 @@ export const ProjectModal = ({ project, onClose }) => {
 
             {/* Badge on Banner */}
             <div className="absolute bottom-4 left-6 flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-semibold backdrop-blur-md">
+              <span className="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200 font-mono text-xs font-semibold backdrop-blur-md">
                 {project.category}
               </span>
               {project.stat && (
@@ -81,7 +81,7 @@ export const ProjectModal = ({ project, onClose }) => {
 
             {/* Full description */}
             <div className="space-y-3">
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
                 Project Overview &amp; Architecture
               </h3>
               <p className="text-sm md:text-base text-slate-300 leading-relaxed font-normal">
@@ -99,7 +99,7 @@ export const ProjectModal = ({ project, onClose }) => {
                 <ul className="space-y-2.5">
                   {project.highlights.map((h, i) => (
                     <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </li>
                   ))}
@@ -118,7 +118,7 @@ export const ProjectModal = ({ project, onClose }) => {
                     key={t}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700 text-xs font-mono text-slate-200"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
                     {t}
                   </span>
                 ))}
@@ -144,7 +144,7 @@ export const ProjectModal = ({ project, onClose }) => {
                   href={project.links.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-bold shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02]"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white hover:bg-slate-200 text-slate-950 text-sm font-bold shadow-lg transition-all hover:scale-[1.02]"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Live Preview / Demo

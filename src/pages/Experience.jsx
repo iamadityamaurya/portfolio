@@ -117,7 +117,7 @@ const ExperiencePage = () => {
                         Professional History
                         <span className="w-4 h-px bg-emerald-400" />
                     </span>
-                    <h3 className="text-3xl md:text-5xl font-extrabold mt-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 inline-block leading-tight">
+                    <h3 className="text-3xl md:text-5xl font-extrabold mt-2 text-white tracking-tight leading-tight">
                         Work Experience
                     </h3>
                     <p className="text-slate-400 mt-4 text-base max-w-lg mx-auto">

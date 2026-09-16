@@ -32,16 +32,16 @@ export const AllProjectsPage = () => {
     }, [selectedCategory, searchQuery]);
 
     return (
-        <div className="min-h-screen overflow-hidden bg-transparent text-slate-50 selection:bg-emerald-400/30 selection:text-emerald-100">
+        <div className="min-h-screen overflow-hidden bg-transparent text-slate-50 selection:bg-slate-700 selection:text-white">
             {/* Background grid */}
             <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_right,#64748b0b_1px,transparent_1px),linear-gradient(to_bottom,#64748b0b_1px,transparent_1px)] bg-[size:32px_32px]" />
-            <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_88%_10%,rgba(16,185,129,0.08),transparent_24%),radial-gradient(circle_at_12%_78%,rgba(56,189,248,0.08),transparent_32%),linear-gradient(#05070de6,#070b14f2)]" />
+            <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_88%_10%,rgba(56,189,248,0.06),transparent_24%),radial-gradient(circle_at_12%_78%,rgba(99,102,241,0.06),transparent_32%),linear-gradient(#05070de6,#070b14f2)]" />
 
             <main className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-10 md:py-16">
                 {/* Back to home */}
                 <Link 
                     to="/" 
-                    className="group inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-400 transition-colors hover:text-emerald-400 mb-8"
+                    className="group inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-400 transition-colors hover:text-white mb-8"
                 >
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" /> 
                     Back to home
@@ -49,12 +49,12 @@ export const AllProjectsPage = () => {
 
                 {/* Header */}
                 <header className="border-b border-slate-800/80 pb-10">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-4">
-                        <FolderGit2 className="w-3.5 h-3.5" />
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 font-mono text-xs uppercase tracking-widest mb-4">
+                        <FolderGit2 className="w-3.5 h-3.5 text-cyan-400" />
                         Full Project Catalog ({projectsData.length})
                     </div>
-                    <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight text-slate-100">
-                        Engineering Archive &amp; <span className="bg-gradient-to-r from-emerald-400 to-cyan-300 bg-clip-text text-transparent">Projects</span>
+                    <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        Engineering Archive &amp; Projects
                     </h1>
                     <p className="mt-4 text-slate-400 text-sm sm:text-lg max-w-3xl leading-relaxed">
                         A comprehensive catalog of autonomous robotics systems, smart home hardware, Chrome extensions, and full-stack web applications.
@@ -77,14 +77,14 @@ export const AllProjectsPage = () => {
                                     onClick={() => setSelectedCategory(cat)}
                                     className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                                         isSelected
-                                            ? 'bg-emerald-500 text-slate-950 font-bold shadow-lg shadow-emerald-500/20'
+                                            ? 'bg-white text-slate-950 font-bold shadow-lg'
                                             : 'bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-slate-700 hover:text-white'
                                     }`}
                                 >
                                     <span>{cat}</span>
                                     <span
                                         className={`px-1.5 py-0.5 rounded-md font-mono text-[10px] ${
-                                            isSelected ? 'bg-slate-950/20 text-slate-950 font-bold' : 'bg-white/5 text-slate-400'
+                                            isSelected ? 'bg-slate-900/20 text-slate-950 font-bold' : 'bg-white/5 text-slate-400'
                                         }`}
                                     >
                                         {count}
@@ -100,7 +100,7 @@ export const AllProjectsPage = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search projects or tech stacks..."
-                            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 outline-none focus:border-emerald-500/50"
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 outline-none focus:border-slate-500"
                         />
                     </div>
                 </section>
@@ -116,7 +116,7 @@ export const AllProjectsPage = () => {
                                 setSelectedCategory('All');
                                 setSearchQuery('');
                             }}
-                            className="mt-4 px-4 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold hover:bg-emerald-500/20 transition-all cursor-pointer"
+                            className="mt-4 px-4 py-2 rounded-xl bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold hover:bg-slate-700 transition-all cursor-pointer"
                         >
                             Reset Filters
                         </button>
@@ -135,13 +135,13 @@ export const AllProjectsPage = () => {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, amount: 0.15 }}
                                         transition={{ duration: 0.4 }}
-                                        className="group relative overflow-hidden rounded-3xl border border-slate-800 bg-[#090e19]/80 p-6 sm:p-8 shadow-2xl hover:border-emerald-500/40 transition-all"
+                                        className="group relative overflow-hidden rounded-3xl border border-slate-800 bg-[#090e19]/80 p-6 sm:p-8 shadow-2xl hover:border-slate-600 transition-all"
                                     >
                                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                             {/* Info Column */}
                                             <div className={`lg:col-span-7 space-y-5 ${!isEven ? 'lg:order-2' : ''}`}>
                                                 <div className="flex items-center gap-2">
-                                                    <span className="px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-bold">
+                                                    <span className="px-3 py-1 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-300 font-mono text-xs font-bold">
                                                         {project.category}
                                                     </span>
                                                     {project.stat && (
@@ -157,7 +157,7 @@ export const AllProjectsPage = () => {
                                                 <div>
                                                     <h2
                                                         onClick={() => setSelectedProject(project)}
-                                                        className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-emerald-400 transition-colors cursor-pointer"
+                                                        className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-cyan-400 transition-colors cursor-pointer"
                                                     >
                                                         {project.title}
                                                     </h2>
@@ -186,7 +186,7 @@ export const AllProjectsPage = () => {
                                                 <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">
                                                     <button
                                                         onClick={() => setSelectedProject(project)}
-                                                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all shadow-md shadow-emerald-500/10 cursor-pointer"
+                                                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-200 text-slate-950 font-bold text-xs transition-all shadow-md cursor-pointer"
                                                     >
                                                         <Eye className="w-3.5 h-3.5" />
                                                         <span>Read Case Study</span>

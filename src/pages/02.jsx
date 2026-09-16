@@ -36,10 +36,10 @@ const cardVariant = {
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 const SectionLabel = ({ children }) => (
-    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase mb-3">
-        <span className="w-4 h-px bg-emerald-400" />
+    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-cyan-400 uppercase mb-3">
+        <span className="w-4 h-px bg-cyan-400/50" />
         {children}
-        <span className="w-4 h-px bg-emerald-400" />
+        <span className="w-4 h-px bg-cyan-400/50" />
     </span>
 );
 
@@ -103,9 +103,9 @@ const AboutPage = () => {
             icon: Briefcase,
             value: '1.5+',
             label: 'Years of Coding',
-            colorClass: 'bg-emerald-500/10 text-emerald-400',
-            borderClass: 'border-emerald-500/20 hover:border-emerald-400/50',
-            glowClass: 'hover:shadow-[0_0_20px_rgba(16,185,129,0.12)]',
+            colorClass: 'bg-cyan-500/10 text-cyan-400',
+            borderClass: 'border-cyan-500/20 hover:border-cyan-400/50',
+            glowClass: 'hover:shadow-[0_0_20px_rgba(6,182,212,0.12)]',
         },
         {
             icon: GraduationCap,
@@ -118,7 +118,7 @@ const AboutPage = () => {
     ];
 
     const hobbies = [
-        { icon: Box,       label: '3D Designing (Onshape)',    colorClass: 'bg-emerald-500/10 text-emerald-400', borderClass: 'border-emerald-500/20 hover:border-emerald-400/50' },
+        { icon: Box,       label: '3D Designing (Onshape)',    colorClass: 'bg-slate-700/40 text-slate-300', borderClass: 'border-slate-700 hover:border-slate-500' },
         { icon: Cpu,       label: 'IoT & Embedded Systems',    colorClass: 'bg-blue-500/10 text-blue-400',       borderClass: 'border-blue-500/20 hover:border-blue-400/50' },
         { icon: Bot,       label: 'Robotics & ROS 2',          colorClass: 'bg-cyan-500/10 text-cyan-400',       borderClass: 'border-cyan-500/20 hover:border-cyan-400/50' },
         { icon: Layers,    label: '3D Printing',               colorClass: 'bg-rose-500/10 text-rose-400',       borderClass: 'border-rose-500/20 hover:border-rose-400/50' },
@@ -131,8 +131,8 @@ const AboutPage = () => {
 
             {/* ── Background ── */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0c1322_0%,_#05070d_70%)] -z-10" />
-            <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-20 right-10 w-72 h-72 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-10" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
@@ -146,7 +146,7 @@ const AboutPage = () => {
                     className="mb-20 text-center flex flex-col items-center"
                 >
                     <SectionLabel>Who I Am</SectionLabel>
-                    <h2 className="text-4xl md:text-6xl font-extrabold mt-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 inline-block leading-tight">
+                    <h2 className="text-4xl md:text-6xl font-extrabold mt-2 text-white tracking-tight leading-tight">
                         My Journey &amp; Expertise
                     </h2>
                     <p className="text-slate-400 mt-4 text-lg max-w-xl mx-auto">
@@ -169,16 +169,16 @@ const AboutPage = () => {
                         <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
                             <p>
                                 Hey, I'm{' '}
-                                <span className="text-emerald-400 font-semibold">Aditya Kumar Maurya</span> —
+                                <span className="text-white font-bold">Aditya Kumar Maurya</span> —
                                 a passionate developer and{' '}
-                                <span className="text-yellow-400 font-semibold">3x Hackathon Winner</span>{' '}
+                                <span className="text-amber-300 font-bold">3x Hackathon Winner</span>{' '}
                                 currently pursuing B.Tech in Electronics &amp; Communication Engineering.
                             </p>
                             <p>
                                 I specialize in{' '}
                                 <span className="text-blue-400 font-medium">Full Stack Web</span>,{' '}
-                                <span className="text-blue-400 font-medium">Android App Development</span>, and{' '}
-                                <span className="text-emerald-400 font-medium">Hardware &amp; IoT Engineering</span>.
+                                <span className="text-sky-400 font-medium">Android App Development</span>, and{' '}
+                                <span className="text-cyan-400 font-medium">Hardware &amp; IoT Engineering</span>.
                                 I thrive on solving complex problems — from designing custom 3D-printed robotics and
                                 ESP32-based smart home systems, to building scalable web backends.
                             </p>
@@ -215,7 +215,7 @@ const AboutPage = () => {
                         {/* Hobbies */}
                         <div>
                             <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2">
-                                <Sparkles className="w-4 h-4 text-emerald-400" />
+                                <Sparkles className="w-4 h-4 text-cyan-400" />
                                 Beyond Coding
                             </h4>
                             <motion.div
@@ -241,7 +241,7 @@ const AboutPage = () => {
                         {/* Photo */}
                         <div className="relative w-full max-w-sm mx-auto">
                             {/* Glow ring */}
-                            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-emerald-500/40 via-blue-500/20 to-purple-500/30 blur-xl opacity-60" />
+                            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-purple-500/30 blur-xl opacity-60" />
 
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-slate-700/60 shadow-2xl group">
                                 {/* Gradient overlay */}
@@ -256,7 +256,7 @@ const AboutPage = () => {
 
                                 {/* Caption overlay */}
                                 <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                                    <div className="h-px w-16 bg-gradient-to-r from-emerald-400 to-blue-400 mb-3 rounded-full" />
+                                    <div className="h-px w-16 bg-gradient-to-r from-cyan-400 to-blue-400 mb-3 rounded-full" />
                                     <p className="text-slate-200 text-sm font-medium italic leading-snug">
                                         "Building ideas into scalable digital solutions."
                                     </p>
@@ -303,7 +303,7 @@ const AboutPage = () => {
 
                         {/* Decorative blobs */}
                         <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />
-                        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />
+                        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-indigo-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />
                     </motion.div>
 
                 </div>

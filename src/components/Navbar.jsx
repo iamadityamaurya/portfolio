@@ -40,7 +40,7 @@ export const Navbar = ({ onOpenTerminal }) => {
               <Link
                 key={item.label}
                 to={item.href}
-                className="transition-colors duration-200 hover:text-emerald-400 whitespace-nowrap"
+                className="transition-colors duration-200 hover:text-white whitespace-nowrap"
               >
                 {item.label}
               </Link>
@@ -52,7 +52,7 @@ export const Navbar = ({ onOpenTerminal }) => {
               key={item.label}
               href={item.href}
               onClick={(e) => handleClick(e, item)}
-              className="transition-colors duration-200 hover:text-emerald-400 cursor-pointer whitespace-nowrap"
+              className="transition-colors duration-200 hover:text-white cursor-pointer whitespace-nowrap"
             >
               {item.label}
             </a>
@@ -62,10 +62,10 @@ export const Navbar = ({ onOpenTerminal }) => {
         {/* CLI Terminal Trigger Button */}
         <button
           onClick={onOpenTerminal}
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:border-emerald-500/60 transition-all text-xs font-mono font-semibold cursor-pointer active:scale-95 shadow-[0_0_12px_rgba(16,185,129,0.15)]"
+          className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-500 transition-all text-xs font-mono font-semibold cursor-pointer active:scale-95"
           title="Open Robotics & Telemetry CLI Terminal"
         >
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
           <span>&gt;_ CLI</span>
         </button>
       </nav>

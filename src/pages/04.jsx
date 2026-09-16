@@ -34,8 +34,8 @@ const SkillsPage = () => {
     return (
         <section id="skills" className="min-h-screen bg-transparent text-slate-50 py-20 px-6 relative overflow-hidden">
             {/* Background elements */}
-            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-emerald-500/5 blur-3xl rounded-full pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-500/5 blur-3xl rounded-full pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/5 blur-3xl rounded-full pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none"></div>
 
             <div className="container mx-auto max-w-6xl relative z-10">
                 <motion.div
@@ -45,7 +45,7 @@ const SkillsPage = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-20 text-center"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 inline-block">
+                    <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-white tracking-tight leading-tight">
                         Tech Stack
                     </h2>
                 </motion.div>
@@ -58,7 +58,7 @@ const SkillsPage = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="group relative flex items-center justify-center p-4 md:p-6 bg-slate-800/75 backdrop-blur-sm border border-slate-700 rounded-2xl md:rounded-3xl hover:border-emerald-500/50 hover:bg-slate-700/80 transition-all duration-300 w-24 h-24 md:w-40 md:h-40 shadow-lg hover:shadow-[0_0_25px_rgba(16,185,129,0.2)] hover:-translate-y-2 cursor-pointer overflow-hidden"
+                            className="group relative flex items-center justify-center p-4 md:p-6 bg-slate-800/75 backdrop-blur-sm border border-slate-700 rounded-2xl md:rounded-3xl hover:border-slate-500 hover:bg-slate-800 transition-all duration-300 w-24 h-24 md:w-40 md:h-40 shadow-lg hover:shadow-2xl hover:-translate-y-2 cursor-pointer overflow-hidden"
                         >
                             <img
                                 src={tech.icon}
@@ -67,7 +67,7 @@ const SkillsPage = () => {
                             />
 
                             <div className="absolute bottom-2 md:bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 md:translate-y-4">
-                                <span className="text-emerald-400 font-bold text-[10px] md:text-sm text-center px-1 md:px-2 pointer-events-none truncate">
+                                <span className="text-slate-200 font-semibold text-[10px] md:text-sm text-center px-1 md:px-2 pointer-events-none truncate">
                                     {tech.name}
                                 </span>
                             </div>

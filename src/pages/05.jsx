@@ -102,7 +102,7 @@ const ContactPage = () => {
     return (
         <section id="contact" className="min-h-screen bg-transparent text-slate-50 py-28 px-4 sm:px-8 relative overflow-hidden flex flex-col justify-center">
             {/* Background Glow */}
-            <div className="absolute top-1/3 right-1/4 w-[550px] h-[400px] bg-emerald-500/5 rounded-full blur-[150px] pointer-events-none -z-10" />
+            <div className="absolute top-1/3 right-1/4 w-[550px] h-[400px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none -z-10" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
                 {/* Section Header */}
@@ -113,11 +113,7 @@ const ContactPage = () => {
                     transition={{ duration: 0.5 }}
                     className="mb-16 text-center"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs sm:text-sm uppercase tracking-widest mb-4">
-                        <MessageSquare className="w-4 h-4" />
-                        Initiate Connection
-                    </div>
-                    <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">
+                    <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
                         Get In Touch
                     </h2>
                 </motion.div>
@@ -137,7 +133,7 @@ const ContactPage = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div className="space-y-2">
                                         <label htmlFor="name" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
-                                            Your Name <span className="text-emerald-400">*</span>
+                                            Your Name <span className="text-cyan-400">*</span>
                                         </label>
                                         <input
                                             type="text"
@@ -146,13 +142,13 @@ const ContactPage = () => {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all"
+                                            className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
                                             placeholder="e.g. Sarah Jenkins"
                                         />
                                     </div>
                                     <div className="space-y-2">
                                         <label htmlFor="email" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
-                                            Email Address <span className="text-emerald-400">*</span>
+                                            Email Address <span className="text-cyan-400">*</span>
                                         </label>
                                         <input
                                             type="email"
@@ -161,7 +157,7 @@ const ContactPage = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all"
+                                            className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
                                             placeholder="sarah@company.com"
                                         />
                                     </div>
@@ -169,7 +165,7 @@ const ContactPage = () => {
 
                                 <div className="space-y-2">
                                     <label htmlFor="subject" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
-                                        Subject / Project Intent <span className="text-emerald-400">*</span>
+                                        Subject / Project Intent <span className="text-cyan-400">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -178,14 +174,14 @@ const ContactPage = () => {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all"
+                                        className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
                                         placeholder="Project Inquiry / Job Opportunity / Hardware Prototype"
                                     />
                                 </div>
 
                                 <div className="space-y-2 flex-1 flex flex-col">
                                     <label htmlFor="message" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
-                                        Message <span className="text-emerald-400">*</span>
+                                        Message <span className="text-cyan-400">*</span>
                                     </label>
                                     <textarea
                                         id="message"
@@ -194,7 +190,7 @@ const ContactPage = () => {
                                         onChange={handleChange}
                                         required
                                         rows="5"
-                                        className="w-full flex-1 min-h-[130px] px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-emerald-500/60 focus:bg-slate-950/90 transition-all resize-none leading-relaxed"
+                                        className="w-full flex-1 min-h-[130px] px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all resize-none leading-relaxed"
                                         placeholder="Hi Aditya, I'd like to discuss a project..."
                                     ></textarea>
                                 </div>
@@ -202,7 +198,7 @@ const ContactPage = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-4 px-8 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-base shadow-xl shadow-emerald-500/20 transition-all active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                                    className="w-full py-4 px-8 rounded-2xl bg-white hover:bg-slate-200 text-slate-950 font-bold text-base shadow-xl transition-all active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed mt-2"
                                 >
                                     {isSubmitting ? (
                                         <>
@@ -221,7 +217,7 @@ const ContactPage = () => {
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-center text-sm font-medium"
+                                        className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-center text-sm font-medium"
                                     >
                                         ✨ Message sent successfully! I'll get back to you soon.
                                     </motion.div>
@@ -280,7 +276,7 @@ const ContactPage = () => {
                                                     <span className="font-bold text-base sm:text-lg absolute inset-0 flex items-center transition-all duration-300 ease-out group-hover:-translate-y-full group-hover:opacity-0 text-slate-200">
                                                         {link.name}
                                                     </span>
-                                                    <span className="font-mono font-medium text-xs sm:text-sm text-emerald-400 absolute inset-0 flex items-center transition-all duration-300 ease-out translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 truncate">
+                                                    <span className="font-mono font-medium text-xs sm:text-sm text-cyan-400 absolute inset-0 flex items-center transition-all duration-300 ease-out translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 truncate">
                                                         {link.handle}
                                                     </span>
                                                 </div>
@@ -295,7 +291,7 @@ const ContactPage = () => {
                                                 title={`Copy ${link.name}`}
                                             >
                                                 {isCopied ? (
-                                                    <Check className="w-4 h-4 text-emerald-400" />
+                                                    <Check className="w-4 h-4 text-cyan-400" />
                                                 ) : (
                                                     <Copy className="w-4 h-4" />
                                                 )}

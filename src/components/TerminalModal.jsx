@@ -4,7 +4,8 @@ import {
   X, Maximize2, Minimize2, Terminal as TerminalIcon, 
   CornerDownLeft, Radio, Cpu, Award, FolderGit2, User, 
   Mail, Sparkles, Check, ExternalLink, GraduationCap,
-  Globe, Smartphone, Layers, Wrench, ArrowRight
+  Globe, Smartphone, Layers, Wrench, ArrowRight, Github,
+  Linkedin, FileText, Send, Copy, Info
 } from 'lucide-react';
 import { projectsData } from '../data/projects';
 
@@ -14,29 +15,41 @@ export const TerminalModal = ({ isOpen, onClose }) => {
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isMaximized, setIsMaximized] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const inputRef = useRef(null);
   const terminalEndRef = useRef(null);
 
   const quickCommands = [
-    'help', 'about', 'projects', 'hackathons', 'skills', 'education', 'contact', 'clear'
+    'help', 'about', 'projects', 'skills', 'hackathons', 'education', 'contact', 'ls', 'clear'
+  ];
+
+  const allKnownCommands = [
+    'help', 'about', 'bio', 'projects', 'skills', 'tech', 'hackathons', 'awards',
+    'education', 'college', 'bunkmait', 'fireshield', 'linefollower', 'nexgenquery',
+    'robot-status', 'telemetry', 'contact', 'email', 'mail', 'github', 'git',
+    'linkedin', 'resume', 'cv', 'whoami', 'pwd', 'ls', 'dir', 'cat', 'date',
+    'sudo', 'clear', 'cls', 'exit', 'quit', 'history', 'echo'
   ];
 
   const renderBanner = () => (
-    <div className="space-y-1.5 pb-2 text-xs sm:text-sm font-mono border-b border-slate-800">
-      <div className="text-emerald-400 font-bold tracking-wider">
-        ADITYA KUMAR MAURYA — FULL-STACK &amp; HARDWARE CLI [v3.0.0]
+    <div className="space-y-2 pb-3 text-xs sm:text-sm font-mono border-b border-slate-800/80">
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <div className="text-cyan-400 font-bold tracking-wider text-xs sm:text-sm flex items-center gap-2">
+          <span>⚡ ADITYA KUMAR MAURYA — CORE TELEMETRY CLI [v3.2.0]</span>
+        </div>
+        <span className="text-[11px] text-slate-500 font-mono">Type "help" or "ls"</span>
       </div>
-      <div className="text-slate-400 flex items-center gap-2 flex-wrap">
-        <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>Connected to:</span>
-        <span className="text-cyan-400 font-semibold">aditya@portfolio-core</span>
-        <span className="text-slate-600">|</span>
-        <span className="text-amber-400">MAIT Delhi (ECE)</span>
-        <span className="text-slate-600">|</span>
-        <span className="text-purple-400">3x Hackathon Champion</span>
+      <div className="text-slate-400 flex items-center gap-2 flex-wrap text-xs">
+        <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span className="text-slate-500">Host:</span>
+        <span className="text-slate-200 font-semibold">aditya@portfolio-core</span>
+        <span className="text-slate-700">|</span>
+        <span className="text-slate-400">MAIT Delhi (ECE)</span>
+        <span className="text-slate-700">|</span>
+        <span className="text-amber-400 font-semibold">3x Hackathon Champion</span>
       </div>
       <div className="text-slate-500 text-xs">
-        Type <span className="text-amber-400 font-semibold">"help"</span> to see available commands or click quick actions below.
+        Use <span className="text-slate-300 font-semibold">Tab</span> for auto-complete, <span className="text-slate-300 font-semibold">↑ / ↓</span> for history, or click quick actions above.
       </div>
     </div>
   );
@@ -52,7 +65,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
           }
         ]);
       }
-      setTimeout(() => inputRef.current?.focus(), 80);
+      setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [isOpen]);
 
@@ -74,6 +87,12 @@ export const TerminalModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
   const executeCommand = (cmdText) => {
     const cleanCmd = cmdText.trim();
     if (!cleanCmd) return;
@@ -84,6 +103,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
 
     const parts = cleanCmd.toLowerCase().split(' ');
     const mainCmd = parts[0];
+    const arg = parts.slice(1).join(' ').trim();
 
     const newHistoryItem = {
       type: 'command',
@@ -91,7 +111,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     };
 
-    if (mainCmd === 'clear') {
+    if (mainCmd === 'clear' || mainCmd === 'cls') {
       setHistory([
         {
           type: 'banner',
@@ -102,66 +122,81 @@ export const TerminalModal = ({ isOpen, onClose }) => {
       return;
     }
 
+    if (mainCmd === 'exit' || mainCmd === 'quit' || mainCmd === 'q') {
+      onClose();
+      return;
+    }
+
     let outputComponent = null;
 
     switch (mainCmd) {
       case 'help':
         outputComponent = (
-          <div className="space-y-2 text-xs sm:text-sm font-mono">
-            <div className="text-slate-300 font-semibold">Available commands:</div>
-            <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-x-4 gap-y-1 text-slate-300 pl-2">
-              <div><span className="text-emerald-400 font-bold">about</span></div>
-              <div className="text-slate-400">- View background, bio, and engineering domains</div>
-
-              <div><span className="text-emerald-400 font-bold">projects</span></div>
-              <div className="text-slate-400">- List web, mobile, IoT &amp; robotics projects</div>
-
-              <div><span className="text-emerald-400 font-bold">hackathons</span></div>
-              <div className="text-slate-400">- Show 3x Hackathon championships &amp; awards</div>
-
-              <div><span className="text-emerald-400 font-bold">skills</span></div>
-              <div className="text-slate-400">- Print complete technical stack &amp; tools</div>
-
-              <div><span className="text-emerald-400 font-bold">education</span></div>
-              <div className="text-slate-400">- View university, degree &amp; coursework info</div>
-
-              <div><span className="text-emerald-400 font-bold">bunkmait</span></div>
-              <div className="text-slate-400">- Spotlight on BunkMAIT attendance app suite</div>
-
-              <div><span className="text-emerald-400 font-bold">robot-status</span></div>
-              <div className="text-slate-400">- Check live ROS2 node telemetry simulation</div>
-
-              <div><span className="text-emerald-400 font-bold">contact</span></div>
-              <div className="text-slate-400">- Get email, GitHub, and LinkedIn links</div>
-
-              <div><span className="text-emerald-400 font-bold">clear</span></div>
-              <div className="text-slate-400">- Clear console output buffer</div>
+          <div className="space-y-3 text-xs sm:text-sm font-mono text-slate-300">
+            <div className="text-white font-bold flex items-center gap-1.5">
+              <span>Available CLI Commands:</span>
             </div>
-            <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-800/80">
-              💡 Tip: Click any quick action button above or use <span className="text-slate-400">↑ / ↓</span> for command history.
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">about</span> / <span className="text-cyan-400">bio</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">Bio, background &amp; engineering domains</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">projects</span> / <span className="text-cyan-400">bunkmait</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">Browse web, mobile, IoT &amp; CAD builds</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">skills</span> / <span className="text-cyan-400">tech</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">Technical stack, tools &amp; frameworks</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">hackathons</span> / <span className="text-cyan-400">awards</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">3x Hackathon championships info</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">contact</span> / <span className="text-cyan-400">email</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">Email, GitHub, and social channels</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">telemetry</span> / <span className="text-cyan-400">robot-status</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">Simulate live ROS 2 hardware monitor</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">ls</span> / <span className="text-cyan-400">cat &lt;file&gt;</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">List files or inspect section files</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">github</span> / <span className="text-cyan-400">linkedin</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">Direct profile links &amp; repositories</p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span className="text-cyan-400 font-bold">whoami</span> / <span className="text-cyan-400">pwd</span> / <span className="text-cyan-400">date</span>
+                <p className="text-slate-400 text-[11px] mt-0.5">Shell utilities &amp; identity</p>
+              </div>
             </div>
           </div>
         );
         break;
 
       case 'about':
+      case 'bio':
         outputComponent = (
           <div className="space-y-3 text-xs sm:text-sm font-mono text-slate-300">
-            <div className="flex items-center gap-2 text-emerald-400 font-bold">
-              <User className="w-4 h-4" />
-              <span>Aditya Kumar Maurya — Full-Stack, Android &amp; Embedded Systems Engineer</span>
+            <div className="flex items-center gap-2 text-white font-bold">
+              <User className="w-4 h-4 text-cyan-400" />
+              <span>Aditya Kumar Maurya — Full-Stack &amp; Hardware Engineer</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
-              Hey! I'm Aditya Kumar Maurya — a developer and 3x Hackathon Winner currently pursuing B.Tech in Electronics &amp; Communication Engineering at Maharaja Agrasen Institute of Technology (MAIT), Rohini, Delhi.
+              Hey! I'm Aditya Kumar Maurya — a developer, IoT engineer, and 3x Hackathon Winner pursuing B.Tech in Electronics &amp; Communication Engineering at Maharaja Agrasen Institute of Technology (MAIT), Rohini, Delhi.
             </p>
             <p className="text-slate-400 leading-relaxed">
-              I specialize in bridging digital software with physical hardware — from Next.js 16 web applications and React Native mobile apps, to ESP32 smart home systems, high-speed line followers, and ROS 2 robotics.
+              I specialize in bridging digital software with physical hardware: from Next.js 16 web applications and React Native mobile apps, to ESP32 smart home systems, high-speed line followers, and ROS 2 robotics.
             </p>
             <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
               <div><span className="text-slate-500">Degree:</span> <span className="text-slate-200">B.Tech in ECE (2024–2028)</span></div>
               <div><span className="text-slate-500">College:</span> <span className="text-cyan-300">MAIT, Rohini, Delhi</span></div>
               <div><span className="text-slate-500">Track Record:</span> <span className="text-amber-300">3x Hackathon Champion</span></div>
-              <div><span className="text-slate-500">Domains:</span> <span className="text-emerald-300">Full Stack, Mobile, IoT, ROS 2</span></div>
+              <div><span className="text-slate-500">Domains:</span> <span className="text-slate-200">Full Stack, Mobile, IoT, ROS 2</span></div>
             </div>
           </div>
         );
@@ -170,20 +205,25 @@ export const TerminalModal = ({ isOpen, onClose }) => {
       case 'projects':
         outputComponent = (
           <div className="space-y-3 text-xs sm:text-sm font-mono">
-            <div className="text-slate-300 font-semibold flex items-center gap-2">
-              <FolderGit2 className="w-4 h-4 text-emerald-400" />
-              <span>Featured Portfolio Projects ({projectsData.length} total):</span>
+            <div className="text-white font-semibold flex items-center justify-between">
+              <span className="flex items-center gap-2">
+                <FolderGit2 className="w-4 h-4 text-cyan-400" />
+                Featured Projects Catalog ({projectsData.length} items):
+              </span>
+              <a href="/project" className="text-cyan-400 hover:underline text-xs flex items-center gap-1">
+                View All <ArrowRight className="w-3 h-3" />
+              </a>
             </div>
             <div className="space-y-2.5">
               {projectsData.map((p, idx) => (
-                <div key={idx} className="p-3 rounded-xl bg-slate-900/80 border border-slate-800/90 hover:border-emerald-500/40 transition-colors">
+                <div key={idx} className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition-colors">
                   <div className="flex flex-wrap items-center justify-between gap-1 mb-1">
-                    <span className="text-emerald-400 font-bold">{p.title}</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                    <span className="text-white font-bold">{p.title}</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
                       {p.category}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300 mb-2 leading-relaxed">{p.tagline || p.description}</p>
+                  <p className="text-xs text-slate-400 mb-2 leading-relaxed">{p.tagline || p.description}</p>
                   <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500">
                     <span className="text-slate-400">Stack:</span>
                     {p.tech.slice(0, 5).map((t, i) => (
@@ -223,38 +263,38 @@ export const TerminalModal = ({ isOpen, onClose }) => {
       case 'awards':
         outputComponent = (
           <div className="space-y-3 text-xs sm:text-sm font-mono">
-            <div className="text-slate-300 font-semibold flex items-center gap-2">
+            <div className="text-white font-semibold flex items-center gap-2">
               <Award className="w-4 h-4 text-amber-400" />
               <span>3x Hackathon Championships &amp; Hardware Victories:</span>
             </div>
             <div className="space-y-2.5">
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200">
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200">
                 <div className="flex justify-between items-center font-bold">
                   <span>🏆 1st Prize — CULMYCA'26 Fast Line Follower</span>
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/20">Lap: 8.42s</span>
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/20">Lap: 14.8s</span>
                 </div>
-                <p className="text-xs text-amber-300/80 mt-1">
+                <p className="text-xs text-amber-200/80 mt-1">
                   Engineered 8-channel IR sensor array with custom AVR registers &amp; fixed-point PID steering for high-speed track navigation.
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200">
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200">
                 <div className="flex justify-between items-center font-bold">
                   <span>🏆 1st Prize — CULMYCA'26 FireShield IoT System</span>
                   <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/20">&lt;50ms Latency</span>
                 </div>
-                <p className="text-xs text-amber-300/80 mt-1">
+                <p className="text-xs text-amber-200/80 mt-1">
                   Real-time smart home fire and gas detection with dual-core ESP32 edge telemetry and React Native push alert dispatch.
                 </p>
               </div>
 
               <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
                 <div className="flex justify-between items-center font-bold">
-                  <span>🥈 2nd Prize — YMCA National Robotics Championship</span>
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">National</span>
+                  <span>🥇 Competitive Hardware &amp; Robotics Champion</span>
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">Faridabad</span>
                 </div>
                 <p className="text-xs text-slate-400 mt-1">
-                  Autonomous robotics trajectory optimization and precision obstacle avoidance.
+                  Autonomous robotics trajectory optimization, custom chassis CAD design, and high-frequency sensor integration.
                 </p>
               </div>
             </div>
@@ -266,29 +306,29 @@ export const TerminalModal = ({ isOpen, onClose }) => {
       case 'tech':
         outputComponent = (
           <div className="space-y-3 text-xs sm:text-sm font-mono text-slate-300">
-            <div className="text-emerald-400 font-bold flex items-center gap-2">
-              <Cpu className="w-4 h-4" />
+            <div className="text-white font-bold flex items-center gap-2">
+              <Cpu className="w-4 h-4 text-cyan-400" />
               <span>Technical Arsenal &amp; Tech Stack:</span>
             </div>
             
             <div className="space-y-2">
               <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                <div className="text-emerald-400 font-semibold mb-1 text-xs flex items-center gap-1.5">
+                <div className="text-cyan-400 font-semibold mb-1 text-xs flex items-center gap-1.5">
                   <Globe className="w-3.5 h-3.5" />
                   <span>Frontend, Web &amp; Mobile:</span>
                 </div>
                 <div className="text-slate-300 text-xs leading-relaxed">
-                  React, Next.js, TypeScript, JavaScript (ES6+), React Native / Expo, Android, Tailwind CSS, Framer Motion.
+                  React, Next.js, TypeScript, JavaScript (ES6+), React Native / Expo, Tailwind CSS, Framer Motion.
                 </div>
               </div>
 
               <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                <div className="text-cyan-400 font-semibold mb-1 text-xs flex items-center gap-1.5">
+                <div className="text-blue-400 font-semibold mb-1 text-xs flex items-center gap-1.5">
                   <Cpu className="w-3.5 h-3.5" />
                   <span>Hardware, Embedded &amp; Robotics:</span>
                 </div>
                 <div className="text-slate-300 text-xs leading-relaxed">
-                  C++, C, Python, Arduino / ATmega328P, ESP32, ROS 2, Fixed-Point PID, 3D CAD (Onshape), 3D Printing, PCB Layout.
+                  C++, C, Python, Arduino / ATmega328P, ESP32, ROS 2, Fixed-Point PID, 3D CAD (Onshape), 3D Printing.
                 </div>
               </div>
 
@@ -335,8 +375,119 @@ export const TerminalModal = ({ isOpen, onClose }) => {
                 📅 Duration: 2024 – 2028 (3rd Year) • 📍 Rohini, Delhi, India
               </div>
               <div className="text-slate-400 text-xs pt-1 border-t border-slate-800">
-                Core Subjects: Microprocessors &amp; Microcontrollers, Digital Signal Processing, Embedded Systems, Computer Networks, VLSI &amp; Circuit Theory.
+                Core Focus: Microprocessors &amp; Microcontrollers, Digital Signal Processing, Embedded Systems, Computer Networks, VLSI &amp; Circuit Theory.
               </div>
+            </div>
+          </div>
+        );
+        break;
+
+      case 'contact':
+      case 'email':
+      case 'mail':
+        outputComponent = (
+          <div className="space-y-3 text-xs sm:text-sm font-mono text-slate-300">
+            <div className="text-white font-bold flex items-center gap-2">
+              <Mail className="w-4 h-4 text-cyan-400" />
+              <span>Direct Communication Endpoints:</span>
+            </div>
+            <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2 text-xs">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-500 w-16">Email:</span>
+                  <a href="mailto:adityamaurya1947@gmail.com" className="text-cyan-400 hover:underline font-semibold">
+                    adityamaurya1947@gmail.com
+                  </a>
+                </div>
+                <button
+                  onClick={() => copyToClipboard('adityamaurya1947@gmail.com')}
+                  className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-white text-[10px] cursor-pointer"
+                >
+                  {copiedEmail ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-500 w-16">GitHub:</span>
+                <a href="https://github.com/iamadityamaurya" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white hover:underline">
+                  github.com/iamadityamaurya
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-500 w-16">LinkedIn:</span>
+                <a href="https://www.linkedin.com/in/iamadityamaurya/" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white hover:underline">
+                  linkedin.com/in/iamadityamaurya
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-500 w-16">Portfolio:</span>
+                <a href="https://iamadityamaurya.vercel.app" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white hover:underline">
+                  iamadityamaurya.vercel.app
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+        break;
+
+      case 'github':
+      case 'git':
+        outputComponent = (
+          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs sm:text-sm font-mono space-y-2">
+            <div className="text-white font-bold flex items-center gap-2">
+              <Github className="w-4 h-4" />
+              <span>GitHub Profile — @iamadityamaurya</span>
+            </div>
+            <p className="text-slate-400">Explore open source repositories, firmware sketches, and project repositories.</p>
+            <a 
+              href="https://github.com/iamadityamaurya" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-cyan-400 hover:bg-slate-700 font-bold transition-colors"
+            >
+              Open github.com/iamadityamaurya <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        );
+        break;
+
+      case 'linkedin':
+        outputComponent = (
+          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs sm:text-sm font-mono space-y-2">
+            <div className="text-white font-bold flex items-center gap-2">
+              <Linkedin className="w-4 h-4 text-blue-400" />
+              <span>LinkedIn Profile — Aditya Kumar Maurya</span>
+            </div>
+            <p className="text-slate-400">Connect for professional opportunities, collaborations, and engineering conversations.</p>
+            <a 
+              href="https://www.linkedin.com/in/iamadityamaurya/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 text-blue-400 hover:bg-slate-700 font-bold transition-colors"
+            >
+              Open LinkedIn Profile <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        );
+        break;
+
+      case 'resume':
+      case 'cv':
+        outputComponent = (
+          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs sm:text-sm font-mono space-y-2">
+            <div className="text-white font-bold flex items-center gap-2">
+              <FileText className="w-4 h-4 text-cyan-400" />
+              <span>Aditya Kumar Maurya — Curriculum Vitae / Resume</span>
+            </div>
+            <p className="text-slate-400">Full-Stack Development, Mobile Engineering, IoT / Embedded Systems &amp; Robotics.</p>
+            <div className="flex items-center gap-3 pt-1">
+              <a 
+                href="/Aditya_Kumar_Maurya_Resume.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-950 hover:bg-slate-200 font-bold transition-colors"
+              >
+                Download Resume <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         );
@@ -345,7 +496,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
       case 'bunkmait':
         outputComponent = (
           <div className="space-y-2.5 text-xs sm:text-sm font-mono text-slate-300">
-            <div className="text-emerald-400 font-bold flex items-center gap-2">
+            <div className="text-white font-bold flex items-center gap-2">
               <span>BunkMAIT — College Attendance &amp; Timetable Suite</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
@@ -359,7 +510,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
               href="https://bunkmait.adityamaurya.dev/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 font-bold transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-slate-950 hover:bg-slate-200 font-bold transition-colors"
             >
               Open Live Web App <ExternalLink className="w-3.5 h-3.5" />
             </a>
@@ -372,7 +523,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
         outputComponent = (
           <div className="space-y-3 text-xs sm:text-sm font-mono text-slate-300">
             <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <div className="flex items-center gap-2 text-emerald-400 font-bold">
+              <div className="flex items-center gap-2 text-cyan-400 font-bold">
                 <Radio className="w-4 h-4 animate-pulse" />
                 <span>ROS 2 Node Telemetry &amp; Hardware Monitor</span>
               </div>
@@ -384,7 +535,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800">
                 <div className="text-slate-500 text-[11px]">MASTER NODE</div>
-                <div className="text-emerald-400 font-bold text-xs mt-0.5">/core_telemetry [ONLINE]</div>
+                <div className="text-cyan-400 font-bold text-xs mt-0.5">/core_telemetry [ONLINE]</div>
                 <div className="text-slate-400 text-[11px] mt-1">ROS 2 Humble • Domain: 42</div>
               </div>
 
@@ -407,55 +558,81 @@ export const TerminalModal = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs flex items-center justify-between">
+            <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-xs flex items-center justify-between">
               <span>● System state: NOMINAL — Ready for teleoperation</span>
-              <span className="text-[10px] text-emerald-400 font-mono">LATENCY: 4ms</span>
+              <span className="text-[10px] text-cyan-400 font-mono">LATENCY: 4ms</span>
             </div>
           </div>
         );
         break;
 
-      case 'contact':
+      case 'ls':
+      case 'dir':
         outputComponent = (
-          <div className="space-y-3 text-xs sm:text-sm font-mono text-slate-300">
-            <div className="text-emerald-400 font-bold flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              <span>Direct Communication Endpoints:</span>
+          <div className="space-y-2 text-xs sm:text-sm font-mono text-slate-300">
+            <div className="text-slate-400 text-xs">Directory contents in ~/portfolio:</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <span className="text-cyan-300 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('about')}>about.md</span>
+              <span className="text-purple-300 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('projects')}>projects/</span>
+              <span className="text-blue-300 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('skills')}>skills.json</span>
+              <span className="text-amber-300 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('hackathons')}>hackathons.log</span>
+              <span className="text-emerald-300 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('contact')}>contact.sh</span>
+              <span className="text-rose-300 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('bunkmait')}>bunkmait/</span>
+              <span className="text-slate-300 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('resume')}>resume.pdf</span>
+              <span className="text-cyan-400 font-bold cursor-pointer hover:underline" onClick={() => executeCommand('telemetry')}>telemetry.ros2</span>
             </div>
-            <div className="space-y-2 pl-2 text-xs">
-              <div className="flex items-center gap-3">
-                <span className="text-slate-500 w-20">Email:</span>
-                <a href="mailto:adityamaurya1947@gmail.com" className="text-cyan-400 hover:underline">
-                  adityamaurya1947@gmail.com
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-slate-500 w-20">GitHub:</span>
-                <a href="https://github.com/iamadityamaurya" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">
-                  github.com/iamadityamaurya
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-slate-500 w-20">LinkedIn:</span>
-                <a href="https://www.linkedin.com/in/iamadityamaurya/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">
-                  linkedin.com/in/iamadityamaurya
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-slate-500 w-20">Portfolio:</span>
-                <a href="https://iamadityamaurya.vercel.app" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">
-                  iamadityamaurya.vercel.app
-                </a>
-              </div>
+            <p className="text-[11px] text-slate-500 mt-1">💡 Type <span className="text-slate-300">"cat &lt;file&gt;"</span> or click any file above to view.</p>
+          </div>
+        );
+        break;
+
+      case 'cat':
+        if (!arg) {
+          outputComponent = (
+            <div className="text-xs sm:text-sm font-mono text-amber-400">
+              usage: cat &lt;filename&gt; (e.g. "cat about.md", "cat projects", "cat contact.sh")
             </div>
+          );
+        } else {
+          const target = arg.toLowerCase().replace('.md', '').replace('.json', '').replace('.sh', '').replace('.txt', '').replace('.log', '').replace('.pdf', '').replace('/', '');
+          if (['about', 'bio'].includes(target)) executeCommand('about');
+          else if (['projects', 'project'].includes(target)) executeCommand('projects');
+          else if (['skills', 'skill', 'tech'].includes(target)) executeCommand('skills');
+          else if (['hackathons', 'hackathon', 'awards'].includes(target)) executeCommand('hackathons');
+          else if (['contact', 'email'].includes(target)) executeCommand('contact');
+          else if (['bunkmait'].includes(target)) executeCommand('bunkmait');
+          else if (['resume', 'cv'].includes(target)) executeCommand('resume');
+          else if (['telemetry', 'robot-status'].includes(target)) executeCommand('telemetry');
+          else {
+            outputComponent = (
+              <div className="text-xs sm:text-sm font-mono text-rose-400">
+                cat: {arg}: No such file or directory. Type "ls" to view files.
+              </div>
+            );
+          }
+        }
+        break;
+
+      case 'cd':
+        outputComponent = (
+          <div className="text-xs sm:text-sm font-mono text-slate-400">
+            Directory unchanged (~/portfolio). All sections and commands are accessible directly from this shell. Type <span className="text-cyan-400 font-bold cursor-pointer" onClick={() => executeCommand('ls')}>"ls"</span> to explore.
           </div>
         );
         break;
 
       case 'whoami':
         outputComponent = (
-          <div className="text-xs sm:text-sm font-mono text-emerald-400">
-            aditya — Full-Stack Developer &amp; Embedded Systems Engineer [MAIT Delhi]
+          <div className="text-xs sm:text-sm font-mono text-cyan-400">
+            aditya — Full-Stack Developer &amp; Hardware Engineer [MAIT Delhi]
+          </div>
+        );
+        break;
+
+      case 'pwd':
+        outputComponent = (
+          <div className="text-xs sm:text-sm font-mono text-slate-300">
+            /home/aditya/portfolio
           </div>
         );
         break;
@@ -470,8 +647,29 @@ export const TerminalModal = ({ isOpen, onClose }) => {
 
       case 'sudo':
         outputComponent = (
-          <div className="text-xs sm:text-sm font-mono text-emerald-400">
-            aditya is in the sudoers file. Full portfolio access granted.
+          <div className="text-xs sm:text-sm font-mono text-cyan-400">
+            [sudo] user 'aditya' is authorized in sudoers. Full portfolio privileges active.
+          </div>
+        );
+        break;
+
+      case 'echo':
+        outputComponent = (
+          <div className="text-xs sm:text-sm font-mono text-slate-300">
+            {arg || ''}
+          </div>
+        );
+        break;
+
+      case 'history':
+        outputComponent = (
+          <div className="space-y-1 text-xs font-mono text-slate-400">
+            <div className="text-slate-300 font-bold">Recent Command History:</div>
+            {commandHistory.slice(-8).map((cmd, idx) => (
+              <div key={idx} className="text-slate-400 pl-2">
+                {idx + 1}. <span className="text-cyan-300">{cmd}</span>
+              </div>
+            ))}
           </div>
         );
         break;
@@ -479,17 +677,19 @@ export const TerminalModal = ({ isOpen, onClose }) => {
       default:
         outputComponent = (
           <div className="text-xs sm:text-sm font-mono text-rose-400">
-            command not found: "{cleanCmd}". Type <span className="text-amber-300 underline cursor-pointer" onClick={() => executeCommand('help')}>"help"</span> for a list of valid commands.
+            command not found: "{cleanCmd}". Type <span className="text-cyan-300 underline cursor-pointer" onClick={() => executeCommand('help')}>"help"</span> or <span className="text-cyan-300 underline cursor-pointer" onClick={() => executeCommand('ls')}>"ls"</span> for valid commands.
           </div>
         );
         break;
     }
 
-    setHistory(prev => [
-      ...prev,
-      newHistoryItem,
-      { type: 'output', content: outputComponent }
-    ]);
+    if (outputComponent) {
+      setHistory(prev => [
+        ...prev,
+        newHistoryItem,
+        { type: 'output', content: outputComponent }
+      ]);
+    }
 
     setInput('');
   };
@@ -519,6 +719,15 @@ export const TerminalModal = ({ isOpen, onClose }) => {
           setInput(commandHistory[nextIndex]);
         }
       }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const currentInput = input.trim().toLowerCase();
+      if (currentInput) {
+        const match = allKnownCommands.find(cmd => cmd.startsWith(currentInput));
+        if (match) {
+          setInput(match);
+        }
+      }
     }
   };
 
@@ -532,7 +741,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 bg-black/85 backdrop-blur-md"
           />
 
           {/* Terminal Window */}
@@ -541,49 +750,49 @@ export const TerminalModal = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 15 }}
             transition={{ type: 'spring', damping: 26, stiffness: 320 }}
-            className={`relative flex flex-col w-full rounded-2xl bg-[#080d1a] border border-slate-700/80 shadow-[0_25px_70px_rgba(0,0,0,0.9),0_0_40px_rgba(16,185,129,0.08)] overflow-hidden z-10 transition-all duration-200 ${
-              isMaximized ? 'h-[94vh] max-w-[96vw]' : 'max-w-3xl h-[580px] max-h-[85vh]'
+            className={`relative flex flex-col w-full rounded-2xl bg-[#090c15] border border-slate-800 shadow-[0_25px_70px_rgba(0,0,0,0.95)] overflow-hidden z-10 transition-all duration-200 ${
+              isMaximized ? 'h-[94vh] max-w-[96vw]' : 'max-w-3xl h-[590px] max-h-[85vh]'
             }`}
           >
             {/* Window Header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-[#0d1527] border-b border-slate-800/80 select-none">
+            <div className="flex items-center justify-between px-4 py-3 bg-[#0d111c] border-b border-slate-800 select-none">
               {/* Left: Window Dots & Title */}
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
                   <button 
                     onClick={onClose} 
-                    className="w-3 h-3 rounded-full bg-[#ef4444] hover:opacity-80 transition-opacity cursor-pointer"
+                    className="w-3 h-3 rounded-full bg-[#ef4444] hover:opacity-80 transition-opacity cursor-pointer flex items-center justify-center text-[8px] text-black opacity-90 group"
                     title="Close"
                   />
                   <button 
                     onClick={() => executeCommand('clear')} 
-                    className="w-3 h-3 rounded-full bg-[#eab308] hover:opacity-80 transition-opacity cursor-pointer"
+                    className="w-3 h-3 rounded-full bg-[#eab308] hover:opacity-80 transition-opacity cursor-pointer flex items-center justify-center text-[8px] text-black opacity-90"
                     title="Clear Buffer"
                   />
                   <button 
                     onClick={() => setIsMaximized(!isMaximized)} 
-                    className="w-3 h-3 rounded-full bg-[#22c55e] hover:opacity-80 transition-opacity cursor-pointer"
+                    className="w-3 h-3 rounded-full bg-[#22c55e] hover:opacity-80 transition-opacity cursor-pointer flex items-center justify-center text-[8px] text-black opacity-90"
                     title="Maximize / Minimize"
                   />
                 </div>
-                <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-emerald-400">
-                  <span>&gt;_</span>
-                  <span className="text-slate-300">aditya@portfolio:~ (zsh)</span>
+                <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-300">
+                  <TerminalIcon className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>aditya@portfolio:~ (zsh)</span>
                 </div>
               </div>
 
               {/* Right: Actions */}
-              <div className="flex items-center gap-2 text-slate-400">
+              <div className="flex items-center gap-1.5 text-slate-400">
                 <button
                   onClick={() => setIsMaximized(!isMaximized)}
-                  className="p-1 hover:text-white rounded transition-colors cursor-pointer"
+                  className="p-1 hover:text-white rounded hover:bg-slate-800 transition-colors cursor-pointer"
                   title={isMaximized ? "Restore size" : "Maximize"}
                 >
                   {isMaximized ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
                 </button>
                 <button
                   onClick={onClose}
-                  className="p-1 hover:text-white rounded transition-colors cursor-pointer"
+                  className="p-1 hover:text-white rounded hover:bg-slate-800 transition-colors cursor-pointer"
                   title="Close Terminal (ESC)"
                 >
                   <X className="w-4 h-4" />
@@ -592,14 +801,14 @@ export const TerminalModal = ({ isOpen, onClose }) => {
             </div>
 
             {/* Quick Actions Row */}
-            <div className="flex items-center gap-2 px-4 py-2 bg-[#09101f] border-b border-slate-800/60 overflow-x-auto no-scrollbar text-xs font-mono">
+            <div className="flex items-center gap-2 px-4 py-2 bg-[#0b0e18] border-b border-slate-800/80 overflow-x-auto no-scrollbar text-xs font-mono">
               <span className="text-slate-500 font-medium shrink-0">quick:</span>
               <div className="flex items-center gap-1.5">
                 {quickCommands.map((cmd) => (
                   <button
                     key={cmd}
                     onClick={() => executeCommand(cmd)}
-                    className="px-2.5 py-1 rounded-md bg-slate-800/80 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-slate-700/60 hover:border-emerald-500/40 text-[11px] transition-all cursor-pointer whitespace-nowrap active:scale-95"
+                    className="px-2.5 py-1 rounded-md bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-700 text-[11px] transition-all cursor-pointer whitespace-nowrap active:scale-95"
                   >
                     {cmd}
                   </button>
@@ -618,7 +827,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
                 }
                 if (item.type === 'command') {
                   return (
-                    <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
+                    <div key={index} className="flex items-center gap-2 text-xs sm:text-sm pt-1">
                       <span className="text-cyan-400 font-bold">$</span>
                       <span className="text-slate-100 font-semibold">{item.command}</span>
                       <span className="ml-auto text-[10px] text-slate-600 select-none">{item.time}</span>
@@ -640,16 +849,16 @@ export const TerminalModal = ({ isOpen, onClose }) => {
             {/* Terminal Bottom Input Bar */}
             <form 
               onSubmit={handleFormSubmit}
-              className="flex items-center gap-2 px-4 py-3 bg-[#0a1122] border-t border-slate-800"
+              className="flex items-center gap-2 px-4 py-3 bg-[#0d111c] border-t border-slate-800"
             >
-              <span className="text-emerald-400 font-mono font-bold text-sm select-none">&gt;</span>
+              <span className="text-cyan-400 font-mono font-bold text-sm select-none">&gt;</span>
               <input
                 ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Type a command (e.g. 'help', 'projects', 'hackathons')..."
+                placeholder="Type a command (e.g. 'help', 'about', 'projects', 'email', 'ls')..."
                 className="flex-1 bg-transparent text-slate-100 placeholder:text-slate-500 font-mono text-xs sm:text-sm outline-none"
                 autoComplete="off"
                 spellCheck="false"
@@ -657,8 +866,8 @@ export const TerminalModal = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={!input.trim()}
-                className="inline-flex items-center justify-center p-2 rounded-lg bg-emerald-500/20 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 disabled:opacity-30 disabled:hover:bg-emerald-500/20 disabled:hover:text-emerald-400 transition-all cursor-pointer"
-                title="Execute command"
+                className="inline-flex items-center justify-center p-2 rounded-lg bg-white hover:bg-slate-200 text-slate-950 font-bold disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-slate-950 transition-all cursor-pointer"
+                title="Execute command (Enter)"
               >
                 <CornerDownLeft className="w-3.5 h-3.5" />
               </button>

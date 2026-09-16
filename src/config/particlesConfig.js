@@ -182,12 +182,12 @@ export const particlesOptions = {
             }
         },
         "color": {
-            "value": "#ff0000",
+            "value": "#94a3b8",
             "animation": {
                 "h": {
                     "count": 0,
-                    "enable": true,
-                    "speed": 50,
+                    "enable": false,
+                    "speed": 0,
                     "decay": 0,
                     "delay": 0,
                     "sync": false,
@@ -457,13 +457,13 @@ export const particlesOptions = {
         "links": {
             "blink": false,
             "color": {
-                "value": "random"
+                "value": "#475569"
             },
             "consent": false,
             "distance": 100,
             "enable": true,
             "frequency": 1,
-            "opacity": 0.5,
+            "opacity": 0.25,
             "shadow": {
                 "blur": 5,
                 "color": {

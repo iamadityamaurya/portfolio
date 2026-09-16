@@ -25,18 +25,18 @@ export const ProjectsPage = () => {
                     className="mb-14 flex flex-col items-center justify-center gap-4 relative"
                 >
                     <div className="text-center">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-3">
-                            <Sparkles className="w-3.5 h-3.5" />
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 font-mono text-xs uppercase tracking-widest mb-3">
+                            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                             Featured Showcase
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">
+                        <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
                             Featured Projects
                         </h2>
                     </div>
                     <div className="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 shrink-0 mt-4 md:mt-0">
                         <Link 
                             to="/project" 
-                            className="group inline-flex items-center gap-2 rounded-2xl border border-slate-700 bg-slate-900/80 px-5 py-2.5 text-sm font-semibold text-slate-300 hover:border-emerald-500/50 hover:text-emerald-400 transition-all backdrop-blur-md shadow-lg"
+                            className="group inline-flex items-center gap-2 rounded-2xl border border-slate-700 bg-slate-900/80 px-5 py-2.5 text-sm font-semibold text-slate-300 hover:border-slate-500 hover:text-white transition-all backdrop-blur-md shadow-lg"
                         >
                             View All Projects
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -58,10 +58,10 @@ export const ProjectsPage = () => {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.35, delay: idx * 0.08 }}
-                                className="group relative bg-[#090e19]/80 border border-slate-800 hover:border-emerald-500/50 rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_0_35px_rgba(16,185,129,0.15)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
+                                className="group relative bg-[#090e19]/80 border border-slate-800 hover:border-slate-600 rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_0_35px_rgba(0,0,0,0.5)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
                             >
                                 {/* Hover Glow */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-slate-700/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                 {project.image && (
                                     <div 
@@ -85,7 +85,7 @@ export const ProjectsPage = () => {
 
                                         {project.category && (
                                             <div className="absolute top-3 left-3 z-10">
-                                                <span className="px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono text-emerald-300 font-semibold">
+                                                <span className="px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono text-slate-300 font-semibold">
                                                     {project.category}
                                                 </span>
                                             </div>
@@ -97,7 +97,7 @@ export const ProjectsPage = () => {
                                     <div className="flex justify-between items-start mb-2">
                                         <h3 
                                             onClick={() => setSelectedProject(project)}
-                                            className="text-xl font-bold text-slate-100 group-hover:text-emerald-400 transition-colors cursor-pointer"
+                                            className="text-xl font-bold text-slate-100 group-hover:text-cyan-400 transition-colors cursor-pointer"
                                         >
                                             {project.title}
                                         </h3>
@@ -109,7 +109,7 @@ export const ProjectsPage = () => {
 
                                     <div className="flex flex-wrap gap-1.5 mb-5 mt-auto">
                                         {project.tech.slice(0, 4).map((t, i) => (
-                                            <span key={i} className="text-[11px] font-mono text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                                            <span key={i} className="text-[11px] font-mono text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/80">
                                                 {t}
                                             </span>
                                         ))}
@@ -119,7 +119,7 @@ export const ProjectsPage = () => {
                                     <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
                                         <button
                                             onClick={() => setSelectedProject(project)}
-                                            className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
+                                            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-white transition-colors cursor-pointer"
                                         >
                                             <Eye className="w-3.5 h-3.5" />
                                             <span>Case Study</span>
