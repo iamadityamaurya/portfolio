@@ -97,7 +97,7 @@ const ExperiencePage = () => {
     const Icon = active.icon;
 
     return (
-        <section id="experience" className="bg-transparent text-slate-50 py-24 px-6 relative overflow-hidden">
+        <section id="experience" className="bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
             {/* Background */}
             <div className="absolute top-20 left-10 w-96 h-96 bg-emerald-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
@@ -110,17 +110,17 @@ const ExperiencePage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.6 }}
-                    className="mb-16 text-center flex flex-col items-center"
+                    className="mb-12 sm:mb-16 text-center flex flex-col items-center"
                 >
-                    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase mb-3">
+                    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase mb-3 select-none">
                         <span className="w-4 h-px bg-emerald-400" />
                         Professional History
                         <span className="w-4 h-px bg-emerald-400" />
                     </span>
-                    <h3 className="text-3xl md:text-5xl font-extrabold mt-2 text-white tracking-tight leading-tight">
+                    <h3 className="text-3xl sm:text-5xl font-extrabold mt-2 text-white tracking-tight leading-tight">
                         Work Experience
                     </h3>
-                    <p className="text-slate-400 mt-4 text-base max-w-lg mx-auto">
+                    <p className="text-slate-400 mt-3 sm:mt-4 text-sm sm:text-base max-w-lg mx-auto">
                         My journey across software development, physical hardware prototyping, and competitive engineering.
                     </p>
                 </motion.div>
@@ -134,7 +134,7 @@ const ExperiencePage = () => {
                     className="flex flex-col lg:flex-row gap-6 lg:gap-0 max-w-5xl mx-auto"
                 >
                     {/* Left Tabs */}
-                    <div className="lg:w-72 shrink-0 flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 lg:border-l-2 border-slate-800">
+                    <div className="lg:w-72 shrink-0 flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 lg:border-l-2 border-slate-800 scrollbar-none">
                         {experiences.map((exp, idx) => {
                             const tabColors = accentColors[exp.accent];
                             const isActive = idx === activeIdx;
@@ -144,21 +144,21 @@ const ExperiencePage = () => {
                                 <button
                                     key={idx}
                                     onClick={() => setActiveIdx(idx)}
-                                    className={`relative flex items-center gap-3 px-5 py-4 text-left transition-all duration-300 whitespace-nowrap lg:whitespace-normal rounded-xl lg:rounded-none lg:rounded-r-xl cursor-pointer min-w-[200px] lg:min-w-0 group
+                                    className={`relative flex items-center gap-3 px-4 sm:px-5 py-3.5 sm:py-4 text-left transition-all duration-300 whitespace-nowrap lg:whitespace-normal rounded-xl lg:rounded-none lg:rounded-r-xl cursor-pointer min-w-[180px] sm:min-w-[200px] lg:min-w-0 group
                                         ${isActive
                                             ? `${tabColors.tabBg} border ${tabColors.tabBorder} lg:border-l-2 lg:border-r-0 lg:border-t-0 lg:border-b-0 ${tabColors.borderActive} lg:-ml-[2px] ${tabColors.text}`
                                             : 'border border-transparent lg:border-none text-slate-500 hover:text-slate-300 hover:bg-slate-800/40'
                                         }
                                     `}
                                 >
-                                    <div className={`p-2 rounded-lg transition-all duration-300 ${isActive ? `${tabColors.bg} ${tabColors.text}` : 'bg-slate-800/60 text-slate-500 group-hover:text-slate-300'}`}>
+                                    <div className={`p-2 rounded-lg transition-all duration-300 shrink-0 ${isActive ? `${tabColors.bg} ${tabColors.text}` : 'bg-slate-800/60 text-slate-500 group-hover:text-slate-300'}`}>
                                         <TabIcon className="w-4 h-4" />
                                     </div>
-                                    <div>
-                                        <span className={`block text-sm font-semibold transition-colors duration-300 ${isActive ? tabColors.text : ''}`}>
-                                            {exp.company.length > 25 ? exp.company.substring(0, 22) + '…' : exp.company}
+                                    <div className="min-w-0">
+                                        <span className={`block text-xs sm:text-sm font-semibold transition-colors duration-300 truncate ${isActive ? tabColors.text : ''}`}>
+                                            {exp.company}
                                         </span>
-                                        <span className="block text-[11px] text-slate-500 font-medium mt-0.5">
+                                        <span className="block text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">
                                             {exp.period}
                                         </span>
                                     </div>
@@ -177,7 +177,7 @@ const ExperiencePage = () => {
                     </div>
 
                     {/* Right Content Panel */}
-                    <div className="flex-1 lg:pl-8 min-h-[420px]">
+                    <div className="flex-1 lg:pl-8 min-h-0">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeIdx}
@@ -185,7 +185,7 @@ const ExperiencePage = () => {
                                 animate={{ opacity: 1, x: 0, scale: 1 }}
                                 exit={{ opacity: 0, x: -20, scale: 0.98 }}
                                 transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                                className={`relative rounded-2xl bg-slate-900/50 border ${colors.border} backdrop-blur-xl overflow-hidden ${colors.glow} transition-shadow duration-500`}
+                                className={`relative rounded-2xl sm:rounded-3xl bg-slate-900/50 border ${colors.border} backdrop-blur-xl overflow-hidden ${colors.glow} transition-shadow duration-500`}
                             >
                                 {/* Top gradient accent bar */}
                                 <div className={`h-1 bg-gradient-to-r ${colors.gradient}`} />
@@ -193,22 +193,22 @@ const ExperiencePage = () => {
                                 {/* Ambient glow blob */}
                                 <div className={`absolute -top-20 -right-20 w-60 h-60 ${colors.bg} rounded-full blur-[80px] pointer-events-none opacity-60`} />
 
-                                <div className="relative p-7 md:p-9">
+                                <div className="relative p-5 sm:p-7 md:p-9">
                                     {/* Header Row */}
-                                    <div className="flex items-start gap-4 mb-6">
-                                        <div className={`p-3 rounded-xl ${colors.bg} ${colors.text} ring-1 ${colors.ring} shrink-0`}>
-                                            <Icon className="w-6 h-6" />
+                                    <div className="flex items-start gap-3 sm:gap-4 mb-5 sm:mb-6">
+                                        <div className={`p-2.5 sm:p-3 rounded-xl ${colors.bg} ${colors.text} ring-1 ${colors.ring} shrink-0`}>
+                                            <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h4 className="text-xl md:text-2xl font-bold text-slate-100 leading-snug">
+                                            <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-100 leading-snug">
                                                 {active.role}
                                             </h4>
-                                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2">
-                                                <span className="inline-flex items-center gap-1.5 text-sm text-slate-400">
+                                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 sm:mt-2">
+                                                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-400">
                                                     <Building2 className="w-3.5 h-3.5" />
                                                     {active.company}
                                                 </span>
-                                                <span className={`inline-flex items-center gap-1.5 text-sm font-medium ${colors.text}`}>
+                                                <span className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium ${colors.text}`}>
                                                     <Calendar className="w-3.5 h-3.5" />
                                                     {active.period}
                                                 </span>
@@ -217,23 +217,25 @@ const ExperiencePage = () => {
                                     </div>
 
                                     {/* Description */}
-                                    <p className="text-slate-400 text-[15px] leading-relaxed mb-6">
-                                        {active.description}
-                                    </p>
+                                    {active.description && (
+                                        <p className="text-slate-400 text-xs sm:text-sm md:text-[15px] leading-relaxed mb-5 sm:mb-6">
+                                            {active.description}
+                                        </p>
+                                    )}
 
                                     {/* Bullets */}
-                                    <ul className="space-y-3 mb-7">
+                                    <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-7">
                                         {active.bullets.map((bullet, bIdx) => (
                                             <motion.li
                                                 key={bIdx}
                                                 initial={{ opacity: 0, x: 10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.3, delay: bIdx * 0.1 }}
-                                                className="flex items-start gap-3 text-sm text-slate-300 leading-relaxed group/bullet"
+                                                className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-slate-300 leading-relaxed group/bullet"
                                             >
-                                                <span className="relative mt-1.5 shrink-0">
-                                                    <span className={`block w-2 h-2 rounded-full ${colors.dot} opacity-70 group-hover/bullet:opacity-100 transition-opacity`} />
-                                                    <span className={`absolute inset-0 w-2 h-2 rounded-full ${colors.dot} opacity-30 animate-ping`} style={{ animationDuration: `${3 + bIdx}s` }} />
+                                                <span className="relative mt-1 sm:mt-1.5 shrink-0">
+                                                    <span className={`block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${colors.dot} opacity-70 group-hover/bullet:opacity-100 transition-opacity`} />
+                                                    <span className={`absolute inset-0 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${colors.dot} opacity-30 animate-ping`} style={{ animationDuration: `${3 + bIdx}s` }} />
                                                 </span>
                                                 <span className="group-hover/bullet:text-slate-200 transition-colors">
                                                     {bullet}
@@ -243,17 +245,17 @@ const ExperiencePage = () => {
                                     </ul>
 
                                     {/* Divider */}
-                                    <div className="h-px bg-gradient-to-r from-transparent via-slate-700/60 to-transparent mb-6" />
+                                    <div className="h-px bg-gradient-to-r from-transparent via-slate-700/60 to-transparent mb-5 sm:mb-6" />
 
                                     {/* Tech Tags */}
-                                    <div className="flex flex-wrap gap-2">
+                                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                                         {active.tech.map((t, tIdx) => (
                                             <motion.span
                                                 key={tIdx}
                                                 initial={{ opacity: 0, scale: 0.8 }}
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 transition={{ duration: 0.2, delay: 0.15 + tIdx * 0.04 }}
-                                                className={`text-xs font-mono px-3 py-1.5 rounded-lg ${colors.bg} ${colors.text} border ${colors.border} hover:border-opacity-60 transition-all cursor-default`}
+                                                className={`text-[11px] sm:text-xs font-mono px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg ${colors.bg} ${colors.text} border ${colors.border} hover:border-opacity-60 transition-all cursor-default`}
                                             >
                                                 {t}
                                             </motion.span>

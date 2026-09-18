@@ -1,4 +1,5 @@
 import bunkmaitBanner from '../assets/project_png/bunkmait-showcase.png';
+import liveTextOcrBanner from '../assets/project_png/live-text-ocr-showcase.png';
 import aiFillerBanner from '../assets/project_png/ai-filler-showcase.png';
 import medScrapperBanner from '../assets/project_png/medscrapper-showcase.png';
 import restockerBanner from '../assets/project_png/restocker-showcase.png';
@@ -12,6 +13,30 @@ import lineFollowerBanner from '../assets/project_png/line-follower-alpha.png';
 import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-showcase.png';
 
 export const projectsData = [
+  {
+    id: 'live-text-ocr',
+    title: 'Live Text OCR for Ubuntu',
+    tagline: 'Native, lightweight utility bringing macOS "Live Text" experience to Linux desktop environments',
+    category: 'Extensions & AI',
+    categorySlug: 'extension',
+    badge: 'Desktop Utility & AI',
+    image: liveTextOcrBanner,
+    description: 'A native, lightweight utility that brings the macOS "Live Text" experience to Linux (Ubuntu, Debian, Wayland/X11). Select any text, code, or QR codes on your screen—such as paused videos, course slides, locked PDFs, or terminals—and instantly recognize, highlight, copy, or search it with zero disk writes.',
+    fullDescription: 'Live Text OCR brings native macOS-style Live Text functionality to Linux (Ubuntu, Debian, and other Wayland/X11 environments). It allows users to select any on-screen text or code from videos, lectures, mockups, or terminals with an interactive glassmorphic overlay. Features zero disk writes via direct in-memory framebuffer capture, Python ctypes bindings to libtesseract.so.5 and libzbar.so.0, QR/barcode scanning, dark-mode auto-inversion, GNOME top-bar tray indicator, and global shortcut keybinding (Super + Shift + O).',
+    highlights: [
+      'Interactive macOS-style Live Text overlay with glowing word/line pills, marquee selection & instant double-click copy',
+      'Integrated QR & barcode scanner automatically classifying URLs, Wi-Fi credentials, 2FA tokens, and plain text',
+      'Zero disk writes via direct in-memory framebuffer capture streaming directly into libtesseract C-API',
+      'Ubuntu GNOME top-panel tray indicator with recent clipboard history & native systemd user daemon'
+    ],
+    tech: ['Python', 'Tesseract OCR', 'libzbar', 'C-API ctypes', 'GNOME / Wayland / X11', 'Qt', 'systemd'],
+    links: {
+      github: 'https://github.com/iamadityamaurya/Live-Text-Like-Mac-in-Ubuntu'
+    },
+    featured: true,
+    mainPageShow: true,
+    stat: 'Zero Disk Writes'
+  },
   {
     id: 'bunkmait',
     title: 'BunkMAIT - Attendance & Timetable Suite',
@@ -56,8 +81,8 @@ export const projectsData = [
     links: {
       github: 'https://github.com/iamadityamaurya'
     },
-    featured: true,
-    mainPageShow: true,
+    featured: false,
+    mainPageShow: false,
     stat: '14.8s Track Record'
   },
   {
@@ -81,8 +106,8 @@ export const projectsData = [
       demo: 'https://fire-1-l13l.onrender.com/health',
       github: 'https://github.com/iamadityamaurya/fire'
     },
-    featured: true,
-    mainPageShow: true,
+    featured: false,
+    mainPageShow: false,
     stat: '<50ms Alert Latency'
   },
   {
@@ -181,7 +206,7 @@ export const projectsData = [
       github: 'https://github.com/iamadityamaurya/google_form'
     },
     featured: true,
-    mainPageShow: false,
+    mainPageShow: true,
     stat: 'Web Store Verified'
   },
   {

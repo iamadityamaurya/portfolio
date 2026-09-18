@@ -47,14 +47,14 @@ const StatCard = ({ icon: Icon, value, label, colorClass, borderClass, glowClass
     <motion.div
         variants={cardVariant}
         whileHover={{ scale: 1.03, y: -3 }}
-        className={`p-4 rounded-2xl bg-slate-900/40 border ${borderClass} flex items-center gap-4 transition-all ${glowClass} cursor-default group`}
+        className={`p-3 sm:p-4 rounded-2xl bg-slate-900/40 border ${borderClass} flex items-center gap-2.5 sm:gap-4 transition-all ${glowClass} cursor-default group min-w-0`}
     >
-        <div className={`p-3 rounded-xl ${colorClass} bg-opacity-10 transition-all group-hover:scale-110`}>
-            <Icon className="w-5 h-5" />
+        <div className={`p-2.5 sm:p-3 rounded-xl ${colorClass} bg-opacity-10 transition-all group-hover:scale-110 shrink-0`}>
+            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
-        <div>
-            <h4 className="text-2xl font-extrabold text-slate-100 leading-none">{value}</h4>
-            <p className="text-xs text-slate-400 mt-1">{label}</p>
+        <div className="min-w-0">
+            <h4 className="text-lg sm:text-2xl font-extrabold text-slate-100 leading-none">{value}</h4>
+            <p className="text-[11px] sm:text-xs text-slate-400 mt-1 truncate">{label}</p>
         </div>
     </motion.div>
 );
@@ -63,12 +63,12 @@ const HobbyCard = ({ icon: Icon, label, colorClass, borderClass }) => (
     <motion.div
         variants={cardVariant}
         whileHover={{ scale: 1.04, y: -3 }}
-        className={`p-4 rounded-2xl bg-slate-900/40 border ${borderClass} flex items-center gap-3 transition-all cursor-default group`}
+        className={`p-2.5 sm:p-4 rounded-2xl bg-slate-900/40 border ${borderClass} flex items-center gap-2 sm:gap-3 transition-all cursor-default group min-w-0`}
     >
-        <div className={`p-2.5 rounded-lg ${colorClass} bg-opacity-10 transition-all group-hover:scale-110`}>
-            <Icon className="w-5 h-5" />
+        <div className={`p-2 sm:p-2.5 rounded-lg ${colorClass} bg-opacity-10 transition-all group-hover:scale-110 shrink-0`}>
+            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
-        <span className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">{label}</span>
+        <span className="text-xs sm:text-sm font-medium text-slate-200 group-hover:text-white transition-colors truncate">{label}</span>
     </motion.div>
 );
 
@@ -127,7 +127,7 @@ const AboutPage = () => {
 
 
     return (
-        <section id="about" className="min-h-screen bg-transparent text-slate-50 py-24 px-6 relative overflow-hidden">
+        <section id="about" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
 
             {/* ── Background ── */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0c1322_0%,_#05070d_70%)] -z-10" />
@@ -143,19 +143,19 @@ const AboutPage = () => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: '-80px' }}
-                    className="mb-20 text-center flex flex-col items-center"
+                    className="mb-12 sm:mb-20 text-center flex flex-col items-center"
                 >
                     <SectionLabel>Who I Am</SectionLabel>
-                    <h2 className="text-4xl md:text-6xl font-extrabold mt-2 text-white tracking-tight leading-tight">
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mt-2 text-white tracking-tight leading-tight">
                         My Journey &amp; Expertise
                     </h2>
-                    <p className="text-slate-400 mt-4 text-lg max-w-xl mx-auto">
+                    <p className="text-slate-400 mt-3 sm:mt-4 text-sm sm:text-lg max-w-xl mx-auto">
                         From circuit boards to cloud backends - I build end-to-end.
                     </p>
                 </motion.div>
 
                 {/* ── Main Grid ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
                     {/* ── LEFT: Text + Stats + Hobbies ── */}
                     <motion.div
@@ -163,10 +163,10 @@ const AboutPage = () => {
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true }}
-                        className="space-y-10"
+                        className="space-y-8 sm:space-y-10"
                     >
                         {/* Bio */}
-                        <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
+                        <div className="space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed">
                             <p>
                                 Hey, I'm{' '}
                                 <span className="text-white font-bold">Aditya Kumar Maurya</span> —
@@ -189,7 +189,7 @@ const AboutPage = () => {
                         </div>
 
                         {/* Info badges */}
-                        <div className="flex flex-wrap gap-x-8 gap-y-3 pt-2">
+                        <div className="flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-2.5 pt-2">
                             <InfoBadge icon={GraduationCap} color="text-purple-400">
                                 MAIT Rohini, Delhi
                             </InfoBadge>
@@ -200,13 +200,13 @@ const AboutPage = () => {
 
                         {/* Stats Grid */}
                         <div>
-                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-5">At a Glance</h4>
+                            <h4 className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mb-3.5 sm:mb-5">At a Glance</h4>
                             <motion.div
                                 variants={stagger}
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
-                                className="grid grid-cols-2 gap-4"
+                                className="grid grid-cols-2 gap-2.5 sm:gap-4"
                             >
                                 {stats.map((s, i) => <StatCard key={i} {...s} />)}
                             </motion.div>
@@ -214,7 +214,7 @@ const AboutPage = () => {
 
                         {/* Hobbies */}
                         <div>
-                            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2">
+                            <h4 className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mb-3.5 sm:mb-5 flex items-center gap-2">
                                 <Sparkles className="w-4 h-4 text-cyan-400" />
                                 Beyond Coding
                             </h4>
@@ -223,7 +223,7 @@ const AboutPage = () => {
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
-                                className="grid grid-cols-2 gap-3"
+                                className="grid grid-cols-2 gap-2 sm:gap-3"
                             >
                                 {hobbies.map((h, i) => <HobbyCard key={i} {...h} />)}
                             </motion.div>
@@ -236,17 +236,16 @@ const AboutPage = () => {
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true }}
-                        className="relative flex flex-col items-center gap-6"
+                        className="relative flex flex-col items-center gap-6 w-full max-w-sm mx-auto lg:max-w-none"
                     >
                         {/* Photo */}
-                        <div className="relative w-full max-w-sm mx-auto">
+                        <div className="relative w-full max-w-xs sm:max-w-sm mx-auto">
                             {/* Glow ring */}
                             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-purple-500/30 blur-xl opacity-60" />
 
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-slate-700/60 shadow-2xl group">
                                 {/* Gradient overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#05070d] via-transparent to-transparent opacity-70 z-10" />
-
 
                                 <img
                                     src={profileImage}
@@ -255,9 +254,9 @@ const AboutPage = () => {
                                 />
 
                                 {/* Caption overlay */}
-                                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                                    <div className="h-px w-16 bg-gradient-to-r from-cyan-400 to-blue-400 mb-3 rounded-full" />
-                                    <p className="text-slate-200 text-sm font-medium italic leading-snug">
+                                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-20">
+                                    <div className="h-px w-16 bg-gradient-to-r from-cyan-400 to-blue-400 mb-2.5 sm:mb-3 rounded-full" />
+                                    <p className="text-slate-200 text-xs sm:text-sm font-medium italic leading-snug">
                                         "Building ideas into scalable digital solutions."
                                     </p>
                                 </div>
@@ -270,29 +269,29 @@ const AboutPage = () => {
                             initial="hidden"
                             whileInView="show"
                             viewport={{ once: true }}
-                            className="w-full max-w-sm mx-auto"
+                            className="w-full max-w-xs sm:max-w-sm mx-auto"
                         >
-                            <div className="relative p-5 rounded-2xl bg-slate-800/80 border border-slate-700 backdrop-blur-md overflow-hidden group hover:border-purple-500/40 transition-all hover:shadow-[0_0_25px_rgba(168,85,247,0.1)]">
+                            <div className="relative p-4 sm:p-5 rounded-2xl bg-slate-800/80 border border-slate-700 backdrop-blur-md overflow-hidden group hover:border-purple-500/40 transition-all hover:shadow-[0_0_25px_rgba(168,85,247,0.1)]">
                                 {/* subtle glow */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                <div className="relative z-10 flex items-start gap-4">
-                                    <div className="p-3 rounded-xl bg-purple-500/10 text-purple-400 shrink-0 mt-0.5">
-                                        <GraduationCap className="w-6 h-6" />
+                                <div className="relative z-10 flex items-start gap-3.5 sm:gap-4">
+                                    <div className="p-2.5 sm:p-3 rounded-xl bg-purple-500/10 text-purple-400 shrink-0 mt-0.5">
+                                        <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />
                                     </div>
-                                    <div>
-                                        <p className="text-xs font-bold text-purple-400 uppercase tracking-widest mb-1">Education</p>
-                                        <h5 className="text-base font-bold text-slate-100 leading-snug">
+                                    <div className="min-w-0 flex-1">
+                                        <p className="text-[10px] sm:text-xs font-bold text-purple-400 uppercase tracking-widest mb-1">Education</p>
+                                        <h5 className="text-sm sm:text-base font-bold text-slate-100 leading-snug">
                                             Maharaja Agrasen Institute of Technology
                                         </h5>
-                                        <p className="text-sm text-slate-400 mt-1">
+                                        <p className="text-xs sm:text-sm text-slate-400 mt-1">
                                             B.Tech in Electronics &amp; Communication Engineering
                                         </p>
-                                        <div className="flex items-center gap-3 mt-3">
-                                            <span className="text-xs bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded-full px-3 py-1 font-medium">
+                                        <div className="flex flex-wrap items-center gap-2 mt-3">
+                                            <span className="text-[11px] sm:text-xs bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded-full px-2.5 sm:px-3 py-1 font-medium">
                                                 3rd Year · 2024–2028
                                             </span>
-                                            <span className="text-xs bg-slate-800 text-slate-400 rounded-full px-3 py-1 font-medium">
+                                            <span className="text-[11px] sm:text-xs bg-slate-800 text-slate-400 rounded-full px-2.5 sm:px-3 py-1 font-medium">
                                                 Rohini, Delhi
                                             </span>
                                         </div>

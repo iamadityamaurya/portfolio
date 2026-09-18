@@ -15,7 +15,6 @@ import GlobalParticles from './components/GlobalParticles';
 import Navbar from './components/Navbar';
 import TerminalModal from './components/TerminalModal';
 import { useState } from 'react';
-import { Terminal } from 'lucide-react';
 
 const pageMetadata = {
   
@@ -95,22 +94,6 @@ function App() {
         isOpen={isTerminalOpen} 
         onClose={() => setIsTerminalOpen(false)} 
       />
-
-      {/* Floating CLI Access Pill */}
-      <div className="fixed bottom-5 right-5 z-40">
-        <button
-          onClick={() => setIsTerminalOpen(true)}
-          className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#0b0f19]/90 hover:bg-slate-900 border border-slate-700/80 hover:border-slate-500 text-slate-300 hover:text-white shadow-[0_8px_30px_rgba(0,0,0,0.7)] backdrop-blur-md text-xs font-mono transition-all duration-300 active:scale-95 cursor-pointer"
-          title="Open Robotics & Telemetry CLI (Press ` or Ctrl+K)"
-        >
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-          <Terminal className="w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-400 group-hover:rotate-12 transition-transform" />
-          <span className="font-semibold text-slate-200 group-hover:text-white">Terminal CLI</span>
-          <span className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] text-slate-400 font-mono">
-            `
-          </span>
-        </button>
-      </div>
 
       <Routes>
         <Route path="/" element={

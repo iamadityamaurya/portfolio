@@ -100,7 +100,7 @@ const ContactPage = () => {
     ];
 
     return (
-        <section id="contact" className="min-h-screen bg-transparent text-slate-50 py-28 px-4 sm:px-8 relative overflow-hidden flex flex-col justify-center">
+        <section id="contact" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 md:px-8 relative overflow-hidden flex flex-col justify-center">
             {/* Background Glow */}
             <div className="absolute top-1/3 right-1/4 w-[550px] h-[400px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none -z-10" />
 
@@ -111,11 +111,19 @@ const ContactPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="mb-16 text-center"
+                    className="mb-10 sm:mb-16 text-center"
                 >
-                    <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
+                    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-cyan-400 uppercase mb-3 select-none">
+                        <span className="w-4 h-px bg-cyan-400" />
+                        Inquiries &amp; Outreach
+                        <span className="w-4 h-px bg-cyan-400" />
+                    </span>
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
                         Get In Touch
                     </h2>
+                    <p className="text-slate-400 mt-2 sm:mt-3 text-sm sm:text-base max-w-lg mx-auto">
+                        Have a project, job opening, or hardware build in mind? Let's connect.
+                    </p>
                 </motion.div>
 
                 {/* Main Grid with matching balanced spacious cards */}
@@ -128,10 +136,10 @@ const ContactPage = () => {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="lg:col-span-7 h-full flex flex-col"
                     >
-                        <div className="relative p-7 sm:p-10 md:p-11 rounded-[32px] bg-[#0b101d]/85 border border-slate-800 backdrop-blur-xl shadow-2xl flex-1 flex flex-col justify-between">
-                            <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col justify-between">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div className="space-y-2">
+                        <div className="relative p-5 sm:p-8 md:p-10 rounded-3xl bg-[#0b101d]/85 border border-slate-800 backdrop-blur-xl shadow-2xl flex-1 flex flex-col justify-between">
+                            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 flex-1 flex flex-col justify-between">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                                    <div className="space-y-1.5 sm:space-y-2">
                                         <label htmlFor="name" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
                                             Your Name <span className="text-cyan-400">*</span>
                                         </label>
@@ -142,11 +150,11 @@ const ContactPage = () => {
                                             value={formData.name}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
+                                            className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl bg-slate-950/60 border border-slate-800 text-xs sm:text-sm md:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
                                             placeholder="e.g. Sarah Jenkins"
                                         />
                                     </div>
-                                    <div className="space-y-2">
+                                    <div className="space-y-1.5 sm:space-y-2">
                                         <label htmlFor="email" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
                                             Email Address <span className="text-cyan-400">*</span>
                                         </label>
@@ -157,13 +165,13 @@ const ContactPage = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
+                                            className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl bg-slate-950/60 border border-slate-800 text-xs sm:text-sm md:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
                                             placeholder="sarah@company.com"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
+                                <div className="space-y-1.5 sm:space-y-2">
                                     <label htmlFor="subject" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
                                         Subject / Project Intent <span className="text-cyan-400">*</span>
                                     </label>
@@ -174,12 +182,12 @@ const ContactPage = () => {
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
-                                        placeholder="Project Inquiry / Job Opportunity / Hardware Prototype"
+                                        className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl bg-slate-950/60 border border-slate-800 text-xs sm:text-sm md:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all"
+                                        placeholder="Project Inquiry / Job Opportunity"
                                     />
                                 </div>
 
-                                <div className="space-y-2 flex-1 flex flex-col">
+                                <div className="space-y-1.5 sm:space-y-2 flex-1 flex flex-col">
                                     <label htmlFor="message" className="text-xs sm:text-sm font-mono font-semibold text-slate-300">
                                         Message <span className="text-cyan-400">*</span>
                                     </label>
@@ -189,25 +197,25 @@ const ContactPage = () => {
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        rows="5"
-                                        className="w-full flex-1 min-h-[130px] px-5 py-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 text-sm sm:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all resize-none leading-relaxed"
-                                        placeholder="Hi Aditya, I'd like to discuss a project..."
+                                        rows="4"
+                                        className="w-full flex-1 min-h-[120px] px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl bg-slate-950/60 border border-slate-800 text-xs sm:text-sm md:text-base text-slate-100 placeholder:text-slate-600 outline-none focus:border-slate-500 focus:bg-slate-950/90 transition-all resize-none leading-relaxed"
+                                        placeholder="Hi Aditya, I'd like to discuss..."
                                     ></textarea>
                                 </div>
 
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-4 px-8 rounded-2xl bg-white hover:bg-slate-200 text-slate-950 font-bold text-base shadow-xl transition-all active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                                    className="w-full py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl bg-white hover:bg-slate-200 text-slate-950 font-bold text-xs sm:text-sm md:text-base shadow-xl transition-all active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed mt-2"
                                 >
                                     {isSubmitting ? (
                                         <>
-                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                            <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
                                             <span>Transmitting Message...</span>
                                         </>
                                     ) : (
                                         <>
-                                            <Send className="w-5 h-5" />
+                                            <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                                             <span>Send Transmission</span>
                                         </>
                                     )}
@@ -217,7 +225,7 @@ const ContactPage = () => {
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-center text-sm font-medium"
+                                        className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-center text-xs sm:text-sm font-medium"
                                     >
                                         ✨ Message sent successfully! I'll get back to you soon.
                                     </motion.div>
@@ -227,7 +235,7 @@ const ContactPage = () => {
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-center text-sm font-medium"
+                                        className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-center text-xs sm:text-sm font-medium"
                                     >
                                         ⚠️ Failed to send message. Please try again later.
                                     </motion.div>
@@ -244,15 +252,15 @@ const ContactPage = () => {
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="lg:col-span-5 h-full flex flex-col"
                     >
-                        <div className="rounded-[32px] bg-[#0b101d]/85 border border-slate-800 backdrop-blur-xl p-7 sm:p-10 md:p-11 shadow-2xl flex-1 flex flex-col justify-between">
-                            <div className="space-y-4">
-                                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Let's Connect</h3>
-                                <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+                        <div className="rounded-3xl bg-[#0b101d]/85 border border-slate-800 backdrop-blur-xl p-5 sm:p-8 md:p-10 shadow-2xl flex-1 flex flex-col justify-between">
+                            <div className="space-y-3 sm:space-y-4">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white">Let's Connect</h3>
+                                <p className="text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed">
                                     I'm currently looking for new opportunities. Whether you have a question about my work, want to collaborate, or just want to say hi, I'll try my best to get back to you!
                                 </p>
                             </div>
 
-                            <div className="space-y-3.5 mt-8">
+                            <div className="space-y-3 mt-6 sm:mt-8">
                                 {socialLinks.map((link) => {
                                     const Icon = link.icon;
                                     const isCopied = copiedName === link.name;
@@ -261,19 +269,19 @@ const ContactPage = () => {
                                     return (
                                         <div
                                             key={link.name}
-                                            className={`p-4 rounded-2xl bg-slate-950/60 border border-slate-800/90 transition-all flex items-center justify-between group cursor-pointer ${link.hoverClass}`}
+                                            className={`p-3.5 sm:p-4 rounded-2xl bg-slate-950/60 border border-slate-800/90 transition-all flex items-center justify-between group cursor-pointer ${link.hoverClass}`}
                                         >
                                             <a
                                                 href={link.url}
                                                 target={link.name === 'Email' ? undefined : "_blank"}
                                                 rel={link.name === 'Email' ? undefined : "noopener noreferrer"}
-                                                className="flex items-center gap-4 min-w-0 flex-1"
+                                                className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1"
                                             >
-                                                <div className={`p-3 rounded-xl bg-slate-900/90 text-slate-400 transition-colors shrink-0 ${link.iconBgClass}`}>
-                                                    <Icon className="w-5 h-5" />
+                                                <div className={`p-2.5 sm:p-3 rounded-xl bg-slate-900/90 text-slate-400 transition-colors shrink-0 ${link.iconBgClass}`}>
+                                                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                                                 </div>
-                                                <div className="flex flex-col relative flex-1 h-7 overflow-hidden">
-                                                    <span className="font-bold text-base sm:text-lg absolute inset-0 flex items-center transition-all duration-300 ease-out group-hover:-translate-y-full group-hover:opacity-0 text-slate-200">
+                                                <div className="flex flex-col relative flex-1 h-6 sm:h-7 overflow-hidden">
+                                                    <span className="font-bold text-sm sm:text-base md:text-lg absolute inset-0 flex items-center transition-all duration-300 ease-out group-hover:-translate-y-full group-hover:opacity-0 text-slate-200">
                                                         {link.name}
                                                     </span>
                                                     <span className="font-mono font-medium text-xs sm:text-sm text-cyan-400 absolute inset-0 flex items-center transition-all duration-300 ease-out translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 truncate">
@@ -287,13 +295,13 @@ const ContactPage = () => {
                                                     e.stopPropagation();
                                                     handleCopy(copyValue, link.name);
                                                 }}
-                                                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0 ml-2 z-10"
+                                                className="p-2 sm:p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0 ml-2 z-10"
                                                 title={`Copy ${link.name}`}
                                             >
                                                 {isCopied ? (
-                                                    <Check className="w-4 h-4 text-cyan-400" />
+                                                    <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
                                                 ) : (
-                                                    <Copy className="w-4 h-4" />
+                                                    <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-400" />
                                                 )}
                                             </button>
                                         </div>

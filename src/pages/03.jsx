@@ -8,11 +8,11 @@ import ProjectModal from '../components/ProjectModal';
 export const ProjectsPage = () => {
     const [selectedProject, setSelectedProject] = useState(null);
 
-    // Show projects designated for main page or top 3-6 featured
-    const projects = projectsData.filter(p => p.mainPageShow || p.featured).slice(0, 6);
+    // Show projects designated for main page (excluding hardware/IoT)
+    const projects = projectsData.filter(p => p.mainPageShow && p.categorySlug !== 'iot').slice(0, 6);
 
     return (
-        <section id="projects" className="min-h-screen bg-transparent text-slate-50 py-24 px-6 relative">
+        <section id="projects" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative">
             {/* Background Subtle Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
@@ -22,21 +22,21 @@ export const ProjectsPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="mb-14 flex flex-col items-center justify-center gap-4 relative"
+                    className="mb-10 sm:mb-14 flex flex-col md:flex-row md:items-end md:justify-between items-center text-center md:text-left gap-4 relative"
                 >
-                    <div className="text-center">
+                    <div>
                         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 font-mono text-xs uppercase tracking-widest mb-3">
                             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                             Featured Showcase
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
                             Featured Projects
                         </h2>
                     </div>
-                    <div className="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 shrink-0 mt-4 md:mt-0">
+                    <div className="shrink-0 mt-2 md:mt-0">
                         <Link 
                             to="/project" 
-                            className="group inline-flex items-center gap-2 rounded-2xl border border-slate-700 bg-slate-900/80 px-5 py-2.5 text-sm font-semibold text-slate-300 hover:border-slate-500 hover:text-white transition-all backdrop-blur-md shadow-lg"
+                            className="group inline-flex items-center gap-2 rounded-2xl border border-slate-700 bg-slate-900/80 px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-300 hover:border-slate-500 hover:text-white transition-all backdrop-blur-md shadow-lg active:scale-95"
                         >
                             View All Projects
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -47,7 +47,7 @@ export const ProjectsPage = () => {
                 {/* Projects Grid */}
                 <motion.div
                     layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
                 >
                     <AnimatePresence>
                         {projects.map((project, idx) => (
