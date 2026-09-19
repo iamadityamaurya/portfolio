@@ -1,3 +1,4 @@
+import deepResearchBanner from '../assets/project_png/deepresearch-showcase.png';
 import bunkmaitBanner from '../assets/project_png/bunkmait-showcase.png';
 import liveTextOcrBanner from '../assets/project_png/live-text-ocr-showcase.png';
 import aiFillerBanner from '../assets/project_png/ai-filler-showcase.png';
@@ -13,6 +14,31 @@ import lineFollowerBanner from '../assets/project_png/line-follower-alpha.png';
 import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-showcase.png';
 
 export const projectsData = [
+  {
+    id: 'deepresearch-agent',
+    title: 'DeepResearch Multi-Tool Agent',
+    tagline: 'Autonomous deep research engine with LangGraph.js cyclic reasoning, 9 empirical tools & SSE streaming',
+    category: 'Extensions & AI',
+    categorySlug: 'extension',
+    badge: 'Agentic AI & LangGraph',
+    image: deepResearchBanner,
+    description: 'An autonomous deep research engine powered by LangGraph.js and Next.js 16. It mimics human research workflows by generating initial hypotheses, orchestrating 9 specialized empirical tools concurrently, iteratively synthesizing cross-source evidence through cyclic reasoning loops, and streaming verified markdown reports via Server-Sent Events (SSE).',
+    fullDescription: 'DeepResearch Multi-Tool Agent is an autonomous deep research platform utilizing compiled LangGraph.js StateGraphs with cyclic conditional routing and multi-provider LLM fallback across Groq (GPT-OSS 120B/20B, Qwen 27B) and Google Gemini 2.5 Flash. It coordinates a 9-tool empirical suite (ArXiv Search, GitHub Analyzer, Tech Discussions, Real-time Finance, Demographics, DNS Diagnostics, Wikipedia REST, Math AST Engine, and Live Web Search with Tavily/DDG fallback) with concurrent execution guards, zero-tool fast-path routing, deterministic MathJS AST evaluation, and real-time Server-Sent Events streaming directly into an interactive research workspace.',
+    highlights: [
+      'Autonomous Cyclic Reasoning: Dynamic LangGraph.js StateGraph with 4 nodes (plan_research, execute_tools, synthesize_notes, generate_report) and iterative gap-detection loops (up to 4 cycles in Deep Dive mode)',
+      '9-Tool Empirical Suite: Concurrent execution (Promise.all) across ArXiv XML API, GitHub REST, HackerNews/Algolia, CoinGecko/Nasdaq, Wikipedia REST, Node.js DNS, and Math AST parsers with timeout guards',
+      'Resilient Multi-Provider Fallback: Seamless cascading fallback from primary Groq models (GPT-OSS 120B) to secondary Groq/Google Gemini 2.5 Flash under rate limits or errors',
+      'Deterministic Math AST & Zero-Tool Fast Path: mathjs AST evaluation to eliminate arithmetic hallucinations, plus intent heuristics to bypass tool latency on conversational queries',
+      'Real-Time SSE Streaming & Rich Workspace: Live pipeline node pulsing, partial state updates, interactive tool inspector modals, and instant Markdown/JSON exports'
+    ],
+    tech: ['LangGraph.js', 'Next.js 16', 'React 19', 'TypeScript', 'Groq (GPT-OSS)', 'Gemini 2.5 Flash', 'Server-Sent Events', 'mathjs AST', 'Tailwind CSS 4', 'Zod / Cheerio'],
+    links: {
+      github: 'https://github.com/iamadityamaurya/deepresearch-agent'
+    },
+    featured: true,
+    mainPageShow: true,
+    stat: '9 Empirical Tools • Cyclic AI'
+  },
   {
     id: 'live-text-ocr',
     title: 'Live Text OCR for Ubuntu',
