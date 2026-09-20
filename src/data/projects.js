@@ -212,28 +212,29 @@ export const projectsData = [
   },
   {
     id: 'ai-filler-google-form',
-    title: 'AI Form AutoFiller',
-    tagline: 'Intelligent Chrome extension that automatically understands and fills complex forms',
+    title: 'AI Form AutoFiller (v2.2)',
+    tagline: 'Multi-provider BYOK AI Chrome extension with draggable floating widget & smart profile autofill',
     category: 'Extensions & AI',
     categorySlug: 'extension',
-    badge: 'Chrome Web Store',
+    badge: 'Chrome Web Store (v2.2)',
     image: aiFillerBanner,
-    description: 'A Chrome extension that uses AI to automatically fill Google Forms. Features a Vercel serverless backend for intelligent form processing and automation.',
-    fullDescription: 'AI Filler analyzes Google Form DOM structures, interprets radio groups, checkboxes, dropdowns, and multi-line prompts, then feeds context to Gemini AI to generate tailored, contextually coherent answers in one click.',
+    description: 'A privacy-first Chrome extension (Manifest V3) that intelligently answers Google Forms using direct browser-to-AI calls (BYOK) with multi-model support across Gemini & Groq, custom persona profiles, and native DOM event simulation.',
+    fullDescription: 'AI Form AutoFiller v2.2 eliminates external backend dependencies with a direct BYOK (Bring Your Own Key) architecture. It intelligently parses Google Form DOM trees (radio groups, checkboxes, dropdowns, and textareas), leverages custom personal info profiles for zero-hallucination identity fields, and streams direct browser-to-AI requests across Gemini (2.5 & 3.5 Flash) and Groq (GPT-OSS 120B/20B, Qwen 27B) while triggering native DOM input/change events.',
     highlights: [
-      'Published on Google Chrome Web Store with active user base',
-      'Manifest V3 compliant with secure isolated script execution',
-      'Vercel Serverless proxy backend protecting AI API keys',
-      'Smart context preservation for consistent persona responses'
+      'Direct browser-to-AI BYOK architecture (zero backend servers for speed & privacy)',
+      'Multi-provider LLM support: Google Gemini (2.5 / 3.5 Flash) & Groq (GPT-OSS, Qwen)',
+      'Personal profile auto-fill for instant name, roll no, college, & contact completion',
+      'Draggable in-page floating action widget for 1-click Google Forms automation',
+      'Comprehensive DOM parsing & native event simulation (Radio, Checkbox, Dropdown, Textarea)'
     ],
-    tech: ['Chrome Extension', 'JavaScript', 'Manifest V3', 'Vercel Serverless', 'Gemini AI'],
+    tech: ['Chrome Extension', 'Manifest V3', 'JavaScript', 'BYOK Serverless', 'Gemini AI', 'Groq API'],
     links: {
       demo: 'https://chromewebstore.google.com/detail/ai-filler-for-google-form/hdkgiebcambianonfpchpdbebnlmaafn',
       github: 'https://github.com/iamadityamaurya/google_form'
     },
     featured: true,
     mainPageShow: true,
-    stat: 'Web Store Verified'
+    stat: 'v2.2 BYOK Direct'
   },
   {
     id: 'drive-stream-downloader',
