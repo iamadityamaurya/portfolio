@@ -1,5 +1,28 @@
 [
     {
+        "id": 13,
+        "title": "ReelFlow: Autonomous AI Reel Pipeline",
+        "category": "Extension",
+        "image": "reelflowBanner",
+        "description": "An automated pipeline orchestrated via Telegram that generates, animates, subtitles, and publishes viral educational 1080x1920 Reels directly to Instagram using Groq, ElevenLabs, FFmpeg sidechain auto-ducking, and Meta Graph API.",
+        "tech": [
+            "Python 3.14",
+            "Telegram Bot API",
+            "FFmpeg",
+            "Groq LLM",
+            "ElevenLabs API",
+            "Instagram Graph API",
+            "Supabase S3",
+            "SQLite"
+        ],
+        "links": {
+            "demo": "https://www.instagram.com/_education4you/",
+            "code": "https://github.com/iamadityamaurya"
+        },
+        "featured": true,
+        "main_page_show": true
+    },
+    {
         "id": 12,
         "title": "BunkMAIT - Attendance & Timetable Suite",
         "category": "Full Stack",

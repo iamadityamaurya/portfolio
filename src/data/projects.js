@@ -1,4 +1,5 @@
 import deepResearchBanner from '../assets/project_png/deepresearch-showcase.png';
+import reelflowBanner from '../assets/project_png/reelflow-showcase.png';
 import bunkmaitBanner from '../assets/project_png/bunkmait-showcase.png';
 import liveTextOcrBanner from '../assets/project_png/live-text-ocr-showcase.png';
 import aiFillerBanner from '../assets/project_png/ai-filler-showcase.png';
@@ -14,6 +15,32 @@ import lineFollowerBanner from '../assets/project_png/line-follower-alpha.png';
 import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-showcase.png';
 
 export const projectsData = [
+  {
+    id: 'reelflow-pipeline',
+    title: 'ReelFlow: Autonomous AI Reel Pipeline',
+    tagline: 'End-to-end automated educational video generation and Instagram publishing studio',
+    category: 'Extensions & AI',
+    categorySlug: 'extension',
+    badge: 'Autonomous AI Pipeline',
+    image: reelflowBanner,
+    description: 'An automated pipeline orchestrated via Telegram that generates, animates, subtitles, and publishes viral educational 1080x1920 Reels. Features LLM scriptwriting, ElevenLabs voiceover, FFmpeg Ken Burns motion rendering, sidechain audio ducking, and direct Meta Graph API publishing.',
+    fullDescription: 'ReelFlow is a fully automated content generation and publishing engine that turns simple topic prompts into production-grade, 60-second vertical videos (Reels/Shorts). Controlled entirely through an interactive Telegram Bot, the pipeline guides the creator through AI idea brainstorming, multi-format scriptwriting (Two-Person Dialogue, Solo Storyteller, Expert vs. Student, Thought Experiment), synchronized TTS voice synthesis, scene visual generation, dynamic Ken Burns motion rendering, burned-in karaoke subtitles, and 1-tap automated publishing via the Instagram Graph API with SQLite state persistence.',
+    highlights: [
+      'Multi-stage Telegram bot orchestrating brainstorming, scriptwriting, voiceover, and video rendering with inline approval loops',
+      'FFmpeg sidechain auto-ducking engine dynamically suppressing background music by 18dB during voiceover with synchronized transition SFX',
+      'Word-level synchronized karaoke subtitle generation (.ASS burn-in) and 1080x1920 60FPS Ken Burns motion animation',
+      'Automated 1:1 Instagram profile grid safe-zone thumbnail cover generation with bold typography and glowing topic badges',
+      'Direct Reel publishing via Meta Graph API container polling and Supabase S3-compatible cloud storage'
+    ],
+    tech: ['Python 3.14', 'Telegram Bot API', 'FFmpeg', 'Groq (Llama 3.3)', 'ElevenLabs API', 'Deepgram Aura', 'Instagram Graph API', 'Supabase S3', 'SQLite', 'Pillow / PIL'],
+    links: {
+      demo: 'https://www.instagram.com/_education4you/',
+      github: 'https://github.com/iamadityamaurya'
+    },
+    featured: true,
+    mainPageShow: true,
+    stat: '1080x1920 60FPS • Auto-Publish'
+  },
   {
     id: 'deepresearch-agent',
     title: 'DeepResearch Multi-Tool Agent',
