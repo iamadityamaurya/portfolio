@@ -1,5 +1,28 @@
 [
     {
+        "id": 14,
+        "title": "DeepQuery - Autonomous AI Research Agent",
+        "category": "Extension",
+        "image": "deepResearchBanner",
+        "description": "An autonomous deep research platform powered by compiled LangGraph.js StateGraphs, 9 empirical tools, and real-time SSE streaming.",
+        "tech": [
+            "LangGraph.js",
+            "Next.js 16",
+            "React 19",
+            "TypeScript",
+            "Groq LLM",
+            "Gemini AI",
+            "Server-Sent Events",
+            "Tailwind CSS 4"
+        ],
+        "links": {
+            "demo": "https://deepquery.adityamaurya.dev/",
+            "code": "https://github.com/iamadityamaurya/deepresearch-agent"
+        },
+        "featured": true,
+        "main_page_show": true
+    },
+    {
         "id": 13,
         "title": "ReelFlow: Autonomous AI Reel Pipeline",
         "category": "Extension",

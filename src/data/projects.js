@@ -42,15 +42,15 @@ export const projectsData = [
     stat: '1080x1920 60FPS • Auto-Publish'
   },
   {
-    id: 'deepresearch-agent',
-    title: 'DeepResearch Multi-Tool Agent',
+    id: 'deepquery-agent',
+    title: 'DeepQuery - Autonomous AI Research Agent',
     tagline: 'Autonomous deep research engine with LangGraph.js cyclic reasoning, 9 empirical tools & SSE streaming',
     category: 'Extensions & AI',
     categorySlug: 'extension',
     badge: 'Agentic AI & LangGraph',
     image: deepResearchBanner,
     description: 'An autonomous deep research engine powered by LangGraph.js and Next.js 16. It mimics human research workflows by generating initial hypotheses, orchestrating 9 specialized empirical tools concurrently, iteratively synthesizing cross-source evidence through cyclic reasoning loops, and streaming verified markdown reports via Server-Sent Events (SSE).',
-    fullDescription: 'DeepResearch Multi-Tool Agent is an autonomous deep research platform utilizing compiled LangGraph.js StateGraphs with cyclic conditional routing and multi-provider LLM fallback across Groq (GPT-OSS 120B/20B, Qwen 27B) and Google Gemini 2.5 Flash. It coordinates a 9-tool empirical suite (ArXiv Search, GitHub Analyzer, Tech Discussions, Real-time Finance, Demographics, DNS Diagnostics, Wikipedia REST, Math AST Engine, and Live Web Search with Tavily/DDG fallback) with concurrent execution guards, zero-tool fast-path routing, deterministic MathJS AST evaluation, and real-time Server-Sent Events streaming directly into an interactive research workspace.',
+    fullDescription: 'DeepQuery is an autonomous deep research platform utilizing compiled LangGraph.js StateGraphs with cyclic conditional routing and multi-provider LLM fallback across Groq (GPT-OSS 120B/20B, Qwen 27B) and Google Gemini 2.5 Flash. It coordinates a 9-tool empirical suite (ArXiv Search, GitHub Analyzer, Tech Discussions, Real-time Finance, Demographics, DNS Diagnostics, Wikipedia REST, Math AST Engine, and Live Web Search with Tavily/DDG fallback) with concurrent execution guards, zero-tool fast-path routing, deterministic MathJS AST evaluation, and real-time Server-Sent Events streaming directly into an interactive research workspace.',
     highlights: [
       'Autonomous Cyclic Reasoning: Dynamic LangGraph.js StateGraph with 4 nodes (plan_research, execute_tools, synthesize_notes, generate_report) and iterative gap-detection loops (up to 4 cycles in Deep Dive mode)',
       '9-Tool Empirical Suite: Concurrent execution (Promise.all) across ArXiv XML API, GitHub REST, HackerNews/Algolia, CoinGecko/Nasdaq, Wikipedia REST, Node.js DNS, and Math AST parsers with timeout guards',
@@ -60,6 +60,7 @@ export const projectsData = [
     ],
     tech: ['LangGraph.js', 'Next.js 16', 'React 19', 'TypeScript', 'Groq (GPT-OSS)', 'Gemini 2.5 Flash', 'Server-Sent Events', 'mathjs AST', 'Tailwind CSS 4', 'Zod / Cheerio'],
     links: {
+      demo: 'https://deepquery.adityamaurya.dev/',
       github: 'https://github.com/iamadityamaurya/deepresearch-agent'
     },
     featured: true,
