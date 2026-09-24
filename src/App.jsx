@@ -10,7 +10,9 @@ import ContactPage from './pages/05';
 
 import AllProjectsPage from './project/01';
 import HackathonPage from './hackathon/01';
+import ExperiencePage from './pages/Experience';
 import NotFound from './pages/NotFound';
+import WorkExperiencePreview from './components/WorkExperiencePreview';
 
 import GlobalParticles from './components/GlobalParticles';
 import Navbar from './components/Navbar';
@@ -32,6 +34,10 @@ const pageMetadata = {
   '/hackathon-winning': {
     title: 'Hackathon Wins | Aditya Kumar Maurya',
     description: 'Explore Aditya Kumar Maurya’s competitive engineering projects, hardware builds, and hackathon achievements.',
+  },
+  '/experience': {
+    title: 'Experience | Aditya Kumar Maurya',
+    description: 'Explore Aditya Kumar Maurya’s work experience across software internships, IoT hardware engineering, and robotics.',
   },
 };
 
@@ -105,6 +111,7 @@ function App() {
           <>
             <HomePage onOpenTerminal={() => setIsTerminalOpen(true)} />
             <AboutPage />
+            <WorkExperiencePreview />
             <ProjectsPage />
             <SkillsPage />
             <ContactPage />
@@ -113,6 +120,7 @@ function App() {
 
         <Route path="/project" element={<AllProjectsPage />} />
         <Route path="/hackathon-winning" element={<HackathonPage />} />
+        <Route path="/experience" element={<ExperiencePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

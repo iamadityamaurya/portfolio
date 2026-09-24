@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
     Box, Cpu, Sparkles, Briefcase, Rocket, Trophy,
-    GraduationCap, MapPin, Bot, Radio, Layers, Music2
+    GraduationCap, MapPin, Bot, Radio, Layers, Music2,
+    ArrowRight
 } from 'lucide-react';
 import profileImage from '../assets/755b323b46fad9c3f86784c55c858b74.jpg';
 

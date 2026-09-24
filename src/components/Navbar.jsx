@@ -4,6 +4,7 @@ import AnimatedLogo from './AnimatedLogo';
 
 const navItems = [
   { label: 'About', href: '#about', isRoute: false },
+  { label: 'Experience', href: '/experience', isRoute: true },
   { label: 'Projects', href: '#projects', isRoute: false },
   { label: 'Skills', href: '#skills', isRoute: false },
   { label: 'Contact', href: '#contact', isRoute: false },

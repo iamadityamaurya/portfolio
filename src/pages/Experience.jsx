@@ -1,270 +1,202 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, Cpu, Rocket, ChevronRight, Calendar, Building2, ArrowUpRight } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Calendar, Building2, Code, Terminal, ExternalLink, MapPin } from 'lucide-react';
 
 const ExperiencePage = () => {
-    const [activeIdx, setActiveIdx] = useState(0);
-
     const experiences = [
         {
-            role: "Hardware Engineer",
+            role: "Software Intern",
             company: "Iotfy",
-            period: "Aug 2026 - Present",
-            icon: Cpu,
-            accent: "blue",
-            description: "",
+            period: "June 2026 – August 2026",
+            location: "On-site",
+            icon: Code,
             bullets: [
-                "Programmed microcontrollers (ESP32, Arduino) with custom communication protocols to implement wireless telemetry systems.",
-                "Developed robotic system modules integrated with ROS 2 framework to execute precise navigation tasks.",
-                "Modelled complex 3D hardware structures, enclosures, and motor brackets in Onshape, ready for functional 3D printing."
+                "Built a cross-platform mobile application for a client using React Native and Expo, delivering a production-ready MVP within the internship timeline.",
+                "Designed and implemented RESTful APIs and backend services to power mobile and web client features.",
+                "Created modern, responsive UI/UX designs and translated Figma-style wireframes into functional React + Tailwind CSS interfaces."
             ],
-            tech: ["C++", "C", "Python", "ROS 2", "Arduino", "ESP32", "Onshape (3D Design)", "3D Printing"]
+            tech: ["React", "React Native", "Expo", "Node.js", "REST APIs", "UI/UX", "Tailwind CSS", "JavaScript"]
         },
         {
-            role: "IoT & Embedded Systems Engineer",
-            company: "Open Source / Robotics Prototype Lab",
-            period: "Jan 2023 – Present",
-            icon: Cpu,
-            accent: "blue",
-            description: "Designing custom physical hardware, automated robotics, and smart home IoT systems from the circuit board to user interface layers.",
+            role: "Lead Software Engineer",
+            company: "Stealth Cab Startup",
+            period: "Dec 2025 – May 2026",
+            location: "Remote",
+            icon: MapPin,
             bullets: [
-                "Programmed microcontrollers (ESP32, Arduino) with custom communication protocols to implement wireless telemetry systems.",
-                "Developed robotic system modules integrated with ROS 2 framework to execute precise navigation tasks.",
-                "Modelled complex 3D hardware structures, enclosures, and motor brackets in Onshape, ready for functional 3D printing."
+                "Built a full-stack cab booking platform with separate apps for passengers and drivers using React Native, NestJS, and Supabase.",
+                "Applied system design principles and DevOps practices including CI/CD pipelines, Docker, and caching to ensure performance and scalability.",
+                "Developed a responsive landing page using Next.js integrated with the NestJS backend."
             ],
-            tech: ["C++", "C", "Python", "ROS 2", "Arduino", "ESP32", "Onshape (3D Design)", "3D Printing"]
-        },
-        {
-            role: "Hackathon Builder & Lead Engineer",
-            company: "Competitive Prototyping",
-            period: "Oct 2023 – Present",
-            icon: Rocket,
-            accent: "purple",
-            description: "Collaborating with rapid-prototyping teams to conceptualize and develop functional solutions for national and collegiate hackathons under 36-hour timelines.",
-            bullets: [
-                "Achieved 3x Hackathon Winner distinctions by delivering production-ready software integrated with active hardware systems.",
-                "Spearheaded multi-layer software-hardware integrations, coordinating REST APIs, serial communication, and mobile interfaces.",
-                "Designed clean database schemas and responsive frontend interfaces to deliver visual impact during live presentations."
-            ],
-            tech: ["React", "Express", "Node.js", "Tailwind CSS", "Arduino", "API Integration", "Framer Motion"]
+            tech: ["React Native", "Nest.js", "Supabase", "TypeScript", "Next.js", "Docker", "CI/CD"]
         }
     ];
 
-    const accentColors = {
-        emerald: {
-            bg: 'bg-emerald-500/10',
-            border: 'border-emerald-500/30',
-            borderActive: 'border-emerald-400',
-            text: 'text-emerald-400',
-            glow: 'shadow-[0_0_30px_rgba(16,185,129,0.15)]',
-            glowStrong: 'shadow-[0_0_40px_rgba(16,185,129,0.25)]',
-            dot: 'bg-emerald-400',
-            gradient: 'from-emerald-500/20 to-transparent',
-            tabBg: 'bg-emerald-500/5',
-            tabBorder: 'border-emerald-500/40',
-            ring: 'ring-emerald-500/30',
-        },
-        blue: {
-            bg: 'bg-blue-500/10',
-            border: 'border-blue-500/30',
-            borderActive: 'border-blue-400',
-            text: 'text-blue-400',
-            glow: 'shadow-[0_0_30px_rgba(59,130,246,0.15)]',
-            glowStrong: 'shadow-[0_0_40px_rgba(59,130,246,0.25)]',
-            dot: 'bg-blue-400',
-            gradient: 'from-blue-500/20 to-transparent',
-            tabBg: 'bg-blue-500/5',
-            tabBorder: 'border-blue-500/40',
-            ring: 'ring-blue-500/30',
-        },
-        purple: {
-            bg: 'bg-purple-500/10',
-            border: 'border-purple-500/30',
-            borderActive: 'border-purple-400',
-            text: 'text-purple-400',
-            glow: 'shadow-[0_0_30px_rgba(168,85,247,0.15)]',
-            glowStrong: 'shadow-[0_0_40px_rgba(168,85,247,0.25)]',
-            dot: 'bg-purple-400',
-            gradient: 'from-purple-500/20 to-transparent',
-            tabBg: 'bg-purple-500/5',
-            tabBorder: 'border-purple-500/40',
-            ring: 'ring-purple-500/30',
-        },
-    };
-
-    const active = experiences[activeIdx];
-    const colors = accentColors[active.accent];
-    const Icon = active.icon;
-
     return (
-        <section id="experience" className="bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
-            {/* Background */}
-            <div className="absolute top-20 left-10 w-96 h-96 bg-emerald-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none -z-10" />
+        <section id="experience" className="min-h-screen bg-[#05070d] text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden flex flex-col justify-center font-mono">
+            {/* Subtle grid background */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
-            <div className="container mx-auto max-w-6xl relative z-10">
+            <div className="container mx-auto max-w-4xl relative z-10">
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 sm:mb-16 text-center flex flex-col items-center"
+                    transition={{ duration: 0.5 }}
+                    className="mb-10 sm:mb-14"
                 >
-                    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase mb-3 select-none">
-                        <span className="w-4 h-px bg-emerald-400" />
-                        Professional History
-                        <span className="w-4 h-px bg-emerald-400" />
-                    </span>
-                    <h3 className="text-3xl sm:text-5xl font-extrabold mt-2 text-white tracking-tight leading-tight">
-                        Work Experience
-                    </h3>
-                    <p className="text-slate-400 mt-3 sm:mt-4 text-sm sm:text-base max-w-lg mx-auto">
-                        My journey across software development, physical hardware prototyping, and competitive engineering.
+                    <div className="flex items-center gap-3 mb-4">
+                        <Terminal className="w-4 h-4 text-cyan-400" />
+                        <span className="text-xs text-cyan-400 uppercase tracking-[0.2em] font-bold">~/experience</span>
+                    </div>
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-none">
+                        Work.
+                    </h2>
+                    <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-500 max-w-md">
+                        Where I've shipped real code, real products, and real value.
                     </p>
                 </motion.div>
 
-                {/* Tab-panel Layout */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.7, delay: 0.1 }}
-                    className="flex flex-col lg:flex-row gap-6 lg:gap-0 max-w-5xl mx-auto"
-                >
-                    {/* Left Tabs */}
-                    <div className="lg:w-72 shrink-0 flex flex-row lg:flex-col gap-2 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 lg:border-l-2 border-slate-800 scrollbar-none">
-                        {experiences.map((exp, idx) => {
-                            const tabColors = accentColors[exp.accent];
-                            const isActive = idx === activeIdx;
-                            const TabIcon = exp.icon;
+                {/* Experience Entries */}
+                <div className="space-y-16 sm:space-y-24">
+                    {experiences.map((exp, expIdx) => {
+                        const Icon = exp.icon;
+                        const year = exp.period.split(' ')[1] || '2026';
 
-                            return (
-                                <button
-                                    key={idx}
-                                    onClick={() => setActiveIdx(idx)}
-                                    className={`relative flex items-center gap-3 px-4 sm:px-5 py-3.5 sm:py-4 text-left transition-all duration-300 whitespace-nowrap lg:whitespace-normal rounded-xl lg:rounded-none lg:rounded-r-xl cursor-pointer min-w-[180px] sm:min-w-[200px] lg:min-w-0 group
-                                        ${isActive
-                                            ? `${tabColors.tabBg} border ${tabColors.tabBorder} lg:border-l-2 lg:border-r-0 lg:border-t-0 lg:border-b-0 ${tabColors.borderActive} lg:-ml-[2px] ${tabColors.text}`
-                                            : 'border border-transparent lg:border-none text-slate-500 hover:text-slate-300 hover:bg-slate-800/40'
-                                        }
-                                    `}
-                                >
-                                    <div className={`p-2 rounded-lg transition-all duration-300 shrink-0 ${isActive ? `${tabColors.bg} ${tabColors.text}` : 'bg-slate-800/60 text-slate-500 group-hover:text-slate-300'}`}>
-                                        <TabIcon className="w-4 h-4" />
-                                    </div>
-                                    <div className="min-w-0">
-                                        <span className={`block text-xs sm:text-sm font-semibold transition-colors duration-300 truncate ${isActive ? tabColors.text : ''}`}>
-                                            {exp.company}
-                                        </span>
-                                        <span className="block text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">
-                                            {exp.period}
-                                        </span>
-                                    </div>
-                                    {isActive && (
-                                        <motion.div
-                                            layoutId="tab-arrow"
-                                            className={`hidden lg:block ml-auto ${tabColors.text}`}
-                                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                        >
-                                            <ChevronRight className="w-4 h-4" />
-                                        </motion.div>
-                                    )}
-                                </button>
-                            );
-                        })}
-                    </div>
-
-                    {/* Right Content Panel */}
-                    <div className="flex-1 lg:pl-8 min-h-0">
-                        <AnimatePresence mode="wait">
+                        return (
                             <motion.div
-                                key={activeIdx}
-                                initial={{ opacity: 0, x: 20, scale: 0.98 }}
-                                animate={{ opacity: 1, x: 0, scale: 1 }}
-                                exit={{ opacity: 0, x: -20, scale: 0.98 }}
-                                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                                className={`relative rounded-2xl sm:rounded-3xl bg-slate-900/50 border ${colors.border} backdrop-blur-xl overflow-hidden ${colors.glow} transition-shadow duration-500`}
+                                key={exp.company}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-60px' }}
+                                transition={{ duration: 0.6, delay: expIdx * 0.1 }}
+                                className="group"
                             >
-                                {/* Top gradient accent bar */}
-                                <div className={`h-1 bg-gradient-to-r ${colors.gradient}`} />
+                                {/* Year marker */}
+                                <div className="flex items-center gap-4 mb-6">
+                                    <span className="text-4xl sm:text-5xl font-black text-slate-800 select-none">
+                                        {year}
+                                    </span>
+                                    <div className="flex-1 h-px bg-slate-800" />
+                                </div>
 
-                                {/* Ambient glow blob */}
-                                <div className={`absolute -top-20 -right-20 w-60 h-60 ${colors.bg} rounded-full blur-[80px] pointer-events-none opacity-60`} />
-
-                                <div className="relative p-5 sm:p-7 md:p-9">
-                                    {/* Header Row */}
-                                    <div className="flex items-start gap-3 sm:gap-4 mb-5 sm:mb-6">
-                                        <div className={`p-2.5 sm:p-3 rounded-xl ${colors.bg} ${colors.text} ring-1 ${colors.ring} shrink-0`}>
-                                            <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                                {/* Main card — raw terminal/editor style */}
+                                <div className="relative border border-slate-800 bg-[#090d16]/80 backdrop-blur-sm overflow-hidden">
+                                    {/* Top bar */}
+                                    <div className="flex items-center justify-between px-3 py-2 bg-[#0d121f] border-b border-slate-800">
+                                        <div className="flex items-center gap-2">
+                                            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/70" />
+                                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
+                                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-100 leading-snug">
-                                                {active.role}
-                                            </h4>
-                                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1.5 sm:mt-2">
-                                                <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-400">
-                                                    <Building2 className="w-3.5 h-3.5" />
-                                                    {active.company}
+                                        <span className="text-[10px] sm:text-xs text-slate-600">
+                                            {exp.company.toLowerCase().replace(/\s+/g, '-')}.md
+                                        </span>
+                                    </div>
+
+                                    {/* Content */}
+                                    <div className="p-5 sm:p-8 md:p-10">
+                                        {/* Title row */}
+                                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
+                                            <div>
+                                                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
+                                                    {exp.role}
+                                                </h3>
+                                                <div className="flex flex-wrap items-center gap-3 text-sm sm:text-base">
+                                                    <span className="inline-flex items-center gap-1.5 text-slate-300 font-semibold">
+                                                        <Building2 className="w-3.5 h-3.5 text-slate-500" />
+                                                        {exp.company}
+                                                    </span>
+                                                    <span className="text-slate-600">/</span>
+                                                    <span className="inline-flex items-center gap-1.5 text-emerald-400 text-xs sm:text-sm font-mono">
+                                                        <Calendar className="w-3.5 h-3.5" />
+                                                        {exp.period}
+                                                    </span>
+                                                    <span className="text-slate-600">/</span>
+                                                    <span className="text-xs sm:text-sm text-slate-500 font-mono px-2 py-0.5 rounded border border-slate-800">
+                                                        {exp.location}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div className="shrink-0">
+                                                <div className="w-12 h-12 sm:w-14 sm:h-14 border border-slate-700 bg-slate-900 flex items-center justify-center text-emerald-400">
+                                                    <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Bullet list */}
+                                        <div className="space-y-4 mb-8">
+                                            {exp.bullets.map((bullet, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    initial={{ opacity: 0, x: 8 }}
+                                                    whileInView={{ opacity: 1, x: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.3, delay: 0.2 + idx * 0.1 }}
+                                                    className="flex items-start gap-3 text-sm sm:text-base text-slate-300 leading-relaxed group/item"
+                                                >
+                                                    <span className="text-emerald-500/60 font-mono select-none mt-0.5">
+                                                        {`[${(idx + 1).toString().padStart(2, '0')}]`}
+                                                    </span>
+                                                    <span className="group-hover/item:text-slate-200 transition-colors">
+                                                        {bullet}
+                                                    </span>
+                                                </motion.div>
+                                            ))}
+                                        </div>
+
+                                        {/* Tech tags */}
+                                        <div className="border-t border-slate-800 pt-6">
+                                            <div className="flex items-center gap-2 mb-3">
+                                                <span className="text-[10px] sm:text-xs text-slate-600 uppercase tracking-widest font-bold">
+                                                    $ tech-stack
                                                 </span>
-                                                <span className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium ${colors.text}`}>
-                                                    <Calendar className="w-3.5 h-3.5" />
-                                                    {active.period}
-                                                </span>
+                                                <div className="flex-1 h-px bg-slate-800" />
+                                            </div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {exp.tech.map((t) => (
+                                                    <span
+                                                        key={t}
+                                                        className="text-xs sm:text-sm font-mono px-3 py-1.5 border border-slate-700 text-slate-400 hover:text-emerald-300 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-colors cursor-default"
+                                                    >
+                                                        {t}
+                                                    </span>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* Description */}
-                                    {active.description && (
-                                        <p className="text-slate-400 text-xs sm:text-sm md:text-[15px] leading-relaxed mb-5 sm:mb-6">
-                                            {active.description}
-                                        </p>
-                                    )}
-
-                                    {/* Bullets */}
-                                    <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-7">
-                                        {active.bullets.map((bullet, bIdx) => (
-                                            <motion.li
-                                                key={bIdx}
-                                                initial={{ opacity: 0, x: 10 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ duration: 0.3, delay: bIdx * 0.1 }}
-                                                className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-slate-300 leading-relaxed group/bullet"
-                                            >
-                                                <span className="relative mt-1 sm:mt-1.5 shrink-0">
-                                                    <span className={`block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${colors.dot} opacity-70 group-hover/bullet:opacity-100 transition-opacity`} />
-                                                    <span className={`absolute inset-0 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${colors.dot} opacity-30 animate-ping`} style={{ animationDuration: `${3 + bIdx}s` }} />
-                                                </span>
-                                                <span className="group-hover/bullet:text-slate-200 transition-colors">
-                                                    {bullet}
-                                                </span>
-                                            </motion.li>
-                                        ))}
-                                    </ul>
-
-                                    {/* Divider */}
-                                    <div className="h-px bg-gradient-to-r from-transparent via-slate-700/60 to-transparent mb-5 sm:mb-6" />
-
-                                    {/* Tech Tags */}
-                                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                                        {active.tech.map((t, tIdx) => (
-                                            <motion.span
-                                                key={tIdx}
-                                                initial={{ opacity: 0, scale: 0.8 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ duration: 0.2, delay: 0.15 + tIdx * 0.04 }}
-                                                className={`text-[11px] sm:text-xs font-mono px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg ${colors.bg} ${colors.text} border ${colors.border} hover:border-opacity-60 transition-all cursor-default`}
-                                            >
-                                                {t}
-                                            </motion.span>
+                                    {/* Decorative line numbers */}
+                                    <div className="hidden sm:flex absolute top-16 -left-8 flex-col gap-1 text-[10px] text-slate-700 font-mono select-none">
+                                        {Array.from({ length: 15 }, (_, n) => n + 1).map((n) => (
+                                            <span key={n}>{n.toString().padStart(2, '0')}</span>
                                         ))}
                                     </div>
                                 </div>
                             </motion.div>
-                        </AnimatePresence>
-                    </div>
+                        );
+                    })}
+                </div>
+
+                {/* Status footer */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                    className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[10px] sm:text-xs text-slate-600 font-mono"
+                >
+                    <span>STATUS: OPEN_TO_OPPORTUNITIES</span>
+                    <a
+                        href="mailto:adityamaurya1947@gmail.com"
+                        className="inline-flex items-center gap-1.5 text-slate-500 hover:text-emerald-400 transition-colors"
+                    >
+                        GET IN TOUCH
+                        <ExternalLink className="w-3 h-3" />
+                    </a>
                 </motion.div>
             </div>
         </section>
