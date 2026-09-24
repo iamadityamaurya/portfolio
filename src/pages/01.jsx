@@ -1,15 +1,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Mail, Github, Linkedin, ChevronDown, Trophy, Copy, Check, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
 
-const DecodingText = ({ text, onComplete }) => {
-    const [display, setDisplay] = useState("");
-    const [isComplete, setIsComplete] = useState(false);
+
+
+const DecodingText = ({ text, onComplete, reducedMotion }) => {
+    const [display, setDisplay] = useState(reducedMotion ? text : "");
+    const [isComplete, setIsComplete] = useState(reducedMotion);
 
     useEffect(() => {
+        if (reducedMotion) {
+            setDisplay(text);
+            setIsComplete(true);
+            if (onComplete) onComplete();
+            return;
+        }
+
         let currentIndex = 0;
         let currentLetterCode = 65; // Start from 'A'
         let solvedPart = "";
@@ -56,7 +65,7 @@ const DecodingText = ({ text, onComplete }) => {
             <span className="invisible">{text}</span>
             <span className="absolute left-0 top-0">
                 {display}
-                {!isComplete && <span className="animate-pulse ml-0.5">_</span>}
+                {!isComplete && !reducedMotion && <span className="animate-pulse ml-0.5">_</span>}
             </span>
         </span>
     );
@@ -65,6 +74,7 @@ const DecodingText = ({ text, onComplete }) => {
 
 
 const HomePage = ({ onOpenTerminal }) => {
+    const reducedMotion = useReducedMotion();
     const [introFinished, setIntroFinished] = useState(false);
     const [copiedEmail, setCopiedEmail] = useState(false);
 
@@ -84,11 +94,13 @@ const HomePage = ({ onOpenTerminal }) => {
 
     // Rotating Titles
     useEffect(() => {
+        if (reducedMotion) return;
+
         const interval = setInterval(() => {
             setIndex((prev) => (prev + 1) % titles.length);
         }, 3000);
         return () => clearInterval(interval);
-    }, []);
+    }, [reducedMotion]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -105,14 +117,14 @@ const HomePage = ({ onOpenTerminal }) => {
 
                     {/* 1. Intro Badge with Decoding Text */}
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
+                        transition={reducedMotion ? { duration: 0 } : { duration: 0.5 }}
                         className="mb-6 sm:mb-8 flex justify-center"
                     >
                         <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-mono backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.15)]">
-                            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0"></span>
-                            <DecodingText text="HELLO, I'M" onComplete={() => setIntroFinished(true)} />
+                            <span className={`w-2 h-2 rounded-full bg-cyan-400 shrink-0 ${reducedMotion ? '' : 'animate-pulse'}`}></span>
+                            <DecodingText text="HELLO, I'M" onComplete={() => setIntroFinished(true)} reducedMotion={reducedMotion} />
                         </div>
                     </motion.div>
 
@@ -122,9 +134,9 @@ const HomePage = ({ onOpenTerminal }) => {
                             <motion.span
                                 key={i}
                                 className="inline-block whitespace-nowrap"
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                transition={{
+                                transition={reducedMotion ? { duration: 0 } : {
                                     duration: 0.5,
                                     delay: (i * 0.15),
                                     ease: "easeOut"
@@ -134,7 +146,7 @@ const HomePage = ({ onOpenTerminal }) => {
                                     <motion.span
                                         key={j}
                                         className="inline-block cursor-default hover:text-cyan-400 transition-colors"
-                                        whileHover={{ scale: 1.2, rotate: 5 }}
+                                        whileHover={reducedMotion ? {} : { scale: 1.2, rotate: 5 }}
                                         transition={{ type: "spring", stiffness: 300 }}
                                     >
                                         {char}
@@ -147,33 +159,33 @@ const HomePage = ({ onOpenTerminal }) => {
                     {/* 3. Titles/Role with Terminal Prompt Theme */}
                     <motion.div
                         className="min-h-[3rem] sm:min-h-[4rem] mb-6 sm:mb-8 flex items-center justify-center font-mono text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight px-2"
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={reducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                         animate={introFinished ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
+                        transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.5 }}
                     >
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 12 }}
+                                initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -12 }}
-                                transition={{ duration: 0.25, ease: "easeInOut" }}
+                                exit={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -12 }}
+                                transition={reducedMotion ? { duration: 0 } : { duration: 0.25, ease: "easeInOut" }}
                                 className="inline-flex items-center gap-1.5 sm:gap-2 text-slate-100 text-center flex-wrap justify-center"
                             >
                                 <span className="text-cyan-400 font-bold select-none">&gt;</span>
                                 <span className="text-slate-100 font-mono">
                                     {titles[index]}
                                 </span>
-                                <span className="text-cyan-400 animate-pulse font-mono select-none">_</span>
+                                <span className={`text-cyan-400 font-mono select-none ${reducedMotion ? '' : 'animate-pulse'}`}>_</span>
                             </motion.div>
                         </AnimatePresence>
                     </motion.div>
 
                     {/* 4. Description */}
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                        transition={{ duration: 0.1, delay: 0 }}
+                        transition={reducedMotion ? { duration: 0 } : { duration: 0.1, delay: 0 }}
                         className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mb-8 sm:mb-10 leading-relaxed mx-auto font-normal px-2"
                     >
                         {"I build fast, accessible, and visually striking digital experiences. Whether web or mobile, my apps are designed to solve real-world problems with clean code and great design."
@@ -182,7 +194,7 @@ const HomePage = ({ onOpenTerminal }) => {
                                 <motion.span
                                     key={i}
                                     className="inline-block mr-1 cursor-default hover:text-white transition-colors"
-                                    whileHover={{ scale: 1.1, y: -2 }}
+                                    whileHover={reducedMotion ? {} : { scale: 1.1, y: -2 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
                                     {word}
@@ -192,9 +204,9 @@ const HomePage = ({ onOpenTerminal }) => {
 
                     {/* 5. Action Buttons */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         animate={introFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                        transition={{ duration: 0.5, delay: 1.0 }}
+                        transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.0 }}
                         className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full px-2"
                     >
                         {/* Primary Button - Explore Projects */}
@@ -204,7 +216,7 @@ const HomePage = ({ onOpenTerminal }) => {
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Explore Projects
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className={`w-4 h-4 transition-transform ${reducedMotion ? '' : 'group-hover:translate-x-1'}`} />
                             </span>
                         </a>
 
@@ -214,7 +226,7 @@ const HomePage = ({ onOpenTerminal }) => {
                             className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-2xl bg-[#080d1a]/90 hover:bg-slate-900 border border-slate-700/80 hover:border-slate-500 text-slate-200 hover:text-white font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg active:scale-95 cursor-pointer backdrop-blur-md font-mono"
                             title="Launch interactive portfolio terminal CLI"
                         >
-                            <Terminal className="w-4 h-4 text-slate-400 group-hover:text-cyan-400 group-hover:rotate-12 transition-transform" />
+                            <Terminal className={`w-4 h-4 text-slate-400 transition-transform ${reducedMotion ? '' : 'group-hover:text-cyan-400 group-hover:rotate-12'}`} />
                             <span>Terminal CLI</span>
                             <span className="hidden md:inline-block px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-slate-400">
                                 `
@@ -226,7 +238,7 @@ const HomePage = ({ onOpenTerminal }) => {
                             to="/hackathon-winning"
                             className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-400/70 text-amber-300 hover:text-amber-200 font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg shadow-amber-500/5 hover:shadow-amber-500/20 active:scale-95"
                         >
-                            <Trophy className="w-4 h-4 text-amber-400 group-hover:rotate-12 transition-transform" />
+                            <Trophy className={`w-4 h-4 text-amber-400 transition-transform ${reducedMotion ? '' : 'group-hover:rotate-12'}`} />
                             <span>Hackathon Wins</span>
                             <span className="px-1.5 py-0.5 rounded-md bg-amber-500/20 text-[11px] font-mono font-bold text-amber-300">
                                 3x
@@ -255,9 +267,9 @@ const HomePage = ({ onOpenTerminal }) => {
 
                     {/* 6. Social Links */}
                     <motion.div
-                        initial={{ opacity: 0 }}
+                        initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
                         animate={introFinished ? { opacity: 1 } : { opacity: 0 }}
-                        transition={{ duration: 0.5, delay: 1.2 }}
+                        transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.2 }}
                         className="mt-10 sm:mt-14 flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-slate-400 px-2"
                     >
                         {[
@@ -286,9 +298,9 @@ const HomePage = ({ onOpenTerminal }) => {
 
                 {/* Scroll Indicator */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, y: [0, 10, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: 4.5 }}
+                    initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
+                    animate={{ opacity: 1, y: reducedMotion ? 0 : [0, 10, 0] }}
+                    transition={reducedMotion ? { duration: 0 } : { duration: 1.5, repeat: Infinity, delay: 4.5 }}
                     className="hidden sm:block absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 text-slate-500 pointer-events-none"
                 >
                     <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />

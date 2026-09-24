@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadFull } from "tsparticles";
+import { loadSlim } from "@tsparticles/slim";
 import { particlesOptions } from '../config/particlesConfig';
+
+const prefersReducedMotion = () => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
 
 const GlobalParticles = () => {
     const [init, setInit] = useState(false);
@@ -14,8 +19,14 @@ const GlobalParticles = () => {
             return;
         }
 
+        // Disable particle motion for users who prefer reduced motion
+        if (prefersReducedMotion()) {
+            setInit(false);
+            return;
+        }
+
         initParticlesEngine(async (engine) => {
-            await loadFull(engine);
+            await loadSlim(engine);
         }).then(() => {
             setInit(true);
         }).catch(() => {

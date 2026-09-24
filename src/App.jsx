@@ -10,6 +10,7 @@ import ContactPage from './pages/05';
 
 import AllProjectsPage from './project/01';
 import HackathonPage from './hackathon/01';
+import NotFound from './pages/NotFound';
 
 import GlobalParticles from './components/GlobalParticles';
 import Navbar from './components/Navbar';
@@ -112,6 +113,7 @@ function App() {
 
         <Route path="/project" element={<AllProjectsPage />} />
         <Route path="/hackathon-winning" element={<HackathonPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
