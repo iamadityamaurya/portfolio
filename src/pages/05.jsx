@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Send, Loader2, Github, Linkedin, Twitter, Copy, Check, MessageSquare } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 const ContactPage = () => {
     const [formData, setFormData] = useState({
@@ -51,6 +52,13 @@ const ContactPage = () => {
             if (result.success) {
                 setSubmitStatus('success');
                 setFormData({ name: '', email: '', subject: '', message: '' });
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.7 },
+                    colors: ['#22d3ee', '#10b981', '#f59e0b', '#f8fafc'],
+                    disableForReducedMotion: true,
+                });
                 setTimeout(() => setSubmitStatus(null), 5000);
             } else {
                 console.error("Web3Forms error:", result);

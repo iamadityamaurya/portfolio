@@ -14,6 +14,7 @@ import HackathonPage from './hackathon/01';
 import GlobalParticles from './components/GlobalParticles';
 import Navbar from './components/Navbar';
 import TerminalModal from './components/TerminalModal';
+import CustomCursor from './components/CustomCursor';
 import { useState } from 'react';
 
 const pageMetadata = {
@@ -86,6 +87,7 @@ function App() {
   return (
     <Router>
       <SeoMeta />
+      <CustomCursor />
       <GlobalParticles />
       <Navbar onOpenTerminal={() => setIsTerminalOpen(true)} />
       

@@ -46,5 +46,16 @@
     -webkit-text-fill-color: #cbd5e1 !important;
     transition: background-color 5000s ease-in-out 0s;
   }
+
+  /* Hide default cursor completely on desktop when custom cursor is active */
+  @media (pointer: fine) and (min-width: 1024px) {
+    body.custom-cursor-active,
+    body.custom-cursor-active *,
+    body.custom-cursor-active *:hover,
+    body.custom-cursor-active *:active,
+    body.custom-cursor-active *:focus {
+      cursor: none !important;
+    }
+  }
 }
 
