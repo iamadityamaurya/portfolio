@@ -15,6 +15,7 @@ import GlobalParticles from './components/GlobalParticles';
 import Navbar from './components/Navbar';
 import TerminalModal from './components/TerminalModal';
 import CustomCursor from './components/CustomCursor';
+import ScrollToTop from './components/ScrollToTop';
 import { useState } from 'react';
 
 const pageMetadata = {
@@ -87,6 +88,7 @@ function App() {
   return (
     <Router>
       <SeoMeta />
+      <ScrollToTop />
       <CustomCursor />
       <GlobalParticles />
       <Navbar onOpenTerminal={() => setIsTerminalOpen(true)} />

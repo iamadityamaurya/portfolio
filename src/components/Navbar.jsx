@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import AnimatedLogo from './AnimatedLogo';
 
 const navItems = [
   { label: 'About', href: '#about', isRoute: false },
@@ -33,7 +34,16 @@ export const Navbar = ({ onOpenTerminal }) => {
 
   return (
     <header className="fixed top-3.5 sm:top-5 left-1/2 -translate-x-1/2 z-50 w-max max-w-[96vw]">
-      <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 pl-4 pr-3 sm:px-6 py-1.5 sm:py-2 rounded-full bg-[#080d1a]/95 backdrop-blur-xl border border-slate-700/70 shadow-[0_10px_35px_rgba(0,0,0,0.6)] text-slate-300 font-medium">
+      <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 pl-3 sm:pl-4 pr-3 sm:px-6 py-1.5 sm:py-2 rounded-full bg-[#080d1a]/95 backdrop-blur-xl border border-slate-700/70 shadow-[0_10px_35px_rgba(0,0,0,0.6)] text-slate-300 font-medium">
+        <Link to="/" className="flex items-center gap-2 group" aria-label="Aditya Kumar Maurya — Home">
+          <AnimatedLogo className="w-6 h-6 sm:w-7 sm:h-7" color="#22d3ee" glowColor="#22d3ee" showGlow />
+          <span className="hidden sm:block text-sm font-bold text-slate-100 group-hover:text-white transition-colors">
+            Aditya.
+          </span>
+        </Link>
+
+        <span className="hidden sm:block w-px h-5 bg-slate-700/60" />
+
         {navItems.map((item) => {
           if (item.isRoute) {
             return (
