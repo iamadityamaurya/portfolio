@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Building2, Code, Terminal, ExternalLink, MapPin } from 'lucide-react';
+import { Calendar, Building2, Code, ExternalLink, MapPin } from 'lucide-react';
 
 const ExperiencePage = () => {
     const experiences = [
@@ -46,10 +46,6 @@ const ExperiencePage = () => {
                     transition={{ duration: 0.5 }}
                     className="mb-10 sm:mb-14"
                 >
-                    <div className="flex items-center gap-3 mb-4">
-                        <Terminal className="w-4 h-4 text-cyan-400" />
-                        <span className="text-xs text-cyan-400 uppercase tracking-[0.2em] font-bold">~/experience</span>
-                    </div>
                     <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-none">
                         Work.
                     </h2>

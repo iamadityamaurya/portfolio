@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowLeft, ArrowUpRight, ExternalLink,
-    Github, Search, Eye, Terminal
+    Github, Search, Eye
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { projectsData } from '../data/projects';
@@ -49,10 +49,6 @@ export const AllProjectsPage = () => {
 
                 {/* Header */}
                 <header className="border-b border-slate-800/80 pb-8 sm:pb-10">
-                    <div className="flex items-center gap-3 mb-4">
-                        <Terminal className="w-4 h-4 text-cyan-400" />
-                        <span className="text-xs text-cyan-400 uppercase tracking-[0.2em] font-bold font-mono">~/projects/archive</span>
-                    </div>
                     <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
                         Engineering Archive.
                     </h1>

@@ -37,13 +37,7 @@ const cardVariant = {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-const SectionLabel = ({ children }) => (
-    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-cyan-400 uppercase mb-3">
-        <span className="w-4 h-px bg-cyan-400/50" />
-        {children}
-        <span className="w-4 h-px bg-cyan-400/50" />
-    </span>
-);
+
 
 const StatCard = ({ icon: Icon, value, label, colorClass, borderClass, glowClass }) => (
     <motion.div
@@ -145,7 +139,6 @@ const AboutPage = () => {
                     viewport={{ once: true, margin: '-80px' }}
                     className="mb-12 sm:mb-20 text-center flex flex-col items-center"
                 >
-                    <SectionLabel>Who I Am</SectionLabel>
                     <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mt-2 text-white tracking-tight leading-tight">
                         My Journey &amp; Expertise
                     </h2>
@@ -262,43 +255,6 @@ const AboutPage = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Education Card */}
-                        <motion.div
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true }}
-                            className="w-full max-w-xs sm:max-w-sm mx-auto"
-                        >
-                            <div className="relative p-4 sm:p-5 rounded-2xl bg-slate-800/80 border border-slate-700 backdrop-blur-md overflow-hidden group hover:border-purple-500/40 transition-all hover:shadow-[0_0_25px_rgba(168,85,247,0.1)]">
-                                {/* subtle glow */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                <div className="relative z-10 flex items-start gap-3.5 sm:gap-4">
-                                    <div className="p-2.5 sm:p-3 rounded-xl bg-purple-500/10 text-purple-400 shrink-0 mt-0.5">
-                                        <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="text-[10px] sm:text-xs font-bold text-purple-400 uppercase tracking-widest mb-1">Education</p>
-                                        <h5 className="text-sm sm:text-base font-bold text-slate-100 leading-snug">
-                                            Maharaja Agrasen Institute of Technology
-                                        </h5>
-                                        <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                                            B.Tech in Electronics &amp; Communication Engineering
-                                        </p>
-                                        <div className="flex flex-wrap items-center gap-2 mt-3">
-                                            <span className="text-[11px] sm:text-xs bg-purple-500/10 text-purple-300 border border-purple-500/20 rounded-full px-2.5 sm:px-3 py-1 font-medium">
-                                                3rd Year · 2024–2028
-                                            </span>
-                                            <span className="text-[11px] sm:text-xs bg-slate-800 text-slate-400 rounded-full px-2.5 sm:px-3 py-1 font-medium">
-                                                Rohini, Delhi
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
 
                         {/* Decorative blobs */}
                         <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />

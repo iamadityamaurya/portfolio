@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Terminal, Smartphone, Cpu, Globe, Server, PenTool } from 'lucide-react';
+import { Code, Database, Smartphone, Cpu, Globe, Server, PenTool } from 'lucide-react';
 
 import onshapeLogo from '../assets/onshape.svg';
 
@@ -45,11 +45,6 @@ const SkillsPage = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-12 sm:mb-20 text-center"
                 >
-                    <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-cyan-400 uppercase mb-3 select-none">
-                        <span className="w-4 h-px bg-cyan-400" />
-                        Capabilities
-                        <span className="w-4 h-px bg-cyan-400" />
-                    </span>
                     <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-white tracking-tight leading-tight">
                         Tech Stack
                     </h2>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Terminal, Calendar, Building2, Code, ArrowRight } from 'lucide-react';
+import { Calendar, Building2, Code, ArrowRight } from 'lucide-react';
 
 const latestExperience = {
     role: "Software Intern",
@@ -33,10 +33,6 @@ const WorkExperiencePreview = () => {
                     className="mb-10 sm:mb-14 flex flex-col sm:flex-row sm:items-end sm:justify-between items-start gap-4"
                 >
                     <div>
-                        <div className="flex items-center gap-3 mb-4">
-                            <Terminal className="w-4 h-4 text-cyan-400" />
-                            <span className="text-xs text-cyan-400 uppercase tracking-[0.2em] font-bold">~/work</span>
-                        </div>
                         <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-none">
                             Experience.
                         </h2>

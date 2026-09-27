@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, ArrowRight, Eye, Terminal } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Eye } from 'lucide-react';
 import { projectsData } from '../data/projects';
 import ProjectModal from '../components/ProjectModal';
 
@@ -25,10 +25,6 @@ export const ProjectsPage = () => {
                     className="mb-10 sm:mb-14 flex flex-col md:flex-row md:items-end md:justify-between items-center text-center md:text-left gap-4 relative"
                 >
                     <div>
-                        <div className="flex items-center gap-3 mb-4">
-                            <Terminal className="w-4 h-4 text-cyan-400" />
-                            <span className="text-xs text-cyan-400 uppercase tracking-[0.2em] font-bold font-mono">~/projects</span>
-                        </div>
                         <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-none">
                             Builds.
                         </h2>
