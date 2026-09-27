@@ -182,7 +182,7 @@ export const particlesOptions = {
             }
         },
         "color": {
-            "value": "#94a3b8",
+            "value": ["#94a3b8", "#22d3ee", "#38bdf8"],
             "animation": {
                 "h": {
                     "count": 0,
@@ -267,7 +267,7 @@ export const particlesOptions = {
             },
             "random": false,
             "size": false,
-            "speed": 2,
+            "speed": 1.2,
             "spin": {
                 "acceleration": 0,
                 "enable": false
@@ -291,7 +291,7 @@ export const particlesOptions = {
                 "mode": "delete",
                 "value": 0
             },
-            "value": 50
+            "value": 80
         },
         "opacity": {
             "value": {

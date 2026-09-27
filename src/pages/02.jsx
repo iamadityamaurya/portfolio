@@ -132,10 +132,8 @@ const AboutPage = () => {
         <section id="about" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
 
             {/* ── Background ── */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#0c1322_0%,_#05070d_70%)] -z-10" />
             <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-20 right-10 w-72 h-72 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-10" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
 

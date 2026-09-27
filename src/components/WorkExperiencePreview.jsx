@@ -20,7 +20,7 @@ const WorkExperiencePreview = () => {
     const Icon = latestExperience.icon;
 
     return (
-        <section id="work-experience" className="min-h-[60vh] bg-[#05070d] text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden flex flex-col justify-center font-mono">
+        <section id="work-experience" className="min-h-[60vh] bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden flex flex-col justify-center font-mono">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
             <div className="container mx-auto max-w-5xl relative z-10">
