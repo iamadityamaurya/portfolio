@@ -155,21 +155,12 @@ const ContactPage = () => {
                                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
                                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
                                 </div>
-                                <span className="flex items-center gap-1.5 text-[10px] sm:text-xs text-slate-500">
-                                    <Terminal className="w-3 h-3 text-cyan-400" />
-                                    new-message.msg
-                                </span>
-                                <span className="flex items-center gap-1.5 text-[10px] text-emerald-400 uppercase tracking-wider">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                    secure
-                                </span>
+                                
+                                
                             </div>
 
                             <form onSubmit={handleSubmit} className="p-5 sm:p-7 md:p-8 space-y-5 flex-1 flex flex-col">
-                                <div className="flex items-center gap-2 text-xs text-slate-500">
-                                    <MessageSquare className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                                    <span>Fill in the fields below to open a direct line.</span>
-                                </div>
+                                
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                                     <div className="space-y-2">
@@ -239,7 +230,7 @@ const ContactPage = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="group w-full py-3.5 px-6 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm shadow-[0_0_30px_rgba(34,211,238,0.2)] hover:shadow-[0_0_40px_rgba(34,211,238,0.35)] transition-all active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="group w-full py-3.5 px-6 rounded-xl bg-white hover:bg-gray-100 text-slate-950 font-bold text-sm shadow-[0_0_30px_rgba(34,211,238,0.2)] hover:shadow-[0_0_40px_rgba(34,211,238,0.35)] transition-all active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? (
                                         <>
