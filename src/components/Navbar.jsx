@@ -86,7 +86,7 @@ export const Navbar = ({ onOpenTerminal }) => {
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className={`relative flex items-center gap-2 sm:gap-4 md:gap-6 pl-3 sm:pl-4 pr-3 sm:px-6 rounded-full bg-[#080d1a]/95 backdrop-blur-xl text-slate-300 font-medium border transition-[padding,border-color,box-shadow] duration-300 ${
           scrolled
-            ? 'py-1 sm:py-1.5 border-cyan-500/30 shadow-[0_8px_30px_rgba(0,0,0,0.7),0_0_22px_rgba(34,211,238,0.12)]'
+            ? 'py-1.5 sm:py-2 border-cyan-500/30 shadow-[0_8px_30px_rgba(0,0,0,0.7),0_0_22px_rgba(34,211,238,0.12)]'
             : 'py-1.5 sm:py-2 border-slate-700/70 shadow-[0_10px_35px_rgba(0,0,0,0.6)]'
         }`}
       >
