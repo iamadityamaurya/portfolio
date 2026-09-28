@@ -13,6 +13,9 @@
     <loc>https://iamadityamaurya.vercel.app/experience</loc>
   </url>
   <url>
+    <loc>https://iamadityamaurya.vercel.app/about</loc>
+  </url>
+  <url>
     <loc>https://adityamaurya.dev/</loc>
   </url>
   <url>
@@ -23,5 +26,8 @@
   </url>
   <url>
     <loc>https://adityamaurya.dev/experience</loc>
+  </url>
+  <url>
+    <loc>https://adityamaurya.dev/about</loc>
   </url>
 </urlset>

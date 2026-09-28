@@ -39,6 +39,10 @@ const pageMetadata = {
     title: 'Experience | Aditya Kumar Maurya',
     description: 'Explore Aditya Kumar Maurya’s work experience across software internships, IoT hardware engineering, and robotics.',
   },
+  '/about': {
+    title: 'About | Aditya Kumar Maurya',
+    description: 'Learn about Aditya Kumar Maurya — full-stack, Android, and IoT developer; his background, experience, and engineering journey.',
+  },
 };
 
 const siteUrl = 'https://iamadityamaurya.vercel.app';
@@ -118,6 +122,7 @@ function App() {
           </>
         } />
 
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/project" element={<AllProjectsPage />} />
         <Route path="/hackathon-winning" element={<HackathonPage />} />
         <Route path="/experience" element={<ExperiencePage />} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Building2, Code, ExternalLink, MapPin } from 'lucide-react';
+import { Calendar, Building2, Code, ExternalLink } from 'lucide-react';
 
 const ExperiencePage = () => {
     const experiences = [
@@ -16,19 +16,6 @@ const ExperiencePage = () => {
                 "Created modern, responsive UI/UX designs and translated Figma-style wireframes into functional React + Tailwind CSS interfaces."
             ],
             tech: ["React", "React Native", "Expo", "Node.js", "REST APIs", "UI/UX", "Tailwind CSS", "JavaScript"]
-        },
-        {
-            role: "Lead Software Engineer",
-            company: "Stealth Cab Startup",
-            period: "Dec 2025 – May 2026",
-            location: "Remote",
-            icon: MapPin,
-            bullets: [
-                "Built a full-stack cab booking platform with separate apps for passengers and drivers using React Native, NestJS, and Supabase.",
-                "Applied system design principles and DevOps practices including CI/CD pipelines, Docker, and caching to ensure performance and scalability.",
-                "Developed a responsive landing page using Next.js integrated with the NestJS backend."
-            ],
-            tech: ["React Native", "Nest.js", "Supabase", "TypeScript", "Next.js", "Docker", "CI/CD"]
         }
     ];
 
