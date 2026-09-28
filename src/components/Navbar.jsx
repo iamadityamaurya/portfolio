@@ -120,7 +120,7 @@ export const Navbar = ({ onOpenTerminal }) => {
           const activePill = isActive && (
             <motion.span
               layoutId="navActivePill"
-              className="absolute inset-0 rounded-full bg-slate-700/60 border border-cyan-500/30"
+              className="absolute inset-x-0 -inset-y-1 rounded-full bg-slate-700/60 border border-cyan-500/30"
               transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             />
           );
