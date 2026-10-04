@@ -99,21 +99,22 @@ export const projectsData = [
     categorySlug: 'fullstack',
     badge: 'Production Web & Mobile',
     image: bunkmaitBanner,
-    description: 'BunkMAIT solves attendance anxiety for college students by combining automated group timetables with predictive attendance analytics. Built with Next.js 16 on the web and Expo on mobile, it allows students to mark attendance per slot, simulate future bunk limits, manage extra makeup classes, view faculty cabin locations, and check course syllabi in one unified interface. Powered by Supabase PostgreSQL with strict RLS policies and optimized for offline-ready fast loading.',
-    fullDescription: 'BunkMAIT is an end-to-end college attendance tracking and timetable management ecosystem built for university students. It combines automated section-wise timetable generation with intelligent attendance calculations, allowing students to predict safe bunk allowances and required makeup classes to meet target thresholds (75%/80%). Featuring offline-first caching, Supabase Row-Level Security, syllabus downloads, and teacher directory lookups.',
+    description: 'Tired of calculating your attendance again and again just to hit that magic threshold? Never sure where to find your teacher for submitting assignments? Meet BunkMAIT — your smart companion that tells you exactly which classes you can skip while still hitting your target attendance. Built for MAIT students, it brings attendance tracking, timetable access, faculty lookup, syllabus management, and academic planning into one place. It has been used by 1,000+ students in my college, with people updating their attendance and academic data regularly.',
+    fullDescription: 'BunkMAIT was built to solve the real frustrations students face during the semester: manually calculating attendance, guessing which classes can be skipped, finding faculty cabins, tracking assignments, and keeping up with academic schedules. The platform lets students set any threshold they want — 30%, 50%, 75%, or even 90% — and instantly calculates how much attendance is safe to lose while still meeting the target. It includes automated timetable access, teacher and cabin lookup, syllabus tracking, academic calendar views, exam schedules, upcoming holidays, and attendance updates from students across the campus. This app was designed especially for students of Maharaja Agrasen Institute Of Technology, Delhi, and has been adopted by 1,000+ students in college, with students actively updating their attendance and academic details on the platform. A special thanks goes to my friends Swayam Bansal and Arun Kukrety for helping build this app.\n\nThe web app is available at bunkmait.adityamaurya.dev, the Android app is available via the linked APK, and the WhatsApp community helps students stay connected and updated.',
     highlights: [
-      'Next.js 16 App Router web client + cross-platform React Native / Expo mobile app',
-      'Real-time predictive attendance calculator with custom target simulations & safe bunk quotas',
-      'Automated section timetables, faculty cabin directory, and course syllabus repositories',
-      'Supabase PostgreSQL database with strict Row-Level Security (RLS) & OAuth authentication'
+      '1,000+ active student users in college, with daily attendance and timetable updates',
+      'Predictive attendance calculator that lets students set any target threshold and plan safe bunk decisions',
+      'Automatic timetable access, faculty cabin lookup, syllabus tracking, and academic calendar management',
+      'Web + Android delivery with real student usage and campus-wide adoption'
     ],
     tech: ['Next.js 16', 'React Native', 'Expo', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Framer Motion'],
     links: {
       demo: 'https://bunkmait.adityamaurya.dev/',
+      
     },
     featured: true,
     mainPageShow: true,
-    stat: 'Web & Mobile Suite'
+    stat: '1K+ USERS'
   },
   {
     id: 'alpha-line-follower',

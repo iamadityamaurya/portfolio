@@ -15,20 +15,36 @@ export const AllProjectsPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedProject, setSelectedProject] = useState(null);
 
+    const preferredOrder = [
+        'bunkmait',
+        'reelflow-pipeline',
+        'deepquery-agent',
+        'nexgenquery',
+        'nexgenstorage',
+        'medscrapper',
+        'ai-filler-google-form',
+        'live-text-ocr',
+        'alpha-line-follower',
+        'fireshield'
+    ];
+
     const filteredProjects = useMemo(() => {
-        return projectsData.filter((project) => {
-            const matchesCategory =
-                selectedCategory === 'All' || project.category === selectedCategory;
+        return projectsData
+            .filter((project) => preferredOrder.includes(project.id))
+            .sort((a, b) => preferredOrder.indexOf(a.id) - preferredOrder.indexOf(b.id))
+            .filter((project) => {
+                const matchesCategory =
+                    selectedCategory === 'All' || project.category === selectedCategory;
 
-            const q = searchQuery.trim().toLowerCase();
-            const matchesSearch =
-                !q ||
-                project.title.toLowerCase().includes(q) ||
-                project.description.toLowerCase().includes(q) ||
-                project.tech.some((t) => t.toLowerCase().includes(q));
+                const q = searchQuery.trim().toLowerCase();
+                const matchesSearch =
+                    !q ||
+                    project.title.toLowerCase().includes(q) ||
+                    project.description.toLowerCase().includes(q) ||
+                    project.tech.some((t) => t.toLowerCase().includes(q));
 
-            return matchesCategory && matchesSearch;
-        });
+                return matchesCategory && matchesSearch;
+            });
     }, [selectedCategory, searchQuery]);
 
     return (
@@ -64,8 +80,8 @@ export const AllProjectsPage = () => {
                             const isSelected = selectedCategory === cat;
                             const count =
                                 cat === 'All'
-                                    ? projectsData.length
-                                    : projectsData.filter((p) => p.category === cat).length;
+? preferredOrder.length
+                            : projectsData.filter((p) => preferredOrder.includes(p.id) && p.category === cat).length;
 
                             return (
                                 <button
