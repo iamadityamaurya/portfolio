@@ -116,7 +116,7 @@ export const ProjectsPage = () => {
                                             {project.title}
                                         </h3>
                                         <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
-                                            {project.description}
+                                            {project.description || project.fullDescription}
                                         </p>
                                     </div>
 

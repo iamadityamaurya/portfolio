@@ -23,7 +23,6 @@ export const projectsData = [
     categorySlug: 'extension',
     badge: 'Autonomous AI Pipeline',
     image: reelflowBanner,
-    description: 'I created an Instagram content workflow that fetches ideas from the internet, researches them with an AI agent, generates visuals and voiceover, combines everything into a final Reels-ready video, and uploads it to Instagram automatically through a Telegram-powered pipeline.',
     fullDescription: 'I built an end-to-end Instagram content pipeline that starts by fetching an idea from the internet, then researches it using an AI agent, generates a few visual concepts, creates image assets, uses human-like voice generation for narration, combines the selected scenes into a final video, and pushes it directly to the content channel for publishing. The workflow is fully automated through a Telegram bot and runs through an internal production pipeline where each stage is validated before the final upload. It also handles rendering, subtitle generation, audio mixing, and direct publishing to Instagram, so the entire process works with minimal manual intervention.',
     highlights: [
       'Idea discovery starts from online research and is expanded through AI-driven topic analysis before content generation',
@@ -43,29 +42,28 @@ export const projectsData = [
   },
   {
     id: 'deepquery-agent',
-    title: 'DeepQuery - Autonomous AI Research Agent',
-    tagline: 'Autonomous deep research engine with LangGraph.js cyclic reasoning, 9 empirical tools & SSE streaming',
+    title: 'DeepQuery - LangChain and LangGraph Research Agent',
+    tagline: 'An autonomous research graph that routes questions through tools, evidence checks, and iterative synthesis',
     category: 'Extensions & AI',
     categorySlug: 'extension',
-    badge: 'Agentic AI & LangGraph',
+    badge: 'Autonomous Tool-Using AI',
     image: deepResearchBanner,
-    description: 'An autonomous deep research engine powered by LangGraph.js and Next.js 16. It mimics human research workflows by generating initial hypotheses, orchestrating 9 specialized empirical tools concurrently, iteratively synthesizing cross-source evidence through cyclic reasoning loops, and streaming verified markdown reports via Server-Sent Events (SSE).',
-    fullDescription: 'DeepQuery is an autonomous deep research platform utilizing compiled LangGraph.js StateGraphs with cyclic conditional routing and multi-provider LLM fallback across Groq (GPT-OSS 120B/20B, Qwen 27B) and Google Gemini 2.5 Flash. It coordinates a 9-tool empirical suite (ArXiv Search, GitHub Analyzer, Tech Discussions, Real-time Finance, Demographics, DNS Diagnostics, Wikipedia REST, Math AST Engine, and Live Web Search with Tavily/DDG fallback) with concurrent execution guards, zero-tool fast-path routing, deterministic MathJS AST evaluation, and real-time Server-Sent Events streaming directly into an interactive research workspace.',
+    fullDescription: 'DeepQuery is not a single prompt sent to a model and it is not a fixed chain of searches. It uses LangChain for the model and tool layer, and LangGraph.js to coordinate the full research workflow as a state graph. A user question enters the graph and the planning agent decides which tools are relevant. Tool nodes run searches and analysis, then return their results into the shared research state. A synthesis node summarizes the evidence and checks what is still missing. LangGraph conditional edges then decide whether to route the state back into planning for another round or move forward to report generation. Once the evidence is sufficient, the graph produces and streams a grounded research report with the collected findings and reasoning steps visible in the workspace.',
     highlights: [
-      'Autonomous Cyclic Reasoning: Dynamic LangGraph.js StateGraph with 4 nodes (plan_research, execute_tools, synthesize_notes, generate_report) and iterative gap-detection loops (up to 4 cycles in Deep Dive mode)',
-      '9-Tool Empirical Suite: Concurrent execution (Promise.all) across ArXiv XML API, GitHub REST, HackerNews/Algolia, CoinGecko/Nasdaq, Wikipedia REST, Node.js DNS, and Math AST parsers with timeout guards',
-      'Resilient Multi-Provider Fallback: Seamless cascading fallback from primary Groq models (GPT-OSS 120B) to secondary Groq/Google Gemini 2.5 Flash under rate limits or errors',
-      'Deterministic Math AST & Zero-Tool Fast Path: mathjs AST evaluation to eliminate arithmetic hallucinations, plus intent heuristics to bypass tool latency on conversational queries',
-      'Real-Time SSE Streaming & Rich Workspace: Live pipeline node pulsing, partial state updates, interactive tool inspector modals, and instant Markdown/JSON exports'
+      'LangChain powers the model and tool-calling layer, while LangGraph.js manages the stateful research workflow',
+      'A LangGraph state graph routes work through planning, tool execution, evidence synthesis, and report generation nodes',
+      'Conditional graph edges detect research gaps and send the state back for another tool-selection cycle when necessary',
+      'The tool layer covers web research, GitHub, academic papers, discussions, finance, demographics, DNS, Wikipedia, and math',
+      'The final report streams live into the workspace with collected evidence, tool activity, and intermediate state visible'
     ],
-    tech: ['LangGraph.js', 'Next.js 16', 'React 19', 'TypeScript', 'Groq (GPT-OSS)', 'Gemini 2.5 Flash', 'Server-Sent Events', 'mathjs AST', 'Tailwind CSS 4', 'Zod / Cheerio'],
+    tech: ['LangChain.js', 'LangGraph.js', 'Next.js 16', 'React 19', 'TypeScript', 'Groq (GPT-OSS)', 'Gemini 2.5 Flash', 'Server-Sent Events', 'mathjs AST', 'Tailwind CSS 4', 'Zod / Cheerio'],
     links: {
       demo: 'https://deepquery.adityamaurya.dev/',
       github: 'https://github.com/iamadityamaurya/deepresearch-agent'
     },
     featured: true,
     mainPageShow: true,
-    stat: '9 Empirical Tools • Cyclic AI'
+    stat: 'Iterative Tool-Driven Research'
   },
   {
     id: 'live-text-ocr',
@@ -75,7 +73,6 @@ export const projectsData = [
     categorySlug: 'extension',
     badge: 'Desktop Utility & AI',
     image: liveTextOcrBanner,
-    description: 'A native, lightweight utility that brings the macOS "Live Text" experience to Linux (Ubuntu, Debian, Wayland/X11). Select any text, code, or QR codes on your screen—such as paused videos, course slides, locked PDFs, or terminals—and instantly recognize, highlight, copy, or search it with zero disk writes.',
     fullDescription: 'Live Text OCR brings native macOS-style Live Text functionality to Linux (Ubuntu, Debian, and other Wayland/X11 environments). It allows users to select any on-screen text or code from videos, lectures, mockups, or terminals with an interactive glassmorphic overlay. Features zero disk writes via direct in-memory framebuffer capture, Python ctypes bindings to libtesseract.so.5 and libzbar.so.0, QR/barcode scanning, dark-mode auto-inversion, GNOME top-bar tray indicator, and global shortcut keybinding (Super + Shift + O).',
     highlights: [
       'Interactive macOS-style Live Text overlay with glowing word/line pills, marquee selection & instant double-click copy',
@@ -99,7 +96,6 @@ export const projectsData = [
     categorySlug: 'fullstack',
     badge: 'Production Web & Mobile',
     image: bunkmaitBanner,
-    description: 'Tired of calculating your attendance again and again just to hit that magic threshold? Never sure where to find your teacher for submitting assignments? Meet BunkMAIT — your smart companion that tells you exactly which classes you can skip while still hitting your target attendance. Built for MAIT students, it brings attendance tracking, timetable access, faculty lookup, syllabus management, and academic planning into one place. It has been used by 1,000+ students in my college, with people updating their attendance and academic data regularly.',
     fullDescription: 'BunkMAIT was built to solve the real frustrations students face during the semester: manually calculating attendance, guessing which classes can be skipped, finding faculty cabins, tracking assignments, and keeping up with academic schedules. The platform lets students set any threshold they want — 30%, 50%, 75%, or even 90% — and instantly calculates how much attendance is safe to lose while still meeting the target. It includes automated timetable access, teacher and cabin lookup, syllabus tracking, academic calendar views, exam schedules, upcoming holidays, and attendance updates from students across the campus. This app was designed especially for students of Maharaja Agrasen Institute Of Technology, Delhi, and has been adopted by 1,000+ students in college, with students actively updating their attendance and academic details on the platform. A special thanks goes to my friends Swayam Bansal and Arun Kukrety for helping build this app.\n\nThe web app is available at bunkmait.adityamaurya.dev, the Android app is available via the linked APK, and the WhatsApp community helps students stay connected and updated.',
     highlights: [
       '1,000+ active student users in college, with daily attendance and timetable updates',
@@ -124,7 +120,6 @@ export const projectsData = [
     categorySlug: 'iot',
     badge: 'Hardware Champion',
     image: lineFollowerBanner,
-    description: 'A high-speed autonomous line follower built around an Arduino Nano. It uses an 8-channel IR sensor array, a fixed-point PID controller, and direct AVR register control to make fast, stable steering decisions in real time.',
     fullDescription: 'Alpha Line Follower was engineered for high-precision, high-speed line tracking across complex loops, hairpin turns, and intersecting courses. By bypassing standard Arduino digitalRead calls with direct AVR port manipulation, sensor polling latency was reduced to microseconds.',
     highlights: [
       '8-Channel TCRT5000 IR sensor array for high-resolution edge detection',
@@ -148,7 +143,6 @@ export const projectsData = [
     categorySlug: 'iot',
     badge: '1st Prize Winner',
     image: fireshieldBanner,
-    description: 'A real-time smart home fire and gas safety system. An ESP32 microcontroller reads live sensor data and streams it to a mobile app via a Node.js backend. Features voice alerts, native push notifications, and a hardware buzzer for emergency situations.',
     fullDescription: 'FireShield is an end-to-end IoT safety platform integrating an ESP32 edge device with MQ-2 gas/smoke sensors and DHT22 temperature tracking. Real-time telemetry is streamed over WebSockets to a React Native mobile application and cloud dashboard, dispatching immediate emergency text-to-speech audio alerts and Expo push notifications.',
     highlights: [
       'Dual-core ESP32 edge processing with asynchronous sensor sampling',
@@ -168,18 +162,17 @@ export const projectsData = [
   {
     id: 'nexgenquery',
     title: 'NexGenQuery',
-    tagline: 'Client-side multi-CSV relational SQL execution engine with visual query builder',
+    tagline: 'Local CSV visualizer and no-code SQL query generator',
     category: 'Full Stack',
     categorySlug: 'fullstack',
     badge: 'Web Utility',
     image: nexgenqueryBanner,
-    description: 'An interactive, premium client-side web application designed to load multiple CSV datasets, visually configure complex relational SQL queries through an intuitive wizard, preview highlighted SQL, and execute queries locally in the browser.',
-    fullDescription: 'NexGenQuery transforms raw tabular CSV files into fully queryable relational in-memory tables directly in the browser without uploading sensitive data to any server. Includes syntax highlighting, schema inspector, and instant dataset export.',
+    fullDescription: 'NexGenQuery is a local-first SQL query generator and execution tool for working with CSV data. Upload one or more CSV files, inspect the data through a visual interface, choose the relationships and operations you need, generate the SQL query through a visual builder, and execute it directly in the browser. The query engine runs against in-memory data on the user\'s device, which means both the files and the query results stay local and never pass through a server. Unlike sending private datasets to an LLM for SQL generation, NexGenQuery keeps the complete workflow inside the website.',
     highlights: [
-      'Client-side SQL engine with zero data leakage (100% private execution)',
-      'Multi-table joins (INNER, LEFT, RIGHT), aggregations, and subqueries',
-      'Interactive visual SQL query constructor with live code preview',
-      'Instant CSV/JSON export with table schema visualization'
+      'Upload and visualize CSV datasets directly inside the browser',
+      'Generate SQL queries visually without writing SQL by hand',
+      'Generate and execute SQL locally in the browser against in-memory data',
+      'Keep sensitive datasets private instead of sending them to an LLM or external service'
     ],
     tech: ['React', 'Tailwind CSS', 'Vite', 'Local SQL Engine', 'In-Memory CSV', 'TypeScript'],
     links: {
@@ -193,18 +186,18 @@ export const projectsData = [
   {
     id: 'nexgenstorage',
     title: 'NexGenStorage',
-    tagline: 'Unlimited cloud drive built on top of Telegram API infrastructure',
+    tagline: 'Private client-side file storage and search built on Telegram channels',
     category: 'Full Stack',
     categorySlug: 'fullstack',
     badge: 'Cloud Storage',
     image: unlimitedStorageBanner,
-    description: 'A full-stack cloud drive web application leveraging Telegram API (GramJS) to convert Telegram channels into free, unlimited cloud storage. Features interactive file & folder management, direct media streaming, token authentication, and multi-drive organization.',
-    fullDescription: 'NexGenStorage re-imagines cloud infrastructure by using distributed Telegram channels as encrypted object storage blocks. Files are chunked and streamed directly to users with a modern Google Drive-like explorer interface.',
+    fullDescription: 'NexGenStorage was built around a simple problem: Telegram can hold a lot of files, but finding one later is difficult when everything is buried in a group or channel. The app connects directly to Telegram from the client, so there is no server in between collecting or processing your files. You can upload files, place them inside folders, search across your stored data, and browse everything through a dedicated file explorer built for Telegram-backed storage. Keeping the workflow client-side also gives privacy more importance: your data is not routed through a separate storage server owned by the app.',
     highlights: [
-      'Encrypted chunked file streaming without server-side storage overhead',
-      'Hierarchical folder tree and interactive file explorer interface',
-      'Token-based channel authentication with multi-vault support',
-      'Media preview player for video, audio, and PDF documents'
+      'Uses Telegram groups and channels as the underlying storage layer',
+      'Searches uploaded files so users do not have to scan through Telegram messages',
+      'Folder-based organization with an interactive cloud-drive file explorer',
+      'Runs entirely on the client side with no intermediary server handling user files',
+      'Supports direct browsing and previews for video, audio, and PDF files'
     ],
     tech: ['React', 'Vite', 'Tailwind CSS', 'Telegram API', 'GramJS', 'React Router', 'Node.js'],
     links: {
@@ -217,18 +210,17 @@ export const projectsData = [
   {
     id: 'medscrapper',
     title: 'MedScrapper',
-    tagline: 'AI-assisted pharmaceutical price intelligence & comparative aggregator',
+    tagline: 'Medicine price comparison across five Indian pharmacy websites',
     category: 'Full Stack',
     categorySlug: 'fullstack',
     badge: 'Healthcare AI',
     image: medScrapperBanner,
-    description: 'Stop overpaying for your health. We search top pharmacies like 1mg and Apollo to find you the best deals in seconds.',
-    fullDescription: 'MedScrapper aggregates medicine pricing across India’s leading online pharmacies (Tata 1mg, Apollo Pharmacy, Pharmeasy) and uses Google Gemini AI to analyze salt compositions, recommend cost-effective generic alternatives, and save users up to 70% on prescriptions.',
+    fullDescription: 'I built MedScrapper because essential medicines should not become more expensive simply because someone does not know which pharmacy has the better price. When a user searches, the platform fetches live medicine information and current pricing from five Indian pharmacy websites, then presents the results together so users can compare options without checking every site manually. Since these services do not provide a simple public API for this workflow, I designed a careful, resilient data-collection pipeline that handles their different page structures and request restrictions. The result is a practical medicine search and comparison platform that brings live product details, availability, and pricing into one view, with Gemini AI helping analyze medicine compositions and identify relevant alternatives.',
     highlights: [
-      'Multi-source pricing scraper and composition matching algorithm',
-      'Gemini AI integration for generic salt substitution suggestions',
-      'Real-time availability and discount comparison matrix',
-      'Prisma ORM database schema for caching searched drugs'
+      'Fetches live medicine information and current prices from five Indian pharmacy websites',
+      'Compares live availability, discounts, and product details in one interface',
+      'Resilient source-specific data collection without relying on a single public API',
+      'Gemini AI analysis for salt composition and relevant medicine alternatives'
     ],
     tech: ['React', 'TypeScript', 'Prisma', 'Gemini AI', 'Tailwind CSS', 'Node.js'],
     links: {
@@ -247,7 +239,6 @@ export const projectsData = [
     categorySlug: 'extension',
     badge: 'Chrome Web Store (v2.2)',
     image: aiFillerBanner,
-    description: 'A privacy-first Chrome extension (Manifest V3) that intelligently answers Google Forms using direct browser-to-AI calls (BYOK) with multi-model support across Gemini & Groq, custom persona profiles, and native DOM event simulation.',
     fullDescription: 'AI Form AutoFiller v2.2 eliminates external backend dependencies with a direct BYOK (Bring Your Own Key) architecture. It intelligently parses Google Form DOM trees (radio groups, checkboxes, dropdowns, and textareas), leverages custom personal info profiles for zero-hallucination identity fields, and streams direct browser-to-AI requests across Gemini (2.5 & 3.5 Flash) and Groq (GPT-OSS 120B/20B, Qwen 27B) while triggering native DOM input/change events.',
     highlights: [
       'Direct browser-to-AI BYOK architecture (zero backend servers for speed & privacy)',
@@ -273,7 +264,6 @@ export const projectsData = [
     categorySlug: 'extension',
     badge: 'Developer Tool',
     image: dsdBanner,
-    description: 'A Google Chrome extension designed to bypass player restrictions and download Google Drive videos that cannot be downloaded (blocked by Google to download). It analyzes network streams to capture separate high-resolution video and audio tracks, providing a local FFmpeg command builder for instant remuxing.',
     fullDescription: 'When Google Drive restricts download permissions on video files, this extension inspects internal blob requests and web worker stream chunks, captures fragmented video/audio tracks, and constructs lossless FFmpeg remuxing commands with zero quality loss.',
     highlights: [
       'Network stream packet sniffer for restricted HTML5 media players',
@@ -298,7 +288,6 @@ export const projectsData = [
     categorySlug: 'fullstack',
     badge: 'AI Analytics',
     image: restockerBanner,
-    description: 'AI-powered restaurant inventory management system. Helps reduce waste by 40% and eliminates stockouts with intelligent tracking.',
     fullDescription: 'Restocker automates kitchen supply chain tracking by analyzing order turnover rates, seasonal demand patterns, and expiration timelines to forecast exact replenishment schedules.',
     highlights: [
       'Predictive inventory consumption modeling with Gemini AI',
@@ -323,7 +312,6 @@ export const projectsData = [
     categorySlug: 'fullstack',
     badge: 'E-Commerce',
     image: addyBitesBanner,
-    description: 'A full-stack food ordering platform featuring seamless cart management, user authentication, and real-time order tracking.',
     fullDescription: 'AddyBites provides a seamless food ordering pipeline with dynamic menu filtering, secure JWT session management, MongoDB order history, and instant order state updates.',
     highlights: [
       'Full authentication and role-based customer/admin dashboard',
@@ -348,7 +336,6 @@ export const projectsData = [
     categorySlug: 'fullstack',
     badge: 'Enterprise Platform',
     image: motiaBanner,
-    description: 'A comprehensive solution designed to streamline and automate the employee onboarding process. This project is a monorepo containing both the event-driven backend and the aesthetic, user-friendly frontend.',
     fullDescription: 'Motia simplifies company onboarding by automating credential provisioning, document verification workflows, task assignment checklists, and manager oversight in a unified portal.',
     highlights: [
       'Event-driven architectural workflow automation',
@@ -373,7 +360,6 @@ export const projectsData = [
     categorySlug: 'fullstack',
     badge: 'Portfolio',
     image: portfolioBanner,
-    description: 'My personal portfolio website built to showcase my projects and skills. Features a premium dark theme, glassmorphism effects, and smooth animations.',
     fullDescription: 'Crafted to highlight the intersection of physical hardware engineering, robotics, and full-stack software development.',
     highlights: [
       'Next-generation dark aesthetic with custom glowing gradients',

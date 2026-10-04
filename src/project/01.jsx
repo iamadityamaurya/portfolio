@@ -40,7 +40,7 @@ export const AllProjectsPage = () => {
                 const matchesSearch =
                     !q ||
                     project.title.toLowerCase().includes(q) ||
-                    project.description.toLowerCase().includes(q) ||
+                    (project.description || project.fullDescription).toLowerCase().includes(q) ||
                     project.tech.some((t) => t.toLowerCase().includes(q));
 
                 return matchesCategory && matchesSearch;
@@ -189,7 +189,7 @@ export const AllProjectsPage = () => {
                                                     </div>
 
                                                     <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                                                        {project.description}
+                                                        {project.description || project.fullDescription}
                                                     </p>
 
                                                     {/* Tech stack */}
