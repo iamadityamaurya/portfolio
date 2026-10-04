@@ -8,8 +8,10 @@ import ProjectModal from '../components/ProjectModal';
 export const ProjectsPage = () => {
     const [selectedProject, setSelectedProject] = useState(null);
 
-    // Show top 6 projects designated for main page (excluding hardware/IoT), 2 rows of 3
-    const projects = projectsData.filter(p => p.mainPageShow && p.categorySlug !== 'iot').slice(0, 6);
+    const preferredHomeProjects = ['bunkmait', 'reelflow-pipeline', 'deepquery-agent'];
+    const projects = preferredHomeProjects
+        .map((id) => projectsData.find((project) => project.id === id))
+        .filter(Boolean);
 
     return (
         <section id="projects" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative">
@@ -72,6 +74,21 @@ export const ProjectsPage = () => {
                                 </div>
 
                                 <div className="p-4 sm:p-5 flex flex-col flex-grow">
+                                    {/* Image thumbnail on top */}
+                                    {project.image && (
+                                        <div
+                                            onClick={() => setSelectedProject(project)}
+                                            className="mb-4 overflow-hidden bg-slate-900 border border-slate-800 cursor-pointer group/img"
+                                        >
+                                            <img
+                                                src={project.image}
+                                                alt={project.title}
+                                                className="w-full h-44 sm:h-48 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                    )}
+
                                     {/* Meta header */}
                                     <div className="flex flex-wrap items-center gap-1.5 mb-3">
                                         {project.category && (
@@ -87,33 +104,16 @@ export const ProjectsPage = () => {
                                     </div>
 
                                     {/* Title + description */}
-                                    <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                                        <div className="flex-1 min-w-0">
-                                            <h3
-                                                onClick={() => setSelectedProject(project)}
-                                                className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer mb-1.5 tracking-tight leading-tight"
-                                            >
-                                                {project.title}
-                                            </h3>
-                                            <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
-                                                {project.description}
-                                            </p>
-                                        </div>
-
-                                        {/* Image thumbnail */}
-                                        {project.image && (
-                                            <div
-                                                onClick={() => setSelectedProject(project)}
-                                                className="sm:w-28 sm:h-20 md:w-24 md:h-16 lg:w-28 lg:h-20 shrink-0 bg-slate-900 border border-slate-800 overflow-hidden cursor-pointer group/img"
-                                            >
-                                                <img
-                                                    src={project.image}
-                                                    alt={project.title}
-                                                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
-                                                    loading="lazy"
-                                                />
-                                            </div>
-                                        )}
+                                    <div className="mb-4">
+                                        <h3
+                                            onClick={() => setSelectedProject(project)}
+                                            className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer mb-1.5 tracking-tight leading-tight"
+                                        >
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                                            {project.description}
+                                        </p>
                                     </div>
 
                                     {/* Tech tags */}
