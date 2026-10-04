@@ -68,9 +68,13 @@ export const ProjectsPage = () => {
                                         <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-500/70" />
                                         <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500/70" />
                                     </div>
-                                    <span className="text-[10px] sm:text-xs text-slate-600 font-mono truncate max-w-[60%]">
-                                        {project.id === 'bunkmait' ? 'bunkmait.md' : `${project.id}.md`}
-                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        {project.id === 'bunkmait' && (
+                                            <span className="inline-flex items-center rounded-full border border-red-400/60 bg-red-500/15 px-3 py-1 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.16em] text-red-300 shadow-[0_0_22px_rgba(239,68,68,0.28)] transform translate-y-[-2px]">
+                                                1K+ USERS
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="p-4 sm:p-5 flex flex-col flex-grow">
@@ -94,11 +98,6 @@ export const ProjectsPage = () => {
                                         {project.category && (
                                             <span className="text-[9px] sm:text-[10px] font-mono text-cyan-400 border border-cyan-500/20 bg-cyan-500/5 px-1.5 py-0.5 uppercase tracking-wider">
                                                 {project.category}
-                                            </span>
-                                        )}
-                                        {project.id === 'bunkmait' && (
-                                            <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-300 shadow-[0_0_16px_rgba(16,185,129,0.2)]">
-                                                1K+ USERS
                                             </span>
                                         )}
                                         {project.stat && project.id !== 'bunkmait' && (

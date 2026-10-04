@@ -23,14 +23,14 @@ export const projectsData = [
     categorySlug: 'extension',
     badge: 'Autonomous AI Pipeline',
     image: reelflowBanner,
-    description: 'An automated pipeline orchestrated via Telegram that generates, animates, subtitles, and publishes viral educational 1080x1920 Reels. Features LLM scriptwriting, ElevenLabs voiceover, FFmpeg Ken Burns motion rendering, sidechain audio ducking, and direct Meta Graph API publishing.',
-    fullDescription: 'ReelFlow is a fully automated content generation and publishing engine that turns simple topic prompts into production-grade, 60-second vertical videos (Reels/Shorts). Controlled entirely through an interactive Telegram Bot, the pipeline guides the creator through AI idea brainstorming, multi-format scriptwriting (Two-Person Dialogue, Solo Storyteller, Expert vs. Student, Thought Experiment), synchronized TTS voice synthesis, scene visual generation, dynamic Ken Burns motion rendering, burned-in karaoke subtitles, and 1-tap automated publishing via the Instagram Graph API with SQLite state persistence.',
+    description: 'I created an Instagram content workflow that fetches ideas from the internet, researches them with an AI agent, generates visuals and voiceover, combines everything into a final Reels-ready video, and uploads it to Instagram automatically through a Telegram-powered pipeline.',
+    fullDescription: 'I built an end-to-end Instagram content pipeline that starts by fetching an idea from the internet, then researches it using an AI agent, generates a few visual concepts, creates image assets, uses human-like voice generation for narration, combines the selected scenes into a final video, and pushes it directly to the content channel for publishing. The workflow is fully automated through a Telegram bot and runs through an internal production pipeline where each stage is validated before the final upload. It also handles rendering, subtitle generation, audio mixing, and direct publishing to Instagram, so the entire process works with minimal manual intervention.',
     highlights: [
-      'Multi-stage Telegram bot orchestrating brainstorming, scriptwriting, voiceover, and video rendering with inline approval loops',
-      'FFmpeg sidechain auto-ducking engine dynamically suppressing background music by 18dB during voiceover with synchronized transition SFX',
-      'Word-level synchronized karaoke subtitle generation (.ASS burn-in) and 1080x1920 60FPS Ken Burns motion animation',
-      'Automated 1:1 Instagram profile grid safe-zone thumbnail cover generation with bold typography and glowing topic badges',
-      'Direct Reel publishing via Meta Graph API container polling and Supabase S3-compatible cloud storage'
+      'Idea discovery starts from online research and is expanded through AI-driven topic analysis before content generation',
+      'The workflow combines AI research, image generation, voice generation, and final video assembly into one automated pipeline',
+      'A Telegram bot acts as the control layer for triggering, reviewing, and managing the publishing flow',
+      'Rendered videos are exported in Reels-ready format, then uploaded automatically with the final production assets',
+      'The system is built as a full end-to-end pipeline with minimal manual work after the initial idea is provided'
     ],
     tech: ['Python 3.14', 'Telegram Bot API', 'FFmpeg', 'Groq (Llama 3.3)', 'ElevenLabs API', 'Deepgram Aura', 'Instagram Graph API', 'Supabase S3', 'SQLite', 'Pillow / PIL'],
     links: {
