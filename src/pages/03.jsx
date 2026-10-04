@@ -115,7 +115,10 @@ export const ProjectsPage = () => {
                                         >
                                             {project.title}
                                         </h3>
-                                        <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                                        <p
+                                            onClick={() => setSelectedProject(project)}
+                                            className="text-xs text-slate-400 leading-relaxed line-clamp-3 cursor-pointer"
+                                        >
                                             {project.description || project.fullDescription}
                                         </p>
                                     </div>

@@ -73,9 +73,6 @@ const ExperiencePage = () => {
                                             <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
                                             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
                                         </div>
-                                        <span className="text-[10px] sm:text-xs text-slate-600">
-                                            {exp.company.toLowerCase().replace(/\s+/g, '-')}.md
-                                        </span>
                                     </div>
 
                                     {/* Content */}

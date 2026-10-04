@@ -156,9 +156,11 @@ export const AllProjectsPage = () => {
                                                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
                                                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
                                             </div>
-                                            <span className="text-[10px] sm:text-xs text-slate-600 font-mono truncate max-w-[60%]">
-                                                {project.id}.md
-                                            </span>
+                                            {project.id === 'bunkmait' && (
+                                                <span className="inline-flex items-center rounded-full border border-red-400/60 bg-red-500/15 px-3 py-1 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.16em] text-red-300 shadow-[0_0_22px_rgba(239,68,68,0.28)]">
+                                                    1K+ USERS
+                                                </span>
+                                            )}
                                         </div>
 
                                         <div className="p-5 sm:p-7 md:p-8">
@@ -169,7 +171,7 @@ export const AllProjectsPage = () => {
                                                         <span className="px-2.5 sm:px-3 py-1 border border-slate-700 text-slate-300 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                                                             {project.category}
                                                         </span>
-                                                        {project.stat && (
+                                                        {project.stat && project.id !== 'bunkmait' && (
                                                             <span className="px-2.5 py-1 border border-cyan-500/20 text-cyan-400 font-mono text-[11px] sm:text-xs">
                                                                 {project.stat}
                                                             </span>
@@ -188,7 +190,10 @@ export const AllProjectsPage = () => {
                                                         </p>
                                                     </div>
 
-                                                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+                                                    <p
+                                                        onClick={() => setSelectedProject(project)}
+                                                        className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal line-clamp-3 cursor-pointer"
+                                                    >
                                                         {project.description || project.fullDescription}
                                                     </p>
 
