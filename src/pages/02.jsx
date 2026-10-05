@@ -105,7 +105,7 @@ const AboutPage = () => {
         },
         {
             icon: GraduationCap,
-            value: '2nd',
+            value: '3rd',
             label: 'Year B.Tech (ECE)',
             colorClass: 'bg-purple-500/10 text-purple-400',
             borderClass: 'border-purple-500/20 hover:border-purple-400/50',

@@ -100,17 +100,14 @@ const SkillsPage = () => {
                             The toolkit
                         </div>
                         <h2 className="max-w-xl text-4xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl">
-                            Built for the space between <span className="text-cyan-300">ideas</span> and impact.
+                            My <span className="text-cyan-300">skills.</span>
                         </h2>
                     </div>
                     <div className="flex max-w-lg flex-col gap-5 lg:pb-1 lg:pl-10">
                         <p className="text-base leading-relaxed text-slate-400 sm:text-lg">
                             A working stack for shipping polished products, reliable services, and hardware that can leave the screen.
                         </p>
-                        <div className="flex items-center gap-3 text-sm font-semibold text-slate-200">
-                            <Layers3 size={17} className="text-cyan-300" />
-                            <span>26 technologies · 5 disciplines</span>
-                        </div>
+                        
                     </div>
                 </motion.div>
 
