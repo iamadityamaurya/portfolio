@@ -19,7 +19,7 @@ const WorkExperiencePreview = () => {
         <section id="work-experience" className="min-h-[60vh] bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden flex flex-col justify-center font-mono">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
-            <div className="container mx-auto max-w-5xl relative z-10">
+            <div className="container mx-auto max-w-6xl relative z-10">
                 {/* Section header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
