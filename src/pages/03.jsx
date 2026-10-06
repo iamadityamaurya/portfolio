@@ -69,11 +69,6 @@ export const ProjectsPage = () => {
                                         <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500/70" />
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        {project.id === 'bunkmait' && (
-                                            <span className="inline-flex items-center rounded-full border border-red-400/60 bg-red-500/15 px-3 py-1 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.16em] text-red-300 shadow-[0_0_22px_rgba(239,68,68,0.28)] transform translate-y-[-2px]">
-                                                1K+ USERS
-                                            </span>
-                                        )}
                                     </div>
                                 </div>
 
@@ -100,7 +95,7 @@ export const ProjectsPage = () => {
                                                 {project.category}
                                             </span>
                                         )}
-                                        {project.stat && project.id !== 'bunkmait' && (
+                                        {project.stat && (
                                             <span className="text-[9px] sm:text-[10px] font-mono text-slate-500 uppercase tracking-wider">
                                                 {project.stat}
                                             </span>

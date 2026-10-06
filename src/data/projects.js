@@ -39,7 +39,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: '1080x1920 60FPS • Auto-Publish'
+    stat: 'Auto-Publish'
   },
   {
     id: 'deepquery-agent',
@@ -132,7 +132,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: '1K+ USERS'
+    stat: '1K+ Active Users'
   },
   {
     id: 'alpha-line-follower',
@@ -155,7 +155,7 @@ export const projectsData = [
     },
     featured: false,
     mainPageShow: false,
-    stat: '14.8s Track Record'
+    
   },
   {
     id: 'fireshield',

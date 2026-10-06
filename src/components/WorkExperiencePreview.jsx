@@ -129,19 +129,7 @@ const WorkExperiencePreview = () => {
                                 ))}
                             </div>
 
-                            {/* CTA */}
-                            <div className="border-t border-slate-800 pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <p className="text-xs text-slate-500 font-mono">
-                                    TYPE: INTERNSHIP • STATUS: COMPLETED
-                                </p>
-                                <Link
-                                    to="/experience"
-                                    className="group/link inline-flex items-center gap-1.5 text-sm font-mono font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
-                                >
-                                    View Full Experience
-                                    <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
-                                </Link>
-                            </div>
+                            
                         </div>
 
                         {/* Decorative line numbers */}

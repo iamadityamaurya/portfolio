@@ -132,9 +132,7 @@ const ContactPage = () => {
                     <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
                         Let's Build Something
                     </h2>
-                    <p className="text-slate-400 mt-3 text-sm sm:text-base max-w-lg mx-auto">
-                        Have a project, job opening, or hardware build in mind? Send a transmission and I'll get back to you.
-                    </p>
+                    
                 </motion.div>
 
                 {/* Main Grid */}

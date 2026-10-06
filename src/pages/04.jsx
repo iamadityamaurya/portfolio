@@ -113,12 +113,7 @@ const SkillsPage = () => {
                             My <span className="text-cyan-300">skills.</span>
                         </h2>
                     </div>
-                    <div className="flex max-w-lg flex-col gap-5 lg:pb-1 lg:pl-10">
-                        <p className="text-base leading-relaxed text-slate-400 sm:text-lg">
-                            A working stack for shipping polished products, reliable services, and hardware that can leave the screen.
-                        </p>
-                        
-                    </div>
+                    
                 </motion.div>
 
                 <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
