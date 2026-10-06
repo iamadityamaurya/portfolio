@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-    Box, Cpu, Sparkles, Briefcase, Rocket, Trophy,
-    GraduationCap, MapPin, Bot, Radio, Layers, Music2,
+    Briefcase, Rocket, Trophy,
+    GraduationCap, MapPin,
     ArrowRight
 } from 'lucide-react';
 import profileImage from '../assets/755b323b46fad9c3f86784c55c858b74.jpg';
@@ -55,19 +55,6 @@ const StatCard = ({ icon: Icon, value, label, colorClass, borderClass, glowClass
     </motion.div>
 );
 
-const HobbyCard = ({ icon: Icon, label, colorClass, borderClass }) => (
-    <motion.div
-        variants={cardVariant}
-        whileHover={{ scale: 1.04, y: -3 }}
-        className={`p-2.5 sm:p-4 rounded-2xl bg-slate-900/40 border ${borderClass} flex items-center gap-2 sm:gap-3 transition-all cursor-default group min-w-0`}
-    >
-        <div className={`p-2 sm:p-2.5 rounded-lg ${colorClass} bg-opacity-10 transition-all group-hover:scale-110 shrink-0`}>
-            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-        </div>
-        <span className="text-xs sm:text-sm font-medium text-slate-200 group-hover:text-white transition-colors truncate">{label}</span>
-    </motion.div>
-);
-
 const InfoBadge = ({ icon: Icon, children, color = 'text-slate-400' }) => (
     <div className={`flex items-center gap-2 text-sm ${color}`}>
         <Icon className="w-4 h-4 shrink-0" />
@@ -112,15 +99,6 @@ const AboutPage = () => {
             glowClass: 'hover:shadow-[0_0_20px_rgba(168,85,247,0.12)]',
         },
     ];
-
-    const hobbies = [
-        { icon: Box, label: '3D Designing (Onshape)', colorClass: 'bg-slate-700/40 text-slate-300', borderClass: 'border-slate-700 hover:border-slate-500' },
-        { icon: Cpu, label: 'IoT & Embedded Systems', colorClass: 'bg-blue-500/10 text-blue-400', borderClass: 'border-blue-500/20 hover:border-blue-400/50' },
-        { icon: Bot, label: 'Robotics & ROS 2', colorClass: 'bg-cyan-500/10 text-cyan-400', borderClass: 'border-cyan-500/20 hover:border-cyan-400/50' },
-        { icon: Layers, label: '3D Printing', colorClass: 'bg-rose-500/10 text-rose-400', borderClass: 'border-rose-500/20 hover:border-rose-400/50' },
-
-    ];
-
 
     return (
         <section id="about" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
@@ -186,9 +164,7 @@ const AboutPage = () => {
                             <InfoBadge icon={GraduationCap} color="text-purple-400">
                                 MAIT Rohini, Delhi
                             </InfoBadge>
-                            <InfoBadge icon={MapPin} color="text-rose-400">
-                                New Delhi, India
-                            </InfoBadge>
+                            
                         </div>
 
                         {/* Stats Grid */}
@@ -205,22 +181,6 @@ const AboutPage = () => {
                             </motion.div>
                         </div>
 
-                        {/* Hobbies */}
-                        <div>
-                            <h4 className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mb-3.5 sm:mb-5 flex items-center gap-2">
-                                <Sparkles className="w-4 h-4 text-cyan-400" />
-                                Beyond Coding
-                            </h4>
-                            <motion.div
-                                variants={stagger}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true }}
-                                className="grid grid-cols-2 gap-2 sm:gap-3"
-                            >
-                                {hobbies.map((h, i) => <HobbyCard key={i} {...h} />)}
-                            </motion.div>
-                        </div>
                     </motion.div>
 
                     {/* ── RIGHT: Profile Image Card ── */}
@@ -232,7 +192,7 @@ const AboutPage = () => {
                         className="relative flex flex-col items-center gap-6 w-full max-w-sm mx-auto lg:max-w-none"
                     >
                         {/* Photo */}
-                        <div className="relative w-full max-w-xs sm:max-w-sm mx-auto">
+                        <div className="relative w-full max-w-sm sm:max-w-lg mx-auto">
                             {/* Glow ring */}
                             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-purple-500/30 blur-xl opacity-60" />
 

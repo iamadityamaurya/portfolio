@@ -19,6 +19,7 @@ export const AllProjectsPage = () => {
         'bunkmait',
         'reelflow-pipeline',
         'deepquery-agent',
+        'opencodebot',
         'nexgenquery',
         'nexgenstorage',
         'medscrapper',
@@ -253,12 +254,18 @@ export const AllProjectsPage = () => {
                                                         onClick={() => setSelectedProject(project)}
                                                         className="relative aspect-[16/10] overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl cursor-pointer group/img"
                                                     >
-                                                        <img
-                                                            src={project.image}
-                                                            alt={project.title}
-                                                            className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
-                                                            loading="lazy"
-                                                        />
+                                                        {project.image ? (
+                                                            <img
+                                                                src={project.image}
+                                                                alt={project.title}
+                                                                className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
+                                                                loading="lazy"
+                                                            />
+                                                        ) : (
+                                                            <div className="flex h-full items-center justify-center bg-[#0d121f] px-6 text-center font-mono text-sm text-cyan-300">
+                                                                OpenCodeBot
+                                                            </div>
+                                                        )}
                                                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
 
                                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity bg-black/40 backdrop-blur-[2px]">

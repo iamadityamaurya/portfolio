@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Braces, Cloud, Cpu, Database, Layers3, Server } from 'lucide-react';
+import { Braces, Cloud, Cpu, Database, Server, Sparkles } from 'lucide-react';
 
 import motiaLogo from '../assets/motia-logo.svg';
 import onshapeLogo from '../assets/onshape.svg';
@@ -80,6 +80,19 @@ const SkillsPage = () => {
                 { name: 'Onshape', icon: onshapeLogo },
             ],
         },
+        {
+            number: '06',
+            name: 'Beyond Coding',
+            description: 'Design, hardware, and physical systems',
+            icon: Sparkles,
+            accent: 'text-cyan-300',
+            technologies: [
+                { name: '3D Designing (Onshape)', icon: onshapeLogo },
+                { name: 'IoT & Embedded Systems', icon: 'https://cdn.simpleicons.org/espressif/E7352C' },
+                { name: 'Robotics & ROS 2', icon: 'https://cdn.simpleicons.org/ros/white' },
+                { name: '3D Printing', icon: 'https://cdn.simpleicons.org/ultimaker/26BCE7' },
+            ],
+        },
     ];
 
     return (
@@ -95,10 +108,7 @@ const SkillsPage = () => {
                     className="mb-12 grid gap-8 lg:mb-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-end"
                 >
                     <div>
-                        <div className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-300">
-                            <span className="h-px w-8 bg-cyan-300" />
-                            The toolkit
-                        </div>
+                        
                         <h2 className="max-w-xl text-4xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl">
                             My <span className="text-cyan-300">skills.</span>
                         </h2>
@@ -143,6 +153,7 @@ const SkillsPage = () => {
                         );
                     })}
                 </div>
+
             </div>
         </section>
     );

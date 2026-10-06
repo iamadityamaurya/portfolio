@@ -116,17 +116,7 @@ const HomePage = ({ onOpenTerminal }) => {
                 <div className="max-w-5xl w-full">
 
                     {/* 1. Intro Badge with Decoding Text */}
-                    <motion.div
-                        initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={reducedMotion ? { duration: 0 } : { duration: 0.5 }}
-                        className="mb-6 sm:mb-8 flex justify-center"
-                    >
-                        <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-mono backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.15)]">
-                            <span className={`w-2 h-2 rounded-full bg-cyan-400 shrink-0 ${reducedMotion ? '' : 'animate-pulse'}`}></span>
-                            <DecodingText text="HELLO, I'M" onComplete={() => setIntroFinished(true)} reducedMotion={reducedMotion} />
-                        </div>
-                    </motion.div>
+        
 
                     {/* 2. Name - Word by Word */}
                     <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 leading-tight flex flex-wrap justify-center gap-x-2 sm:gap-x-4 drop-shadow-2xl tracking-tight">

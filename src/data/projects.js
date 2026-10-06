@@ -13,6 +13,7 @@ import nexgenqueryBanner from '../assets/project_png/nexgenquery-showcase.png';
 import dsdBanner from '../assets/project_png/dsd-showcase.png';
 import lineFollowerBanner from '../assets/project_png/line-follower-alpha.png';
 import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-showcase.png';
+import opencodebotBanner from '../assets/project_png/opencodebot-showcase.svg';
 
 export const projectsData = [
   {
@@ -87,6 +88,27 @@ export const projectsData = [
     featured: true,
     mainPageShow: true,
     stat: 'Zero Disk Writes'
+  },
+  {
+    id: 'opencodebot',
+    title: 'OpenCodeBot',
+    tagline: 'Telegram-controlled wrapper around the OpenCode CLI',
+    category: 'Extensions & AI',
+    categorySlug: 'extension',
+    badge: 'Telegram Automation',
+    image: opencodebotBanner,
+    fullDescription: 'OpenCodeBot wraps the OpenCode CLI in a Telegram-controlled workflow. Instead of sitting at the terminal for every task, you can send instructions through a Telegram bot and let it start, manage, and monitor the work for you. The bot acts as the remote control layer while OpenCode handles the underlying CLI work, making it possible to drive the full process from a chat interface.',
+    highlights: [
+      'Control OpenCode CLI workflows directly from Telegram',
+      'Send tasks remotely and let the bot manage the work for you',
+      'Use Telegram as the interaction layer for CLI-based development tasks',
+      'Keeps the workflow focused on automation instead of repeated terminal interaction'
+    ],
+    tech: ['OpenCode CLI', 'Telegram Bot API', 'Node.js', 'TypeScript'],
+    links: {},
+    featured: false,
+    mainPageShow: false,
+    stat: 'Telegram-Controlled CLI'
   },
   {
     id: 'bunkmait',
