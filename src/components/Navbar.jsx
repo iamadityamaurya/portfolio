@@ -6,7 +6,7 @@ import AnimatedLogo from './AnimatedLogo';
 const navItems = [
   { label: 'About', href: '#about', isRoute: false, spyId: 'about', routeMatch: '/about' },
   { label: 'Experience', href: '/experience', isRoute: true, spyId: 'work-experience', routeMatch: '/experience' },
-  { label: 'Projects', href: '#projects', isRoute: false, spyId: 'projects', routeMatch: '/project' },
+  { label: 'Projects', href: '#projects', isRoute: false, spyId: 'projects', routeMatch: '/projects' },
   { label: 'Skills', href: '#skills', isRoute: false, spyId: 'skills', routeMatch: null },
   { label: 'Contact', href: '#contact', isRoute: false, spyId: 'contact', routeMatch: null },
 ];

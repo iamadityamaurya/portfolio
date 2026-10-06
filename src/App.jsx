@@ -27,7 +27,7 @@ const pageMetadata = {
     title: 'Aditya Kumar Maurya | Full-Stack & IoT Developer',
     description: 'Portfolio of Aditya Kumar Maurya, a full-stack, Android, IoT, and embedded systems developer.',
   },
-  '/project': {
+  '/projects': {
     title: 'Projects | Aditya Kumar Maurya',
     description: 'Explore full-stack, Chrome extension, IoT, robotics, and embedded systems projects by Aditya Kumar Maurya.',
   },
@@ -123,7 +123,7 @@ function App() {
         } />
 
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/project" element={<AllProjectsPage />} />
+        <Route path="/projects" element={<AllProjectsPage />} />
         <Route path="/hackathon-winning" element={<HackathonPage />} />
         <Route path="/experience" element={<ExperiencePage />} />
         <Route path="*" element={<NotFound />} />

@@ -127,7 +127,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
           <div className="space-y-2 text-xs sm:text-sm font-mono text-slate-300">
             <div className="text-cyan-400 font-semibold flex items-center justify-between">
               <span>Featured Projects ({projectsData.length}):</span>
-              <a href="/project" className="text-xs text-slate-400 hover:text-white underline inline-flex items-center gap-1">
+              <a href="/projects" className="text-xs text-slate-400 hover:text-white underline inline-flex items-center gap-1">
                 View Full Catalog <ArrowRight className="w-3 h-3" />
               </a>
             </div>

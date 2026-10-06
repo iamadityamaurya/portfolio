@@ -39,7 +39,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: 'Auto-Publish'
+    
   },
   {
     id: 'deepquery-agent',
@@ -64,7 +64,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: 'Iterative Tool-Driven Research'
+    
   },
   {
     id: 'live-text-ocr',
@@ -87,7 +87,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: 'Zero Disk Writes'
+
   },
   {
     id: 'opencodebot',
@@ -108,7 +108,7 @@ export const projectsData = [
     links: {},
     featured: false,
     mainPageShow: false,
-    stat: 'Telegram-Controlled CLI'
+    
   },
   {
     id: 'bunkmait',
@@ -179,7 +179,7 @@ export const projectsData = [
     },
     featured: false,
     mainPageShow: false,
-    stat: '<50ms Alert Latency'
+
   },
   {
     id: 'nexgenquery',
@@ -203,7 +203,6 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: '100% In-Browser'
   },
   {
     id: 'nexgenstorage',
@@ -227,7 +226,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: 'Unlimited Storage'
+    
   },
   {
     id: 'medscrapper',
@@ -251,7 +250,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: 'Up to 70% Savings'
+    
   },
   {
     id: 'ai-filler-google-form',
@@ -276,7 +275,7 @@ export const projectsData = [
     },
     featured: true,
     mainPageShow: true,
-    stat: 'v2.2 BYOK Direct'
+
   },
   {
     id: 'drive-stream-downloader',

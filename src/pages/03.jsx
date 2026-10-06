@@ -36,7 +36,7 @@ export const ProjectsPage = () => {
                     </div>
                     <div className="shrink-0 mt-2 md:mt-0">
                         <Link
-                            to="/project"
+                            to="/projects"
                             className="group inline-flex items-center gap-2 border border-slate-700 bg-slate-900/80 px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-mono font-semibold text-slate-300 hover:border-slate-500 hover:text-white transition-all backdrop-blur-md active:scale-95"
                         >
                             View All Projects
@@ -96,7 +96,10 @@ export const ProjectsPage = () => {
                                             </span>
                                         )}
                                         {project.stat && (
-                                            <span className="text-[9px] sm:text-[10px] font-mono text-slate-500 uppercase tracking-wider">
+                                            <span className={`text-[9px] sm:text-[10px] font-mono uppercase tracking-wider ${project.id === 'bunkmait'
+                                                ? 'rounded-full border border-amber-300/70 bg-amber-400/15 px-2.5 py-1 font-black text-amber-200 shadow-[0_0_16px_rgba(251,191,36,0.25)]'
+                                                : 'text-slate-500'
+                                                }`}>
                                                 {project.stat}
                                             </span>
                                         )}

@@ -201,7 +201,7 @@ const HomePage = ({ onOpenTerminal }) => {
                     >
                         {/* Primary Button - Explore Projects */}
                         <a
-                            href="/project"
+                            href="/projects"
                             className="group relative inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-2xl bg-white text-slate-950 font-bold text-sm sm:text-base shadow-xl hover:bg-slate-200 transition-all duration-300 cursor-pointer overflow-hidden active:scale-95"
                         >
                             <span className="relative z-10 flex items-center gap-2">

@@ -168,7 +168,10 @@ export const AllProjectsPage = () => {
                                                             {project.category}
                                                         </span>
                                                         {project.stat && (
-                                                            <span className="px-2.5 py-1 border border-cyan-500/20 text-cyan-400 font-mono text-[11px] sm:text-xs">
+                                                            <span className={`px-2.5 py-1 font-mono text-[11px] sm:text-xs ${project.id === 'bunkmait'
+                                                                ? 'rounded-full border border-amber-300/70 bg-amber-400/15 font-black text-amber-200 shadow-[0_0_16px_rgba(251,191,36,0.25)]'
+                                                                : 'border border-cyan-500/20 text-cyan-400'
+                                                                }`}>
                                                                 {project.stat}
                                                             </span>
                                                         )}
