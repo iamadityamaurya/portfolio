@@ -35,7 +35,7 @@ export const projectsData = [
     tech: ['Python 3.14', 'Telegram Bot API', 'FFmpeg', 'Groq (Llama 3.3)', 'ElevenLabs API', 'Deepgram Aura', 'Instagram Graph API', 'Supabase S3', 'SQLite', 'Pillow / PIL'],
     links: {
       demo: 'https://www.instagram.com/_education4you/',
-      github: 'https://github.com/iamadityamaurya'
+      github: 'https://github.com/iamadityamaurya/reel'
     },
     featured: true,
     mainPageShow: true,
