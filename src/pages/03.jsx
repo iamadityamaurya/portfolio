@@ -31,7 +31,7 @@ export const ProjectsPage = () => {
                             Builds.
                         </h2>
                         <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-500 max-w-md">
-                            Selected shipped projects, from AI pipelines to full-stack products.
+                            I have shipped projects across full-stack, AI automation, and more.
                         </p>
                     </div>
                     <div className="shrink-0 mt-2 md:mt-0">

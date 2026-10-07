@@ -32,9 +32,7 @@ const WorkExperiencePreview = () => {
                         <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-none">
                             Experience.
                         </h2>
-                        <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-500 max-w-md">
-                            Where I've shipped real code and grown as an engineer.
-                        </p>
+                        
                     </div>
 
                 </motion.div>
