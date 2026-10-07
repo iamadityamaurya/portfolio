@@ -212,7 +212,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
               </div>
               <div><span className="text-slate-400">GitHub:</span> <a href="https://github.com/iamadityamaurya" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">github.com/iamadityamaurya</a></div>
               <div><span className="text-slate-400">LinkedIn:</span> <a href="https://www.linkedin.com/in/iamadityamaurya/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">linkedin.com/in/iamadityamaurya</a></div>
-              <div><span className="text-slate-400">Twitter/X:</span> <a href="https://x.com/AdityaMaur43164" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">@AdityaMaur43164</a></div>
+              <div><span className="text-slate-400">Twitter/X:</span> <a href="https://x.com/aditya_maurya0" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">@aditya_maurya0</a></div>
             </div>
           </div>
         );

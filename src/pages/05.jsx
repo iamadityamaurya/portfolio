@@ -82,7 +82,7 @@ const ContactPage = () => {
         {
             name: 'Twitter',
             handle: 'x/AdityaMaur43164',
-            url: 'https://x.com/AdityaMaur43164',
+            url: 'https://x.com/aditya_maurya0',
             icon: Twitter,
             hoverClass: 'hover:bg-sky-500/10 hover:border-sky-500/50',
             iconBgClass: 'group-hover:bg-sky-500/20 group-hover:text-sky-400'
