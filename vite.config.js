@@ -8,5 +8,10 @@ export default defineConfig({
     tailwindcss(),
     react()
   ],
+  server: {
+    allowedHosts: [
+      'category-prayer-civilization-rats.trycloudflare.com'
+    ]
+  }
 })
 
