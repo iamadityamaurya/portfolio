@@ -1,166 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { motion, useScroll, useSpring } from 'framer-motion';
-import AnimatedLogo from './AnimatedLogo';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { scrollToTarget } from '../lib/scroll';
 
 const navItems = [
-  { label: 'About', href: '#about', isRoute: false, spyId: 'about', routeMatch: '/about' },
-  { label: 'Experience', href: '/experience', isRoute: true, spyId: 'work-experience', routeMatch: '/experience' },
-  { label: 'Projects', href: '#projects', isRoute: false, spyId: 'projects', routeMatch: '/projects' },
-  { label: 'Skills', href: '#skills', isRoute: false, spyId: 'skills', routeMatch: null },
-  { label: 'Contact', href: '#contact', isRoute: false, spyId: 'contact', routeMatch: null },
+  { label: 'work', to: '/experience' },
+  { label: 'about', hash: 'about' },
+  { label: 'projects', to: '/projects' },
+  { label: 'contact', hash: 'contact' },
 ];
 
-export const Navbar = ({ onOpenTerminal }) => {
-  const location = useLocation();
+export const Navbar = () => {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const isHome = location.pathname === '/';
 
-  const [scrolled, setScrolled] = useState(false);
-  const [activeId, setActiveId] = useState(null);
-
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.2 });
-
-  // Scroll-driven state: compact look once scrolled + scroll-spy on the home page
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 24);
-
-      if (!isHome) return;
-
-      // Pick the section currently crossing the upper-third probe line
-      const probe = window.innerHeight * 0.35;
-      let current = null;
-      for (const item of navItems) {
-        const element = document.getElementById(item.spyId);
-        if (!element) continue;
-        const rect = element.getBoundingClientRect();
-        if (rect.top <= probe && rect.bottom > probe) {
-          current = item.spyId;
-          break;
-        }
-      }
-      setActiveId(current);
-    };
-
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [isHome]);
-
-  // Route-driven active state for standalone pages
-  useEffect(() => {
-    if (isHome) return;
-    const match = navItems.find(
-      (item) => item.routeMatch && location.pathname.startsWith(item.routeMatch)
-    );
-    setActiveId(match ? match.spyId : null);
-  }, [location.pathname, isHome]);
-
-  const handleClick = (e, item) => {
-    if (item.isRoute) {
-      // Direct route navigation
-      return;
-    }
-
+  const goHash = (e, hash) => {
     e.preventDefault();
-    if (isHome) {
-      const targetId = item.href.replace('#', '');
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      navigate('/' + item.href);
-    }
+    if (pathname === '/') scrollToTarget(`#${hash}`);
+    else navigate('/', { state: { scrollTo: hash } });
   };
 
   return (
-    <header className="fixed top-3.5 sm:top-5 left-1/2 -translate-x-1/2 z-50 w-max max-w-[96vw]">
-      {/* Keyed by pathname so the bar re-animates on every page change */}
-      <motion.nav
-        key={location.pathname}
-        initial={{ y: -14, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        className={`relative flex items-center gap-2 sm:gap-4 md:gap-6 pl-3 sm:pl-4 pr-3 sm:px-6 rounded-full bg-[#080d1a]/95 backdrop-blur-xl text-slate-300 font-medium border transition-[padding,border-color,box-shadow] duration-300 ${
-          scrolled
-            ? 'py-1.5 sm:py-2 border-cyan-500/30 shadow-[0_8px_30px_rgba(0,0,0,0.7),0_0_22px_rgba(34,211,238,0.12)]'
-            : 'py-1.5 sm:py-2 border-slate-700/70 shadow-[0_10px_35px_rgba(0,0,0,0.6)]'
-        }`}
-      >
-        <Link to="/" className="flex items-center gap-2 group" aria-label="Aditya Kumar Maurya — Home">
-          <AnimatedLogo className="w-6 h-6 sm:w-7 sm:h-7" color="#22d3ee" glowColor="#22d3ee" showGlow />
-          <span className="hidden sm:block text-sm font-bold text-slate-100 group-hover:text-white transition-colors">
-            Aditya.
-          </span>
-        </Link>
-
-        <span className="hidden sm:block w-px h-5 bg-slate-700/60" />
-
-        {navItems.map((item) => {
-          const isActive = activeId === item.spyId;
-
-          const label = (
-            <span className="relative z-10 flex items-center gap-1.5">
-              <span
-                className={`hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 transition-opacity duration-200 ${
-                  isActive ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
-              {item.label}
-            </span>
-          );
-
-          const className = `relative transition-colors duration-200 whitespace-nowrap px-1.5 sm:px-2.5 py-1 text-xs sm:text-sm font-semibold rounded-full ${
-            isActive ? 'text-white' : 'hover:text-white'
-          }`;
-
-          const activePill = isActive && (
-            <motion.span
-              layoutId="navActivePill"
-              className="absolute inset-x-0 -inset-y-1 rounded-full bg-slate-700/60 border border-cyan-500/30"
-              transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-            />
-          );
-
-          if (item.isRoute) {
-            return (
-              <Link
-                key={item.label}
-                to={item.href}
-                aria-current={isActive ? 'page' : undefined}
-                className={className}
-              >
-                {activePill}
-                {label}
-              </Link>
-            );
-          }
-
-          return (
-            <a
+    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 sm:px-8 py-5 mix-blend-difference text-white">
+      <Link to="/" className="text-base sm:text-lg font-bold tracking-tight" aria-label="Aditya Kumar Maurya, home">
+        Aditya.
+      </Link>
+      <nav className="flex gap-4 sm:gap-8 font-mono text-xs sm:text-sm">
+        {navItems.map((item) =>
+          item.to ? (
+            <Link
               key={item.label}
-              href={item.href}
-              onClick={(e) => handleClick(e, item)}
-              aria-current={isActive ? 'location' : undefined}
-              className={`${className} cursor-pointer`}
+              to={item.to}
+              className={`hover:opacity-100 transition-opacity ${pathname === item.to ? 'opacity-100' : 'opacity-60'}`}
             >
-              {activePill}
-              {label}
+              {item.label}
+            </Link>
+          ) : (
+            <a key={item.label} href={`/#${item.hash}`} onClick={(e) => goHash(e, item.hash)} className="opacity-60 hover:opacity-100 transition-opacity">
+              {item.label}
             </a>
-          );
-        })}
-
-       
-
-        {/* Scroll progress line */}
-        <motion.span
-          style={{ scaleX: progress }}
-          className="pointer-events-none absolute bottom-0 left-4 right-4 h-[1.5px] origin-left rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 opacity-70"
-        />
-      </motion.nav>
+          )
+        )}
+      </nav>
     </header>
   );
 };

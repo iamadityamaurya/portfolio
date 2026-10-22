@@ -1,12 +1,20 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ScrollTrigger, scrollToTarget } from '../lib/scroll';
 
+// Reset scroll on route change; honour { state: { scrollTo: 'id' } } from nav links on other pages.
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [pathname]);
+    scrollToTarget(0, true);
+    if (!state?.scrollTo) return;
+    const id = setTimeout(() => {
+      ScrollTrigger.refresh();
+      scrollToTarget(`#${state.scrollTo}`, true);
+    }, 150);
+    return () => clearTimeout(id);
+  }, [pathname, state]);
 
   return null;
 };

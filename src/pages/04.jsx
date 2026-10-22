@@ -90,13 +90,13 @@ const SkillsPage = () => {
                 { name: '3D Designing (Onshape)', icon: onshapeLogo },
                 { name: 'IoT & Embedded Systems', icon: 'https://cdn.simpleicons.org/espressif/E7352C' },
                 { name: 'Robotics & ROS 2', icon: 'https://cdn.simpleicons.org/ros/white' },
-                { name: '3D Printing', icon: 'https://cdn.simpleicons.org/ultimaker/26BCE7' },
+                { name: '3D Printing', icon: 'https://cdn.simpleicons.org/thingiverse/248BFB' },
             ],
         },
     ];
 
     return (
-        <section id="skills" className="relative overflow-hidden bg-transparent px-4 py-20 text-slate-50 sm:px-6 sm:py-28">
+        <section id="skills" className="relative overflow-hidden bg-ink px-4 py-24 text-slate-50 sm:px-8 sm:py-32">
             <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent" />
 
             <div className="container relative z-10 mx-auto max-w-6xl">
@@ -109,9 +109,8 @@ const SkillsPage = () => {
                 >
                     <div>
                         
-                        <h2 className="max-w-xl text-4xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl">
-                            My <span className="text-cyan-300">skills.</span>
-                        </h2>
+                        <p className="label text-muted">( Skills )</p>
+                        <h2 className="display mt-4 text-[clamp(2.5rem,8vw,7rem)]">Toolkit</h2>
                     </div>
                     
                 </motion.div>

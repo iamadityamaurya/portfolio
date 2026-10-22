@@ -398,3 +398,5 @@ export const projectsData = [
     stat: '60 FPS Motion'
   }
 ];
+
+export const shortTitle = (title) => title.split(/:| - | – | — /)[0];

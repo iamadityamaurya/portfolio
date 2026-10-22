@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 new port
 diff design
+.vercel
+.env*

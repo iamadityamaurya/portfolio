@@ -14,3 +14,7 @@ The React Compiler is not enabled on this template. To add it, see [this documen
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Audio credits
+- `public/audio/ambient.mp3`: "Sector" from the [Dark Sci-Fi Audio Pack](https://opengameart.org/content/dark-sci-fi-audio-pack) by SRG774, CC0 (re-encoded at 96 kbps).
+- `public/audio/whoosh.mp3`: generated with ffmpeg (filtered pink noise), original.

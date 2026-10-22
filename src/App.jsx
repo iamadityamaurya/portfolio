@@ -1,25 +1,23 @@
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import HomePage from './pages/01';
 import AboutPage from './pages/02';
 import ProjectsPage from './pages/03';
 import SkillsPage from './pages/04';
-
 import ContactPage from './pages/05';
-
 import AllProjectsPage from './project/01';
 import HackathonPage from './hackathon/01';
 import ExperiencePage from './pages/Experience';
 import NotFound from './pages/NotFound';
-import WorkExperiencePreview from './components/WorkExperiencePreview';
 
-import GlobalParticles from './components/GlobalParticles';
 import Navbar from './components/Navbar';
 import TerminalModal from './components/TerminalModal';
 import CustomCursor from './components/CustomCursor';
 import ScrollToTop from './components/ScrollToTop';
-import { useState } from 'react';
+import Preloader from './components/Preloader';
+import SoundToggle from './components/SoundToggle';
+import { initLenis, ScrollTrigger, gsap, reducedMotion } from './lib/scroll';
+import { sfx, unlock } from './lib/audio';
 
 const pageMetadata = {
   
@@ -80,13 +78,69 @@ function SeoMeta() {
   return null;
 }
 
+// Whoosh when a home section scrolls into view, and on every route change.
+function SectionSounds() {
+  const { pathname } = useLocation();
+  const first = useRef(true);
+
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    sfx();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname !== '/') return;
+    const triggers = ['about', 'projects', 'skills', 'contact'].map((id) =>
+      ScrollTrigger.create({ trigger: `#${id}`, start: 'top 60%', onEnter: sfx, onEnterBack: sfx })
+    );
+    return () => triggers.forEach((t) => t.kill());
+  }, [pathname]);
+
+  return null;
+}
+
+// Curtain that lifts off each new route (douglus.site-style sweep, reveal half only).
+function RouteCurtain() {
+  const { pathname } = useLocation();
+  const ref = useRef(null);
+  const first = useRef(true);
+
+  useEffect(() => {
+    if (first.current || reducedMotion()) {
+      first.current = false;
+      return;
+    }
+    gsap.fromTo(ref.current,
+      { yPercent: 0, borderBottomLeftRadius: '0%', borderBottomRightRadius: '0%', visibility: 'visible' },
+      { yPercent: -100, borderBottomLeftRadius: '50% 20%', borderBottomRightRadius: '50% 20%', duration: 0.9, ease: 'power4.inOut', delay: 0.1,
+        onComplete: () => gsap.set(ref.current, { visibility: 'hidden' }) });
+  }, [pathname]);
+
+  return <div ref={ref} className="pointer-events-none fixed inset-0 z-[9000] invisible bg-[#1c1d20]" aria-hidden="true" />;
+}
+
 function App() {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    initLenis();
+    window.addEventListener('pointerdown', unlock, { once: true });
+    return () => window.removeEventListener('pointerdown', unlock);
+  }, []);
+
+  // Pins and spacers depend on final layout: refresh once fonts are in.
+  useEffect(() => {
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  }, []);
 
   // Global shortcut to toggle terminal: ` (backquote) or Ctrl+` or Cmd+K
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if ((e.key === '`' && !e.shiftKey && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') || 
+      if ((e.key === '`' && !e.shiftKey && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') ||
           ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === '`' || e.key === 'j'))) {
         e.preventDefault();
         setIsTerminalOpen(prev => !prev);
@@ -100,28 +154,24 @@ function App() {
     <Router>
       <SeoMeta />
       <ScrollToTop />
+      <SectionSounds />
+      <RouteCurtain />
+      {!ready && <Preloader onDone={() => setReady(true)} />}
       <CustomCursor />
-      <GlobalParticles />
-      <Navbar onOpenTerminal={() => setIsTerminalOpen(true)} />
-      
-      {/* Interactive Terminal Modal */}
-      <TerminalModal 
-        isOpen={isTerminalOpen} 
-        onClose={() => setIsTerminalOpen(false)} 
-      />
+      <Navbar />
+      <SoundToggle />
+      <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
 
       <Routes>
         <Route path="/" element={
-          <>
-            <HomePage onOpenTerminal={() => setIsTerminalOpen(true)} />
+          <main>
+            <HomePage ready={ready} />
             <AboutPage />
-            <WorkExperiencePreview />
             <ProjectsPage />
             <SkillsPage />
             <ContactPage />
-          </>
+          </main>
         } />
-
         <Route path="/about" element={<AboutPage />} />
         <Route path="/projects" element={<AllProjectsPage />} />
         <Route path="/hackathon-winning" element={<HackathonPage />} />

@@ -1,182 +1,115 @@
-import React, { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, ArrowRight, Eye } from 'lucide-react';
-import { projectsData } from '../data/projects';
+import { projectsData, shortTitle } from '../data/projects';
 import ProjectModal from '../components/ProjectModal';
+import { gsap } from '../lib/scroll';
+
+const HOME_PROJECTS = ['bunkmait', 'reelflow-pipeline', 'deepquery-agent', 'opencodebot'];
+
+// Pinned list (alejandroha.com "services" technique): each scroll step collapses the current
+// panel, slides its image out to the right, wipes the next image in and moves the list up a row.
+const NAV_H = 80; // pinned stage starts below the fixed nav
 
 export const ProjectsPage = () => {
-    const [selectedProject, setSelectedProject] = useState(null);
+    const [selected, setSelected] = useState(null);
+    const pinRef = useRef(null);
+    const projects = HOME_PROJECTS.map((id) => projectsData.find((p) => p.id === id)).filter(Boolean);
 
-    const preferredHomeProjects = ['bunkmait', 'reelflow-pipeline', 'deepquery-agent'];
-    const projects = preferredHomeProjects
-        .map((id) => projectsData.find((project) => project.id === id))
-        .filter(Boolean);
+    useLayoutEffect(() => {
+        const mm = gsap.matchMedia();
+        mm.add('(min-width: 992px) and (prefers-reduced-motion: no-preference)', () => {
+            const pin = pinRef.current;
+            const rows = gsap.utils.toArray('[data-row]', pin);
+            const panels = gsap.utils.toArray('[data-panel]', pin);
+            const wraps = gsap.utils.toArray('[data-wrap]', pin);
+            const descs = gsap.utils.toArray('[data-desc]', pin);
+            const list = pin.querySelector('[data-list]');
+            const n = panels.length;
+            const rowH = () => rows[0].offsetHeight;
+            const panelH = () => window.innerHeight - NAV_H - rowH() * 2;
+
+            gsap.set(panels, { height: (i) => (i === 0 ? panelH() : 0) });
+            gsap.set(wraps, { left: (i) => (i === 0 ? '29%' : '0%'), width: (i) => (i === 0 ? '71%' : '0%') });
+            gsap.set(descs, { opacity: (i) => (i === 0 ? 1 : 0) });
+
+            const tl = gsap.timeline({
+                defaults: { ease: 'none', duration: 1 },
+                scrollTrigger: {
+                    trigger: pin,
+                    pin: true,
+                    start: 'top top',
+                    end: () => `+=${window.innerHeight * (n - 1)}`,
+                    scrub: true,
+                    invalidateOnRefresh: true,
+                },
+            });
+            for (let i = 0; i < n - 1; i++) {
+                tl.to(panels[i], { height: 0 }, i)
+                    .to(panels[i + 1], { height: panelH }, i)
+                    .to(wraps[i], { left: '100%', width: '0%' }, i)
+                    .fromTo(wraps[i + 1], { left: '0%', width: '0%' }, { left: '29%', width: '71%' }, i)
+                    .to(descs[i], { opacity: 0, duration: 0.4 }, i)
+                    .to(descs[i + 1], { opacity: 1, duration: 0.4 }, i + 0.6)
+                    .to(list, { y: () => -rowH() * i }, i);
+            }
+        });
+        return () => mm.revert();
+    }, []);
 
     return (
-        <section id="projects" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative">
-            {/* Background Subtle Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
-
-            <div className="container mx-auto max-w-6xl relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-10 sm:mb-14 flex flex-col md:flex-row md:items-end md:justify-between items-center text-center md:text-left gap-4 relative"
-                >
-                    <div>
-                        <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-none">
-                            Builds.
-                        </h2>
-                        <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-500 max-w-md">
-                            I have shipped projects across full-stack, AI automation, and more.
-                        </p>
-                    </div>
-                    <div className="shrink-0 mt-2 md:mt-0">
-                        <Link
-                            to="/projects"
-                            className="group inline-flex items-center gap-2 border border-slate-700 bg-slate-900/80 px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-mono font-semibold text-slate-300 hover:border-slate-500 hover:text-white transition-all backdrop-blur-md active:scale-95"
-                        >
-                            View All Projects
-                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                    </div>
-                </motion.div>
-
-                {/* Projects Grid */}
-                <motion.div
-                    layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
-                >
-                    <AnimatePresence>
-                        {projects.map((project, idx) => (
-                            <motion.div
-                                layout
-                                key={project.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                                className="group relative border border-slate-800 bg-[#090d16]/80 backdrop-blur-sm overflow-hidden hover:border-slate-600 transition-colors duration-300 flex flex-col"
-                            >
-                                {/* Top window bar */}
-                                <div className="flex items-center justify-between px-3 py-2 bg-[#0d121f] border-b border-slate-800">
-                                    <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-rose-500/70" />
-                                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-500/70" />
-                                        <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500/70" />
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                    </div>
-                                </div>
-
-                                <div className="p-4 sm:p-5 flex flex-col flex-grow">
-                                    {/* Image thumbnail on top */}
-                                    {project.image && (
-                                        <div
-                                            onClick={() => setSelectedProject(project)}
-                                            className="mb-4 overflow-hidden bg-slate-900 border border-slate-800 cursor-pointer group/img"
-                                        >
-                                            <img
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="w-full h-44 sm:h-48 object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                    )}
-
-                                    {/* Meta header */}
-                                    <div className="flex flex-wrap items-center gap-1.5 mb-3">
-                                        {project.category && (
-                                            <span className="text-[9px] sm:text-[10px] font-mono text-cyan-400 border border-cyan-500/20 bg-cyan-500/5 px-1.5 py-0.5 uppercase tracking-wider">
-                                                {project.category}
-                                            </span>
-                                        )}
-                                        {project.stat && (
-                                            <span className={`text-[9px] sm:text-[10px] font-mono uppercase tracking-wider ${project.id === 'bunkmait'
-                                                ? 'rounded-full border border-amber-300/70 bg-amber-400/15 px-2.5 py-1 font-black text-amber-200 shadow-[0_0_16px_rgba(251,191,36,0.25)]'
-                                                : 'text-slate-500'
-                                                }`}>
-                                                {project.stat}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    {/* Title + description */}
-                                    <div className="mb-4">
-                                        <h3
-                                            onClick={() => setSelectedProject(project)}
-                                            className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-400 transition-colors cursor-pointer mb-1.5 tracking-tight leading-tight"
-                                        >
-                                            {project.title}
-                                        </h3>
-                                        <p
-                                            onClick={() => setSelectedProject(project)}
-                                            className="text-xs text-slate-400 leading-relaxed line-clamp-3 cursor-pointer"
-                                        >
-                                            {project.description || project.fullDescription}
-                                        </p>
-                                    </div>
-
-                                    {/* Tech tags */}
-                                    <div className="flex flex-wrap gap-1.5 mb-4">
-                                        {project.tech.slice(0, 5).map((t, i) => (
-                                            <span key={i} className="text-[10px] font-mono text-slate-400 border border-slate-700 px-1.5 py-0.5 hover:border-emerald-500/40 hover:text-emerald-300 hover:bg-emerald-500/5 transition-colors cursor-default">
-                                                {t}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    {/* Action row */}
-                                    <div className="mt-auto pt-3 border-t border-slate-800 flex items-center justify-between gap-3">
-                                        <button
-                                            onClick={() => setSelectedProject(project)}
-                                            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-mono font-bold text-slate-300 hover:text-white transition-colors cursor-pointer"
-                                        >
-                                            <Eye className="w-3 h-3" />
-                                            <span>Case Study</span>
-                                        </button>
-
-                                        <div className="flex items-center gap-2.5">
-                                            {project.links?.github && (
-                                                <a
-                                                    href={project.links.github}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-slate-500 hover:text-white transition-colors"
-                                                    title="GitHub Source Code"
-                                                >
-                                                    <Github className="w-3.5 h-3.5" />
-                                                </a>
-                                            )}
-                                            {project.links?.demo && (
-                                                <a
-                                                    href={project.links.demo}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-slate-500 hover:text-cyan-400 transition-colors"
-                                                    title="Live Preview"
-                                                >
-                                                    <ExternalLink className="w-3.5 h-3.5" />
-                                                </a>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+        <section id="projects" className="relative bg-ink text-paper">
+            <div className="flex items-end justify-between px-4 pb-8 pt-24 sm:px-8 sm:pt-32">
+                <div>
+                    <p className="label text-muted">( Selected work )</p>
+                    <h2 className="display mt-4 text-[clamp(2.5rem,8vw,7rem)]">Builds</h2>
+                </div>
+                <Link to="/projects" className="label pb-2 text-paper/80 transition-colors hover:text-accent">
+                    All projects ({projectsData.length}) →
+                </Link>
             </div>
 
-            {/* Case Study Modal */}
-            <ProjectModal
-                project={selectedProject}
-                onClose={() => setSelectedProject(null)}
-            />
+            <div ref={pinRef} className="relative pin:h-screen pin:pt-20">
+                <div className="h-full overflow-hidden">
+                <div data-list>
+                    {projects.map((project, i) => (
+                        <article key={project.id}>
+                            <button
+                                data-row
+                                onClick={() => setSelected(project)}
+                                className="flex w-full items-center justify-between gap-6 border-t border-paper/20 px-4 py-5 text-left sm:px-8 cursor-pointer group"
+                            >
+                                <span className="font-mono text-sm text-muted sm:text-base">[{String(i + 1).padStart(2, '0')}]</span>
+                                <span className="display truncate text-right text-[clamp(1.6rem,4.4vw,4rem)] transition-colors group-hover:text-accent">
+                                    {shortTitle(project.title)}
+                                </span>
+                            </button>
+                            <div data-panel className="relative overflow-hidden nopin:px-4 nopin:pb-10">
+                                <p data-desc className="max-w-md text-sm leading-relaxed text-paper/70 pin:absolute pin:bottom-8 pin:left-8 pin:w-[25%] nopin:mb-5">
+                                    <span className="label mb-3 block text-accent">{project.category}</span>
+                                    {project.tagline}
+                                </p>
+                                <div
+                                    data-wrap
+                                    data-cursor="view"
+                                    onClick={() => setSelected(project)}
+                                    className="overflow-hidden pin:absolute pin:top-0 pin:h-full nopin:aspect-video cursor-pointer"
+                                >
+                                    <img
+                                        src={project.image}
+                                        alt={shortTitle(project.title)}
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="h-full w-full object-cover pin:absolute pin:right-0 pin:top-0 pin:w-[71vw]"
+                                    />
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+                </div>
+            </div>
+
+            <ProjectModal project={selected} onClose={() => setSelected(null)} />
         </section>
     );
 };

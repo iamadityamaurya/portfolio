@@ -101,7 +101,7 @@ const AboutPage = () => {
     ];
 
     return (
-        <section id="about" className="min-h-screen bg-transparent text-slate-50 py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+        <section id="about" className="min-h-screen bg-ink text-slate-50 py-24 sm:py-32 px-4 sm:px-8 relative overflow-hidden">
 
             {/* ── Background ── */}
             <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -115,14 +115,12 @@ const AboutPage = () => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, margin: '-80px' }}
-                    className="mb-12 sm:mb-20 text-center flex flex-col items-center"
+                    className="mb-12 sm:mb-20"
                 >
-                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mt-2 text-white tracking-tight leading-tight">
-                        My Journey &amp; Expertise
+                    <p className="label text-muted">( About )</p>
+                    <h2 className="display mt-4 text-[clamp(2.5rem,8vw,7rem)]">
+                        Circuits <span className="text-accent">to</span> cloud
                     </h2>
-                    <p className="text-slate-400 mt-3 sm:mt-4 text-sm sm:text-lg max-w-xl mx-auto">
-                        From circuit boards to cloud backends - I build end-to-end.
-                    </p>
                 </motion.div>
 
                 {/* ── Main Grid ── */}
@@ -158,6 +156,13 @@ const AboutPage = () => {
                                 making sure every layer of the stack is solid.
                             </p>
                         </div>
+
+                        <Link
+                            to="/hackathon-winning"
+                            className="label inline-flex items-center gap-3 text-paper transition-colors hover:text-accent"
+                        >
+                            3× hackathon winner <ArrowRight className="h-4 w-4" />
+                        </Link>
 
                         {/* Info badges */}
                         <div className="flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-2.5 pt-2">
@@ -198,7 +203,7 @@ const AboutPage = () => {
 
                             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-slate-700/60 shadow-2xl group">
                                 {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#05070d] via-transparent to-transparent opacity-70 z-10" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-70 z-10" />
 
                                 <img
                                     src={profileImage}

@@ -1,61 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+/* Home projects pin: only on wide screens with motion allowed; otherwise a static stack. */
+@custom-variant pin (@media (min-width: 992px) and (prefers-reduced-motion: no-preference));
+@custom-variant nopin {
+  @media (max-width: 991px) { @slot; }
+  @media (prefers-reduced-motion: reduce) { @slot; }
+}
+
+/* Remap the palettes the existing pages use onto the new tokens:
+   cyan/emerald/sky -> electric blue, slate -> neutral greys. */
+@theme {
+  --font-sans: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-ink: #0a0a0a;
+  --color-paper: #ece9e2;
+  --color-muted: #8a8a8a;
+  --color-accent: #2b4bff;
+  --color-orange: #ff6a3d;
+
+  --color-cyan-200: #c4cdff;
+  --color-cyan-300: #93a4ff;
+  --color-cyan-400: #5c75ff;
+  --color-cyan-500: #2b4bff;
+  --color-cyan-600: #1f3be0;
+  --color-emerald-300: #93a4ff;
+  --color-emerald-400: #5c75ff;
+  --color-emerald-500: #2b4bff;
+  --color-sky-300: #93a4ff;
+  --color-sky-400: #5c75ff;
+
+  --color-slate-50: #f4f2ed;
+  --color-slate-100: #ece9e2;
+  --color-slate-200: #d6d3cc;
+  --color-slate-300: #b5b2ab;
+  --color-slate-400: #8a8a8a;
+  --color-slate-500: #6b6b6b;
+  --color-slate-600: #4d4d4d;
+  --color-slate-700: #333333;
+  --color-slate-800: #222222;
+  --color-slate-900: #151515;
+  --color-slate-950: #0d0d0d;
+}
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    font-family: 'Outfit', sans-serif;
-    background-color: #05070d;
-    color: #f8fafc;
+    font-family: var(--font-sans);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  body {
+    background-color: var(--color-ink);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-sans);
     letter-spacing: -0.02em;
   }
 
   ::selection {
-    background-color: #10b981;
-    /* Emerald-500 */
-    color: #05070d;
+    background-color: var(--color-accent);
+    color: var(--color-paper);
   }
 
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #05070d;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #10b981;
-  }
-
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--color-ink); }
+  ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #05070d inset !important;
-    -webkit-text-fill-color: #cbd5e1 !important;
+    -webkit-box-shadow: 0 0 0 30px var(--color-ink) inset !important;
+    -webkit-text-fill-color: var(--color-paper) !important;
     transition: background-color 5000s ease-in-out 0s;
   }
 
-  /* Hide default cursor completely on desktop when custom cursor is active */
   @media (pointer: fine) and (min-width: 1024px) {
     body.custom-cursor-active,
-    body.custom-cursor-active *,
-    body.custom-cursor-active *:hover,
-    body.custom-cursor-active *:active,
-    body.custom-cursor-active *:focus {
+    body.custom-cursor-active * {
       cursor: none !important;
     }
   }
 }
 
+@layer components {
+  /* Wide, heavy uppercase display type */
+  .display {
+    font-family: var(--font-sans);
+    font-stretch: 125%;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.85;
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* Overflow mask for line/char rise reveals */
+  .mask { display: block; overflow: hidden; }
+  .mask > * { display: block; }
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }

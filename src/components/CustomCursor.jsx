@@ -1,207 +1,69 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+// Ring + dot cursor (lerp 0.2 / 0.35). Grows into a "VIEW" disc over [data-cursor="view"],
+// swells slightly over links and buttons. Desktop fine pointers only.
 const CustomCursor = () => {
-  const cursorRef = useRef(null);
-  const canvasRef = useRef(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(true);
-  const positionRef = useRef({ x: 0, y: 0 });
-  const targetRef = useRef({ x: 0, y: 0 });
-  const pointsRef = useRef([]);
-  const rafRef = useRef(null);
+  const ringRef = useRef(null);
+  const dotRef = useRef(null);
+  const [enabled] = useState(() => window.matchMedia('(pointer: fine)').matches && window.innerWidth >= 1024);
+  const [mode, setMode] = useState('default');
 
   useEffect(() => {
-    // Enable custom cursor on non-touch desktop screens (width >= 1024px)
-    const checkDevice = () => {
-      const mobile =
-        window.matchMedia('(pointer: coarse)').matches ||
-        window.innerWidth < 1024;
-      setIsMobile(mobile);
-      return mobile;
-    };
-
-    const mobile = checkDevice();
-
-    const handleResize = () => {
-      const isMobileNow = checkDevice();
-      if (isMobileNow) {
-        document.body.classList.remove('custom-cursor-active');
-      } else {
-        document.body.classList.add('custom-cursor-active');
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    if (mobile) return;
-
+    if (!enabled) return;
     document.body.classList.add('custom-cursor-active');
+    const target = { x: -100, y: -100 };
+    const ring = { x: -100, y: -100 };
+    const dot = { x: -100, y: -100 };
+    let raf = 0;
 
-    const handleMouseMove = (e) => {
-      targetRef.current = { x: e.clientX, y: e.clientY };
-      setIsVisible(true);
+    const onMove = (e) => {
+      target.x = e.clientX;
+      target.y = e.clientY;
+    };
+    const onOver = (e) => {
+      const el = e.target.closest?.('[data-cursor], a, button, input, textarea, select, label');
+      setMode(el ? el.dataset.cursor || 'link' : 'default');
+    };
+    const tick = () => {
+      ring.x += (target.x - ring.x) * 0.2;
+      ring.y += (target.y - ring.y) * 0.2;
+      dot.x += (target.x - dot.x) * 0.35;
+      dot.y += (target.y - dot.y) * 0.35;
+      ringRef.current.style.transform = `translate3d(${ring.x}px, ${ring.y}px, 0)`;
+      dotRef.current.style.transform = `translate3d(${dot.x}px, ${dot.y}px, 0)`;
+      raf = requestAnimationFrame(tick);
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
-
-    const interactiveSelectors = [
-      'a',
-      'button',
-      '[role="button"]',
-      'input',
-      'textarea',
-      'select',
-      'label',
-      '[data-cursor-hover]',
-    ];
-
-    const addHoverListeners = () => {
-      interactiveSelectors.forEach((selector) => {
-        document.querySelectorAll(selector).forEach((el) => {
-          el.addEventListener('mouseenter', () => setIsHovering(true));
-          el.addEventListener('mouseleave', () => setIsHovering(false));
-        });
-      });
-    };
-
-    const observer = new MutationObserver(() => {
-      addHoverListeners();
-    });
-
-    const DURATION_MS = 1200; // Trail lifetime ~1.2 seconds
-
-    const animate = () => {
-      const ease = 0.25;
-      positionRef.current.x +=
-        (targetRef.current.x - positionRef.current.x) * ease;
-      positionRef.current.y +=
-        (targetRef.current.y - positionRef.current.y) * ease;
-
-      const currX = positionRef.current.x;
-      const currY = positionRef.current.y;
-
-      // Position the red cursor arrow
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${currX}px, ${currY}px, 0) translate(-8%, -8%)`;
-      }
-
-      // Record trail point at current cursor location
-      const now = Date.now();
-      const points = pointsRef.current;
-      const lastPoint = points[points.length - 1];
-
-      if (
-        isVisible &&
-        (!lastPoint || Math.hypot(currX - lastPoint.x, currY - lastPoint.y) > 2)
-      ) {
-        points.push({ x: currX, y: currY, time: now });
-      }
-
-      // Draw path trail on full screen canvas
-      const canvas = canvasRef.current;
-      if (canvas) {
-        // Sync canvas buffer dimensions 1:1 with viewport
-        if (
-          canvas.width !== window.innerWidth ||
-          canvas.height !== window.innerHeight
-        ) {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Filter out expired points
-        pointsRef.current = points.filter((p) => now - p.time < DURATION_MS);
-        const validPoints = pointsRef.current;
-
-        if (validPoints.length > 1) {
-          ctx.save();
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-
-          // Draw tapering line segments connecting points
-          for (let i = 0; i < validPoints.length - 1; i++) {
-            const p1 = validPoints[i];
-            const p2 = validPoints[i + 1];
-
-            const age = now - ((p1.time + p2.time) / 2);
-            const alpha = Math.max(0, 1 - age / DURATION_MS);
-            if (alpha <= 0) continue;
-
-            const progress = i / (validPoints.length - 1); // 0 (oldest) to 1 (newest/cursor tip)
-            const lineWidth = 0.5 + progress * 2.5;
-
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-
-            ctx.strokeStyle = `rgba(237, 28, 36, ${alpha * 0.85})`;
-            ctx.lineWidth = lineWidth;
-            ctx.shadowColor = 'rgba(237, 28, 36, 0.6)';
-            ctx.shadowBlur = 4 * alpha;
-
-            ctx.stroke();
-          }
-
-          ctx.restore();
-        }
-      }
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.body.addEventListener('mouseleave', handleMouseLeave);
-    document.body.addEventListener('mouseenter', handleMouseEnter);
-
-    addHoverListeners();
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    rafRef.current = requestAnimationFrame(animate);
-
+    window.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseover', onOver);
+    raf = requestAnimationFrame(tick);
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.body.removeEventListener('mouseleave', handleMouseLeave);
-      document.body.removeEventListener('mouseenter', handleMouseEnter);
-      observer.disconnect();
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      document.body.classList.remove('custom-cursor-active');
+      window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseover', onOver);
+      cancelAnimationFrame(raf);
     };
-  }, [isVisible]);
+  }, [enabled]);
 
-  if (isMobile) return null;
+  if (!enabled) return null;
 
+  const scale = mode === 'view' ? 3.36 : mode === 'link' ? 1.5 : 1;
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 w-full h-full pointer-events-none z-[9998]"
-        aria-hidden="true"
-      />
-      <div
-        ref={cursorRef}
-        className={`fixed top-0 left-0 z-[9999] pointer-events-none transition-[opacity,filter] duration-200 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          width: isHovering ? '44px' : '36px',
-          height: isHovering ? '35px' : '29px',
-          backgroundImage: 'url(/cursor.svg)',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          filter: isHovering
-            ? 'drop-shadow(0 0 8px rgba(237,28,36,0.6))'
-            : 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
-          transition: 'width 0.15s ease, height 0.15s ease',
-          willChange: 'transform',
-        }}
-        aria-hidden="true"
-      />
-    </>
+    <div className="pointer-events-none fixed inset-0 z-[9999]" aria-hidden="true">
+      <div ref={ringRef} className="absolute left-0 top-0">
+        <div
+          className={`-translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full border flex items-center justify-center transition-[transform,background-color,border-color] duration-300 ease-out ${
+            mode === 'view' ? 'bg-paper border-paper' : 'border-paper/70 mix-blend-difference'
+          }`}
+          style={{ transform: `translate(-50%, -50%) scale(${scale})` }}
+        >
+          <span className={`font-mono text-[3px] tracking-[0.15em] text-ink transition-opacity ${mode === 'view' ? 'opacity-100' : 'opacity-0'}`}>VIEW</span>
+        </div>
+      </div>
+      <div ref={dotRef} className="absolute left-0 top-0">
+        <div className={`-translate-x-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-paper mix-blend-difference ${mode === 'view' ? 'opacity-0' : ''}`} />
+      </div>
+    </div>
   );
 };
 
