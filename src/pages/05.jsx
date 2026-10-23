@@ -1,9 +1,29 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState, useEffect } from 'react';
 import { Check, Copy, Loader2 } from 'lucide-react';
 import { gsap, reducedMotion } from '../lib/scroll';
 
 const EMAIL = 'adityamaurya1947@gmail.com';
-const WORDS = ['Contact', 'Contacto', 'Kontakt', 'Contatto', 'Contato', 'संपर्क', '連絡', '연락', '联系', 'Επαφή', 'Контакт'];
+
+// 16 diverse international languages (+5 added: Arabic, Bengali, Turkish, Vietnamese, Hebrew)
+const WORDS = [
+    'Contact',   // English
+    'संपर्क',     // Hindi
+    'Contacto',  // Spanish
+    '連絡',      // Japanese
+    'Kontakt',   // German
+    'Επαφή',     // Greek
+    '연락',      // Korean
+    '联系',      // Chinese
+    'Контакт',   // Russian
+    'Contatto',  // Italian
+    'Contactez', // French
+    'اتصال',     // Arabic
+    'যোগাযোগ',   // Bengali
+    'İletişim',  // Turkish
+    'Liên hệ',   // Vietnamese
+    'קשר',       // Hebrew
+];
+
 const socials = [
     { name: 'GitHub', url: 'https://github.com/iamadityamaurya' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/iamadityamaurya/' },
@@ -12,13 +32,90 @@ const socials = [
 
 const fieldClass = 'w-full bg-transparent border-0 border-b border-paper/20 py-3 text-base text-paper placeholder:text-paper/30 outline-none focus:border-accent transition-colors';
 
+// Generates random non-overlapping coordinates across the canvas
+// with an exclusion zone around the center title & buttons.
+function generateRandomSlots(count, isMobile = false) {
+    const slots = [];
+    const minDistance = isMobile ? 20 : 15; // Minimum spacing in viewport units
+    const maxAttempts = 400;
+
+    // Center exclusion zone: protects main "CONTACT" heading, subtitle, and action buttons
+    const excludeX = isMobile ? 32 : 27;
+    const excludeY = isMobile ? 25 : 18;
+
+    // Boundary limits (in vw and vh)
+    const minX = isMobile ? -42 : -45;
+    const maxX = isMobile ? 42 : 45;
+    const minY = isMobile ? -40 : -42;
+    const maxY = isMobile ? 40 : 42;
+
+    for (let i = 0; i < count; i++) {
+        let placed = false;
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+            const x = Math.random() * (maxX - minX) + minX;
+            const y = Math.random() * (maxY - minY) + minY;
+
+            // Reject if inside center exclusion box
+            if (Math.abs(x) < excludeX && Math.abs(y) < excludeY) {
+                continue;
+            }
+
+            // Check distance against already placed slots to prevent overlapping
+            const tooClose = slots.some((s) => {
+                const dx = s.x - x;
+                const dy = s.y - y;
+                // Weighted Euclidean distance accounting for wide word aspect ratios
+                return Math.sqrt(dx * dx * 0.75 + dy * dy * 1.35) < minDistance;
+            });
+
+            if (!tooClose) {
+                slots.push({
+                    x: Math.round(x * 10) / 10,
+                    y: Math.round(y * 10) / 10,
+                    scale: 0.85 + Math.random() * 0.28,
+                    timeOffset: (i / count) * 0.52 + (Math.random() - 0.5) * 0.05,
+                    driftAngle: Math.random() * Math.PI * 2,
+                });
+                placed = true;
+                break;
+            }
+        }
+
+        // Fallback perimeter anchor if random attempt limit is reached
+        if (!placed) {
+            const angle = (i / count) * Math.PI * 2;
+            const rx = isMobile ? 36 : 39;
+            const ry = isMobile ? 32 : 31;
+            slots.push({
+                x: Math.round(Math.cos(angle) * rx),
+                y: Math.round(Math.sin(angle) * ry),
+                scale: 0.9,
+                timeOffset: (i / count) * 0.52,
+                driftAngle: angle,
+            });
+        }
+    }
+
+    return slots;
+}
+
 const ContactPage = () => {
     const sectionRef = useRef(null);
-    const [wordCount] = useState(() => (window.innerWidth < 768 ? 16 : 40));
+    const [isMobile, setIsMobile] = useState(() => (typeof window !== 'undefined' ? window.innerWidth < 768 : false));
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
     const [copied, setCopied] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // 20 random slots on desktop, 10 on mobile (well-spaced and collision-free)
+    const slotCount = isMobile ? 10 : 20;
+    const slots = useMemo(() => generateRandomSlots(slotCount, isMobile), [slotCount, isMobile]);
 
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -56,8 +153,7 @@ const ContactPage = () => {
         }
     };
 
-    // alejandroha.com contact: content scrubs in from blur, and a tunnel of "contact" words
-    // in 11 languages flies from deep z, through anchor points, past the camera.
+    // 3D floating language words in randomized non-overlapping positions
     useLayoutEffect(() => {
         if (reducedMotion()) return;
         const ctx = gsap.context(() => {
@@ -67,35 +163,50 @@ const ContactPage = () => {
                   scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: true } });
 
             const words = gsap.utils.toArray('[data-word]');
-            const rand = gsap.utils.random;
+            const n = words.length;
+            if (!n) return;
+
             const tl = gsap.timeline({
                 scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
             });
+
             words.forEach((word, i) => {
-                const angle = (i % 16) / 16 * Math.PI * 2 + rand(-0.15, 0.15);
-                const ax = Math.cos(angle) * rand(14, 42) * window.innerWidth / 100;
-                const ay = Math.sin(angle) * rand(14, 40) * window.innerHeight / 100;
-                const m = rand(0.7, 1.3);
-                const at = rand(0, 0.52) + Math.floor(i / 16) * 0.12;
-                tl.fromTo(word,
-                    { x: ax * 0.15, y: ay * 0.15, z: rand(-1600, -1100), scale: 0.35 * m, opacity: 0 },
-                    { x: ax, y: ay, z: 0, scale: m, opacity: rand(0.25, 0.62), duration: rand(0.12, 0.18), ease: 'power1.inOut' }, at)
-                  .to(word, { z: rand(800, 1200), scale: m * rand(1.3, 1.65), opacity: 0, duration: 0.18, ease: 'power1.in' });
+                const slot = slots[i % slots.length];
+                const ax = (slot.x * window.innerWidth) / 100;
+                const ay = (slot.y * window.innerHeight) / 100;
+                const driftX = Math.cos(slot.driftAngle) * 24;
+                const driftY = Math.sin(slot.driftAngle) * 16;
+                const at = Math.max(0, slot.timeOffset);
+
+                tl.fromTo(
+                    word,
+                    { x: ax - driftX, y: ay - driftY, z: -1100, scale: slot.scale * 0.45, opacity: 0 },
+                    { x: ax, y: ay, z: 0, scale: slot.scale, opacity: 0.28, duration: 0.18, ease: 'power1.inOut' },
+                    at
+                ).to(word, {
+                    x: ax + driftX * 1.4,
+                    y: ay + driftY * 1.4,
+                    z: 750,
+                    scale: slot.scale * 1.35,
+                    opacity: 0,
+                    duration: 0.18,
+                    ease: 'power1.in',
+                });
             });
         }, sectionRef);
         return () => ctx.revert();
-    }, []);
+    }, [slots]);
 
     return (
         <section id="contact" className="relative bg-ink text-paper">
             <div ref={sectionRef} className="relative motion-safe:h-[200dvh] md:motion-safe:h-[250dvh]">
                 <div className="sticky top-0 grid h-[100dvh] place-items-center overflow-hidden" style={{ perspective: '1000px' }}>
                     <div className="pointer-events-none absolute inset-0 motion-reduce:hidden" style={{ transformStyle: 'preserve-3d' }} aria-hidden="true">
-                        {Array.from({ length: wordCount }, (_, i) => (
+                        {slots.map((_, i) => (
                             <span
                                 key={i}
                                 data-word
-                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[clamp(1.5rem,3.5vw,4.5rem)] font-normal uppercase text-paper opacity-0"
+                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[clamp(1.1rem,2vw,2.5rem)] font-light uppercase tracking-wider text-paper/75 opacity-0 select-none pointer-events-none"
                             >
                                 {WORDS[i % WORDS.length]}
                             </span>

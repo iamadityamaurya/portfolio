@@ -1,223 +1,276 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import {
-    Briefcase, Rocket, Trophy,
-    GraduationCap, MapPin,
-    ArrowRight
-} from 'lucide-react';
+import { ArrowRight, Globe, Sparkles, Award, Code2, Cpu, GraduationCap } from 'lucide-react';
 import profileImage from '../assets/755b323b46fad9c3f86784c55c858b74.jpg';
+import { scrollToTarget } from '../lib/scroll';
+
+const EMAIL = 'adityamaurya1947@gmail.com';
 
 // ─── Animation Variants ──────────────────────────────────────────────────────
 
+const riseVariant = {
+    hidden: { y: '100%', opacity: 0 },
+    show: {
+        y: 0,
+        opacity: 1,
+        transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
+    }
+};
+
 const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
-
-const fadeLeft = {
-    hidden: { opacity: 0, x: -30 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
-
-const fadeRight = {
-    hidden: { opacity: 0, x: 30 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
-
-const stagger = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12 } },
-};
-
-const cardVariant = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 60 } },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+    }
 };
 
-// ─── Sub-components ───────────────────────────────────────────────────────────
+const staggerContainer = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.05
+        }
+    }
+};
 
+// ─── Metric Data (Alejandro HA Minimalist Strip) ──────────────────────────────
 
+const metrics = [
+    {
+        num: '01',
+        tag: 'AWARDS',
+        value: '3× Won',
+        label: 'Hackathon Winner',
+        icon: Award,
+    },
+    {
+        num: '02',
+        tag: 'BUILDS',
+        value: '10+',
+        label: 'Shipped Projects',
+        icon: Code2,
+    },
+    {
+        num: '03',
+        tag: 'EXPERIENCE',
+        value: '1.5+ Yrs',
+        label: 'Hardware & Web',
+        icon: Cpu,
+    },
+    {
+        num: '04',
+        tag: 'EDUCATION',
+        value: 'B.Tech',
+        label: 'ECE @ MAIT Delhi',
+        icon: GraduationCap,
+    },
+];
 
-const StatCard = ({ icon: Icon, value, label, colorClass, borderClass, glowClass }) => (
-    <motion.div
-        variants={cardVariant}
-        whileHover={{ scale: 1.03, y: -3 }}
-        className={`p-3 sm:p-4 rounded-2xl bg-slate-900/40 border ${borderClass} flex items-center gap-2.5 sm:gap-4 transition-all ${glowClass} cursor-default group min-w-0`}
-    >
-        <div className={`p-2.5 sm:p-3 rounded-xl ${colorClass} bg-opacity-10 transition-all group-hover:scale-110 shrink-0`}>
-            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-        </div>
-        <div className="min-w-0">
-            <h4 className="text-lg sm:text-2xl font-extrabold text-slate-100 leading-none">{value}</h4>
-            <p className="text-[11px] sm:text-xs text-slate-400 mt-1 truncate">{label}</p>
-        </div>
-    </motion.div>
-);
-
-const InfoBadge = ({ icon: Icon, children, color = 'text-slate-400' }) => (
-    <div className={`flex items-center gap-2 text-sm ${color}`}>
-        <Icon className="w-4 h-4 shrink-0" />
-        <span>{children}</span>
-    </div>
-);
-
-// ─── Main Component ───────────────────────────────────────────────────────────
+// ─── Component ───────────────────────────────────────────────────────────────
 
 const AboutPage = () => {
-    const stats = [
-        {
-            icon: Trophy,
-            value: '3x',
-            label: 'Hackathon Winner',
-            colorClass: 'bg-yellow-500/10 text-yellow-400',
-            borderClass: 'border-yellow-500/20 hover:border-yellow-400/50',
-            glowClass: 'hover:shadow-[0_0_20px_rgba(234,179,8,0.12)]',
-        },
-        {
-            icon: Rocket,
-            value: '10+',
-            label: 'Projects Built',
-            colorClass: 'bg-blue-500/10 text-blue-400',
-            borderClass: 'border-blue-500/20 hover:border-blue-400/50',
-            glowClass: 'hover:shadow-[0_0_20px_rgba(59,130,246,0.12)]',
-        },
-        {
-            icon: Briefcase,
-            value: '1.5+',
-            label: 'Years of Coding',
-            colorClass: 'bg-cyan-500/10 text-cyan-400',
-            borderClass: 'border-cyan-500/20 hover:border-cyan-400/50',
-            glowClass: 'hover:shadow-[0_0_20px_rgba(6,182,212,0.12)]',
-        },
-        {
-            icon: GraduationCap,
-            value: '3rd',
-            label: 'Year B.Tech (ECE)',
-            colorClass: 'bg-purple-500/10 text-purple-400',
-            borderClass: 'border-purple-500/20 hover:border-purple-400/50',
-            glowClass: 'hover:shadow-[0_0_20px_rgba(168,85,247,0.12)]',
-        },
-    ];
-
     return (
-        <section id="about" className="min-h-screen bg-ink text-slate-50 py-24 sm:py-32 px-4 sm:px-8 relative overflow-hidden">
+        <section
+            id="about"
+            className="relative min-h-screen bg-ink text-paper py-20 sm:py-28 lg:py-36 px-4 sm:px-8 lg:px-16 overflow-hidden border-t border-paper/10"
+        >
+            {/* Ambient Background Grid Texture */}
+            <div
+                className="pointer-events-none absolute inset-0 opacity-[0.03]"
+                style={{
+                    backgroundImage: `linear-gradient(to right, #ece9e2 1px, transparent 1px), linear-gradient(to bottom, #ece9e2 1px, transparent 1px)`,
+                    backgroundSize: '4rem 4rem',
+                }}
+                aria-hidden="true"
+            />
 
-            {/* ── Background ── */}
-            <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-20 right-10 w-72 h-72 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10 mx-auto max-w-7xl">
 
-            <div className="container mx-auto max-w-6xl relative z-10">
-
-                {/* ── Section Header ── */}
+                {/* ── Top Header Track (Category indicator) ── */}
                 <motion.div
                     variants={fadeUp}
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, margin: '-80px' }}
-                    className="mb-12 sm:mb-20"
+                    viewport={{ once: true, margin: '-40px' }}
+                    className="mb-8 sm:mb-12 flex items-center justify-between border-b border-paper/10 pb-4"
                 >
-                    <p className="label text-muted">( About )</p>
-                    <h2 className="display mt-4 text-[clamp(2.5rem,8vw,7rem)]">
-                        Circuits <span className="text-accent">to</span> cloud
-                    </h2>
+                    <span className="font-mono text-xs tracking-[0.25em] uppercase text-muted">
+                        ( 02 / ABOUT )
+                    </span>
+                    <span className="hidden sm:inline-flex items-center gap-2 font-mono text-xs tracking-wider text-muted">
+                        <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        AVAILABLE FOR CONTRACTS &amp; ROLES
+                    </span>
                 </motion.div>
 
-                {/* ── Main Grid ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                {/* ── Main 2-Column Split Composition (alejandroha.com inspired) ── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-start">
 
-                    {/* ── LEFT: Text + Stats + Hobbies ── */}
+                    {/* ── Left Column: Display Headline, Tagline, Tags & Portrait ── */}
                     <motion.div
-                        variants={fadeLeft}
+                        variants={staggerContainer}
                         initial="hidden"
                         whileInView="show"
-                        viewport={{ once: true }}
-                        className="space-y-8 sm:space-y-10"
+                        viewport={{ once: true, margin: '-60px' }}
+                        className="lg:col-span-6 flex flex-col justify-between space-y-6 sm:space-y-8"
                     >
-                        {/* Bio */}
-                        <div className="space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed">
-                            <p>
-                                Hey, I'm{' '}
-                                <span className="text-white font-bold">Aditya Kumar Maurya</span> —
-                                a passionate developer and{' '}
-                                <span className="text-amber-300 font-bold">3x Hackathon Winner</span>{' '}
-                                currently pursuing B.Tech in Electronics &amp; Communication Engineering.
-                            </p>
-                            <p>
-                                I specialize in{' '}
-                                <span className="text-blue-400 font-medium">Full Stack Web</span>,{' '}
-                                <span className="text-sky-400 font-medium">Android App Development</span>, and{' '}
-                                <span className="text-cyan-400 font-medium">Hardware &amp; IoT Engineering</span>.
-                                I thrive on solving complex problems - from designing custom 3D-printed robotics and
-                                ESP32-based smart home systems, to building scalable web backends.
-                            </p>
-                            <p>
-                                I bring deep technical precision from the physical hardware all the way to the cloud,
-                                making sure every layer of the stack is solid.
-                            </p>
-                        </div>
-
-                        <Link
-                            to="/hackathon-winning"
-                            className="label inline-flex items-center gap-3 text-paper transition-colors hover:text-accent"
-                        >
-                            3× hackathon winner <ArrowRight className="h-4 w-4" />
-                        </Link>
-
-                        {/* Info badges */}
-                        <div className="flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-2.5 pt-2">
-                            <InfoBadge icon={GraduationCap} color="text-purple-400">
-                                MAIT Rohini, Delhi
-                            </InfoBadge>
-                            
-                        </div>
-
-                        {/* Stats Grid */}
                         <div>
-                            <h4 className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mb-3.5 sm:mb-5">At a Glance</h4>
-                            <motion.div
-                                variants={stagger}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true }}
-                                className="grid grid-cols-2 gap-2.5 sm:gap-4"
+                            {/* Massive Display Headline */}
+                            <h2 className="font-sans font-black uppercase text-[clamp(2.3rem,4.4vw,5rem)] leading-[0.92] tracking-tight text-paper">
+                                <span className="block overflow-hidden pb-1">
+                                    <motion.span variants={riseVariant} className="block whitespace-nowrap">
+                                        FULL-STACK &amp; IOT
+                                    </motion.span>
+                                </span>
+                                <span className="block overflow-hidden pb-1">
+                                    <motion.span variants={riseVariant} className="block text-accent whitespace-nowrap">
+                                        ENGINEERING
+                                    </motion.span>
+                                </span>
+                            </h2>
+
+                            {/* Sub-sentence */}
+                            <motion.p
+                                variants={fadeUp}
+                                className="mt-5 sm:mt-6 text-base sm:text-lg text-paper/75 font-normal leading-relaxed max-w-lg"
                             >
-                                {stats.map((s, i) => <StatCard key={i} {...s} />)}
+                                Modern, custom-built software and connected hardware engineered from circuits to the cloud.
+                            </motion.p>
+
+                            {/* Alejandro-style Tag Pills */}
+                            <motion.div
+                                variants={fadeUp}
+                                className="mt-5 flex flex-wrap items-center gap-2 sm:gap-2.5"
+                            >
+                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper/15 bg-paper/[0.02] text-xs font-mono text-paper/80">
+                                    <Globe className="w-3.5 h-3.5 text-accent" />
+                                    BASED IN DELHI, NCR • WORKING GLOBALLY
+                                </div>
+                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper/15 bg-paper/[0.02] text-xs font-mono text-paper/80">
+                                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                                    3× HACKATHON WINNER
+                                </div>
                             </motion.div>
                         </div>
 
+                        {/* Editorial Portrait Presentation */}
+                        <motion.div
+                            variants={fadeUp}
+                            className="relative group w-full max-w-md pt-1"
+                        >
+                            <div className="relative rounded-2xl p-1 bg-gradient-to-b from-paper/15 via-paper/5 to-transparent border border-paper/15 shadow-2xl backdrop-blur-sm transition-all duration-500 group-hover:border-accent/40">
+                                <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-ink">
+                                    {/* Gradient Vignette */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent z-10 pointer-events-none" />
+
+                                    <img
+                                        src={profileImage}
+                                        alt="Aditya Kumar Maurya"
+                                        className="w-full h-full object-cover object-center grayscale contrast-110 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105"
+                                    />
+
+                                    {/* Bottom Info Ribbon */}
+                                    <div className="absolute bottom-2.5 inset-x-2.5 sm:bottom-3 sm:inset-x-3 z-20 flex items-center justify-between text-xs font-mono text-paper/80 pointer-events-none">
+                                        <span className="flex items-center gap-1.5 bg-ink/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-paper/10 text-[11px]">
+                                            [ ADITYA MAURYA ]
+                                        </span>
+                                        <span className="hidden sm:inline-block bg-ink/80 backdrop-blur-md px-2 py-1 rounded-md border border-paper/10 text-[10px] text-muted">
+                                            28.7041° N, 77.1025° E
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
                     </motion.div>
 
-                    {/* ── RIGHT: Profile Image Card ── */}
+                    {/* ── Right Column: [ About me ], Narrative, Action Buttons & Metrics ── */}
                     <motion.div
-                        variants={fadeRight}
+                        variants={staggerContainer}
                         initial="hidden"
                         whileInView="show"
-                        viewport={{ once: true }}
-                        className="relative flex flex-col items-center gap-6 w-full max-w-sm mx-auto lg:max-w-none"
+                        viewport={{ once: true, margin: '-60px' }}
+                        className="lg:col-span-6 flex flex-col justify-between space-y-6 sm:space-y-8"
                     >
-                        {/* Photo */}
-                        <div className="relative w-full max-w-sm sm:max-w-lg mx-auto">
-                            {/* Glow ring */}
-                            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-purple-500/30 blur-xl opacity-60" />
+                        <div>
+                            {/* Distinctive Alejandro-style [ About me ] Marker */}
+                            <motion.h3
+                                variants={fadeUp}
+                                className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-paper mb-6 sm:mb-8"
+                            >
+                                <span className="text-accent">[</span> About me <span className="text-accent">]</span>
+                            </motion.h3>
 
-                            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-slate-700/60 shadow-2xl group">
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-70 z-10" />
+                            {/* Editorial Narrative */}
+                            <motion.div
+                                variants={fadeUp}
+                                className="space-y-4 sm:space-y-5 text-paper/80 text-sm sm:text-base lg:text-lg leading-relaxed font-normal"
+                            >
+                                <p>
+                                    I&apos;m Aditya, a full-stack engineer and hardware developer specializing in systems that not only look exceptional but feel intuitive and perform under heavy load. I bridge modern web frameworks, AI agent pipelines, and low-level IoT firmware to build end-to-end digital experiences.
+                                </p>
+                                <p>
+                                    Every system I build is custom-engineered from first principles—never reliant on generic templates or superficial quick-fixes. Whether it&apos;s architecting real-time video processing pipelines, writing ESP32 robotics firmware, or competing under 36-hour hackathon clocks, I approach every build with the same commitment to craftsmanship, precision, and attention to detail.
+                                </p>
+                            </motion.div>
 
-                                <img
-                                    src={profileImage}
-                                    alt="Aditya Kumar Maurya"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
+                            {/* Action Buttons (Alejandro HA pill buttons) */}
+                            <motion.div
+                                variants={fadeUp}
+                                className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
+                            >
+                                {/* Primary CTA Button (Royal Blue Pill like Alejandro's GET A QUOTE) */}
+                                <button
+                                    onClick={() => scrollToTarget('#contact')}
+                                    className="group inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-accent hover:bg-accent/90 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-[0_10px_25px_-5px_rgba(43,75,255,0.4)] cursor-pointer"
+                                >
+                                    GET IN TOUCH
+                                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                </button>
 
-                                
-                            </div>
+                                {/* Secondary Pill Button */}
+                                <Link
+                                    to="/hackathon-winning"
+                                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-paper/20 hover:border-paper hover:bg-paper/5 text-paper font-mono text-xs font-medium uppercase tracking-wider transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+                                >
+                                    3× HACKATHON WINNER ↗
+                                </Link>
+
+                                {/* Direct Mail Pill */}
+                                <a
+                                    href={`mailto:${EMAIL}`}
+                                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-paper/20 hover:border-paper hover:bg-paper/5 text-muted hover:text-paper font-mono text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer"
+                                >
+                                    EMAIL ↗
+                                </a>
+                            </motion.div>
                         </div>
 
-                        {/* Decorative blobs */}
-                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />
-                        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-indigo-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />
+                        {/* ── Alejandro HA Minimalist Metrics Strip ── */}
+                        <motion.div
+                            variants={fadeUp}
+                            className="pt-6 sm:pt-8 border-t border-paper/10 mt-4"
+                        >
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-4">
+                                {metrics.map((item, idx) => (
+                                    <div key={idx} className="space-y-1">
+                                        <span className="font-mono text-[10px] sm:text-[11px] text-muted tracking-widest block uppercase">
+                                            {item.num} / {item.tag}
+                                        </span>
+                                        <div className="text-xl sm:text-2xl lg:text-3xl font-black text-paper tracking-tight">
+                                            {item.value}
+                                        </div>
+                                        <p className="text-xs text-paper/60 truncate">
+                                            {item.label}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+
                     </motion.div>
 
                 </div>
