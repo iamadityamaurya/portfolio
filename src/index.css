@@ -79,13 +79,6 @@
     -webkit-text-fill-color: var(--color-paper) !important;
     transition: background-color 5000s ease-in-out 0s;
   }
-
-  @media (pointer: fine) and (min-width: 1024px) {
-    body.custom-cursor-active,
-    body.custom-cursor-active * {
-      cursor: none !important;
-    }
-  }
 }
 
 @layer components {

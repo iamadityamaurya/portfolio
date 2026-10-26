@@ -12,7 +12,6 @@ import NotFound from './pages/NotFound';
 
 import Navbar from './components/Navbar';
 import TerminalModal from './components/TerminalModal';
-import CustomCursor from './components/CustomCursor';
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
 import SoundToggle from './components/SoundToggle';
@@ -157,7 +156,6 @@ function App() {
       <SectionSounds />
       <RouteCurtain />
       {!ready && <Preloader onDone={() => setReady(true)} />}
-      <CustomCursor />
       <Navbar />
       <SoundToggle />
       <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
