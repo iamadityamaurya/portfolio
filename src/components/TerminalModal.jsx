@@ -5,6 +5,7 @@ import {
   CornerDownLeft, ExternalLink, ArrowRight, Check, Copy
 } from 'lucide-react';
 import { projectsData } from '../data/projects';
+import { lenis } from '../lib/scroll';
 
 export const TerminalModal = ({ isOpen, onClose }) => {
   const [input, setInput] = useState('');
@@ -30,13 +31,17 @@ export const TerminalModal = ({ isOpen, onClose }) => {
     </div>
   );
 
-  // Initialize banner
+  // Initialize banner and pause Lenis
   useEffect(() => {
     if (isOpen) {
+      lenis?.stop();
       if (history.length === 0) {
         setHistory([{ type: 'banner', content: renderBanner() }]);
       }
       setTimeout(() => inputRef.current?.focus(), 100);
+      return () => {
+        lenis?.start();
+      };
     }
   }, [isOpen]);
 

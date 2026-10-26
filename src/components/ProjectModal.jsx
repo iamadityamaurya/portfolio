@@ -5,6 +5,7 @@ import {
   Check, Copy, Terminal, Layers, CheckCircle2,
   Lock, Globe, Sparkles
 } from 'lucide-react';
+import { lenis } from '../lib/scroll';
 
 export const ProjectModal = ({ project, onClose }) => {
   const [copied, setCopied] = useState(false);
@@ -16,13 +17,15 @@ export const ProjectModal = ({ project, onClose }) => {
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // Lock background scroll when modal is open
+    // Stop Lenis and lock body scroll when modal is open
+    lenis?.stop();
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = originalOverflow;
+      lenis?.start();
     };
   }, [project, onClose]);
 
@@ -41,7 +44,10 @@ export const ProjectModal = ({ project, onClose }) => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
+      <div 
+        data-lenis-prevent="true"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -53,11 +59,14 @@ export const ProjectModal = ({ project, onClose }) => {
 
         {/* Modal Window */}
         <motion.div
+          data-lenis-prevent="true"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.94, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#090b10] border border-paper/15 shadow-[0_30px_100px_rgba(0,0,0,0.95)] z-10 text-paper flex flex-col"
+          className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#090b10] border border-paper/15 shadow-[0_30px_100px_rgba(0,0,0,0.95)] z-10 text-paper flex flex-col overscroll-contain"
         >
           {/* 1. Sticky Control Deck */}
           <div className="sticky top-0 z-30 flex items-center justify-between px-5 sm:px-8 py-4 bg-[#090b10]/95 backdrop-blur-2xl border-b border-paper/10">
