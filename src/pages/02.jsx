@@ -1,280 +1,350 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Globe, Sparkles, Award, Code2, Cpu, GraduationCap } from 'lucide-react';
-import profileImage from '../assets/755b323b46fad9c3f86784c55c858b74.jpg';
-import { scrollToTarget } from '../lib/scroll';
+import { useLayoutEffect, useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { gsap, reducedMotion, scrollToTarget } from '../lib/scroll';
 
-const EMAIL = 'adityamaurya1947@gmail.com';
+const LINE_1 = 'FULL-STACK & IOT';
+const LINE_2 = 'DEVELOPMENT';
 
-// ─── Animation Variants ──────────────────────────────────────────────────────
+const P1_TEXT =
+    "I'm Aditya, a full-stack developer and hardware engineer specializing in software and connected systems that not only look exceptional but feel intuitive. I bridge modern web frameworks, AI agent workflows, and low-level firmware to build digital experiences that reflect real craftsmanship.";
 
-const riseVariant = {
-    hidden: { y: '100%', opacity: 0 },
-    show: {
-        y: 0,
-        opacity: 1,
-        transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
-    }
-};
+const P2_TEXT =
+    "Every project I build is fully custom, never based on generic templates or one size fits all solutions. Whether it's an emerging startup, high-speed robotics, or an intense 36-hour hackathon, I approach every build with the same commitment to craftsmanship, precision, and attention to detail.";
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-    }
-};
-
-const staggerContainer = {
-    hidden: {},
-    show: {
-        transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.05
-        }
-    }
-};
-
-// ─── Metric Data (Alejandro HA Minimalist Strip) ──────────────────────────────
-
-const metrics = [
-    {
-        num: '01',
-        tag: 'AWARDS',
-        value: '3× Won',
-        label: 'Hackathon Winner',
-        icon: Award,
-    },
-    {
-        num: '02',
-        tag: 'BUILDS',
-        value: '10+',
-        label: 'Shipped Projects',
-        icon: Code2,
-    },
-    {
-        num: '03',
-        tag: 'EXPERIENCE',
-        value: '1.5+ Yrs',
-        label: 'Hardware & Web',
-        icon: Cpu,
-    },
-    {
-        num: '04',
-        tag: 'EDUCATION',
-        value: 'B.Tech',
-        label: 'ECE @ MAIT Delhi',
-        icon: GraduationCap,
-    },
-];
-
-// ─── Component ───────────────────────────────────────────────────────────────
+const P1_WORDS = P1_TEXT.split(' ');
+const P2_WORDS = P2_TEXT.split(' ');
 
 const AboutPage = () => {
+    const rootRef = useRef(null);
+    const pinRef = useRef(null);
+
+    useLayoutEffect(() => {
+        if (!pinRef.current) return;
+
+        if (reducedMotion()) {
+            if (rootRef.current) {
+                rootRef.current.querySelectorAll('[data-p1-word], [data-p2-word]').forEach((el) => {
+                    el.style.color = '#ece9e2';
+                    el.style.opacity = '1';
+                });
+                const p1Num = rootRef.current.querySelector('[data-p1-num]');
+                const p2Num = rootRef.current.querySelector('[data-p2-num]');
+                if (p1Num) { p1Num.style.color = '#ece9e2'; p1Num.style.opacity = '1'; }
+                if (p2Num) { p2Num.style.color = '#ece9e2'; p2Num.style.opacity = '1'; }
+                const bLeft = rootRef.current.querySelector('[data-bracket-left]');
+                const bRight = rootRef.current.querySelector('[data-bracket-right]');
+                if (bLeft) { bLeft.style.opacity = '1'; bLeft.style.transform = 'none'; }
+                if (bRight) { bRight.style.opacity = '1'; bRight.style.transform = 'none'; }
+                const actionBtn = rootRef.current.querySelector('[data-action-btn]');
+                if (actionBtn) { actionBtn.style.opacity = '1'; actionBtn.style.transform = 'none'; }
+            }
+            return;
+        }
+
+        const mm = gsap.matchMedia();
+        mm.add('(min-height: 480px) and (prefers-reduced-motion: no-preference)', () => {
+            const pin = pinRef.current;
+            const bLeft = pin.querySelector('[data-bracket-left]');
+            const bRight = pin.querySelector('[data-bracket-right]');
+            const chars = pin.querySelectorAll('[data-char]');
+            const riseLines = pin.querySelectorAll('[data-rise-line]');
+            const p1Words = pin.querySelectorAll('[data-p1-word]');
+            const p2Words = pin.querySelectorAll('[data-p2-word]');
+            const p1Num = pin.querySelector('[data-p1-num]');
+            const p2Num = pin.querySelector('[data-p2-num]');
+            const actionBtn = pin.querySelector('[data-action-btn]');
+
+            // Pinned scroll timeline
+            const tl = gsap.timeline({
+                defaults: { ease: 'power1.inOut' },
+                scrollTrigger: {
+                    trigger: pin,
+                    pin: true,
+                    start: 'top top',
+                    end: () => `+=${window.innerHeight * 2.2}`,
+                    scrub: 0.6,
+                    invalidateOnRefresh: true,
+                },
+            });
+
+            // 1. Entrance: Bracket Clamping & 3D Character Rolling
+            if (bLeft && bRight) {
+                tl.fromTo(bLeft,
+                    { xPercent: -150, opacity: 0 },
+                    { xPercent: 0, opacity: 1, duration: 0.35 },
+                    0
+                );
+                tl.fromTo(bRight,
+                    { xPercent: 150, opacity: 0 },
+                    { xPercent: 0, opacity: 1, duration: 0.35 },
+                    0
+                );
+            }
+
+            if (chars.length) {
+                tl.fromTo(chars,
+                    { transformOrigin: '50% 50%', rotateX: -90, y: 35, z: -50, opacity: 0 },
+                    { rotateX: 0, y: 0, z: 0, opacity: 1, duration: 0.45, stagger: 0.015 },
+                    0
+                );
+            }
+
+            if (riseLines.length) {
+                tl.fromTo(riseLines,
+                    { yPercent: 110, opacity: 0 },
+                    { yPercent: 0, opacity: 1, duration: 0.4, stagger: 0.08 },
+                    0.05
+                );
+            }
+
+            // 2. Paragraph 01 Word Illumination (gray to bright white)
+            const p1Start = 0.35;
+            if (p1Num) {
+                tl.fromTo(p1Num,
+                    { color: '#71717a', opacity: 0.4 },
+                    { color: '#ffffff', opacity: 1, duration: 0.15 },
+                    p1Start
+                );
+            }
+
+            if (p1Words.length) {
+                tl.fromTo(p1Words,
+                    { color: '#71717a', opacity: 0.35 },
+                    {
+                        color: '#ffffff',
+                        opacity: 1,
+                        stagger: 0.02,
+                        duration: 0.12,
+                        ease: 'none',
+                    },
+                    p1Start
+                );
+            }
+
+            const p1Duration = 0.12 + (p1Words.length - 1) * 0.02;
+            const p1End = p1Start + p1Duration;
+
+            // 3. Paragraph 02 Word Illumination (gray to bright white)
+            const p2Start = p1End + 0.18;
+            if (p2Num) {
+                tl.fromTo(p2Num,
+                    { color: '#71717a', opacity: 0.4 },
+                    { color: '#ffffff', opacity: 1, duration: 0.15 },
+                    p2Start
+                );
+            }
+
+            if (p2Words.length) {
+                tl.fromTo(p2Words,
+                    { color: '#71717a', opacity: 0.35 },
+                    {
+                        color: '#ffffff',
+                        opacity: 1,
+                        stagger: 0.02,
+                        duration: 0.12,
+                        ease: 'none',
+                    },
+                    p2Start
+                );
+            }
+
+            const p2Duration = 0.12 + (p2Words.length - 1) * 0.02;
+            const p2End = p2Start + p2Duration;
+
+            // 4. Action button reveal
+            const btnStart = p2End + 0.12;
+            if (actionBtn) {
+                tl.fromTo(actionBtn,
+                    { y: 18, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' },
+                    btnStart
+                );
+            }
+
+            // 5. Comfortable settle hold before unpinning to the next section
+            tl.to({}, { duration: 0.4 });
+
+            return () => tl.kill();
+        });
+
+        return () => mm.revert();
+    }, []);
+
     return (
         <section
+            ref={rootRef}
             id="about"
-            className="relative min-h-screen bg-ink text-paper py-20 sm:py-28 lg:py-36 px-4 sm:px-8 lg:px-16 overflow-hidden border-t border-paper/10"
+            className="relative bg-ink text-paper"
         >
-            {/* Ambient Background Grid Texture */}
             <div
-                className="pointer-events-none absolute inset-0 opacity-[0.03]"
-                style={{
-                    backgroundImage: `linear-gradient(to right, #ece9e2 1px, transparent 1px), linear-gradient(to bottom, #ece9e2 1px, transparent 1px)`,
-                    backgroundSize: '4rem 4rem',
-                }}
-                aria-hidden="true"
-            />
+                ref={pinRef}
+                className="relative flex h-[100svh] min-h-[620px] w-full flex-col justify-center px-6 sm:px-12 lg:px-20 pt-20 pb-10 overflow-hidden"
+            >
+                <div className="relative z-10 mx-auto w-full max-w-7xl">
+                    {/* ── Main 2-Column Split Composition ── */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
-            <div className="relative z-10 mx-auto max-w-7xl">
-
-                {/* ── Top Header Track (Category indicator) ── */}
-                <motion.div
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: '-40px' }}
-                    className="mb-8 sm:mb-12 flex items-center justify-between border-b border-paper/10 pb-4"
-                >
-                    <span className="font-mono text-xs tracking-[0.25em] uppercase text-muted">
-                        ( 02 / ABOUT )
-                    </span>
-                    <span className="hidden sm:inline-flex items-center gap-2 font-mono text-xs tracking-wider text-muted">
-                        <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        AVAILABLE FOR CONTRACTS &amp; ROLES
-                    </span>
-                </motion.div>
-
-                {/* ── Main 2-Column Split Composition (alejandroha.com inspired) ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-start">
-
-                    {/* ── Left Column: Display Headline, Tagline, Tags & Portrait ── */}
-                    <motion.div
-                        variants={staggerContainer}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true, margin: '-60px' }}
-                        className="lg:col-span-6 flex flex-col justify-between space-y-6 sm:space-y-8"
-                    >
-                        <div>
-                            {/* Massive Display Headline */}
-                            <h2 className="font-sans font-black uppercase text-[clamp(2.3rem,4.4vw,5rem)] leading-[0.92] tracking-tight text-paper">
-                                <span className="block overflow-hidden pb-1">
-                                    <motion.span variants={riseVariant} className="block whitespace-nowrap">
-                                        FULL-STACK &amp; IOT
-                                    </motion.span>
-                                </span>
-                                <span className="block overflow-hidden pb-1">
-                                    <motion.span variants={riseVariant} className="block text-accent whitespace-nowrap">
-                                        ENGINEERING
-                                    </motion.span>
-                                </span>
-                            </h2>
-
-                            {/* Sub-sentence */}
-                            <motion.p
-                                variants={fadeUp}
-                                className="mt-5 sm:mt-6 text-base sm:text-lg text-paper/75 font-normal leading-relaxed max-w-lg"
-                            >
-                                Modern, custom-built software and connected hardware engineered from circuits to the cloud.
-                            </motion.p>
-
-                            {/* Alejandro-style Tag Pills */}
-                            <motion.div
-                                variants={fadeUp}
-                                className="mt-5 flex flex-wrap items-center gap-2 sm:gap-2.5"
-                            >
-                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper/15 bg-paper/[0.02] text-xs font-mono text-paper/80">
-                                    <Globe className="w-3.5 h-3.5 text-accent" />
-                                    BASED IN DELHI, NCR • WORKING GLOBALLY
+                        {/* ── Left Column: Clean Headline & Subtitle ── */}
+                        <div className="lg:col-span-6 space-y-5 sm:space-y-7">
+                            <div>
+                                {/* Section kicker */}
+                                <div className="overflow-hidden">
+                                    <p
+                                        data-rise-line
+                                        className="label mb-4 sm:mb-6 text-paper/50"
+                                    >
+                                        01 — About
+                                    </p>
                                 </div>
-                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-paper/15 bg-paper/[0.02] text-xs font-mono text-paper/80">
-                                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                                    3× HACKATHON WINNER
-                                </div>
-                            </motion.div>
-                        </div>
 
-                        {/* Editorial Portrait Presentation */}
-                        <motion.div
-                            variants={fadeUp}
-                            className="relative group w-full max-w-md pt-1"
-                        >
-                            <div className="relative rounded-2xl p-1 bg-gradient-to-b from-paper/15 via-paper/5 to-transparent border border-paper/15 shadow-2xl backdrop-blur-sm transition-all duration-500 group-hover:border-accent/40">
-                                <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-ink">
-                                    {/* Gradient Vignette */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent z-10 pointer-events-none" />
-
-                                    <img
-                                        src={profileImage}
-                                        alt="Aditya Kumar Maurya"
-                                        className="w-full h-full object-cover object-center grayscale contrast-110 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105"
-                                    />
-
-                                    {/* Bottom Info Ribbon */}
-                                    <div className="absolute bottom-2.5 inset-x-2.5 sm:bottom-3 sm:inset-x-3 z-20 flex items-center justify-between text-xs font-mono text-paper/80 pointer-events-none">
-                                        <span className="flex items-center gap-1.5 bg-ink/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-paper/10 text-[11px]">
-                                            [ ADITYA MAURYA ]
-                                        </span>
-                                        <span className="hidden sm:inline-block bg-ink/80 backdrop-blur-md px-2 py-1 rounded-md border border-paper/10 text-[10px] text-muted">
-                                            28.7041° N, 77.1025° E
+                                {/* Massive Display Headline */}
+                                <h2
+                                    data-headline
+                                    className="font-sans font-black uppercase text-[clamp(2.2rem,3.8vw,4.5rem)] leading-[0.92] tracking-tight text-paper select-none"
+                                >
+                                    <div className="pb-1" style={{ perspective: '600px' }}>
+                                        <span className="inline-block whitespace-nowrap">
+                                            {LINE_1.split('').map((ch, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    data-char
+                                                    className="inline-block"
+                                                    style={{ display: 'inline-block', transformStyle: 'preserve-3d' }}
+                                                >
+                                                    {ch === ' ' ? '\u00A0' : ch}
+                                                </span>
+                                            ))}
                                         </span>
                                     </div>
+                                    <div className="pb-1" style={{ perspective: '600px' }}>
+                                        <span className="inline-block whitespace-nowrap">
+                                            {LINE_2.split('').map((ch, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    data-char
+                                                    className="inline-block"
+                                                    style={{ display: 'inline-block', transformStyle: 'preserve-3d' }}
+                                                >
+                                                    {ch === ' ' ? '\u00A0' : ch}
+                                                </span>
+                                            ))}
+                                        </span>
+                                    </div>
+                                </h2>
+
+                                {/* Subtitle with Masked Line Rise */}
+                                <div className="overflow-hidden mt-5 sm:mt-7">
+                                    <p
+                                        data-rise-line
+                                        className="text-sm sm:text-base lg:text-lg text-paper/70 font-normal leading-relaxed max-w-md"
+                                    >
+                                        Modern, custom-built software and connected hardware engineered from circuits to the cloud.
+                                    </p>
+                                </div>
+
+                                {/* Context strip */}
+                                <div className="overflow-hidden mt-8 sm:mt-12 hidden lg:block">
+                                    <p data-rise-line className="label text-paper/40">
+                                        Based in India · Building worldwide
+                                    </p>
                                 </div>
                             </div>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* ── Right Column: [ About me ], Narrative, Action Buttons & Metrics ── */}
-                    <motion.div
-                        variants={staggerContainer}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true, margin: '-60px' }}
-                        className="lg:col-span-6 flex flex-col justify-between space-y-6 sm:space-y-8"
-                    >
-                        <div>
-                            {/* Distinctive Alejandro-style [ About me ] Marker */}
-                            <motion.h3
-                                variants={fadeUp}
-                                className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-paper mb-6 sm:mb-8"
-                            >
-                                <span className="text-accent">[</span> About me <span className="text-accent">]</span>
-                            </motion.h3>
-
-                            {/* Editorial Narrative */}
-                            <motion.div
-                                variants={fadeUp}
-                                className="space-y-4 sm:space-y-5 text-paper/80 text-sm sm:text-base lg:text-lg leading-relaxed font-normal"
-                            >
-                                <p>
-                                    I&apos;m Aditya, a full-stack engineer and hardware developer specializing in systems that not only look exceptional but feel intuitive and perform under heavy load. I bridge modern web frameworks, AI agent pipelines, and low-level IoT firmware to build end-to-end digital experiences.
-                                </p>
-                                <p>
-                                    Every system I build is custom-engineered from first principles—never reliant on generic templates or superficial quick-fixes. Whether it&apos;s architecting real-time video processing pipelines, writing ESP32 robotics firmware, or competing under 36-hour hackathon clocks, I approach every build with the same commitment to craftsmanship, precision, and attention to detail.
-                                </p>
-                            </motion.div>
-
-                            {/* Action Buttons (Alejandro HA pill buttons) */}
-                            <motion.div
-                                variants={fadeUp}
-                                className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
-                            >
-                                {/* Primary CTA Button (Royal Blue Pill like Alejandro's GET A QUOTE) */}
-                                <button
-                                    onClick={() => scrollToTarget('#contact')}
-                                    className="group inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-accent hover:bg-accent/90 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-[0_10px_25px_-5px_rgba(43,75,255,0.4)] cursor-pointer"
-                                >
-                                    GET IN TOUCH
-                                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                                </button>
-
-                                {/* Secondary Pill Button */}
-                                <Link
-                                    to="/hackathon-winning"
-                                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-paper/20 hover:border-paper hover:bg-paper/5 text-paper font-mono text-xs font-medium uppercase tracking-wider transition-all duration-300 hover:scale-[1.02] cursor-pointer"
-                                >
-                                    3× HACKATHON WINNER ↗
-                                </Link>
-
-                                {/* Direct Mail Pill */}
-                                <a
-                                    href={`mailto:${EMAIL}`}
-                                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-paper/20 hover:border-paper hover:bg-paper/5 text-muted hover:text-paper font-mono text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer"
-                                >
-                                    EMAIL ↗
-                                </a>
-                            </motion.div>
                         </div>
 
-                        {/* ── Alejandro HA Minimalist Metrics Strip ── */}
-                        <motion.div
-                            variants={fadeUp}
-                            className="pt-6 sm:pt-8 border-t border-paper/10 mt-4"
-                        >
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-4">
-                                {metrics.map((item, idx) => (
-                                    <div key={idx} className="space-y-1">
-                                        <span className="font-mono text-[10px] sm:text-[11px] text-muted tracking-widest block uppercase">
-                                            {item.num} / {item.tag}
+                        {/* ── Right Column: [ About me ], 2 Paragraphs & Single CTA Button ── */}
+                        <div className="lg:col-span-6 flex flex-col justify-between space-y-6 sm:space-y-8 lg:pl-6">
+                            <div>
+                                {/* Distinctive [ About me ] Marker */}
+                                <h3
+                                    data-bracket-heading
+                                    className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-paper mb-6 sm:mb-8 overflow-visible flex items-baseline"
+                                >
+                                    <span
+                                        data-bracket-left
+                                        aria-hidden="true"
+                                        className="inline-block text-paper/40 mr-2 sm:mr-3 select-none"
+                                    >
+                                        [
+                                    </span>
+                                    <span>About me</span>
+                                    <span
+                                        data-bracket-right
+                                        aria-hidden="true"
+                                        className="inline-block text-paper/40 ml-2 sm:mr-3 select-none"
+                                    >
+                                        ]
+                                    </span>
+                                </h3>
+
+                                {/* Editorial narrative: mono index + scroll-scrubbed word illumination */}
+                                <div
+                                    data-narrative
+                                    className="space-y-6 sm:space-y-7 text-sm sm:text-base lg:text-lg leading-relaxed font-normal"
+                                >
+                                    <div className="flex gap-4 sm:gap-5">
+                                        <span
+                                            aria-hidden="true"
+                                            data-p1-num
+                                            className="label pt-1.5 shrink-0 select-none text-[#71717a] transition-colors"
+                                            style={{ color: '#71717a', opacity: 0.4 }}
+                                        >
+                                            01
                                         </span>
-                                        <div className="text-xl sm:text-2xl lg:text-3xl font-black text-paper tracking-tight">
-                                            {item.value}
-                                        </div>
-                                        <p className="text-xs text-paper/60 truncate">
-                                            {item.label}
+                                        <p className="leading-relaxed">
+                                            {P1_WORDS.map((word, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    data-p1-word
+                                                    className="inline-block mr-[0.28em] text-[#71717a] transition-colors duration-150 select-text"
+                                                    style={{ color: '#71717a', opacity: 0.35 }}
+                                                >
+                                                    {word}
+                                                </span>
+                                            ))}
                                         </p>
                                     </div>
-                                ))}
-                            </div>
-                        </motion.div>
+                                    <div className="flex gap-4 sm:gap-5">
+                                        <span
+                                            aria-hidden="true"
+                                            data-p2-num
+                                            className="label pt-1.5 shrink-0 select-none text-[#71717a] transition-colors"
+                                            style={{ color: '#71717a', opacity: 0.4 }}
+                                        >
+                                            02
+                                        </span>
+                                        <p className="leading-relaxed">
+                                            {P2_WORDS.map((word, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    data-p2-word
+                                                    className="inline-block mr-[0.28em] text-[#71717a] transition-colors duration-150 select-text"
+                                                    style={{ color: '#71717a', opacity: 0.35 }}
+                                                >
+                                                    {word}
+                                                </span>
+                                            ))}
+                                        </p>
+                                    </div>
+                                </div>
 
-                    </motion.div>
+                                {/* Clean Monochrome CTA Button */}
+                                <div className="mt-8 sm:mt-10">
+                                    <button
+                                        data-action-btn
+                                        onClick={() => scrollToTarget('#contact')}
+                                        className="group inline-flex items-center gap-3 px-6 sm:px-7 py-3.5 rounded-full bg-paper hover:bg-paper/90 text-ink font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg cursor-pointer"
+                                    >
+                                        Get in touch
+                                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
-
             </div>
         </section>
     );
