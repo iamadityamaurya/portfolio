@@ -258,11 +258,11 @@ const SkillsPage = () => {
                     <header className="mb-6 flex items-end justify-between gap-6 sm:mb-8">
                         <div>
                             <div className="mask">
-                                <p data-rise className="label text-paper/50">( Skills )</p>
+                                <p data-rise className="label text-paper/50">( Toolkit )</p>
                             </div>
                             <h2 className="display mt-2 text-[clamp(2.5rem,7vw,5.5rem)]">
                                 <div className="mask pb-[0.05em]">
-                                    <span data-rise className="block">Toolkit</span>
+                                    <span data-rise className="block">Skills</span>
                                 </div>
                             </h2>
                         </div>
@@ -360,22 +360,22 @@ const SkillsPage = () => {
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -10 }}
                                             transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-                                            className="grid grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-6 sm:gap-y-7 py-2 sm:py-4"
+                                            className="grid grid-cols-2 gap-x-8 sm:gap-x-14 gap-y-7 sm:gap-y-8 py-3 sm:py-5"
                                         >
                                             {activeCategory.technologies.map((tech) => (
                                                 <div
                                                     key={tech.name}
-                                                    className="group flex items-center gap-3.5 sm:gap-4 select-none cursor-default"
+                                                    className="group flex items-center gap-4 sm:gap-4.5 select-none cursor-default"
                                                 >
-                                                    <div className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center shrink-0">
+                                                    <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
                                                         <img
                                                             src={tech.icon}
                                                             alt={tech.name}
-                                                            className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform duration-200"
+                                                            className="w-6 h-6 sm:w-7 sm:h-7 object-contain group-hover:scale-110 transition-transform duration-200"
                                                             loading="lazy"
                                                         />
                                                     </div>
-                                                    <span className="text-sm sm:text-base font-medium text-white/90 group-hover:text-white transition-colors">
+                                                    <span className="text-base sm:text-lg font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors">
                                                         {tech.name}
                                                     </span>
                                                 </div>
