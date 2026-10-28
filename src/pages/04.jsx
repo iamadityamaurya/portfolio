@@ -343,26 +343,12 @@ const SkillsPage = () => {
 
                                 {/* ── Card Top Header ── */}
                                 <div className="relative z-10">
-                                    <div className="flex items-center justify-between gap-4">
-                                        <div className="flex items-center gap-2">
-                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-white/80 font-mono text-[11px] tracking-wider uppercase font-semibold">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-[#2b4bff] shadow-[0_0_8px_#2b4bff]" />
-                                                Discipline {activeCategory.number}
-                                            </span>
-                                            <span className="font-mono text-xs text-white/40 tracking-wider">
-                                                / {String(categories.length).padStart(2, '0')}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-4">
-                                        <h3 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-tight">
-                                            {activeCategory.name}
-                                        </h3>
-                                        <p className="mt-1 text-xs sm:text-sm text-white/55 font-sans max-w-xl">
-                                            {activeCategory.description}
-                                        </p>
-                                    </div>
+                                    <h3 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-tight">
+                                        {activeCategory.name}
+                                    </h3>
+                                    <p className="mt-1 text-xs sm:text-sm text-white/55 font-sans max-w-xl">
+                                        {activeCategory.description}
+                                    </p>
                                 </div>
 
                                 {/* ── Animated 2-Column List of Technologies ── */}
