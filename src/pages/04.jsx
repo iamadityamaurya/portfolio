@@ -1,195 +1,257 @@
-import { useLayoutEffect, useRef, useState } from 'react';
-import { Plus } from 'lucide-react';
-import { gsap, reducedMotion, scrollToTarget } from '../lib/scroll';
+import { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, Pause, ArrowLeft, ArrowRight } from 'lucide-react';
+import { gsap, ScrollTrigger, lenis, reducedMotion } from '../lib/scroll';
+import { sfx } from '../lib/audio';
 
 import motiaLogo from '../assets/motia-logo.svg';
 import onshapeLogo from '../assets/onshape.svg';
 
-const categories = [
+const rawCategories = [
     {
         number: '01',
-        name: 'FRAMEWORKS',
-        description: 'Interfaces and applications',
+        name: 'Frameworks',
+        description: 'Frontend architectures, modern view libraries & mobile runtimes',
         technologies: [
-            { name: 'React', icon: 'https://cdn.simpleicons.org/react/61DAFB' },
-            { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs/white' },
-            { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
-            { name: 'JavaScript', icon: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
-            { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4' },
-            { name: 'Expo', icon: 'https://cdn.simpleicons.org/expo/white' },
+            { name: 'React', role: 'Library', summary: 'Component-driven UI & hooks', level: 'Expert', icon: 'https://cdn.simpleicons.org/react/61DAFB' },
+            { name: 'Next.js', role: 'Framework', summary: 'App router, SSR & server actions', level: 'Advanced', icon: 'https://cdn.simpleicons.org/nextdotjs/white' },
+            { name: 'TypeScript', role: 'Language', summary: 'Type-safe interfaces & strict types', level: 'Advanced', icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
+            { name: 'JavaScript', role: 'Core', summary: 'Modern ES2024+ asynchronous runtime', level: 'Expert', icon: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
+            { name: 'Tailwind CSS', role: 'Styling', summary: 'Utility design tokens & fluid layouts', level: 'Advanced', icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4' },
+            { name: 'Expo', role: 'Mobile', summary: 'Universal iOS & Android builds', level: 'Proficient', icon: 'https://cdn.simpleicons.org/expo/white' },
         ],
     },
     {
         number: '02',
-        name: 'BACKEND',
-        description: 'Services, APIs, and extensions',
+        name: 'Backend',
+        description: 'Distributed services, micro-APIs, serverless & extensions',
         technologies: [
-            { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
-            { name: 'Express', icon: 'https://cdn.simpleicons.org/express/white' },
-            { name: 'Motia Framework', icon: motiaLogo },
-            { name: 'Vercel Serverless', icon: 'https://cdn.simpleicons.org/vercel/white' },
-            { name: 'Chrome Extensions', icon: 'https://cdn.simpleicons.org/googlechrome/4285F4' },
-            { name: 'Manifest V3', icon: 'https://cdn.simpleicons.org/chromewebstore/white' },
+            { name: 'Node.js', role: 'Runtime', summary: 'Event-driven backend architecture', level: 'Advanced', icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
+            { name: 'Express', role: 'Framework', summary: 'REST endpoints, routing & middleware', level: 'Advanced', icon: 'https://cdn.simpleicons.org/express/white' },
+            { name: 'Motia Framework', role: 'Tooling', summary: 'Workflow pipelines & event handlers', level: 'Proficient', icon: motiaLogo },
+            { name: 'Vercel Serverless', role: 'Cloud', summary: 'Edge compute & globally cached APIs', level: 'Advanced', icon: 'https://cdn.simpleicons.org/vercel/white' },
+            { name: 'Chrome Extensions', role: 'Browser', summary: 'Content scripts, popups & background', level: 'Advanced', icon: 'https://cdn.simpleicons.org/googlechrome/4285F4' },
+            { name: 'Manifest V3', role: 'Standard', summary: 'Declarative net rules & workers', level: 'Advanced', icon: 'https://cdn.simpleicons.org/chromewebstore/white' },
         ],
     },
     {
         number: '03',
-        name: 'DATABASES',
-        description: 'Storage and data platforms',
+        name: 'Databases',
+        description: 'Relational schemas, document storage & realtime platforms',
         technologies: [
-            { name: 'MongoDB', icon: 'https://cdn.simpleicons.org/mongodb/47A248' },
-            { name: 'PostgreSQL', icon: 'https://cdn.simpleicons.org/postgresql/4169E1' },
-            { name: 'Supabase', icon: 'https://cdn.simpleicons.org/supabase/3ECF8E' },
-            { name: 'Firebase', icon: 'https://cdn.simpleicons.org/firebase/FFCA28' },
+            { name: 'MongoDB', role: 'NoSQL', summary: 'Schema-free document clustering', level: 'Advanced', icon: 'https://cdn.simpleicons.org/mongodb/47A248' },
+            { name: 'PostgreSQL', role: 'SQL', summary: 'ACID transactions, views & indexing', level: 'Advanced', icon: 'https://cdn.simpleicons.org/postgresql/4169E1' },
+            { name: 'Supabase', role: 'BaaS', summary: 'Postgres auth, storage & RPC functions', level: 'Proficient', icon: 'https://cdn.simpleicons.org/supabase/3ECF8E' },
+            { name: 'Firebase', role: 'Cloud', summary: 'Realtime store & cloud sync', level: 'Proficient', icon: 'https://cdn.simpleicons.org/firebase/FFCA28' },
         ],
     },
     {
         number: '04',
-        name: 'CLOUD & DEVOPS',
-        description: 'Deployment and infrastructure',
+        name: 'Cloud & DevOps',
+        description: 'Containerization, CI/CD pipelines & production infrastructure',
         technologies: [
-            { name: 'Docker', icon: 'https://cdn.simpleicons.org/docker/2496ED' },
-            { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032' },
-            { name: 'Vercel', icon: 'https://cdn.simpleicons.org/vercel/white' },
-            { name: 'Linux', icon: 'https://cdn.simpleicons.org/linux/FCC624' },
+            { name: 'Docker', role: 'Containers', summary: 'Multi-stage builds & containerization', level: 'Proficient', icon: 'https://cdn.simpleicons.org/docker/2496ED' },
+            { name: 'Git', role: 'VCS', summary: 'Trunk development & rebase workflows', level: 'Advanced', icon: 'https://cdn.simpleicons.org/git/F05032' },
+            { name: 'Vercel', role: 'Deployment', summary: 'Automated CI/CD & preview branches', level: 'Advanced', icon: 'https://cdn.simpleicons.org/vercel/white' },
+            { name: 'Linux', role: 'OS', summary: 'Bash scripting, systemd & SSH admin', level: 'Advanced', icon: 'https://cdn.simpleicons.org/linux/FCC624' },
         ],
     },
     {
         number: '05',
-        name: 'EMBEDDED & ROBOTICS',
-        description: 'Systems, robotics, and hardware',
+        name: 'Embedded & Robotics',
+        description: 'Microcontroller firmware, robotics middleware & parametric CAD',
         technologies: [
-            { name: 'Python', icon: 'https://cdn.simpleicons.org/python/3776AB' },
-            { name: 'C++', icon: 'https://cdn.simpleicons.org/cplusplus/00599C' },
-            { name: 'C', icon: 'https://cdn.simpleicons.org/c/A8B9CC' },
-            { name: 'ROS 2', icon: 'https://cdn.simpleicons.org/ros/white' },
-            { name: 'Arduino', icon: 'https://cdn.simpleicons.org/arduino/00979D' },
-            { name: 'Onshape', icon: onshapeLogo },
+            { name: 'Python', role: 'Language', summary: 'Data processing, CV & automation', level: 'Advanced', icon: 'https://cdn.simpleicons.org/python/3776AB' },
+            { name: 'C++', role: 'Systems', summary: 'Low-latency code & hardware interfaces', level: 'Advanced', icon: 'https://cdn.simpleicons.org/cplusplus/00599C' },
+            { name: 'C', role: 'Firmware', summary: 'Bare-metal embedded registers & memory', level: 'Proficient', icon: 'https://cdn.simpleicons.org/c/A8B9CC' },
+            { name: 'ROS 2', role: 'Robotics', summary: 'Pub-sub nodes, navigation & TF2 tree', level: 'Proficient', icon: 'https://cdn.simpleicons.org/ros/white' },
+            { name: 'Arduino', role: 'Hardware', summary: 'Sensor telemetry & motor driver control', level: 'Advanced', icon: 'https://cdn.simpleicons.org/arduino/00979D' },
+            { name: 'Onshape', role: 'CAD', summary: 'Parametric modeling & mechanical parts', level: 'Proficient', icon: onshapeLogo },
         ],
     },
     {
         number: '06',
-        name: 'BEYOND CODING',
-        description: 'Design, hardware, and physical systems',
+        name: 'Beyond Coding',
+        description: 'Physical fabrication, hardware prototyping & systems design',
         technologies: [
-            { name: '3D Designing (Onshape)', icon: onshapeLogo },
-            { name: 'IoT & Embedded Systems', icon: 'https://cdn.simpleicons.org/espressif/E7352C' },
-            { name: 'Robotics & ROS 2', icon: 'https://cdn.simpleicons.org/ros/white' },
-            { name: '3D Printing', icon: 'https://cdn.simpleicons.org/thingiverse/248BFB' },
+            { name: '3D Designing', role: 'CAD', summary: 'Functional enclosures & tolerance fits', level: 'Proficient', icon: onshapeLogo },
+            { name: 'IoT Systems', role: 'Hardware', summary: 'ESP32, WiFi/BLE telemetry & MQTT', level: 'Advanced', icon: 'https://cdn.simpleicons.org/espressif/E7352C' },
+            { name: 'Robotics & ROS 2', role: 'Robotics', summary: 'Autonomous rovers & sensor pipelines', level: 'Proficient', icon: 'https://cdn.simpleicons.org/ros/white' },
+            { name: '3D Printing', role: 'Fabrication', summary: 'Rapid prototyping, slicing & testing', level: 'Proficient', icon: 'https://cdn.simpleicons.org/thingiverse/248BFB' },
         ],
     },
 ];
 
+// Continuous numbering: 01..06, 07..12, etc.
+let globalCount = 1;
+const categories = rawCategories.map((cat) => ({
+    ...cat,
+    technologies: cat.technologies.map((t) => ({
+        ...t,
+        indexStr: String(globalCount++).padStart(2, '0'),
+    })),
+}));
+
 const totalTools = categories.reduce((sum, c) => sum + c.technologies.length, 0);
 
 const SkillsPage = () => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+
     const rootRef = useRef(null);
-    const pinRef = useRef(null);
+    const pinStageRef = useRef(null);
+    const isProgrammaticRef = useRef(false);
+    const programmaticTimerRef = useRef(null);
+    const activeIndexRef = useRef(0);
     const scrollTriggerRef = useRef(null);
-    const [fallbackOpenIndex, setFallbackOpenIndex] = useState(0);
+    const inViewRef = useRef(false);
 
-    useLayoutEffect(() => {
-        if (!pinRef.current) return;
-        if (reducedMotion()) return;
+    // Keep activeIndexRef in sync
+    useEffect(() => {
+        activeIndexRef.current = activeIndex;
+    }, [activeIndex]);
 
-        const mm = gsap.matchMedia();
-        mm.add('(min-height: 480px) and (prefers-reduced-motion: no-preference)', () => {
-            const pin = pinRef.current;
-            const panels = gsap.utils.toArray('[data-panel]', pin);
-            const contents = gsap.utils.toArray('[data-content]', pin);
-            const icons = gsap.utils.toArray('[data-icon]', pin);
-            const nums = gsap.utils.toArray('[data-num]', pin);
-            const titles = gsap.utils.toArray('[data-title]', pin);
-            const pillsList = gsap.utils.toArray('[data-pills]', pin);
-            const n = categories.length;
+    // Go to category by index, optionally scrolling the page to sync scroll
+    const goToCategory = (targetIndex, shouldScroll = true) => {
+        const clamped = Math.max(0, Math.min(categories.length - 1, targetIndex));
+        setActiveIndex(clamped);
+        activeIndexRef.current = clamped;
+        sfx();
 
-            const getPanelH = (i) => {
-                const el = contents[i];
-                if (!el) return 80;
-                return el.scrollHeight || el.offsetHeight || 80;
-            };
+        if (shouldScroll && scrollTriggerRef.current) {
+            const st = scrollTriggerRef.current;
+            const totalScroll = st.end - st.start;
+            const targetPos = st.start + ((clamped + 0.5) / categories.length) * totalScroll;
 
-            // Initial setup: Row 0 is open, all other rows are collapsed
-            gsap.set(panels[0], { height: () => getPanelH(0) });
-            gsap.set(icons[0], { rotate: 45, color: '#2b4bff' });
-            gsap.set(nums[0], { color: '#2b4bff' });
-            gsap.set(titles[0], { color: '#ece9e2' });
-            gsap.set(pillsList[0], { opacity: 1, y: 0 });
+            isProgrammaticRef.current = true;
+            if (programmaticTimerRef.current) clearTimeout(programmaticTimerRef.current);
+            programmaticTimerRef.current = setTimeout(() => {
+                isProgrammaticRef.current = false;
+            }, 700);
 
-            for (let i = 1; i < n; i++) {
-                gsap.set(panels[i], { height: 0 });
-                gsap.set(icons[i], { rotate: 0, color: 'rgba(236, 233, 226, 0.4)' });
-                gsap.set(nums[i], { color: 'rgba(236, 233, 226, 0.4)' });
-                gsap.set(titles[i], { color: 'rgba(236, 233, 226, 0.75)' });
-                gsap.set(pillsList[i], { opacity: 0, y: 8 });
+            if (lenis) {
+                lenis.scrollTo(targetPos, { duration: 0.7, lock: false });
+            } else {
+                window.scrollTo({ top: targetPos, behavior: 'smooth' });
             }
-
-            // Timeline scrubbed by scroll:
-            // Pins the section, opens items one-by-one, and when finished releases to next section.
-            const tl = gsap.timeline({
-                defaults: { ease: 'power1.inOut' },
-                scrollTrigger: {
-                    trigger: pin,
-                    pin: true,
-                    start: 'top top',
-                    end: () => `+=${window.innerHeight * 3.2}`,
-                    scrub: 0.6,
-                    invalidateOnRefresh: true,
-                },
-            });
-
-            scrollTriggerRef.current = tl.scrollTrigger;
-
-            // Sequential transitions between categories
-            for (let i = 0; i < n - 1; i++) {
-                const tStart = i * 1.0 + 0.2;
-                const tDuration = 0.65;
-
-                // Close category i
-                tl.to(panels[i], { height: 0, duration: tDuration }, tStart)
-                  .to(icons[i], { rotate: 0, color: 'rgba(236, 233, 226, 0.4)', duration: tDuration }, tStart)
-                  .to(nums[i], { color: 'rgba(236, 233, 226, 0.4)', duration: tDuration }, tStart)
-                  .to(titles[i], { color: 'rgba(236, 233, 226, 0.75)', duration: tDuration }, tStart)
-                  .to(pillsList[i], { opacity: 0, y: -6, duration: tDuration * 0.6 }, tStart);
-
-                // Open category i + 1
-                tl.to(panels[i + 1], { height: () => getPanelH(i + 1), duration: tDuration }, tStart)
-                  .to(icons[i + 1], { rotate: 45, color: '#2b4bff', duration: tDuration }, tStart)
-                  .to(nums[i + 1], { color: '#2b4bff', duration: tDuration }, tStart)
-                  .to(titles[i + 1], { color: '#ece9e2', duration: tDuration }, tStart)
-                  .fromTo(
-                      pillsList[i + 1],
-                      { opacity: 0, y: 8 },
-                      { opacity: 1, y: 0, duration: tDuration * 0.75 },
-                      tStart + 0.15
-                  );
-            }
-
-            // Settle hold at the end for the last item (BEYOND CODING)
-            // before releasing pin to the next section
-            tl.to({}, { duration: 0.5 });
-
-            return () => {
-                tl.kill();
-                scrollTriggerRef.current = null;
-            };
-        });
-
-        return () => mm.revert();
-    }, []);
-
-    const handleRowClick = (index) => {
-        const st = scrollTriggerRef.current;
-        if (st && st.pin) {
-            // Calculate corresponding scroll position along the pin scrub range
-            const stepProgress = Math.min(0.96, Math.max(0.04, (index + 0.15) / categories.length));
-            const targetY = st.start + stepProgress * (st.end - st.start);
-            scrollToTarget(targetY);
-        } else {
-            // Fallback for reduced-motion or non-pinned viewports
-            setFallbackOpenIndex((prev) => (prev === index ? -1 : index));
         }
     };
+
+    const nextCategory = () => goToCategory((activeIndexRef.current + 1) % categories.length);
+    const prevCategory = () => goToCategory((activeIndexRef.current - 1 + categories.length) % categories.length);
+    const togglePlay = () => setIsPlaying((prev) => !prev);
+
+    // Hover handler: instant preview of the category
+    const handleCategoryHover = (index) => {
+        if (index !== activeIndexRef.current) {
+            setActiveIndex(index);
+            activeIndexRef.current = index;
+            sfx();
+        }
+    };
+
+    // Keyboard navigation (Arrow keys & Space)
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (!inViewRef.current) return;
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextCategory();
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevCategory();
+            } else if (e.key === ' ' && inViewRef.current) {
+                e.preventDefault();
+                togglePlay();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
+    // Autoplay interval
+    useEffect(() => {
+        if (!isPlaying) return;
+        const interval = setInterval(() => {
+            goToCategory((activeIndexRef.current + 1) % categories.length);
+        }, 3400);
+        return () => clearInterval(interval);
+    }, [isPlaying]);
+
+    // GSAP ScrollTrigger & Pinning
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            // Header lines reveal
+            if (!reducedMotion()) {
+                gsap.utils.toArray('[data-rise]', rootRef.current).forEach((el) => {
+                    gsap.fromTo(
+                        el,
+                        { yPercent: 115, opacity: 0 },
+                        {
+                            yPercent: 0,
+                            opacity: 1,
+                            duration: 1,
+                            ease: 'expo.out',
+                            scrollTrigger: {
+                                trigger: el.parentElement,
+                                start: 'top 88%',
+                                toggleActions: 'play none none reverse',
+                            },
+                        }
+                    );
+                });
+            }
+
+            // Track viewport visibility
+            ScrollTrigger.create({
+                trigger: rootRef.current,
+                start: 'top 70%',
+                end: 'bottom 20%',
+                onEnter: () => { inViewRef.current = true; },
+                onEnterBack: () => { inViewRef.current = true; },
+                onLeave: () => { inViewRef.current = false; },
+                onLeaveBack: () => { inViewRef.current = false; },
+            });
+
+            // Pinned scroll-jack scrub for desktop screens
+            const mm = gsap.matchMedia();
+            mm.add('(min-width: 992px) and (prefers-reduced-motion: no-preference)', () => {
+                const stage = pinStageRef.current;
+                if (!stage) return;
+
+                const st = ScrollTrigger.create({
+                    trigger: stage,
+                    pin: true,
+                    start: 'top top',
+                    end: () => `+=${window.innerHeight * (categories.length - 1) * 0.75}`,
+                    scrub: 0.3,
+                    invalidateOnRefresh: true,
+                    onUpdate: (self) => {
+                        if (isProgrammaticRef.current) return;
+                        const progress = self.progress;
+                        const targetIdx = Math.min(
+                            categories.length - 1,
+                            Math.max(0, Math.floor(progress * categories.length))
+                        );
+                        if (targetIdx !== activeIndexRef.current) {
+                            activeIndexRef.current = targetIdx;
+                            setActiveIndex(targetIdx);
+                            sfx();
+                        }
+                    },
+                });
+
+                scrollTriggerRef.current = st;
+            });
+        }, rootRef);
+
+        return () => ctx.revert();
+    }, []);
+
+    const activeCategory = categories[activeIndex] || categories[0];
 
     return (
         <section
@@ -198,106 +260,268 @@ const SkillsPage = () => {
             className="relative bg-ink text-paper"
         >
             <div
-                ref={pinRef}
-                className="relative flex h-[100svh] min-h-[580px] w-full flex-col justify-center px-4 sm:px-8 lg:px-12 pt-20 pb-10 overflow-hidden"
+                ref={pinStageRef}
+                className="min-h-screen flex flex-col justify-center px-4 py-16 sm:px-8 sm:py-20 lg:py-24"
             >
                 <div className="mx-auto w-full max-w-6xl">
-                    {/* Header */}
-                    <header className="mb-6 sm:mb-10 flex items-end justify-between gap-6">
+                    {/* ── Main Section Header ── */}
+                    <header className="mb-6 flex items-end justify-between gap-6 sm:mb-8">
                         <div>
                             <div className="mask">
-                                <p className="label text-paper/50">( SKILLS )</p>
+                                <p data-rise className="label text-paper/50">( Skills )</p>
                             </div>
-                            <h2 className="display mt-2 sm:mt-4 text-[clamp(2.5rem,7.5vw,6.5rem)] text-paper">
-                                Toolkit
+                            <h2 className="display mt-2 text-[clamp(2.5rem,7vw,5.5rem)]">
+                                <div className="mask pb-[0.05em]">
+                                    <span data-rise className="block">Toolkit</span>
+                                </div>
                             </h2>
                         </div>
-                        <div className="text-right">
-                            <p className="label leading-relaxed text-paper/40">
-                                {String(totalTools).padStart(2, '0')} TOOLS
+                        <div className="mask hidden sm:block">
+                            <p data-rise className="label text-right leading-relaxed text-paper/40">
+                                {String(totalTools).padStart(2, '0')} tools
                                 <br />
-                                06 DISCIPLINES
+                                06 disciplines
                             </p>
                         </div>
                     </header>
 
-                    {/* Accordion ledger: one full-width row per discipline */}
-                    <div className="border-t border-slate-800">
-                        {categories.map((category, index) => {
-                            const isFallbackOpen = fallbackOpenIndex === index;
-                            return (
-                                <div
-                                    key={category.number}
-                                    data-category-row
-                                    className="border-b border-slate-800"
-                                >
-                                    <button
-                                        type="button"
-                                        onClick={() => handleRowClick(index)}
-                                        aria-expanded={isFallbackOpen}
-                                        className="group flex w-full cursor-pointer items-center justify-between py-3.5 sm:py-4.5 text-left transition-colors"
-                                    >
-                                        <div className="flex items-center gap-4 sm:gap-10 min-w-0">
-                                            <span
-                                                data-num
-                                                className={`label transition-colors duration-200 ${isFallbackOpen ? 'text-accent' : 'text-paper/40'}`}
-                                            >
-                                                {category.number}
-                                            </span>
-                                            <span
-                                                data-title
-                                                className={`display truncate text-[clamp(1.4rem,3.8vw,3rem)] transition-colors duration-200 ${isFallbackOpen ? 'text-paper' : 'text-paper/75 group-hover:text-paper'}`}
-                                            >
-                                                {category.name}
-                                            </span>
-                                        </div>
-                                        <div className="flex h-7 w-7 items-center justify-center shrink-0">
-                                            <Plus
-                                                data-icon
-                                                aria-hidden="true"
-                                                strokeWidth={1.5}
-                                                className={`h-5 w-5 transition-colors duration-200 ${isFallbackOpen ? 'text-accent' : 'text-paper/40 group-hover:text-paper'}`}
-                                                style={{ transform: isFallbackOpen ? 'rotate(45deg)' : undefined }}
-                                            />
-                                        </div>
-                                    </button>
+                    {/* ── Index / Explorer Sub-header ── */}
+                    <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-3 font-mono text-xs text-white/40 tracking-wider">
+                        <span>( INDEX )</span>
+                        <span className="hidden sm:inline">HOVER, CLICK OR USE ↑ ↓ TO EXPLORE</span>
+                    </div>
 
-                                    {/* Expanding panel */}
+                    {/* ── 2-Column Layout: Left List & Right Bento Card ── */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+                        
+                        {/* ── Left Column: Categories List ── */}
+                        <div className="lg:col-span-5 flex flex-col justify-center divide-y divide-white/10 border-t border-b border-white/10">
+                            {categories.map((cat, idx) => {
+                                const isActive = idx === activeIndex;
+                                return (
                                     <div
-                                        data-panel
-                                        className="overflow-hidden"
+                                        key={cat.number}
+                                        onMouseEnter={() => handleCategoryHover(idx)}
+                                        onClick={() => goToCategory(idx)}
+                                        className="group relative flex items-center justify-between py-4 sm:py-5 cursor-pointer select-none transition-colors"
                                     >
-                                        <div
-                                            data-content
-                                            className="pt-1 pb-5 sm:pb-6 pl-0 sm:pl-[4.5rem]"
+                                        {/* Number */}
+                                        <span
+                                            className={`font-mono text-sm sm:text-base font-medium transition-colors duration-200 ${
+                                                isActive ? 'text-[#ff6a3d]' : 'text-white/30 group-hover:text-white/60'
+                                            }`}
                                         >
-                                            <p className="mb-3 text-xs text-paper/50 sm:hidden">
-                                                {category.description}
-                                            </p>
-                                            <ul
-                                                data-pills
-                                                className="flex flex-wrap gap-2 sm:gap-2.5"
+                                            {cat.number}
+                                        </span>
+
+                                        {/* Title + Orange Dot indicator */}
+                                        <div className="flex items-center gap-3 flex-1 ml-5 sm:ml-7">
+                                            {isActive ? (
+                                                <span className="w-2.5 h-2.5 rounded-full bg-[#ff6a3d] shadow-[0_0_10px_#ff6a3d] shrink-0" />
+                                            ) : (
+                                                <span className="w-2.5 h-2.5 rounded-full bg-transparent shrink-0" />
+                                            )}
+                                            <h3
+                                                className={`text-xl sm:text-2xl lg:text-[1.75rem] font-bold tracking-tight transition-all duration-200 ${
+                                                    isActive
+                                                        ? 'text-white translate-x-0'
+                                                        : 'text-white/35 group-hover:text-white/70 group-hover:translate-x-1'
+                                                }`}
                                             >
-                                                {category.technologies.map((tech) => (
-                                                    <li
-                                                        key={tech.name}
-                                                        className="flex items-center gap-2.5 rounded-full border border-slate-800 bg-[#0d0d0d] px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-paper/85 transition-colors hover:border-accent/60 hover:text-paper shadow-sm"
-                                                    >
-                                                        <img
-                                                            src={tech.icon}
-                                                            alt=""
-                                                            className="h-4 w-4 shrink-0 object-contain"
-                                                            loading="lazy"
-                                                        />
-                                                        <span className="whitespace-nowrap font-medium">{tech.name}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
+                                                {cat.name}
+                                            </h3>
+                                        </div>
+
+                                        {/* Count badge */}
+                                        <span
+                                            className={`font-mono text-xs px-2 py-0.5 rounded transition-colors duration-200 ${
+                                                isActive
+                                                    ? 'bg-white/10 text-white font-medium'
+                                                    : 'bg-white/[0.03] text-white/30'
+                                            }`}
+                                        >
+                                            {String(cat.technologies.length).padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* ── Right Column: Clean Modern Bento Showcase ── */}
+                        <div className="lg:col-span-7">
+                            <div className="relative rounded-[26px] border border-white/[0.12] bg-[#0d0d10] p-6 sm:p-8 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between min-h-[500px]">
+                                
+                                {/* Crisp blueprint grid pattern */}
+                                <div
+                                    className="absolute inset-0 pointer-events-none opacity-[0.06]"
+                                    style={{
+                                        backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1px)',
+                                        backgroundSize: '20px 20px',
+                                    }}
+                                />
+
+                                {/* Minimalist corner crosshair accents */}
+                                <div className="absolute top-3.5 left-4 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+                                <div className="absolute top-3.5 right-4 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+                                <div className="absolute bottom-3.5 left-4 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+                                <div className="absolute bottom-3.5 right-4 text-white/20 font-mono text-[10px] select-none pointer-events-none">+</div>
+
+                                {/* Subtle architectural top-light sheen */}
+                                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+
+                                {/* ── Card Top Header ── */}
+                                <div className="relative z-10">
+                                    <div className="flex items-center justify-between gap-4">
+                                        <div className="flex items-center gap-2">
+                                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-white/80 font-mono text-[11px] tracking-wider uppercase font-semibold">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-[#ff6a3d]" />
+                                                Discipline {activeCategory.number}
+                                            </span>
+                                            <span className="font-mono text-xs text-white/40 tracking-wider">
+                                                / {String(categories.length).padStart(2, '0')}
+                                            </span>
+                                        </div>
+
+                                        <div className="flex items-center gap-2 font-mono text-xs text-white/50">
+                                            <span className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-[11px] tracking-wide">
+                                                {activeCategory.technologies.length} Stack Components
+                                            </span>
                                         </div>
                                     </div>
+
+                                    <div className="mt-4">
+                                        <h3 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-tight">
+                                            {activeCategory.name}
+                                        </h3>
+                                        <p className="mt-1 text-xs sm:text-sm text-white/55 font-sans max-w-xl">
+                                            {activeCategory.description}
+                                        </p>
+                                    </div>
                                 </div>
-                            );
-                        })}
+
+                                {/* ── Animated Grid of Modern Bento Tiles ── */}
+                                <div className="relative z-10 my-6 sm:my-7 flex-1 flex flex-col justify-center">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={activeCategory.number}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+                                            className={`grid gap-3 sm:gap-3.5 ${
+                                                activeCategory.technologies.length <= 4
+                                                    ? 'grid-cols-1 sm:grid-cols-2'
+                                                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                                            }`}
+                                        >
+                                            {activeCategory.technologies.map((tech) => (
+                                                <div
+                                                    key={tech.name}
+                                                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-white/[0.08] bg-white/[0.025] hover:bg-white/[0.06] hover:border-white/20 p-4 sm:p-4.5 transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+                                                >
+                                                    {/* Top Row: Icon + Index + Role Badge */}
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <div className="flex items-center gap-2.5">
+                                                            <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center p-1.5 shrink-0 group-hover:scale-105 transition-transform duration-200">
+                                                                <img
+                                                                    src={tech.icon}
+                                                                    alt={tech.name}
+                                                                    className="w-4 h-4 object-contain"
+                                                                    loading="lazy"
+                                                                />
+                                                            </div>
+                                                            <span className="font-mono text-[11px] text-white/35 font-medium tracking-wider">
+                                                                {tech.indexStr}
+                                                            </span>
+                                                        </div>
+
+                                                        <span className="font-mono text-[10px] tracking-wider uppercase px-2 py-0.5 rounded border border-white/10 bg-white/[0.04] text-white/60">
+                                                            {tech.role}
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Middle Row: Name + Summary */}
+                                                    <div className="my-3">
+                                                        <h4 className="text-sm sm:text-base font-bold tracking-tight text-white group-hover:text-white transition-colors">
+                                                            {tech.name}
+                                                        </h4>
+                                                        <p className="text-[11px] sm:text-xs text-white/50 line-clamp-1 mt-0.5 font-normal">
+                                                            {tech.summary}
+                                                        </p>
+                                                    </div>
+
+                                                    {/* Bottom Row: Proficiency & Level Bars */}
+                                                    <div className="pt-2.5 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-white/40">
+                                                        <div className="flex items-center gap-1.5">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-white/70 shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
+                                                            <span className="tracking-wider uppercase text-[10px] text-white/60">
+                                                                {tech.level}
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="flex items-center gap-1" title={tech.level}>
+                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' || tech.level === 'Advanced' || tech.level === 'Proficient' ? 'bg-white/80' : 'bg-white/20'}`} />
+                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' || tech.level === 'Advanced' || tech.level === 'Proficient' ? 'bg-white/80' : 'bg-white/20'}`} />
+                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' || tech.level === 'Advanced' ? 'bg-white/80' : 'bg-white/20'}`} />
+                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' ? 'bg-white/80' : 'bg-white/20'}`} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
+
+                                {/* ── Card Bottom Footer Bar ── */}
+                                <div className="relative z-10 flex items-center justify-between pt-4 border-t border-white/[0.06]">
+                                    {/* Pagination pill segments */}
+                                    <div className="flex items-center gap-1.5">
+                                        {categories.map((c, i) => (
+                                            <button
+                                                key={c.number}
+                                                onClick={() => goToCategory(i)}
+                                                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                                                    i === activeIndex
+                                                        ? 'w-7 sm:w-8 bg-white'
+                                                        : 'w-2 bg-white/20 hover:bg-white/40'
+                                                }`}
+                                                aria-label={`Switch to ${c.name}`}
+                                            />
+                                        ))}
+                                    </div>
+
+                                    {/* Controls: status + play/pause + prev/next */}
+                                    <div className="flex items-center gap-3">
+                                        <span className="font-mono text-[11px] tracking-widest text-white/40 uppercase select-none">
+                                            {isPlaying ? 'AUTOPLAY' : 'PAUSED'}
+                                        </span>
+                                        <button
+                                            onClick={togglePlay}
+                                            className="w-8 h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                                            aria-label={isPlaying ? 'Pause auto-cycle' : 'Start auto-cycle'}
+                                        >
+                                            {isPlaying ? <Pause size={12} /> : <Play size={12} className="ml-0.5" />}
+                                        </button>
+                                        <button
+                                            onClick={prevCategory}
+                                            className="w-8 h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                                            aria-label="Previous category"
+                                        >
+                                            <ArrowLeft size={13} />
+                                        </button>
+                                        <button
+                                            onClick={nextCategory}
+                                            className="w-8 h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                                            aria-label="Next category"
+                                        >
+                                            <ArrowRight size={13} />
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -306,3 +530,4 @@ const SkillsPage = () => {
 };
 
 export default SkillsPage;
+
