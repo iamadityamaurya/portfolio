@@ -82,17 +82,7 @@ const rawCategories = [
     },
 ];
 
-// Continuous numbering: 01..06, 07..12, etc.
-let globalCount = 1;
-const categories = rawCategories.map((cat) => ({
-    ...cat,
-    technologies: cat.technologies.map((t) => ({
-        ...t,
-        indexStr: String(globalCount++).padStart(2, '0'),
-    })),
-}));
-
-const totalTools = categories.reduce((sum, c) => sum + c.technologies.length, 0);
+const categories = rawCategories;
 
 const SkillsPage = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -276,13 +266,6 @@ const SkillsPage = () => {
                                 </div>
                             </h2>
                         </div>
-                        <div className="mask hidden sm:block">
-                            <p data-rise className="label text-right leading-relaxed text-paper/40">
-                                {String(totalTools).padStart(2, '0')} tools
-                                <br />
-                                06 disciplines
-                            </p>
-                        </div>
                     </header>
 
                     {/* ── Index / Explorer Sub-header ── */}
@@ -308,16 +291,16 @@ const SkillsPage = () => {
                                         {/* Number */}
                                         <span
                                             className={`font-mono text-sm sm:text-base font-medium transition-colors duration-200 ${
-                                                isActive ? 'text-[#ff6a3d]' : 'text-white/30 group-hover:text-white/60'
+                                                isActive ? 'text-[#2b4bff]' : 'text-white/30 group-hover:text-white/60'
                                             }`}
                                         >
                                             {cat.number}
                                         </span>
 
-                                        {/* Title + Orange Dot indicator */}
+                                        {/* Title + Blue Dot indicator */}
                                         <div className="flex items-center gap-3 flex-1 ml-5 sm:ml-7">
                                             {isActive ? (
-                                                <span className="w-2.5 h-2.5 rounded-full bg-[#ff6a3d] shadow-[0_0_10px_#ff6a3d] shrink-0" />
+                                                <span className="w-2.5 h-2.5 rounded-full bg-[#2b4bff] shadow-[0_0_10px_#2b4bff] shrink-0" />
                                             ) : (
                                                 <span className="w-2.5 h-2.5 rounded-full bg-transparent shrink-0" />
                                             )}
@@ -331,17 +314,6 @@ const SkillsPage = () => {
                                                 {cat.name}
                                             </h3>
                                         </div>
-
-                                        {/* Count badge */}
-                                        <span
-                                            className={`font-mono text-xs px-2 py-0.5 rounded transition-colors duration-200 ${
-                                                isActive
-                                                    ? 'bg-white/10 text-white font-medium'
-                                                    : 'bg-white/[0.03] text-white/30'
-                                            }`}
-                                        >
-                                            {String(cat.technologies.length).padStart(2, '0')}
-                                        </span>
                                     </div>
                                 );
                             })}
@@ -349,7 +321,7 @@ const SkillsPage = () => {
 
                         {/* ── Right Column: Clean Modern Bento Showcase ── */}
                         <div className="lg:col-span-7">
-                            <div className="relative rounded-[26px] border border-white/[0.12] bg-[#0d0d10] p-6 sm:p-8 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between min-h-[500px]">
+                            <div className="relative rounded-[26px] border border-white/[0.12] bg-[#0d0d10] p-6 sm:p-8 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between min-h-[500px] h-[500px]">
                                 
                                 {/* Crisp blueprint grid pattern */}
                                 <div
@@ -374,17 +346,11 @@ const SkillsPage = () => {
                                     <div className="flex items-center justify-between gap-4">
                                         <div className="flex items-center gap-2">
                                             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.06] border border-white/10 text-white/80 font-mono text-[11px] tracking-wider uppercase font-semibold">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-[#ff6a3d]" />
+                                                <span className="w-1.5 h-1.5 rounded-full bg-[#2b4bff] shadow-[0_0_8px_#2b4bff]" />
                                                 Discipline {activeCategory.number}
                                             </span>
                                             <span className="font-mono text-xs text-white/40 tracking-wider">
                                                 / {String(categories.length).padStart(2, '0')}
-                                            </span>
-                                        </div>
-
-                                        <div className="flex items-center gap-2 font-mono text-xs text-white/50">
-                                            <span className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.08] text-[11px] tracking-wide">
-                                                {activeCategory.technologies.length} Stack Components
                                             </span>
                                         </div>
                                     </div>
@@ -399,8 +365,8 @@ const SkillsPage = () => {
                                     </div>
                                 </div>
 
-                                {/* ── Animated Grid of Modern Bento Tiles ── */}
-                                <div className="relative z-10 my-6 sm:my-7 flex-1 flex flex-col justify-center">
+                                {/* ── Animated 2-Column List of Technologies ── */}
+                                <div className="relative z-10 my-6 sm:my-8 flex-1 flex flex-col justify-center">
                                     <AnimatePresence mode="wait">
                                         <motion.div
                                             key={activeCategory.number}
@@ -408,64 +374,24 @@ const SkillsPage = () => {
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -10 }}
                                             transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-                                            className={`grid gap-3 sm:gap-3.5 ${
-                                                activeCategory.technologies.length <= 4
-                                                    ? 'grid-cols-1 sm:grid-cols-2'
-                                                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-                                            }`}
+                                            className="grid grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-6 sm:gap-y-7 py-2 sm:py-4"
                                         >
                                             {activeCategory.technologies.map((tech) => (
                                                 <div
                                                     key={tech.name}
-                                                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-white/[0.08] bg-white/[0.025] hover:bg-white/[0.06] hover:border-white/20 p-4 sm:p-4.5 transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+                                                    className="group flex items-center gap-3.5 sm:gap-4 select-none cursor-default"
                                                 >
-                                                    {/* Top Row: Icon + Index + Role Badge */}
-                                                    <div className="flex items-center justify-between gap-2">
-                                                        <div className="flex items-center gap-2.5">
-                                                            <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center p-1.5 shrink-0 group-hover:scale-105 transition-transform duration-200">
-                                                                <img
-                                                                    src={tech.icon}
-                                                                    alt={tech.name}
-                                                                    className="w-4 h-4 object-contain"
-                                                                    loading="lazy"
-                                                                />
-                                                            </div>
-                                                            <span className="font-mono text-[11px] text-white/35 font-medium tracking-wider">
-                                                                {tech.indexStr}
-                                                            </span>
-                                                        </div>
-
-                                                        <span className="font-mono text-[10px] tracking-wider uppercase px-2 py-0.5 rounded border border-white/10 bg-white/[0.04] text-white/60">
-                                                            {tech.role}
-                                                        </span>
+                                                    <div className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center shrink-0">
+                                                        <img
+                                                            src={tech.icon}
+                                                            alt={tech.name}
+                                                            className="w-5 h-5 sm:w-6 sm:h-6 object-contain group-hover:scale-110 transition-transform duration-200"
+                                                            loading="lazy"
+                                                        />
                                                     </div>
-
-                                                    {/* Middle Row: Name + Summary */}
-                                                    <div className="my-3">
-                                                        <h4 className="text-sm sm:text-base font-bold tracking-tight text-white group-hover:text-white transition-colors">
-                                                            {tech.name}
-                                                        </h4>
-                                                        <p className="text-[11px] sm:text-xs text-white/50 line-clamp-1 mt-0.5 font-normal">
-                                                            {tech.summary}
-                                                        </p>
-                                                    </div>
-
-                                                    {/* Bottom Row: Proficiency & Level Bars */}
-                                                    <div className="pt-2.5 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-white/40">
-                                                        <div className="flex items-center gap-1.5">
-                                                            <span className="w-1.5 h-1.5 rounded-full bg-white/70 shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
-                                                            <span className="tracking-wider uppercase text-[10px] text-white/60">
-                                                                {tech.level}
-                                                            </span>
-                                                        </div>
-
-                                                        <div className="flex items-center gap-1" title={tech.level}>
-                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' || tech.level === 'Advanced' || tech.level === 'Proficient' ? 'bg-white/80' : 'bg-white/20'}`} />
-                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' || tech.level === 'Advanced' || tech.level === 'Proficient' ? 'bg-white/80' : 'bg-white/20'}`} />
-                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' || tech.level === 'Advanced' ? 'bg-white/80' : 'bg-white/20'}`} />
-                                                            <span className={`w-3.5 h-1 rounded-sm ${tech.level === 'Expert' ? 'bg-white/80' : 'bg-white/20'}`} />
-                                                        </div>
-                                                    </div>
+                                                    <span className="text-sm sm:text-base font-medium text-white/90 group-hover:text-white transition-colors">
+                                                        {tech.name}
+                                                    </span>
                                                 </div>
                                             ))}
                                         </motion.div>
@@ -482,7 +408,7 @@ const SkillsPage = () => {
                                                 onClick={() => goToCategory(i)}
                                                 className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                                                     i === activeIndex
-                                                        ? 'w-7 sm:w-8 bg-white'
+                                                        ? 'w-7 sm:w-8 bg-[#2b4bff] shadow-[0_0_8px_rgba(43,75,255,0.6)]'
                                                         : 'w-2 bg-white/20 hover:bg-white/40'
                                                 }`}
                                                 aria-label={`Switch to ${c.name}`}
