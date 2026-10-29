@@ -264,12 +264,6 @@ const SkillsPage = () => {
                         </div>
                     </header>
 
-                    {/* ── Index / Explorer Sub-header ── */}
-                    <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-3 font-mono text-xs text-white/40 tracking-wider">
-                        <span>( INDEX )</span>
-                        <span className="hidden sm:inline">HOVER, CLICK OR USE ↑ ↓ TO EXPLORE</span>
-                    </div>
-
                     {/* ── 2-Column Layout: Left List & Right Bento Card ── */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
                         

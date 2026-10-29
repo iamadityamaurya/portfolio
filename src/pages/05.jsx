@@ -30,7 +30,7 @@ const socials = [
     { name: 'X', url: 'https://x.com/aditya_maurya0' },
 ];
 
-const fieldClass = 'w-full bg-transparent border-0 border-b border-paper/20 py-3 text-base text-paper placeholder:text-paper/30 outline-none focus:border-accent focus:shadow-[0_2px_12px_rgba(43,75,255,0.25)] transition-all duration-300';
+const fieldClass = 'w-full bg-transparent border-0 border-b border-paper/20 py-3 text-base text-paper placeholder:text-paper/30 outline-none focus:border-paper transition-all duration-300';
 
 // Generates random non-overlapping coordinates across the canvas
 // with an exclusion zone around the center title & buttons.
@@ -239,7 +239,7 @@ const ContactPage = () => {
 
             <div className="mx-auto grid max-w-6xl gap-10 px-4 py-24 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
                 <div>
-                    <p className="label text-muted">( Or write )</p>
+                    
                     <h3 className="display mt-4 text-[clamp(2rem,5vw,4rem)]">Send a<br />message</h3>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-6">
