@@ -1,4 +1,3 @@
-import { sfx } from '../lib/audio';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projectsData, shortTitle } from '../data/projects';
@@ -77,10 +76,8 @@ export const ProjectsPage = () => {
                             <button
                                 data-row
                                 onClick={() => {
-                                    sfx();
                                     setSelected(project);
                                 }}
-                                onMouseEnter={() => sfx()}
                                 className="flex w-full items-center justify-between gap-6 border-t border-paper/20 px-4 py-5 text-left sm:px-8 cursor-pointer group hover:bg-white/[0.015] transition-colors"
                             >
                                 <div className="flex items-center gap-4">

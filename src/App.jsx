@@ -31,9 +31,7 @@ import Navbar from './components/Navbar';
 import TerminalModal from './components/TerminalModal';
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
-import SoundToggle from './components/SoundToggle';
 import { initLenis, ScrollTrigger, gsap, reducedMotion } from './lib/scroll';
-import { sfx, unlock } from './lib/audio';
 
 const pageMetadata = {
   
@@ -94,29 +92,7 @@ function SeoMeta() {
   return null;
 }
 
-// Whoosh when a home section scrolls into view, and on every route change.
-function SectionSounds() {
-  const { pathname } = useLocation();
-  const first = useRef(true);
 
-  useEffect(() => {
-    if (first.current) {
-      first.current = false;
-      return;
-    }
-    sfx();
-  }, [pathname]);
-
-  useEffect(() => {
-    if (pathname !== '/') return;
-    const triggers = ['about', 'projects', 'skills', 'contact'].map((id) =>
-      ScrollTrigger.create({ trigger: `#${id}`, start: 'top 60%', onEnter: sfx, onEnterBack: sfx })
-    );
-    return () => triggers.forEach((t) => t.kill());
-  }, [pathname]);
-
-  return null;
-}
 
 // Curtain that lifts off each new route (douglus.site-style sweep, reveal half only).
 function RouteCurtain() {
@@ -144,8 +120,6 @@ function App() {
 
   useEffect(() => {
     initLenis();
-    window.addEventListener('pointerdown', unlock, { once: true });
-    return () => window.removeEventListener('pointerdown', unlock);
   }, []);
 
   // Pins and spacers depend on final layout: refresh once fonts are in.
@@ -171,11 +145,9 @@ function App() {
       <SeoMeta />
       <ScrollProgress />
       <ScrollToTop />
-      <SectionSounds />
       <RouteCurtain />
       {!ready && <Preloader onDone={() => setReady(true)} />}
       <Navbar />
-      <SoundToggle />
       <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
 
       <Routes>

@@ -120,7 +120,6 @@ const ContactPage = () => {
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const copyEmail = () => {
-        sfx();
         navigator.clipboard.writeText(EMAIL);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { scrollToTarget } from '../lib/scroll';
-import { sfx } from '../lib/audio';
 
 const navItems = [
   { label: 'work', to: '/experience' },
@@ -27,7 +26,6 @@ export const Navbar = () => {
 
   const goHash = (e, hash) => {
     e.preventDefault();
-    sfx();
     if (pathname === '/') scrollToTarget(`#${hash}`);
     else navigate('/', { state: { scrollTo: hash } });
   };
@@ -42,7 +40,6 @@ export const Navbar = () => {
     >
       <Link
         to="/"
-        onMouseEnter={() => sfx()}
         className="group flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight select-none cursor-pointer"
         aria-label="Aditya Kumar Maurya, home"
       >
@@ -82,7 +79,6 @@ export const Navbar = () => {
               to={item.to}
               onMouseEnter={() => {
                 setHoveredIndex(idx);
-                sfx();
               }}
               className={`transition-opacity duration-200 relative ${
                 isCurrent ? 'opacity-100 text-white font-medium' : 'opacity-65 hover:opacity-100'
@@ -97,7 +93,6 @@ export const Navbar = () => {
               onClick={(e) => goHash(e, item.hash)}
               onMouseEnter={() => {
                 setHoveredIndex(idx);
-                sfx();
               }}
               className="opacity-65 hover:opacity-100 transition-opacity duration-200 relative"
             >
