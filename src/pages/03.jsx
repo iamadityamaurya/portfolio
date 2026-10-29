@@ -1,3 +1,4 @@
+import { sfx } from '../lib/audio';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projectsData, shortTitle } from '../data/projects';
@@ -75,10 +76,19 @@ export const ProjectsPage = () => {
                         <article key={project.id}>
                             <button
                                 data-row
-                                onClick={() => setSelected(project)}
-                                className="flex w-full items-center justify-between gap-6 border-t border-paper/20 px-4 py-5 text-left sm:px-8 cursor-pointer group"
+                                onClick={() => {
+                                    sfx();
+                                    setSelected(project);
+                                }}
+                                onMouseEnter={() => sfx()}
+                                className="flex w-full items-center justify-between gap-6 border-t border-paper/20 px-4 py-5 text-left sm:px-8 cursor-pointer group hover:bg-white/[0.015] transition-colors"
                             >
-                                <span className="font-mono text-sm text-muted sm:text-base">[{String(i + 1).padStart(2, '0')}]</span>
+                                <div className="flex items-center gap-4">
+                                    <span className="font-mono text-sm text-muted sm:text-base">[{String(i + 1).padStart(2, '0')}]</span>
+                                    <span className="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                                        View case study →
+                                    </span>
+                                </div>
                                 <span className="display truncate text-right text-[clamp(1.6rem,4.4vw,4rem)] transition-colors group-hover:text-accent">
                                     {shortTitle(project.title)}
                                 </span>
@@ -99,7 +109,7 @@ export const ProjectsPage = () => {
                                         alt={shortTitle(project.title)}
                                         loading="lazy"
                                         decoding="async"
-                                        className="h-full w-full object-cover pin:absolute pin:right-0 pin:top-0 pin:w-[71vw]"
+                                        className="h-full w-full object-cover pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
                                     />
                                 </div>
                             </div>

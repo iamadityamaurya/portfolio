@@ -286,11 +286,18 @@ const SkillsPage = () => {
                                         key={cat.number}
                                         onMouseEnter={() => handleCategoryHover(idx)}
                                         onClick={() => goToCategory(idx)}
-                                        className="group relative flex items-center justify-between py-4 sm:py-5 cursor-pointer select-none transition-colors"
+                                        className="group relative flex items-center justify-between py-4 sm:py-5 cursor-pointer select-none transition-colors px-2.5"
                                     >
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="activeCategoryBackground"
+                                                className="absolute inset-0 bg-white/[0.04] rounded-xl border border-white/[0.06] pointer-events-none"
+                                                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                                            />
+                                        )}
                                         {/* Number */}
                                         <span
-                                            className={`font-mono text-sm sm:text-base font-medium transition-colors duration-200 ${
+                                            className={`font-mono text-sm sm:text-base font-medium transition-colors duration-200 relative z-10 ${
                                                 isActive ? 'text-[#2b4bff]' : 'text-white/30 group-hover:text-white/60'
                                             }`}
                                         >
@@ -298,16 +305,20 @@ const SkillsPage = () => {
                                         </span>
 
                                         {/* Title + Blue Dot indicator */}
-                                        <div className="flex items-center gap-3 flex-1 ml-5 sm:ml-7">
+                                        <div className="flex items-center gap-3 flex-1 ml-5 sm:ml-7 relative z-10">
                                             {isActive ? (
-                                                <span className="w-2.5 h-2.5 rounded-full bg-[#2b4bff] shadow-[0_0_10px_#2b4bff] shrink-0" />
+                                                <motion.span
+                                                    layoutId="activeCategoryDot"
+                                                    className="w-2.5 h-2.5 rounded-full bg-[#2b4bff] shadow-[0_0_12px_#2b4bff] shrink-0"
+                                                    transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+                                                />
                                             ) : (
                                                 <span className="w-2.5 h-2.5 rounded-full bg-transparent shrink-0" />
                                             )}
                                             <h3
                                                 className={`text-xl sm:text-2xl lg:text-[1.75rem] font-bold tracking-tight transition-all duration-200 ${
                                                     isActive
-                                                        ? 'text-white translate-x-0'
+                                                        ? 'text-white translate-x-0 font-extrabold'
                                                         : 'text-white/35 group-hover:text-white/70 group-hover:translate-x-1'
                                                 }`}
                                             >
@@ -352,33 +363,71 @@ const SkillsPage = () => {
                                 </div>
 
                                 {/* ── Animated 2-Column List of Technologies ── */}
-                                <div className="relative z-10 my-6 sm:my-8 flex-1 flex flex-col justify-center">
+                                <div className="relative z-10 my-4 sm:my-6 flex-1 flex flex-col justify-center">
                                     <AnimatePresence mode="wait">
                                         <motion.div
                                             key={activeCategory.number}
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-                                            className="grid grid-cols-2 gap-x-8 sm:gap-x-14 gap-y-7 sm:gap-y-8 py-3 sm:py-5"
+                                            initial="hidden"
+                                            animate="show"
+                                            exit="exit"
+                                            variants={{
+                                                hidden: { opacity: 0 },
+                                                show: {
+                                                    opacity: 1,
+                                                    transition: {
+                                                        staggerChildren: 0.04,
+                                                        delayChildren: 0.02,
+                                                    },
+                                                },
+                                                exit: { opacity: 0, transition: { duration: 0.15 } },
+                                            }}
+                                            className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-3 sm:gap-y-3.5 py-2"
                                         >
                                             {activeCategory.technologies.map((tech) => (
-                                                <div
+                                                <motion.div
                                                     key={tech.name}
-                                                    className="group flex items-center gap-4 sm:gap-4.5 select-none cursor-default"
+                                                    variants={{
+                                                        hidden: { opacity: 0, y: 10, scale: 0.97 },
+                                                        show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 320, damping: 26 } },
+                                                    }}
+                                                    whileHover={{ scale: 1.03, x: 3 }}
+                                                    className="group flex items-center justify-between p-2.5 sm:p-3 rounded-xl border border-white/[0.04] bg-white/[0.015] hover:bg-white/[0.05] hover:border-white/[0.1] transition-all select-none cursor-default shadow-sm"
                                                 >
-                                                    <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
-                                                        <img
-                                                            src={tech.icon}
-                                                            alt={tech.name}
-                                                            className="w-6 h-6 sm:w-7 sm:h-7 object-contain group-hover:scale-110 transition-transform duration-200"
-                                                            loading="lazy"
-                                                        />
+                                                    <div className="flex items-center gap-3 min-w-0">
+                                                        <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center shrink-0 group-hover:border-[#2b4bff]/50 group-hover:shadow-[0_0_10px_rgba(43,75,255,0.3)] transition-all">
+                                                            <img
+                                                                src={tech.icon}
+                                                                alt={tech.name}
+                                                                className="w-5 h-5 object-contain group-hover:scale-110 transition-transform duration-200"
+                                                                loading="lazy"
+                                                            />
+                                                        </div>
+                                                        <div className="min-w-0">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-sm sm:text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors truncate">
+                                                                    {tech.name}
+                                                                </span>
+                                                                {tech.role && (
+                                                                    <span className="font-mono text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-white/[0.06] text-white/50 border border-white/[0.04]">
+                                                                        {tech.role}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                            {tech.summary && (
+                                                                <p className="text-[11px] text-white/40 truncate max-w-[170px] sm:max-w-[210px] group-hover:text-white/60 transition-colors mt-0.5">
+                                                                    {tech.summary}
+                                                                </p>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                    <span className="text-base sm:text-lg font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors">
-                                                        {tech.name}
-                                                    </span>
-                                                </div>
+
+                                                    {tech.level && (
+                                                        <div className="hidden md:flex items-center gap-1.5 shrink-0 pl-2">
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-[#2b4bff] shadow-[0_0_6px_#2b4bff]" />
+                                                            <span className="font-mono text-[9.5px] text-white/40">{tech.level}</span>
+                                                        </div>
+                                                    )}
+                                                </motion.div>
                                             ))}
                                         </motion.div>
                                     </AnimatePresence>
@@ -387,19 +436,34 @@ const SkillsPage = () => {
                                 {/* ── Card Bottom Footer Bar ── */}
                                 <div className="relative z-10 flex items-center justify-between pt-4 border-t border-white/[0.06]">
                                     {/* Pagination pill segments */}
-                                    <div className="flex items-center gap-1.5">
-                                        {categories.map((c, i) => (
-                                            <button
-                                                key={c.number}
-                                                onClick={() => goToCategory(i)}
-                                                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                                                    i === activeIndex
-                                                        ? 'w-7 sm:w-8 bg-[#2b4bff] shadow-[0_0_8px_rgba(43,75,255,0.6)]'
-                                                        : 'w-2 bg-white/20 hover:bg-white/40'
-                                                }`}
-                                                aria-label={`Switch to ${c.name}`}
-                                            />
-                                        ))}
+                                    <div className="flex items-center gap-2.5">
+                                        <div className="flex items-center gap-1.5">
+                                            {categories.map((c, i) => (
+                                                <button
+                                                    key={c.number}
+                                                    onClick={() => goToCategory(i)}
+                                                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer relative overflow-hidden ${
+                                                        i === activeIndex
+                                                            ? 'w-8 sm:w-10 bg-[#2b4bff] shadow-[0_0_8px_rgba(43,75,255,0.7)]'
+                                                            : 'w-2 bg-white/20 hover:bg-white/40'
+                                                    }`}
+                                                    aria-label={`Switch to ${c.name}`}
+                                                >
+                                                    {i === activeIndex && isPlaying && (
+                                                        <motion.div
+                                                            key={activeCategory.number}
+                                                            initial={{ width: '0%' }}
+                                                            animate={{ width: '100%' }}
+                                                            transition={{ duration: 3.4, ease: 'linear' }}
+                                                            className="h-full bg-white/70 rounded-full"
+                                                        />
+                                                    )}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <span className="font-mono text-[10.5px] text-white/40 ml-1 select-none">
+                                            {String(activeIndex + 1).padStart(2, '0')} / {String(categories.length).padStart(2, '0')}
+                                        </span>
                                     </div>
 
                                     {/* Controls: status + play/pause + prev/next */}

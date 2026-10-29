@@ -30,7 +30,7 @@ const socials = [
     { name: 'X', url: 'https://x.com/aditya_maurya0' },
 ];
 
-const fieldClass = 'w-full bg-transparent border-0 border-b border-paper/20 py-3 text-base text-paper placeholder:text-paper/30 outline-none focus:border-accent transition-colors';
+const fieldClass = 'w-full bg-transparent border-0 border-b border-paper/20 py-3 text-base text-paper placeholder:text-paper/30 outline-none focus:border-accent focus:shadow-[0_2px_12px_rgba(43,75,255,0.25)] transition-all duration-300';
 
 // Generates random non-overlapping coordinates across the canvas
 // with an exclusion zone around the center title & buttons.
@@ -120,6 +120,7 @@ const ContactPage = () => {
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const copyEmail = () => {
+        sfx();
         navigator.clipboard.writeText(EMAIL);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);

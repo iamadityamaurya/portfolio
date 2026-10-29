@@ -328,7 +328,23 @@ const AboutPage = () => {
                                 </div>
 
                                 {/* Clean Monochrome CTA Button */}
-                                <div className="mt-8 sm:mt-10">
+                                {/* Mini Stats Strip */}
+                                <div className="mt-8 grid grid-cols-3 gap-3 border-t border-white/[0.08] pt-6">
+                                    <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all">
+                                        <span className="block font-bold text-lg sm:text-xl text-white">16+</span>
+                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">Builds</span>
+                                    </div>
+                                    <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all">
+                                        <span className="block font-bold text-lg sm:text-xl text-[#2b4bff]">1st</span>
+                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">Robotics Wins</span>
+                                    </div>
+                                    <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all">
+                                        <span className="block font-bold text-lg sm:text-xl text-white">IoT</span>
+                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">&amp; Firmware</span>
+                                    </div>
+                                </div>
+
+                                <div className="mt-6 sm:mt-8">
                                     <button
                                         data-action-btn
                                         onClick={() => scrollToTarget('#contact')}

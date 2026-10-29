@@ -1,3 +1,20 @@
+import { motion, useScroll, useSpring } from 'framer-motion';
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#2b4bff] via-[#5c75ff] to-[#93a4ff] origin-left z-[100] pointer-events-none shadow-[0_0_8px_rgba(43,75,255,0.8)]"
+      style={{ scaleX }}
+    />
+  );
+}
 import { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './pages/01';
@@ -152,6 +169,7 @@ function App() {
   return (
     <Router>
       <SeoMeta />
+      <ScrollProgress />
       <ScrollToTop />
       <SectionSounds />
       <RouteCurtain />
