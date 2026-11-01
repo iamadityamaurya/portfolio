@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { projectsData, shortTitle } from '../data/projects';
-import ProjectModal from '../components/ProjectModal';
 import { gsap } from '../lib/scroll';
 
 const HOME_PROJECTS = ['bunkmait', 'reelflow-pipeline', 'deepquery-agent', 'opencodebot'];
@@ -11,7 +10,7 @@ const HOME_PROJECTS = ['bunkmait', 'reelflow-pipeline', 'deepquery-agent', 'open
 const NAV_H = 80; // pinned stage starts below the fixed nav
 
 export const ProjectsPage = () => {
-    const [selected, setSelected] = useState(null);
+    const navigate = useNavigate();
     const pinRef = useRef(null);
     const projects = HOME_PROJECTS.map((id) => projectsData.find((p) => p.id === id)).filter(Boolean);
 
@@ -76,7 +75,7 @@ export const ProjectsPage = () => {
                             <button
                                 data-row
                                 onClick={() => {
-                                    setSelected(project);
+                                    navigate('/projects', { state: { projectId: project.id } });
                                 }}
                                 className="flex w-full items-center justify-between gap-6 border-t border-paper/20 px-4 py-5 text-left sm:px-8 cursor-pointer group hover:bg-white/[0.015] transition-colors"
                             >
@@ -98,7 +97,7 @@ export const ProjectsPage = () => {
                                 <div
                                     data-wrap
                                     data-cursor="view"
-                                    onClick={() => setSelected(project)}
+                                    onClick={() => navigate('/projects', { state: { projectId: project.id } })}
                                     className="overflow-hidden pin:absolute pin:top-0 pin:h-full nopin:aspect-video cursor-pointer"
                                 >
                                     <img
@@ -115,8 +114,6 @@ export const ProjectsPage = () => {
                 </div>
                 </div>
             </div>
-
-            <ProjectModal project={selected} onClose={() => setSelected(null)} />
         </section>
     );
 };

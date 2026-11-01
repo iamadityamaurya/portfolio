@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, ExternalLink, ArrowUpRight, Github, 
   Check, Copy, Terminal, Layers, CheckCircle2,
-  Lock, Globe, Sparkles
+  Lock, Globe, Sparkles, Download
 } from 'lucide-react';
 import { lenis } from '../lib/scroll';
 
@@ -46,7 +46,7 @@ export const ProjectModal = ({ project, onClose }) => {
     <AnimatePresence>
       <div 
         data-lenis-prevent="true"
-        className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden"
+        className="fixed inset-0 z-[100] flex justify-end overflow-hidden"
       >
         {/* Backdrop */}
         <motion.div
@@ -54,19 +54,19 @@ export const ProjectModal = ({ project, onClose }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/85 backdrop-blur-xl"
+          className="fixed inset-0 bg-black/75 backdrop-blur-md"
         />
 
-        {/* Modal Window */}
+        {/* Slide-over Side Drawer */}
         <motion.div
           data-lenis-prevent="true"
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
-          initial={{ opacity: 0, scale: 0.94, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 20 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#090b10] border border-paper/15 shadow-[0_30px_100px_rgba(0,0,0,0.95)] z-10 text-paper flex flex-col overscroll-contain"
+          initial={{ x: '100%', opacity: 0.5 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: '100%', opacity: 0 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-4xl h-full overflow-y-auto bg-[#090b10] border-l border-paper/15 shadow-[-30px_0_100px_rgba(0,0,0,0.95)] z-10 text-paper flex flex-col overscroll-contain"
         >
           {/* 1. Sticky Control Deck */}
           <div className="sticky top-0 z-30 flex items-center justify-between px-5 sm:px-8 py-4 bg-[#090b10]/95 backdrop-blur-2xl border-b border-paper/10">
@@ -154,7 +154,7 @@ export const ProjectModal = ({ project, onClose }) => {
 
             {/* Floating Action Launchpad */}
             <div className="mt-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-paper/10 bg-paper/[0.02]">
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 {project.links?.demo && (
                   <a
                     href={project.links.demo}
@@ -164,6 +164,17 @@ export const ProjectModal = ({ project, onClose }) => {
                   >
                     <span>Launch Live App</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                {project.links?.apk && (
+                  <a
+                    href={project.links.apk}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-400 font-mono text-xs font-bold transition-all shadow-lg hover:scale-[1.02] cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download APK (v1.0.0)</span>
                   </a>
                 )}
                 {project.links?.github && (
@@ -319,6 +330,16 @@ export const ProjectModal = ({ project, onClose }) => {
                     className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-paper hover:bg-orange hover:text-white text-ink font-mono text-xs font-bold transition-all shadow-md cursor-pointer"
                   >
                     <span>Live App ↗</span>
+                  </a>
+                )}
+                {project.links?.apk && (
+                  <a
+                    href={project.links.apk}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 font-mono text-xs text-emerald-300 font-semibold transition-all cursor-pointer"
+                  >
+                    <span>Download APK ↗</span>
                   </a>
                 )}
                 {project.links?.github && (

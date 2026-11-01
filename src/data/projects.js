@@ -1,3 +1,4 @@
+import openwhisprBanner from '../assets/project_png/openwhispr-showcase.png';
 import deepResearchBanner from '../assets/project_png/deepresearch-showcase.png';
 import reelflowBanner from '../assets/project_png/reelflow-showcase.png';
 import bunkmaitBanner from '../assets/project_png/bunkmait-showcase.png';
@@ -16,6 +17,32 @@ import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-show
 import opencodebotBanner from '../assets/project_png/opencodebot-showcase.svg';
 
 export const projectsData = [
+  {
+    id: 'openwhispr',
+    title: 'OpenWhispr Android: Floating AI Voice Companion',
+    tagline: 'Native floating AI voice companion for Android that fixes speech-to-text with auto-persona switching and sub-0.4s latency',
+    category: 'Android & AI',
+    categorySlug: 'android',
+    badge: 'Native Android AI (v1.0.0)',
+    image: openwhisprBanner,
+    fullDescription: 'I built OpenWhispr as a native, floating AI voice companion for Android that fixes speech-to-text once and for all. Instead of literal, raw transcriptions filled with "um", "uh", and rambles, OpenWhispr streams audio through Deepgram Nova-3 for real-time transcription and Groq Llama 3.3 70B for lightning-fast contextual cleanup (<0.4s end-to-end latency). A floating dual-button capsule pill docks seamlessly 48dp above your active software keyboard, automatically sensing whether you are in WhatsApp, Gmail, or Notion, and switches cleanup personas on the fly. Clean, perfectly punctuated, executive-grade text is injected directly into your active input field via native Android overlay and accessibility services. Built with a 100% Bring-Your-Own-Key (BYOK) architecture with Android Hardware Keystore encryption, ensuring zero middleman servers and complete data sovereignty.',
+    highlights: [
+      'Floating dual-button capsule docks dynamically 48dp above your active software keyboard',
+      'Zero-tap auto-persona sensing detects whether you are in WhatsApp, Gmail, or Notion and switches cleanup modes on the fly',
+      'Ultra-low-latency pipeline streaming audio through Deepgram Nova-3 and Groq Llama 3.3 70B (<0.4s latency)',
+      'Injects clean, perfectly punctuated, executive-grade text directly into your active application',
+      '100% BYOK (Bring Your Own Key) & Android Hardware Keystore encrypted with no middleman servers'
+    ],
+    tech: ['React Native', 'Kotlin Native Overlay', 'Android AccessibilityService', 'Deepgram Nova-3', 'Groq (Llama 3.3 70B)', 'Hardware Keystore', 'WebSocket Audio Stream'],
+    links: {
+      demo: 'https://openwhispr-nine.vercel.app',
+      apk: 'https://github.com/iamadityamaurya/openwhispr/releases/download/v1.0.0/OpenWisper-Production.apk',
+      github: 'https://github.com/iamadityamaurya/openwhispr'
+    },
+    featured: true,
+    mainPageShow: false,
+    stat: '<0.4s Latency'
+  },
   {
     id: 'reelflow-pipeline',
     title: 'ReelFlow: Autonomous AI Reel Pipeline',

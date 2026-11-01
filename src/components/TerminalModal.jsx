@@ -150,6 +150,11 @@ export const TerminalModal = ({ isOpen, onClose }) => {
                         Demo <ExternalLink className="w-3 h-3" />
                       </a>
                     )}
+                    {p.links?.apk && (
+                      <a href={p.links.apk} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline inline-flex items-center gap-1">
+                        APK <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
                     {p.links?.github && (
                       <a href={p.links.github} target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:underline inline-flex items-center gap-1">
                         Code <ExternalLink className="w-3 h-3" />
