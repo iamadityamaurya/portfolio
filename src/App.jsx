@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound';
 
 import Navbar from './components/Navbar';
 import TerminalModal from './components/TerminalModal';
+import TerminalPill from './components/TerminalPill';
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
 import { initLenis, ScrollTrigger, gsap, reducedMotion } from './lib/scroll';
@@ -129,7 +130,8 @@ function App() {
       <ScrollToTop />
       <RouteCurtain />
       {!ready && <Preloader onDone={() => setReady(true)} />}
-      <Navbar />
+      <Navbar onOpenTerminal={() => setIsTerminalOpen(true)} />
+      <TerminalPill isOpen={isTerminalOpen} onToggle={() => setIsTerminalOpen(prev => !prev)} />
       <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
 
       <Routes>

@@ -287,9 +287,8 @@ const ContactPage = () => {
                 </form>
             </div>
 
-            <footer className="flex flex-wrap justify-between gap-4 border-t border-paper/10 px-4 py-6 font-mono text-xs text-muted sm:px-8">
+            <footer className="flex flex-wrap justify-between items-center gap-4 border-t border-paper/10 px-4 py-6 font-mono text-xs text-muted sm:px-8">
                 <span>© {new Date().getFullYear()} Aditya Kumar Maurya</span>
-                <span>Press ` for terminal</span>
             </footer>
         </section>
     );

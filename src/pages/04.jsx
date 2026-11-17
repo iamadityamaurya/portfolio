@@ -287,13 +287,8 @@ const SkillsPage = () => {
                                             {cat.number}
                                         </span>
 
-                                        {/* Title + Blue Dot indicator */}
-                                        <div className="flex items-center gap-3 flex-1 ml-5 sm:ml-7">
-                                            {isActive ? (
-                                                <span className="w-2.5 h-2.5 rounded-full bg-[#2b4bff] shadow-[0_0_10px_#2b4bff] shrink-0" />
-                                            ) : (
-                                                <span className="w-2.5 h-2.5 rounded-full bg-transparent shrink-0" />
-                                            )}
+                                        {/* Title */}
+                                        <div className="flex items-center flex-1 ml-5 sm:ml-7">
                                             <h3
                                                 className={`text-xl sm:text-2xl lg:text-[1.75rem] font-bold tracking-tight transition-all duration-200 ${
                                                     isActive

@@ -295,7 +295,10 @@ export const TerminalModal = ({ isOpen, onClose }) => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6">
+      <div 
+        data-lenis-prevent
+        className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -307,6 +310,7 @@ export const TerminalModal = ({ isOpen, onClose }) => {
 
         {/* Terminal Modal Window */}
         <motion.div
+          data-lenis-prevent
           initial={{ opacity: 0, scale: 0.96, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 15 }}
@@ -355,7 +359,10 @@ export const TerminalModal = ({ isOpen, onClose }) => {
 
           {/* Output Area */}
           <div
-            className="flex-1 p-4 overflow-y-auto space-y-3 font-mono text-slate-200 text-xs sm:text-sm"
+            data-lenis-prevent
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            className="flex-1 p-4 overflow-y-auto overscroll-contain space-y-3 font-mono text-slate-200 text-xs sm:text-sm"
             onClick={() => inputRef.current?.focus()}
           >
             {history.map((item, index) => {
