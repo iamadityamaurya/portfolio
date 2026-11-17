@@ -1,5 +1,6 @@
 import { useLayoutEffect, useMemo, useRef, useState, useEffect } from 'react';
 import { Check, Copy, Loader2 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import { gsap, reducedMotion } from '../lib/scroll';
 
 const EMAIL = 'adityamaurya1947@gmail.com';
@@ -125,6 +126,29 @@ const ContactPage = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
+    const triggerConfetti = () => {
+        const count = 180;
+        const defaults = {
+            origin: { y: 0.7 },
+            colors: ['#2b4bff', '#5c75ff', '#93a4ff', '#ece9e2', '#ff6a3d'],
+            zIndex: 9999,
+        };
+
+        const fire = (particleRatio, opts) => {
+            confetti({
+                ...defaults,
+                ...opts,
+                particleCount: Math.floor(count * particleRatio),
+            });
+        };
+
+        fire(0.25, { spread: 26, startVelocity: 55 });
+        fire(0.2, { spread: 60 });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1, { spread: 120, startVelocity: 45 });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -140,6 +164,7 @@ const ContactPage = () => {
             if (result.success) {
                 setSubmitStatus('success');
                 setFormData({ name: '', email: '', subject: '', message: '' });
+                triggerConfetti();
                 setTimeout(() => setSubmitStatus(null), 5000);
             } else {
                 console.error('Web3Forms error:', result);

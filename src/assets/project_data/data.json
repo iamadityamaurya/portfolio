@@ -196,7 +196,8 @@
       "Framer Motion"
     ],
     "links": {
-      "demo": "https://bunkmait.adityamaurya.dev/"
+      "demo": "https://bunkmait.adityamaurya.dev/",
+      "github": "https://github.com/iamadityamaurya/BunkMAIT"
     },
     "featured": true,
     "mainPageShow": true,
@@ -327,7 +328,8 @@
       "Node.js"
     ],
     "links": {
-      "github": "https://github.com/iamadityamaurya/unlimited_storage"
+      "github": "https://github.com/iamadityamaurya/unlimited_storage",
+      "demo": "https://nexgenstorage.adityamaurya.dev/"
     },
     "featured": true,
     "mainPageShow": false,

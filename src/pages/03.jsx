@@ -81,7 +81,6 @@ export const ProjectsPage = () => {
                                 className="flex w-full items-center justify-between gap-6 border-t border-paper/20 px-4 py-5 text-left sm:px-8 cursor-pointer group hover:bg-white/[0.015] transition-colors"
                             >
                                 <div className="flex items-center gap-4">
-                                    <span className="font-mono text-sm text-muted sm:text-base">[{String(i + 1).padStart(2, '0')}]</span>
                                     <span className="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                                         View case study →
                                     </span>

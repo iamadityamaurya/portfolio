@@ -82,14 +82,14 @@
 }
 
 @layer components {
-  /* Wide, heavy uppercase display type */
+  /* Refined, modern display typography without horizontal distortion */
   .display {
     font-family: var(--font-sans);
-    font-stretch: 125%;
+    font-stretch: normal;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.03em;
-    line-height: 0.85;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
   }
 
   .label {
@@ -108,3 +108,19 @@
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* Infinite Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

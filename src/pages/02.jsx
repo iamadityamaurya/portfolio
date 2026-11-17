@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { gsap, reducedMotion, scrollToTarget } from '../lib/scroll';
 
 const LINE_1 = 'FULL-STACK & IOT';
@@ -187,16 +188,6 @@ const AboutPage = () => {
                         {/* ── Left Column: Clean Headline & Subtitle ── */}
                         <div className="lg:col-span-6 space-y-5 sm:space-y-7">
                             <div>
-                                {/* Section kicker */}
-                                <div className="overflow-hidden">
-                                    <p
-                                        data-rise-line
-                                        className="label mb-4 sm:mb-6 text-paper/50"
-                                    >
-                                        01 — About
-                                    </p>
-                                </div>
-
                                 {/* Massive Display Headline */}
                                 <h2
                                     data-headline
@@ -334,25 +325,38 @@ const AboutPage = () => {
                                         <span className="block font-bold text-lg sm:text-xl text-white">16+</span>
                                         <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">Builds</span>
                                     </div>
-                                    <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all">
-                                        <span className="block font-bold text-lg sm:text-xl text-[#2b4bff]">1st</span>
-                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">Robotics Wins</span>
-                                    </div>
+                                    <Link
+                                        to="/hackathon-winning"
+                                        className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all block cursor-pointer group"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <span className="block font-bold text-lg sm:text-xl text-[#2b4bff]">3x</span>
+                                            <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-white transition-colors" />
+                                        </div>
+                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider group-hover:text-paper/70 transition-colors">Winner</span>
+                                    </Link>
                                     <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all">
                                         <span className="block font-bold text-lg sm:text-xl text-white">IoT</span>
                                         <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">&amp; Firmware</span>
                                     </div>
                                 </div>
 
-                                <div className="mt-6 sm:mt-8">
+                                <div data-action-btn className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
                                     <button
-                                        data-action-btn
                                         onClick={() => scrollToTarget('#contact')}
                                         className="group inline-flex items-center gap-3 px-6 sm:px-7 py-3.5 rounded-full bg-paper hover:bg-paper/90 text-ink font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg cursor-pointer"
                                     >
                                         Get in touch
                                         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                                     </button>
+
+                                    <Link
+                                        to="/hackathon-winning"
+                                        className="group inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full border border-paper/25 hover:border-paper bg-transparent hover:bg-paper hover:text-ink text-paper font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg cursor-pointer"
+                                    >
+                                        3x Winner
+                                        <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                    </Link>
                                 </div>
                             </div>
 

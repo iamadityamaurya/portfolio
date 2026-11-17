@@ -294,12 +294,9 @@ export const AllProjectsPage = () => {
                               decoding="async"
                               className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-6">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                               <span className="inline-flex items-center gap-2 rounded-full bg-orange px-4 py-1.5 font-mono text-xs font-semibold text-ink shadow-lg">
                                 Open Split Case Study →
-                              </span>
-                              <span className="font-mono text-xs text-paper/80 hidden sm:inline">
-                                {project.stat || 'Production Ready'}
                               </span>
                             </div>
                           </div>
