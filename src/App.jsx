@@ -57,7 +57,7 @@ const pageMetadata = {
   },
 };
 
-const siteUrl = 'https://iamadityamaurya.vercel.app';
+const siteUrl = 'https://www.adityamaurya.dev';
 
 const setMetaContent = (selector, content) => {
   const element = document.querySelector(selector);

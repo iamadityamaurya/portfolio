@@ -225,7 +225,7 @@ export const projectsData = [
     ],
     tech: ['React', 'Tailwind CSS', 'Vite', 'Local SQL Engine', 'In-Memory CSV', 'TypeScript'],
     links: {
-      demo: 'https://nexgenquery.vercel.app/',
+      demo: 'https://nexgenquery.adityamaurya.dev/',
       github: 'https://github.com/iamadityamaurya/nexgenquery'
     },
     featured: true,
@@ -272,7 +272,7 @@ export const projectsData = [
     ],
     tech: ['React', 'TypeScript', 'Prisma', 'Gemini AI', 'Tailwind CSS', 'Node.js'],
     links: {
-      demo: 'https://medscrapper.vercel.app/',
+      demo: 'https://medscrapper.adityamaurya.dev/',
       github: 'https://github.com/iamadityamaurya/med_scraper'
     },
     featured: true,
@@ -345,7 +345,7 @@ export const projectsData = [
     ],
     tech: ['React', 'Tailwind CSS', 'AI Analytics', 'Gemini AI', 'Chart.js', 'Node.js'],
     links: {
-      demo: 'https://restocker.vercel.app/',
+      demo: 'https://restocker.adityamaurya.dev/',
       github: 'https://github.com/iamadityamaurya/restocker_frontend'
     },
     featured: true,
@@ -369,7 +369,7 @@ export const projectsData = [
     ],
     tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'JWT'],
     links: {
-      demo: 'https://addybites.vercel.app',
+      demo: 'https://addybites.adityamaurya.dev',
       github: 'https://github.com/iamadityamaurya/addyBites'
     },
     featured: true,
@@ -393,7 +393,7 @@ export const projectsData = [
     ],
     tech: ['Motia Framework', 'React', 'JavaScript', 'Tailwind CSS', 'Vercel', 'Node.js'],
     links: {
-      demo: 'https://motia-project.vercel.app/',
+      demo: 'https://motia.adityamaurya.dev/',
       github: 'https://github.com/iamadityamaurya/motia_project'
     },
     featured: true,
@@ -417,7 +417,7 @@ export const projectsData = [
     ],
     tech: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite', 'Lucide Icons'],
     links: {
-      demo: 'https://iamadityamaurya.vercel.app',
+      demo: 'https://www.adityamaurya.dev',
       github: 'https://github.com/iamadityamaurya/portfolio'
     },
     featured: false,

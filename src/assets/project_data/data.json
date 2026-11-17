@@ -43,7 +43,7 @@
             "code": "https://github.com/iamadityamaurya/reel"
         },
         "featured": true,
-        "main_page_show": tru "vs"e
+        "main_page_show": true
     },
     {
         "id": 12,
@@ -139,7 +139,7 @@
             "Gemini AI"
         ],
         "links": {
-            "demo": "https://medscrapper.vercel.app/",
+            "demo": "https://medscrapper.adityamaurya.dev/",
             "code": "https://github.com/iamadityamaurya/med_scraper"
         },
         "featured": true,
@@ -159,7 +159,7 @@
             "Chart.js"
         ],
         "links": {
-            "demo": "https://restocker.vercel.app/",
+            "demo": "https://restocker.adityamaurya.dev/",
             "code": "https://github.com/iamadityamaurya/restocker_frontend"
         },
         "featured": true
@@ -177,7 +177,7 @@
             "MongoDB"
         ],
         "links": {
-            "demo": "https://addybites.vercel.app",
+            "demo": "https://addybites.adityamaurya.dev",
             "code": "https://github.com/iamadityamaurya/addyBites"
         },
         "featured": true
@@ -214,7 +214,7 @@
             "Vercel"
         ],
         "links": {
-            "demo": "https://motia-project.vercel.app/",
+            "demo": "https://motia.adityamaurya.dev/",
             "code": "https://github.com/iamadityamaurya/motia_project"
         },
         "featured": true
@@ -233,7 +233,7 @@
             "In-Memory CSV"
         ],
         "links": {
-            "demo": "https://nexgenquery.vercel.app/",
+            "demo": "https://nexgenquery.adityamaurya.dev/",
             "code": "https://github.com/iamadityamaurya/nexgenquery"
         },
         "featured": true,
@@ -273,6 +273,7 @@
             "React Router"
         ],
         "links": {
+            "demo": "https://nexgenstorage.adityamaurya.dev/",
             "code": "https://github.com/iamadityamaurya/unlimited_storage"
         },
         "featured": true,
