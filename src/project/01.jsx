@@ -6,30 +6,12 @@ import {
   Download, Check, Copy, Sparkles, Layers, Terminal, 
   CheckCircle2, Globe, Lock, ChevronRight, SlidersHorizontal, Grid
 } from 'lucide-react';
-import { projectsData, shortTitle } from '../data/projects';
+import { projectsData, shortTitle } from '../data/loadProjects';
 import { gsap, ScrollTrigger, SplitText, reducedMotion, lenis } from '../lib/scroll';
 
-const ORDER = [
-  'openwhispr',
-  'bunkmait',
-  'reelflow-pipeline',
-  'deepquery-agent',
-  'opencodebot',
-  'nexgenquery',
-  'nexgenstorage',
-  'medscrapper',
-  'ai-filler-google-form',
-  'live-text-ocr',
-  'alpha-line-follower',
-  'fireshield',
-  'drive-stream-downloader',
-  'restocker',
-  'addybites',
-  'motia-onboarding',
-  'portfolio-v1',
-];
-
-const projects = ORDER.map((id) => projectsData.find((p) => p.id === id)).filter(Boolean);
+// Projects shown on the projects page are controlled by "projectPageShow" in
+// src/assets/project_data/data.json (order = JSON array order).
+const projects = projectsData.filter((p) => p.projectPageShow !== false);
 
 const CATEGORIES = [
   { id: 'all', label: 'All Projects' },

@@ -1,3 +1,8 @@
+// This is NOT the project data — it is only a loader.
+// The single source of truth for all projects is:
+//   src/assets/project_data/data.json
+// Edit that file to add/remove projects, change links, reorder,
+// or toggle visibility via "mainPageShow" / "projectPageShow".
 import rawData from '../assets/project_data/data.json';
 
 import openwhisprBanner from '../assets/project_png/openwhispr-showcase.png';
@@ -38,8 +43,6 @@ const imageMap = {
   opencodebotBanner,
 };
 
-// Single source of truth: src/assets/project_data/data.json
-// Edit projects there; this loader only resolves image keys to imported assets.
 export const projectsData = rawData.map((project) => ({
   ...project,
   image: imageMap[project.image] || project.image,

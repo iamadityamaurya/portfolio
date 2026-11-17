@@ -1,9 +1,10 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { projectsData, shortTitle } from '../data/projects';
+import { projectsData, shortTitle } from '../data/loadProjects';
 import { gsap } from '../lib/scroll';
 
-const HOME_PROJECTS = ['bunkmait', 'reelflow-pipeline', 'deepquery-agent', 'opencodebot'];
+// Projects shown on the home page are controlled by "mainPageShow" in
+// src/assets/project_data/data.json (order = JSON array order).
 
 // Pinned list (alejandroha.com "services" technique): each scroll step collapses the current
 // panel, slides its image out to the right, wipes the next image in and moves the list up a row.
@@ -12,7 +13,7 @@ const NAV_H = 80; // pinned stage starts below the fixed nav
 export const ProjectsPage = () => {
     const navigate = useNavigate();
     const pinRef = useRef(null);
-    const projects = HOME_PROJECTS.map((id) => projectsData.find((p) => p.id === id)).filter(Boolean);
+    const projects = projectsData.filter((p) => p.mainPageShow);
 
     useLayoutEffect(() => {
         const mm = gsap.matchMedia();

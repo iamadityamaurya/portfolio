@@ -31,7 +31,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "stat": "<0.4s Latency"
+    "stat": "<0.4s Latency",
+    "projectPageShow": true
   },
   {
     "id": "reelflow-pipeline",
@@ -66,7 +67,8 @@
       "github": "https://github.com/iamadityamaurya/reel"
     },
     "featured": true,
-    "mainPageShow": true
+    "mainPageShow": true,
+    "projectPageShow": true
   },
   {
     "id": "deepquery-agent",
@@ -102,7 +104,8 @@
       "github": "https://github.com/iamadityamaurya/deepresearch-agent"
     },
     "featured": true,
-    "mainPageShow": true
+    "mainPageShow": true,
+    "projectPageShow": true
   },
   {
     "id": "live-text-ocr",
@@ -129,10 +132,12 @@
       "systemd"
     ],
     "links": {
-      "github": "https://github.com/iamadityamaurya/Live-Text-Like-Mac-in-Ubuntu"
+      "github": "https://github.com/iamadityamaurya/Live-Text-Like-Mac-in-Ubuntu",
+      "demo": "https://livetext.adityamaurya.dev/"
     },
     "featured": true,
-    "mainPageShow": true
+    "mainPageShow": false,
+    "projectPageShow": true
   },
   {
     "id": "opencodebot",
@@ -157,7 +162,8 @@
     ],
     "links": {},
     "featured": false,
-    "mainPageShow": false
+    "mainPageShow": true,
+    "projectPageShow": true
   },
   {
     "id": "bunkmait",
@@ -167,7 +173,7 @@
     "categorySlug": "fullstack",
     "badge": "Production Web & Mobile",
     "image": "bunkmaitBanner",
-    "fullDescription": "BunkMAIT was built to solve the real frustrations students face during the semester: manually calculating attendance, guessing which classes can be skipped, finding faculty cabins, tracking assignments, and keeping up with academic schedules. The platform lets students set any threshold they want — 30%, 50%, 75%, or even 90% — and instantly calculates how much attendance is safe to lose while still meeting the target. It includes automated timetable access, teacher and cabin lookup, syllabus tracking, academic calendar views, exam schedules, upcoming holidays, and attendance updates from students across the campus. This app was designed especially for students of Maharaja Agrasen Institute Of Technology, Delhi, and has been adopted by 1,000+ students in college, with students actively updating their attendance and academic details on the platform. A special thanks goes to my friends Swayam Bansal and Arun Kukrety for helping build this app.\n\nThe web app is available at bunkmait.adityamaurya.dev, the Android app is available via the linked APK, and the WhatsApp community helps students stay connected and updated.",
+    "fullDescription": "BunkMAIT was built to solve the real frustrations students face during the semester: manually calculating attendance, guessing which classes can be skipped, finding faculty cabins, tracking assignments, and keeping up with academic schedules. The platform lets students set any threshold they want \u2014 30%, 50%, 75%, or even 90% \u2014 and instantly calculates how much attendance is safe to lose while still meeting the target. It includes automated timetable access, teacher and cabin lookup, syllabus tracking, academic calendar views, exam schedules, upcoming holidays, and attendance updates from students across the campus. This app was designed especially for students of Maharaja Agrasen Institute Of Technology, Delhi, and has been adopted by 1,000+ students in college, with students actively updating their attendance and academic details on the platform. A special thanks goes to my friends Swayam Bansal and Arun Kukrety for helping build this app.\n\nThe web app is available at bunkmait.adityamaurya.dev, the Android app is available via the linked APK, and the WhatsApp community helps students stay connected and updated.",
     "highlights": [
       "1,000+ active student users in college, with daily attendance and timetable updates",
       "Predictive attendance calculator that lets students set any target threshold and plan safe bunk decisions",
@@ -189,7 +195,8 @@
     },
     "featured": true,
     "mainPageShow": true,
-    "stat": "1K+ Active Users"
+    "stat": "1K+ Active Users",
+    "projectPageShow": true
   },
   {
     "id": "alpha-line-follower",
@@ -219,7 +226,8 @@
       "github": "https://github.com/iamadityamaurya"
     },
     "featured": false,
-    "mainPageShow": false
+    "mainPageShow": false,
+    "projectPageShow": true
   },
   {
     "id": "fireshield",
@@ -250,7 +258,8 @@
       "github": "https://github.com/iamadityamaurya/fire"
     },
     "featured": false,
-    "mainPageShow": false
+    "mainPageShow": false,
+    "projectPageShow": true
   },
   {
     "id": "nexgenquery",
@@ -280,7 +289,8 @@
       "github": "https://github.com/iamadityamaurya/nexgenquery"
     },
     "featured": true,
-    "mainPageShow": true
+    "mainPageShow": false,
+    "projectPageShow": true
   },
   {
     "id": "nexgenstorage",
@@ -311,7 +321,8 @@
       "github": "https://github.com/iamadityamaurya/unlimited_storage"
     },
     "featured": true,
-    "mainPageShow": true
+    "mainPageShow": false,
+    "projectPageShow": true
   },
   {
     "id": "medscrapper",
@@ -341,7 +352,8 @@
       "github": "https://github.com/iamadityamaurya/med_scraper"
     },
     "featured": true,
-    "mainPageShow": true
+    "mainPageShow": false,
+    "projectPageShow": true
   },
   {
     "id": "ai-filler-google-form",
@@ -372,7 +384,8 @@
       "github": "https://github.com/iamadityamaurya/google_form"
     },
     "featured": true,
-    "mainPageShow": true
+    "mainPageShow": false,
+    "projectPageShow": true
   },
   {
     "id": "drive-stream-downloader",
@@ -402,7 +415,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "stat": "Lossless 1080p/4K"
+    "stat": "Lossless 1080p/4K",
+    "projectPageShow": true
   },
   {
     "id": "restocker",
@@ -433,7 +447,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "stat": "-40% Food Waste"
+    "stat": "-40% Food Waste",
+    "projectPageShow": true
   },
   {
     "id": "addybites",
@@ -464,7 +479,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "stat": "Full E2E Stack"
+    "stat": "Full E2E Stack",
+    "projectPageShow": true
   },
   {
     "id": "motia-onboarding",
@@ -495,7 +511,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "stat": "Event-Driven"
+    "stat": "Event-Driven",
+    "projectPageShow": true
   },
   {
     "id": "portfolio-v1",
@@ -525,6 +542,7 @@
     },
     "featured": false,
     "mainPageShow": false,
-    "stat": "60 FPS Motion"
+    "stat": "60 FPS Motion",
+    "projectPageShow": true
   }
 ]

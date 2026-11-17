@@ -4,7 +4,7 @@ import {
   X, Maximize2, Minimize2, Terminal as TerminalIcon,
   CornerDownLeft, ExternalLink, ArrowRight, Check, Copy
 } from 'lucide-react';
-import { projectsData } from '../data/projects';
+import { projectsData } from '../data/loadProjects';
 import { lenis } from '../lib/scroll';
 
 export const TerminalModal = ({ isOpen, onClose }) => {
