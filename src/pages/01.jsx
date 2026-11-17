@@ -52,11 +52,7 @@ const HomePage = ({ ready }) => {
                 </p>
             </div>
 
-            {/* Bottom scroll down indicator */}
-            <div data-fade className="absolute bottom-6 left-4 z-10 hidden sm:flex items-center gap-2.5 text-paper/40 font-mono text-[10px] tracking-widest uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2b4bff] shadow-[0_0_6px_#2b4bff] animate-bounce" />
-                Scroll to explore
-            </div>
+           
 
             {/* Magnetic CTA button */}
             <button

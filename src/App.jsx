@@ -130,7 +130,7 @@ function App() {
       <ScrollToTop />
       <RouteCurtain />
       {!ready && <Preloader onDone={() => setReady(true)} />}
-      <Navbar onOpenTerminal={() => setIsTerminalOpen(true)} />
+      <Navbar />
       <TerminalPill isOpen={isTerminalOpen} onToggle={() => setIsTerminalOpen(prev => !prev)} />
       <TerminalModal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
 
