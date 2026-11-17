@@ -10,7 +10,7 @@ import { projectsData, shortTitle } from '../data/loadProjects';
 import { gsap, ScrollTrigger, SplitText, reducedMotion, lenis } from '../lib/scroll';
 
 // Projects shown on the projects page are controlled by "projectPageShow" in
-// src/assets/project_data/data.json (order = JSON array order).
+// src/assets/project_data/data.json; sequence is controlled by "index".
 const projects = projectsData.filter((p) => p.projectPageShow !== false);
 
 const CATEGORIES = [

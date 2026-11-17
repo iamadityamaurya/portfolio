@@ -43,9 +43,11 @@ const imageMap = {
   opencodebotBanner,
 };
 
-export const projectsData = rawData.map((project) => ({
-  ...project,
-  image: imageMap[project.image] || project.image,
-}));
+export const projectsData = [...rawData]
+  .sort((a, b) => (a.index ?? Infinity) - (b.index ?? Infinity))
+  .map((project) => ({
+    ...project,
+    image: imageMap[project.image] || project.image,
+  }));
 
 export const shortTitle = (title) => title.split(/:| - | – | — /)[0];

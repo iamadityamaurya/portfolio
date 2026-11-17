@@ -32,7 +32,8 @@
     "featured": true,
     "mainPageShow": false,
     "stat": "<0.4s Latency",
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 1
   },
   {
     "id": "reelflow-pipeline",
@@ -68,7 +69,8 @@
     },
     "featured": true,
     "mainPageShow": true,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 2
   },
   {
     "id": "deepquery-agent",
@@ -105,7 +107,8 @@
     },
     "featured": true,
     "mainPageShow": true,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 3
   },
   {
     "id": "live-text-ocr",
@@ -137,7 +140,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 4
   },
   {
     "id": "opencodebot",
@@ -163,7 +167,8 @@
     "links": {},
     "featured": false,
     "mainPageShow": true,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 5
   },
   {
     "id": "bunkmait",
@@ -196,7 +201,8 @@
     "featured": true,
     "mainPageShow": true,
     "stat": "1K+ Active Users",
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 6
   },
   {
     "id": "alpha-line-follower",
@@ -227,7 +233,8 @@
     },
     "featured": false,
     "mainPageShow": false,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 7
   },
   {
     "id": "fireshield",
@@ -259,7 +266,8 @@
     },
     "featured": false,
     "mainPageShow": false,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 8
   },
   {
     "id": "nexgenquery",
@@ -290,7 +298,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 9
   },
   {
     "id": "nexgenstorage",
@@ -322,7 +331,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 10
   },
   {
     "id": "medscrapper",
@@ -353,7 +363,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 11
   },
   {
     "id": "ai-filler-google-form",
@@ -385,7 +396,8 @@
     },
     "featured": true,
     "mainPageShow": false,
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 12
   },
   {
     "id": "drive-stream-downloader",
@@ -416,7 +428,8 @@
     "featured": true,
     "mainPageShow": false,
     "stat": "Lossless 1080p/4K",
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 13
   },
   {
     "id": "restocker",
@@ -448,7 +461,8 @@
     "featured": true,
     "mainPageShow": false,
     "stat": "-40% Food Waste",
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 14
   },
   {
     "id": "addybites",
@@ -480,7 +494,8 @@
     "featured": true,
     "mainPageShow": false,
     "stat": "Full E2E Stack",
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 15
   },
   {
     "id": "motia-onboarding",
@@ -512,7 +527,8 @@
     "featured": true,
     "mainPageShow": false,
     "stat": "Event-Driven",
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 16
   },
   {
     "id": "portfolio-v1",
@@ -543,6 +559,7 @@
     "featured": false,
     "mainPageShow": false,
     "stat": "60 FPS Motion",
-    "projectPageShow": true
+    "projectPageShow": true,
+    "index": 17
   }
 ]

@@ -4,7 +4,7 @@ import { projectsData, shortTitle } from '../data/loadProjects';
 import { gsap } from '../lib/scroll';
 
 // Projects shown on the home page are controlled by "mainPageShow" in
-// src/assets/project_data/data.json (order = JSON array order).
+// src/assets/project_data/data.json; sequence is controlled by "index".
 
 // Pinned list (alejandroha.com "services" technique): each scroll step collapses the current
 // panel, slides its image out to the right, wipes the next image in and moves the list up a row.
