@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState, useEffect } from 'react';
-import { Check, Copy, Loader2 } from 'lucide-react';
+import { Check, Copy, Loader2, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { gsap, reducedMotion } from '../lib/scroll';
 
@@ -277,10 +277,17 @@ const ContactPage = () => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="label flex items-center gap-3 text-paper transition-colors hover:text-accent disabled:opacity-50 cursor-pointer"
+                        className="group label flex items-center gap-2.5 text-paper transition-colors hover:text-accent disabled:opacity-50 cursor-pointer"
                     >
                         {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
-                        {isSubmitting ? 'Sending' : 'Send message ——→'}
+                        {isSubmitting ? (
+                            'Sending'
+                        ) : (
+                            <>
+                                <span>Send message</span>
+                                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                            </>
+                        )}
                     </button>
                     {submitStatus === 'success' && <p className="text-sm text-accent">Message sent. I&apos;ll get back to you soon.</p>}
                     {submitStatus === 'error' && <p className="text-sm text-orange">Failed to send. Please email me directly.</p>}

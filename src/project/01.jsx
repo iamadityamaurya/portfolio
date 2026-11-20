@@ -214,14 +214,7 @@ export const AllProjectsPage = () => {
           >
             {/* Hero */}
             <header data-hero className="px-4 pb-16 pt-32 sm:px-8 sm:pt-40">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <span className="font-mono text-xs uppercase tracking-widest text-orange font-semibold">
-                  ( Portolio Directory // {projects.length} Works )
-                </span>
-                <span className="font-mono text-xs text-muted">
-                  Click any project to enter split-screen case study
-                </span>
-              </div>
+              
               <h1 className="mt-4 text-[clamp(3.5rem,12vw,10rem)] font-medium uppercase leading-[0.9] tracking-tight">
                 <span className="mask"><span data-line>All Projects</span></span>
               </h1>
