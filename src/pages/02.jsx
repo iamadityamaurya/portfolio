@@ -207,10 +207,18 @@ const AboutPage = () => {
                                         </div>
                                         <span className="font-mono text-[10px] text-cyan-300/70 uppercase tracking-wider group-hover:text-cyan-200 transition-colors">Hackathon Wins</span>
                                     </Link>
-                                    <div className="p-2.5 sm:p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-all">
-                                        <span className="block font-bold text-lg sm:text-xl text-white">1k+</span>
-                                        <span className="font-mono text-[10px] text-paper/50 uppercase tracking-wider">Active Users</span>
-                                    </div>
+                                    <Link
+                                        to="/projects"
+                                        state={{ projectId: 'bunkmait' }}
+                                        title="1K+ Active Users on BunkMAIT"
+                                        className="p-2.5 sm:p-3 rounded-xl border border-white/[0.06] hover:border-emerald-400/40 bg-white/[0.02] hover:bg-emerald-500/5 transition-all block cursor-pointer group"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <span className="block font-bold text-lg sm:text-xl text-white group-hover:text-emerald-400 transition-colors">1k+</span>
+                                            <ArrowUpRight className="w-3.5 h-3.5 text-paper/40 group-hover:text-emerald-400 transition-colors" />
+                                        </div>
+                                        <span className="font-mono text-[10px] text-paper/50 group-hover:text-emerald-300/80 uppercase tracking-wider transition-colors">BunkMAIT Users</span>
+                                    </Link>
                                 </div>
 
                                 {/* Action buttons */}
