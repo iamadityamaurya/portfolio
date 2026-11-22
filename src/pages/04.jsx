@@ -213,7 +213,7 @@ const SkillsPage = () => {
                     trigger: stage,
                     pin: true,
                     start: 'top top',
-                    end: () => `+=${window.innerHeight * (categories.length - 1) * 0.75}`,
+                    end: () => `+=${window.innerHeight * (categories.length - 1) * 0.3}`,
                     scrub: 0.3,
                     invalidateOnRefresh: true,
                     onUpdate: (self) => {
