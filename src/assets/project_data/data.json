@@ -176,10 +176,10 @@
   {
     "id": "bunkmait",
     "title": "BunkMAIT - Attendance & Timetable Suite",
-    "tagline": "College attendance & timetable management suite with predictive analytics",
+    "tagline": "College attendance & timetable management suite with predictive analytics — adopted by 1k+ active users",
     "category": "Full Stack",
     "categorySlug": "fullstack",
-    "badge": "Production Web & Mobile",
+    "badge": "1K+ Active Users",
     "project video:": "/bunkmait-promo-20s.mp4",
     "image": "bunkmaitBanner",
     "fullDescription": "BunkMAIT was built to solve the real frustrations students face during the semester: manually calculating attendance, guessing which classes can be skipped, finding faculty cabins, tracking assignments, and keeping up with academic schedules. The platform lets students set any threshold they want \u2014 30%, 50%, 75%, or even 90% \u2014 and instantly calculates how much attendance is safe to lose while still meeting the target. It includes automated timetable access, teacher and cabin lookup, syllabus tracking, academic calendar views, exam schedules, upcoming holidays, and attendance updates from students across the campus. This app was designed especially for students of Maharaja Agrasen Institute Of Technology, Delhi, and has been adopted by 1,000+ students in college, with students actively updating their attendance and academic details on the platform. A special thanks goes to my friends Swayam Bansal and Arun Kukrety for helping build this app.\n\nThe web app is available at bunkmait.adityamaurya.dev, the Android app is available via the linked APK, and the WhatsApp community helps students stay connected and updated.",

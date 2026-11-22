@@ -95,7 +95,14 @@ export const ProjectsPage = () => {
                             </button>
                             <div data-panel className="relative overflow-hidden nopin:px-4 nopin:pb-10">
                                 <p data-desc className="max-w-md text-sm leading-relaxed text-paper/70 pin:absolute pin:bottom-8 pin:left-8 pin:w-[25%] nopin:mb-5">
-                                    <span className="label mb-3 block text-accent">{project.category}</span>
+                                    <span className="flex items-center gap-2 mb-3">
+                                        <span className="label text-accent">{project.category}</span>
+                                        {project.badge && (
+                                            <span className="font-mono text-[10px] px-2 py-0.5 rounded-full border border-white/10 bg-white/5 text-paper/80 uppercase tracking-wider">
+                                                {project.badge}
+                                            </span>
+                                        )}
+                                    </span>
                                     {project.tagline}
                                 </p>
                                 <div
