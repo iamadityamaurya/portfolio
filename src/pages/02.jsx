@@ -2,15 +2,13 @@ import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { gsap, reducedMotion, scrollToTarget } from '../lib/scroll';
-
-const LINE_1 = 'FULL-STACK & IOT';
-const LINE_2 = 'DEVELOPMENT';
+import asciiCatImg from '../assets/ascii-cat-transparent.png';
 
 const P1_TEXT =
-    "I'm Aditya, a full-stack developer and hardware engineer specializing in software and connected systems that not only look exceptional but feel intuitive. I bridge modern web frameworks, AI agent workflows, and low-level firmware to build digital experiences that reflect real craftsmanship.";
+    "I'm Aditya, a full-stack and AI software developer specializing in high-performance digital systems that not only look exceptional but feel intuitive. I bridge modern web frameworks, autonomous AI agent pipelines, and low-latency architectures to build digital products that reflect real craftsmanship.";
 
 const P2_TEXT =
-    "Every project I build is fully custom, never based on generic templates or one size fits all solutions. Whether it's an emerging startup, high-speed robotics, or an intense 36-hour hackathon, I approach every build with the same commitment to craftsmanship, precision, and attention to detail.";
+    "Every project I build is fully custom, engineered with clean abstractions rather than one size fits all templates. Whether it's an end-to-end AI automation studio, an offline-first native mobile application, or a competitive hackathon build, I approach each layer with relentless attention to precision and detail.";
 
 const P1_WORDS = P1_TEXT.split(' ');
 const P2_WORDS = P2_TEXT.split(' ');
@@ -36,6 +34,8 @@ const AboutPage = () => {
                 const bRight = rootRef.current.querySelector('[data-bracket-right]');
                 if (bLeft) { bLeft.style.opacity = '1'; bLeft.style.transform = 'none'; }
                 if (bRight) { bRight.style.opacity = '1'; bRight.style.transform = 'none'; }
+                const catFrame = rootRef.current.querySelector('[data-cat-frame]');
+                if (catFrame) { catFrame.style.opacity = '1'; catFrame.style.transform = 'none'; }
                 const actionBtn = rootRef.current.querySelector('[data-action-btn]');
                 if (actionBtn) { actionBtn.style.opacity = '1'; actionBtn.style.transform = 'none'; }
             }
@@ -47,7 +47,7 @@ const AboutPage = () => {
             const pin = pinRef.current;
             const bLeft = pin.querySelector('[data-bracket-left]');
             const bRight = pin.querySelector('[data-bracket-right]');
-            const chars = pin.querySelectorAll('[data-char]');
+            const catFrame = pin.querySelector('[data-cat-frame]');
             const riseLines = pin.querySelectorAll('[data-rise-line]');
             const p1Words = pin.querySelectorAll('[data-p1-word]');
             const p2Words = pin.querySelectorAll('[data-p2-word]');
@@ -68,7 +68,7 @@ const AboutPage = () => {
                 },
             });
 
-            // 1. Entrance: Bracket Clamping & 3D Character Rolling
+            // 1. Entrance: Bracket Clamping & Cat Frame reveal
             if (bLeft && bRight) {
                 tl.fromTo(bLeft,
                     { xPercent: -150, opacity: 0 },
@@ -82,10 +82,10 @@ const AboutPage = () => {
                 );
             }
 
-            if (chars.length) {
-                tl.fromTo(chars,
-                    { transformOrigin: '50% 50%', rotateX: -90, y: 35, z: -50, opacity: 0 },
-                    { rotateX: 0, y: 0, z: 0, opacity: 1, duration: 0.45, stagger: 0.015 },
+            if (catFrame) {
+                tl.fromTo(catFrame,
+                    { scale: 0.92, y: 20, opacity: 0 },
+                    { scale: 1, y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
                     0
                 );
             }
@@ -179,81 +179,32 @@ const AboutPage = () => {
         >
             <div
                 ref={pinRef}
-                className="relative flex h-[100svh] min-h-[620px] w-full flex-col justify-center px-6 sm:px-12 lg:px-20 pt-20 pb-10 overflow-hidden"
+                className="relative flex min-h-[100svh] w-full flex-col justify-center px-6 sm:px-12 lg:px-20 py-16 sm:py-20 overflow-hidden"
             >
                 <div className="relative z-10 mx-auto w-full max-w-7xl">
-                    {/* ── Main 2-Column Split Composition ── */}
+                    {/* ── Main 2-Column Split Composition: Text on Left, Cat on Right ── */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
-                        {/* ── Left Column: Clean Headline & Subtitle ── */}
-                        <div className="lg:col-span-6 space-y-5 sm:space-y-7">
+                        {/* ── Left Column: [ About me ], 2 Paragraphs & Stats ── */}
+                        <div className="lg:col-span-7 flex flex-col justify-between space-y-5 sm:space-y-6">
                             <div>
-                                {/* Massive Display Headline */}
-                                <h2
-                                    data-headline
-                                    className="font-sans font-black uppercase text-[clamp(2.2rem,3.8vw,4.5rem)] leading-[0.92] tracking-tight text-paper select-none"
-                                >
-                                    <div className="pb-1" style={{ perspective: '600px' }}>
-                                        <span className="inline-block whitespace-nowrap">
-                                            {LINE_1.split('').map((ch, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    data-char
-                                                    className="inline-block"
-                                                    style={{ display: 'inline-block', transformStyle: 'preserve-3d' }}
-                                                >
-                                                    {ch === ' ' ? '\u00A0' : ch}
-                                                </span>
-                                            ))}
-                                        </span>
-                                    </div>
-                                    <div className="pb-1" style={{ perspective: '600px' }}>
-                                        <span className="inline-block whitespace-nowrap">
-                                            {LINE_2.split('').map((ch, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    data-char
-                                                    className="inline-block"
-                                                    style={{ display: 'inline-block', transformStyle: 'preserve-3d' }}
-                                                >
-                                                    {ch === ' ' ? '\u00A0' : ch}
-                                                </span>
-                                            ))}
-                                        </span>
-                                    </div>
-                                </h2>
-
-                                {/* Subtitle with Masked Line Rise */}
-                                <div className="overflow-hidden mt-5 sm:mt-7">
-                                    <p
-                                        data-rise-line
-                                        className="text-sm sm:text-base lg:text-lg text-paper/70 font-normal leading-relaxed max-w-md"
-                                    >
-                                        Modern, custom-built software and connected hardware engineered from circuits to the cloud.
-                                    </p>
+                                {/* Micro Header Tag */}
+                                <div className="overflow-hidden mb-2.5">
+                                    <span data-rise-line className="label text-cyan-400/90 text-xs font-mono tracking-widest uppercase flex items-center gap-2">
+                                        <span className="w-2.5 h-0.5 bg-cyan-400" />
+                                        Engineering &amp; Philosophy
+                                    </span>
                                 </div>
 
-                                {/* Context strip */}
-                                <div className="overflow-hidden mt-8 sm:mt-12 hidden lg:block">
-                                    <p data-rise-line className="label text-paper/40">
-                                        Based in India · Building worldwide
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* ── Right Column: [ About me ], 2 Paragraphs & Single CTA Button ── */}
-                        <div className="lg:col-span-6 flex flex-col justify-between space-y-6 sm:space-y-8 lg:pl-6">
-                            <div>
                                 {/* Distinctive [ About me ] Marker */}
-                                <h3
+                                <h2
                                     data-bracket-heading
-                                    className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-paper mb-6 sm:mb-8 overflow-visible flex items-baseline"
+                                    className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-paper mb-5 sm:mb-6 overflow-visible flex items-baseline font-sans uppercase"
                                 >
                                     <span
                                         data-bracket-left
                                         aria-hidden="true"
-                                        className="inline-block text-paper/40 mr-2 sm:mr-3 select-none"
+                                        className="inline-block text-[#2b4bff] mr-2 sm:mr-3 select-none"
                                     >
                                         [
                                     </span>
@@ -261,22 +212,22 @@ const AboutPage = () => {
                                     <span
                                         data-bracket-right
                                         aria-hidden="true"
-                                        className="inline-block text-paper/40 ml-2 sm:mr-3 select-none"
+                                        className="inline-block text-[#2b4bff] ml-2 sm:mr-3 select-none"
                                     >
                                         ]
                                     </span>
-                                </h3>
+                                </h2>
 
                                 {/* Editorial narrative: mono index + scroll-scrubbed word illumination */}
                                 <div
                                     data-narrative
-                                    className="space-y-6 sm:space-y-7 text-sm sm:text-base lg:text-lg leading-relaxed font-normal"
+                                    className="space-y-4 sm:space-y-5 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed font-normal"
                                 >
-                                    <div className="flex gap-4 sm:gap-5">
+                                    <div className="flex gap-3.5 sm:gap-4">
                                         <span
                                             aria-hidden="true"
                                             data-p1-num
-                                            className="label pt-1.5 shrink-0 select-none text-[#71717a] transition-colors"
+                                            className="label pt-1 shrink-0 select-none text-[#71717a] transition-colors font-mono"
                                             style={{ color: '#71717a', opacity: 0.4 }}
                                         >
                                             01
@@ -294,11 +245,11 @@ const AboutPage = () => {
                                             ))}
                                         </p>
                                     </div>
-                                    <div className="flex gap-4 sm:gap-5">
+                                    <div className="flex gap-3.5 sm:gap-4">
                                         <span
                                             aria-hidden="true"
                                             data-p2-num
-                                            className="label pt-1.5 shrink-0 select-none text-[#71717a] transition-colors"
+                                            className="label pt-1 shrink-0 select-none text-[#71717a] transition-colors font-mono"
                                             style={{ color: '#71717a', opacity: 0.4 }}
                                         >
                                             02
@@ -318,48 +269,68 @@ const AboutPage = () => {
                                     </div>
                                 </div>
 
-                                {/* Clean Monochrome CTA Button */}
                                 {/* Mini Stats Strip */}
-                                <div className="mt-8 grid grid-cols-3 gap-3 border-t border-white/[0.08] pt-6">
-                                    <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all">
-                                        <span className="block font-bold text-lg sm:text-xl text-white">16+</span>
-                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">Builds</span>
+                                <div className="mt-6 grid grid-cols-3 gap-2.5 sm:gap-3 border-t border-white/[0.08] pt-4 sm:pt-5">
+                                    <div className="p-2.5 sm:p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-all">
+                                        <span className="block font-bold text-lg sm:text-xl text-white">17+</span>
+                                        <span className="font-mono text-[10px] text-paper/50 uppercase tracking-wider">Shipped Builds</span>
                                     </div>
                                     <Link
                                         to="/hackathon-winning"
-                                        className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.15] transition-all block cursor-pointer group"
+                                        className="p-2.5 sm:p-3 rounded-xl border border-[#2b4bff]/30 bg-[#2b4bff]/5 hover:bg-[#2b4bff]/10 transition-all block cursor-pointer group"
                                     >
                                         <div className="flex items-center justify-between">
-                                            <span className="block font-bold text-lg sm:text-xl text-[#2b4bff]">3x</span>
-                                            <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-white transition-colors" />
+                                            <span className="block font-bold text-lg sm:text-xl text-cyan-400">3x</span>
+                                            <ArrowUpRight className="w-3.5 h-3.5 text-cyan-400/60 group-hover:text-cyan-300 transition-colors" />
                                         </div>
-                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider group-hover:text-paper/70 transition-colors">Winner</span>
+                                        <span className="font-mono text-[10px] text-cyan-300/70 uppercase tracking-wider group-hover:text-cyan-200 transition-colors">Hackathon Wins</span>
                                     </Link>
-                                    <div className="p-3 rounded-xl border border-white/[0.05] bg-white/[0.015] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all">
-                                        <span className="block font-bold text-lg sm:text-xl text-white">IoT</span>
-                                        <span className="font-mono text-[10px] text-paper/40 uppercase tracking-wider">&amp; Firmware</span>
+                                    <div className="p-2.5 sm:p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-all">
+                                        <span className="block font-bold text-lg sm:text-xl text-white">&lt;0.4s</span>
+                                        <span className="font-mono text-[10px] text-paper/50 uppercase tracking-wider">Voice AI Latency</span>
                                     </div>
                                 </div>
 
-                                <div data-action-btn className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+                                {/* Action buttons */}
+                                <div data-action-btn className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3">
                                     <button
                                         onClick={() => scrollToTarget('#contact')}
-                                        className="group inline-flex items-center gap-3 px-6 sm:px-7 py-3.5 rounded-full bg-paper hover:bg-paper/90 text-ink font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg cursor-pointer"
+                                        className="group inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-paper hover:bg-paper/90 text-ink font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg cursor-pointer"
                                     >
                                         Get in touch
-                                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                                     </button>
 
                                     <Link
-                                        to="/hackathon-winning"
-                                        className="group inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full border border-paper/25 hover:border-paper bg-transparent hover:bg-paper hover:text-ink text-paper font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg cursor-pointer"
+                                        to="/projects"
+                                        className="group inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-paper/20 hover:border-cyan-400 bg-transparent hover:bg-cyan-500/10 hover:text-cyan-300 text-paper font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-lg cursor-pointer"
                                     >
-                                        3x Winner
-                                        <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                        View Projects
+                                        <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                     </Link>
                                 </div>
                             </div>
+                        </div>
 
+                        {/* ── Right Column: Pure Floating ASCII Cat Visual (No Box) ── */}
+                        <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center">
+                            <div
+                                data-cat-frame
+                                className="relative flex items-center justify-center select-none"
+                            >
+                                <img
+                                    src={asciiCatImg}
+                                    alt="Aditya Kumar Maurya"
+                                    className="w-[280px] sm:w-[350px] lg:w-[420px] max-w-full h-auto object-contain transition-transform duration-500 hover:scale-105 drop-shadow-[0_0_35px_rgba(43,75,255,0.45)]"
+                                />
+                            </div>
+
+                            {/* Subtitle / context note below the cat */}
+                            <div className="overflow-hidden mt-6 hidden sm:block">
+                                <p data-rise-line className="label text-paper/40 text-[10px] tracking-widest uppercase">
+                                    Based in India · Building worldwide
+                                </p>
+                            </div>
                         </div>
 
                     </div>

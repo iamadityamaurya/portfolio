@@ -96,6 +96,19 @@ export const TerminalModal = ({ isOpen, onClose }) => {
   const virtualFiles = ['about.txt', 'contact.sh', 'resume.pdf', 'README.md'];
   const virtualDirs = ['projects', 'skills', 'hackathons'];
 
+  const skillsFiles = [
+    'languages.txt',
+    'frontend.txt',
+    'backend-ai.txt',
+    'mobile.txt',
+    'devops-tools.txt'
+  ];
+
+  const hackathonFiles = [
+    'culmyca-2026.txt',
+    'awards.md'
+  ];
+
   const renderBanner = () => (
     <div className="space-y-2 select-text font-mono text-xs sm:text-[13px] leading-relaxed pb-2 border-b border-white/[0.08]">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -525,46 +538,228 @@ export const TerminalModal = ({ isOpen, onClose }) => {
 
       case 'ls':
       case 'dir':
-        output = (
-          <div className="space-y-2 text-xs sm:text-[13px] font-mono">
-            <div className="text-slate-500 text-[11px]">total 24 (directory: {currentDir})</div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-              <span className="text-sky-400 font-bold flex items-center gap-1.5">
-                <Folder className="w-3.5 h-3.5" /> projects/
-              </span>
-              <span className="text-sky-400 font-bold flex items-center gap-1.5">
-                <Folder className="w-3.5 h-3.5" /> skills/
-              </span>
-              <span className="text-sky-400 font-bold flex items-center gap-1.5">
-                <Folder className="w-3.5 h-3.5" /> hackathons/
-              </span>
-              <span className="text-slate-200 flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-slate-400" /> about.txt
-              </span>
-              <span className="text-emerald-400 flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-emerald-400" /> contact.sh
-              </span>
-              <span className="text-amber-400 flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-amber-400" /> resume.pdf
-              </span>
-              <span className="text-purple-400 flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-purple-400" /> README.md
-              </span>
+        if (currentDir === '~/projects') {
+          output = (
+            <div className="space-y-2 text-xs sm:text-[13px] font-mono">
+              <div className="flex flex-wrap items-center justify-between text-slate-500 text-[11px] border-b border-white/[0.08] pb-1 gap-1">
+                <span>total {projectsData.length} items (directory: ~/projects)</span>
+                <span className="text-slate-400">Click any file or run: cat &lt;name&gt;</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1 max-h-[300px] overflow-y-auto pr-1">
+                {projectsData.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => executeCommand(`cat ${p.id}.md`)}
+                    className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03] hover:bg-white/[0.08] hover:border-cyan-500/40 border border-white/[0.06] text-left transition-all cursor-pointer group"
+                    title={`Read ${p.id}.md`}
+                  >
+                    <FileText className="w-3.5 h-3.5 text-cyan-400 shrink-0 group-hover:scale-110 transition-transform" />
+                    <div className="overflow-hidden">
+                      <div className="text-slate-200 group-hover:text-cyan-300 font-semibold truncate text-xs">
+                        {p.id}.md
+                      </div>
+                      <div className="text-[10px] text-slate-500 truncate">
+                        {p.category}
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <div className="text-[11px] text-slate-500 pt-1 flex flex-wrap items-center justify-between gap-1">
+                <span>Type <span className="text-emerald-400 font-semibold">cd ..</span> to return to root (~)</span>
+                <span>Type <span className="text-cyan-400 font-semibold">projects</span> for full visual gallery</span>
+              </div>
             </div>
-          </div>
-        );
+          );
+        } else if (currentDir === '~/skills') {
+          output = (
+            <div className="space-y-2 text-xs sm:text-[13px] font-mono">
+              <div className="flex flex-wrap items-center justify-between text-slate-500 text-[11px] border-b border-white/[0.08] pb-1 gap-1">
+                <span>total {skillsFiles.length} items (directory: ~/skills)</span>
+                <span className="text-slate-400">Click any file or run: cat &lt;name&gt;</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                {skillsFiles.map((file) => (
+                  <button
+                    key={file}
+                    onClick={() => executeCommand(`cat ${file}`)}
+                    className="flex items-center gap-2 p-2 rounded bg-white/[0.03] hover:bg-white/[0.08] hover:border-emerald-500/40 border border-white/[0.06] text-left transition-all cursor-pointer group"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span className="text-slate-200 group-hover:text-emerald-300 text-xs font-semibold">{file}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="text-[11px] text-slate-500 pt-1">
+                Type <span className="text-emerald-400 font-semibold">cd ..</span> to return to root (~)
+              </div>
+            </div>
+          );
+        } else if (currentDir === '~/hackathons') {
+          output = (
+            <div className="space-y-2 text-xs sm:text-[13px] font-mono">
+              <div className="flex flex-wrap items-center justify-between text-slate-500 text-[11px] border-b border-white/[0.08] pb-1 gap-1">
+                <span>total {hackathonFiles.length} items (directory: ~/hackathons)</span>
+                <span className="text-slate-400">Click any file or run: cat &lt;name&gt;</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                {hackathonFiles.map((file) => (
+                  <button
+                    key={file}
+                    onClick={() => executeCommand(`cat ${file}`)}
+                    className="flex items-center gap-2 p-2 rounded bg-white/[0.03] hover:bg-white/[0.08] hover:border-amber-500/40 border border-white/[0.06] text-left transition-all cursor-pointer group"
+                  >
+                    <Trophy className="w-3.5 h-3.5 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span className="text-slate-200 group-hover:text-amber-300 text-xs font-semibold">{file}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="text-[11px] text-slate-500 pt-1">
+                Type <span className="text-emerald-400 font-semibold">cd ..</span> to return to root (~)
+              </div>
+            </div>
+          );
+        } else {
+          output = (
+            <div className="space-y-2 text-xs sm:text-[13px] font-mono">
+              <div className="text-slate-500 text-[11px]">total 24 (directory: ~)</div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                <button
+                  onClick={() => executeCommand('cd projects')}
+                  className="text-sky-400 font-bold flex items-center gap-1.5 p-1 rounded hover:bg-white/[0.05] text-left transition-colors cursor-pointer"
+                >
+                  <Folder className="w-3.5 h-3.5" /> projects/
+                </button>
+                <button
+                  onClick={() => executeCommand('cd skills')}
+                  className="text-sky-400 font-bold flex items-center gap-1.5 p-1 rounded hover:bg-white/[0.05] text-left transition-colors cursor-pointer"
+                >
+                  <Folder className="w-3.5 h-3.5" /> skills/
+                </button>
+                <button
+                  onClick={() => executeCommand('cd hackathons')}
+                  className="text-sky-400 font-bold flex items-center gap-1.5 p-1 rounded hover:bg-white/[0.05] text-left transition-colors cursor-pointer"
+                >
+                  <Folder className="w-3.5 h-3.5" /> hackathons/
+                </button>
+                <button
+                  onClick={() => executeCommand('cat about.txt')}
+                  className="text-slate-200 flex items-center gap-1.5 p-1 rounded hover:bg-white/[0.05] text-left transition-colors cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5 text-slate-400" /> about.txt
+                </button>
+                <button
+                  onClick={() => executeCommand('cat contact.sh')}
+                  className="text-emerald-400 flex items-center gap-1.5 p-1 rounded hover:bg-white/[0.05] text-left transition-colors cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5 text-emerald-400" /> contact.sh
+                </button>
+                <button
+                  onClick={() => executeCommand('cat resume.pdf')}
+                  className="text-amber-400 flex items-center gap-1.5 p-1 rounded hover:bg-white/[0.05] text-left transition-colors cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5 text-amber-400" /> resume.pdf
+                </button>
+                <button
+                  onClick={() => executeCommand('cat README.md')}
+                  className="text-purple-400 flex items-center gap-1.5 p-1 rounded hover:bg-white/[0.05] text-left transition-colors cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5 text-purple-400" /> README.md
+                </button>
+              </div>
+            </div>
+          );
+        }
         break;
 
       case 'cat':
-        const targetFile = args[0]?.toLowerCase();
-        if (!targetFile) {
-          output = <span className="text-rose-400 text-xs">usage: cat &lt;filename&gt; (try: cat about.txt or cat README.md)</span>;
+        const rawTarget = args[0]?.trim();
+        if (!rawTarget) {
+          output = <span className="text-rose-400 text-xs">usage: cat &lt;filename&gt; (try: cat about.txt or ls to see files)</span>;
+          break;
+        }
+
+        const targetFile = rawTarget.toLowerCase();
+        const cleanProjectName = targetFile.replace(/^projects\//, '').replace(/\.md$/, '').replace(/\.txt$/, '');
+
+        // Check if matching a project (either when in ~/projects or referencing projects/...)
+        const matchingProject = projectsData.find(p => 
+          p.id.toLowerCase() === cleanProjectName ||
+          p.title.toLowerCase().replace(/[^a-z0-9]/g, '').includes(cleanProjectName.replace(/[^a-z0-9]/g, ''))
+        );
+
+        if (matchingProject && (currentDir === '~/projects' || targetFile.startsWith('projects/') || !['about.txt', 'readme.md', 'contact.sh', 'resume.pdf', ...skillsFiles, ...hackathonFiles].includes(targetFile))) {
+          output = (
+            <div className="space-y-2.5 text-xs sm:text-[13px] font-mono leading-relaxed p-3 rounded-lg bg-white/[0.03] border border-white/[0.08]">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.08] pb-1.5">
+                <div className="text-white font-bold text-sm flex items-center gap-2">
+                  <span>{matchingProject.title}</span>
+                  {matchingProject.badge && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      {matchingProject.badge}
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  {matchingProject.stat && (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold">
+                      {matchingProject.stat}
+                    </span>
+                  )}
+                  <span className="text-[11px] text-sky-400 font-semibold">{matchingProject.category}</span>
+                </div>
+              </div>
+
+              <p className="text-slate-300">
+                {matchingProject.fullDescription || matchingProject.tagline}
+              </p>
+
+              {matchingProject.tech && matchingProject.tech.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {matchingProject.tech.map((t, i) => (
+                    <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-white/[0.05] text-slate-300 border border-white/[0.08]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {matchingProject.highlights && matchingProject.highlights.length > 0 && (
+                <ul className="space-y-1 text-slate-400 text-xs pt-1">
+                  {matchingProject.highlights.map((h, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className="text-emerald-400">▹</span>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-white/[0.08] text-xs">
+                {matchingProject.links?.demo && (
+                  <a href={matchingProject.links.demo} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline inline-flex items-center gap-1 font-semibold">
+                    <span>Live Demo</span> <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+                {matchingProject.links?.github && (
+                  <a href={matchingProject.links.github} target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white inline-flex items-center gap-1 font-semibold">
+                    <span>GitHub</span> <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+                {matchingProject.links?.apk && (
+                  <a href={matchingProject.links.apk} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline inline-flex items-center gap-1 font-semibold">
+                    <span>Download APK</span> <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
+            </div>
+          );
         } else if (targetFile === 'about.txt' || targetFile === 'about') {
           output = (
             <div className="text-xs sm:text-[13px] font-mono text-slate-300 leading-relaxed whitespace-pre-wrap">
-              {`Aditya Kumar Maurya — Full-Stack & IoT Hardware Engineer
-Currently studying Electronics & Communication at MAIT Delhi.
-Passionate about low-latency systems, robotics, and delightful UI engineering.`}
+              {`Aditya Kumar Maurya — Full-Stack Developer & Software Engineer
+Maharaja Agrasen Institute of Technology (MAIT), Delhi.
+Passionate about low-latency systems, AI agents, mobile apps, and distributed pipelines.`}
             </div>
           );
         } else if (targetFile === 'readme.md' || targetFile === 'readme') {
@@ -574,8 +769,8 @@ Passionate about low-latency systems, robotics, and delightful UI engineering.`}
               <p className="text-slate-400">
                 Welcome to my interactive terminal environment. You can explore projects, inspect code repos, or view competition achievements.
               </p>
-              <div className="text-emerald-400 text-xs">• Run `projects` to inspect all 17 live builds.</div>
-              <div className="text-amber-400 text-xs">• Run `hackathons` for robotics trophies.</div>
+              <div className="text-emerald-400 text-xs">• Run `cd projects` and `ls` to browse all projects.</div>
+              <div className="text-amber-400 text-xs">• Run `hackathons` for awards &amp; achievements.</div>
               <div className="text-cyan-400 text-xs">• Run `contact` for direct communication.</div>
             </div>
           );
@@ -587,7 +782,7 @@ EMAIL="adityamaurya1947@gmail.com"
 GITHUB="https://github.com/iamadityamaurya"
 LINKEDIN="https://www.linkedin.com/in/iamadityamaurya"
 TWITTER="https://x.com/aditya_maurya0"
-echo "Ready to build ambitious systems together."`}
+echo "Ready to build ambitious software together."`}
             </pre>
           );
         } else if (targetFile === 'resume.pdf' || targetFile === 'resume') {
@@ -596,25 +791,134 @@ echo "Ready to build ambitious systems together."`}
               <span className="text-white font-bold">Aditya_Kumar_Maurya_Resume.pdf</span> — Run <span className="text-cyan-400">contact</span> to request the latest version.
             </div>
           );
+        } else if (targetFile === 'languages.txt') {
+          output = (
+            <div className="text-xs font-mono text-slate-300 space-y-1">
+              <div className="text-white font-bold pb-1 border-b border-white/[0.08]">Core Languages</div>
+              <div>• TypeScript / JavaScript (ESNext, Node.js)</div>
+              <div>• Python (Automation, AI Agents, Scraping)</div>
+              <div>• Kotlin (Android Native Overlay, AccessibilityService)</div>
+              <div>• C / C++ (Embedded Systems, Algorithms)</div>
+              <div>• SQL &amp; Bash Scripting</div>
+            </div>
+          );
+        } else if (targetFile === 'frontend.txt') {
+          output = (
+            <div className="text-xs font-mono text-slate-300 space-y-1">
+              <div className="text-white font-bold pb-1 border-b border-white/[0.08]">Frontend Engineering</div>
+              <div>• React 19, Next.js 16, Vite</div>
+              <div>• Tailwind CSS v4, Framer Motion, GSAP</div>
+              <div>• Three.js / WebGL / Canvas Animations</div>
+              <div>• Chrome Extension APIs (Manifest v3)</div>
+            </div>
+          );
+        } else if (targetFile === 'backend-ai.txt') {
+          output = (
+            <div className="text-xs font-mono text-slate-300 space-y-1">
+              <div className="text-white font-bold pb-1 border-b border-white/[0.08]">Backend &amp; AI Architectures</div>
+              <div>• Groq (Llama 3.3 70B), Deepgram Nova-3 (sub-0.4s voice AI)</div>
+              <div>• LangChain &amp; LangGraph Multi-Agent Workflows</div>
+              <div>• Supabase (PostgreSQL), SQLite, Redis, S3 Storage</div>
+              <div>• WebSocket Audio Streaming, REST APIs, Telegram Bot APIs</div>
+            </div>
+          );
+        } else if (targetFile === 'mobile.txt') {
+          output = (
+            <div className="text-xs font-mono text-slate-300 space-y-1">
+              <div className="text-white font-bold pb-1 border-b border-white/[0.08]">Mobile Development</div>
+              <div>• React Native &amp; Expo</div>
+              <div>• Kotlin Native Overlays &amp; Foreground Services</div>
+              <div>• Android AccessibilityService Integration</div>
+              <div>• Android Hardware Keystore Security</div>
+            </div>
+          );
+        } else if (targetFile === 'devops-tools.txt') {
+          output = (
+            <div className="text-xs font-mono text-slate-300 space-y-1">
+              <div className="text-white font-bold pb-1 border-b border-white/[0.08]">DevOps &amp; Tooling</div>
+              <div>• Linux / Ubuntu CLI environment</div>
+              <div>• Git, GitHub Actions CI/CD</div>
+              <div>• Docker, Vercel deployments</div>
+              <div>• FFmpeg video &amp; audio rendering pipelines</div>
+            </div>
+          );
+        } else if (targetFile === 'culmyca-2026.txt') {
+          output = (
+            <div className="text-xs font-mono text-slate-300 space-y-1.5 p-2 rounded bg-amber-500/10 border border-amber-500/20">
+              <div className="text-amber-400 font-bold flex items-center gap-1.5">
+                <Trophy className="w-4 h-4" /> 1st Place Champion — CULMYCA'26 Robotics Autonomous Challenge
+              </div>
+              <p className="text-slate-300">
+                Engineered high-speed autonomous robotic line follower featuring custom PID feedback loops, sensory array telemetry, and optimized execution.
+              </p>
+            </div>
+          );
+        } else if (targetFile === 'awards.md') {
+          output = (
+            <div className="text-xs font-mono text-slate-300 space-y-2">
+              <div className="text-white font-bold pb-1 border-b border-white/[0.08]">Hackathons &amp; Competition Awards</div>
+              <div>🏆 <span className="text-amber-400 font-semibold">Champion (1st Place):</span> CULMYCA'26 Robotics Challenge</div>
+              <div>🏆 <span className="text-cyan-400 font-semibold">Finalist / Best Engineering:</span> National Level Hackathons</div>
+              <div>🏆 <span className="text-emerald-400 font-semibold">17+ Shipped Projects:</span> Production-grade AI, Android &amp; Full-Stack builds</div>
+            </div>
+          );
         } else {
-          output = <span className="text-rose-400 text-xs">cat: {targetFile}: No such file or directory</span>;
+          output = <span className="text-rose-400 text-xs">cat: {rawTarget}: No such file or directory. Type <span className="text-white font-semibold">ls</span> to see files.</span>;
         }
         break;
 
       case 'cd':
-        const targetDir = args[0]?.toLowerCase();
-        if (!targetDir || targetDir === '~' || targetDir === '/') {
+        const rawCdTarget = args[0]?.trim();
+        if (!rawCdTarget || rawCdTarget === '~' || rawCdTarget === '/') {
           setCurrentDir('~');
           output = null;
-        } else if (targetDir === '..' || targetDir === '../') {
+        } else if (rawCdTarget === '..' || rawCdTarget === '../') {
           setCurrentDir('~');
           output = null;
-        } else if (virtualDirs.includes(targetDir.replace('/', ''))) {
-          const cleanDir = targetDir.replace('/', '');
-          setCurrentDir(`~/${cleanDir}`);
-          output = <span className="text-slate-400 text-xs">Moved to {cleanDir}/. Type <span className="text-white font-bold">ls</span> to view contents.</span>;
         } else {
-          output = <span className="text-rose-400 text-xs">cd: no such file or directory: {args[0]}</span>;
+          const targetDir = rawCdTarget.toLowerCase().replace(/\/$/, '');
+          if (currentDir === '~') {
+            if (virtualDirs.includes(targetDir)) {
+              setCurrentDir(`~/${targetDir}`);
+              output = (
+                <span className="text-slate-400 text-xs">
+                  Moved to {targetDir}/. Type <span className="text-white font-bold">ls</span> to view contents.
+                </span>
+              );
+            } else {
+              output = <span className="text-rose-400 text-xs">cd: no such file or directory: {args[0]}</span>;
+            }
+          } else {
+            // Already inside a subfolder, e.g. ~/projects
+            if (targetDir === '..' || targetDir === '../') {
+              setCurrentDir('~');
+              output = null;
+            } else if (targetDir === currentDir.replace('~/', '')) {
+              output = (
+                <span className="text-slate-400 text-xs">
+                  cd: already in {currentDir} (type <span className="text-white font-bold">ls</span> to view contents or <span className="text-white font-bold">cd ..</span> to go back)
+                </span>
+              );
+            } else if (virtualDirs.includes(targetDir)) {
+              setCurrentDir(`~/${targetDir}`);
+              output = (
+                <span className="text-slate-400 text-xs">
+                  Moved to {targetDir}/. Type <span className="text-white font-bold">ls</span> to view contents.
+                </span>
+              );
+            } else {
+              const isProj = projectsData.some(p => p.id.toLowerCase() === targetDir.replace(/\.md$/, ''));
+              if (isProj) {
+                output = (
+                  <span className="text-amber-400 text-xs">
+                    cd: '{args[0]}' is a project file. Type <span className="text-white font-bold">cat {targetDir.replace(/\.md$/, '')}.md</span> to read it.
+                  </span>
+                );
+              } else {
+                output = <span className="text-rose-400 text-xs">cd: no such file or directory: {args[0]}</span>;
+              }
+            }
+          }
         }
         break;
 
@@ -704,15 +1008,31 @@ echo "Ready to build ambitious systems together."`}
       if (!trimmed) return;
 
       if (trimmed.startsWith('cat ')) {
-        const filePrefix = trimmed.replace('cat ', '');
-        const match = virtualFiles.find(f => f.startsWith(filePrefix));
+        const filePrefix = trimmed.replace('cat ', '').toLowerCase();
+        let availableFiles = [];
+        if (currentDir === '~') {
+          availableFiles = virtualFiles;
+        } else if (currentDir === '~/projects') {
+          availableFiles = projectsData.map(p => `${p.id}.md`);
+        } else if (currentDir === '~/skills') {
+          availableFiles = skillsFiles;
+        } else if (currentDir === '~/hackathons') {
+          availableFiles = hackathonFiles;
+        }
+        const match = availableFiles.find(f => f.toLowerCase().startsWith(filePrefix));
         if (match) setInput(`cat ${match}`);
         return;
       }
 
       if (trimmed.startsWith('cd ')) {
-        const dirPrefix = trimmed.replace('cd ', '');
-        const match = virtualDirs.find(d => d.startsWith(dirPrefix));
+        const dirPrefix = trimmed.replace('cd ', '').toLowerCase();
+        let availableDirs = [];
+        if (currentDir === '~') {
+          availableDirs = virtualDirs;
+        } else {
+          availableDirs = ['..', '~', ...virtualDirs];
+        }
+        const match = availableDirs.find(d => d.toLowerCase().startsWith(dirPrefix));
         if (match) setInput(`cd ${match}`);
         return;
       }
