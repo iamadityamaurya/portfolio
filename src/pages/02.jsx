@@ -4,14 +4,10 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { gsap, reducedMotion, scrollToTarget } from '../lib/scroll';
 import asciiCatImg from '../assets/ascii-cat-transparent.png';
 
-const P1_TEXT =
-    "I'm Aditya, a full-stack and AI software developer specializing in high-performance digital systems that not only look exceptional but feel intuitive. I bridge modern web frameworks, autonomous AI agent pipelines, and low-latency architectures to build digital products that reflect real craftsmanship.";
+const BIO_TEXT =
+    "I'm Aditya, a full-stack and AI software developer building autonomous agent pipelines, modern web frameworks, and low-latency systems. Every product is custom-engineered with relentless precision, high performance, and real craftsmanship.";
 
-const P2_TEXT =
-    "Every project I build is fully custom, engineered with clean abstractions rather than one size fits all templates. Whether it's an end-to-end AI automation studio, an offline-first native mobile application, or a competitive hackathon build, I approach each layer with relentless attention to precision and detail.";
-
-const P1_WORDS = P1_TEXT.split(' ');
-const P2_WORDS = P2_TEXT.split(' ');
+const BIO_WORDS = BIO_TEXT.split(' ');
 
 const AboutPage = () => {
     const rootRef = useRef(null);
@@ -22,14 +18,10 @@ const AboutPage = () => {
 
         if (reducedMotion()) {
             if (rootRef.current) {
-                rootRef.current.querySelectorAll('[data-p1-word], [data-p2-word]').forEach((el) => {
+                rootRef.current.querySelectorAll('[data-bio-word]').forEach((el) => {
                     el.style.color = '#ece9e2';
                     el.style.opacity = '1';
                 });
-                const p1Num = rootRef.current.querySelector('[data-p1-num]');
-                const p2Num = rootRef.current.querySelector('[data-p2-num]');
-                if (p1Num) { p1Num.style.color = '#ece9e2'; p1Num.style.opacity = '1'; }
-                if (p2Num) { p2Num.style.color = '#ece9e2'; p2Num.style.opacity = '1'; }
                 const bLeft = rootRef.current.querySelector('[data-bracket-left]');
                 const bRight = rootRef.current.querySelector('[data-bracket-right]');
                 if (bLeft) { bLeft.style.opacity = '1'; bLeft.style.transform = 'none'; }
@@ -49,10 +41,7 @@ const AboutPage = () => {
             const bRight = pin.querySelector('[data-bracket-right]');
             const catFrame = pin.querySelector('[data-cat-frame]');
             const riseLines = pin.querySelectorAll('[data-rise-line]');
-            const p1Words = pin.querySelectorAll('[data-p1-word]');
-            const p2Words = pin.querySelectorAll('[data-p2-word]');
-            const p1Num = pin.querySelector('[data-p1-num]');
-            const p2Num = pin.querySelector('[data-p2-num]');
+            const bioWords = pin.querySelectorAll('[data-bio-word]');
             const actionBtn = pin.querySelector('[data-action-btn]');
 
             // Pinned scroll timeline
@@ -62,7 +51,7 @@ const AboutPage = () => {
                     trigger: pin,
                     pin: true,
                     start: 'top top',
-                    end: () => `+=${window.innerHeight * 2.2}`,
+                    end: () => `+=${window.innerHeight * 1.5}`,
                     scrub: 0.6,
                     invalidateOnRefresh: true,
                 },
@@ -98,62 +87,27 @@ const AboutPage = () => {
                 );
             }
 
-            // 2. Paragraph 01 Word Illumination (gray to bright white)
-            const p1Start = 0.35;
-            if (p1Num) {
-                tl.fromTo(p1Num,
-                    { color: '#71717a', opacity: 0.4 },
-                    { color: '#ffffff', opacity: 1, duration: 0.15 },
-                    p1Start
-                );
-            }
-
-            if (p1Words.length) {
-                tl.fromTo(p1Words,
+            // 2. Word Illumination (gray to bright white) in one seamless go
+            const pStart = 0.35;
+            if (bioWords.length) {
+                tl.fromTo(bioWords,
                     { color: '#71717a', opacity: 0.35 },
                     {
                         color: '#ffffff',
                         opacity: 1,
                         stagger: 0.02,
-                        duration: 0.12,
+                        duration: 0.14,
                         ease: 'none',
                     },
-                    p1Start
+                    pStart
                 );
             }
 
-            const p1Duration = 0.12 + (p1Words.length - 1) * 0.02;
-            const p1End = p1Start + p1Duration;
+            const pDuration = 0.14 + (bioWords.length - 1) * 0.02;
+            const pEnd = pStart + pDuration;
 
-            // 3. Paragraph 02 Word Illumination (gray to bright white)
-            const p2Start = p1End + 0.18;
-            if (p2Num) {
-                tl.fromTo(p2Num,
-                    { color: '#71717a', opacity: 0.4 },
-                    { color: '#ffffff', opacity: 1, duration: 0.15 },
-                    p2Start
-                );
-            }
-
-            if (p2Words.length) {
-                tl.fromTo(p2Words,
-                    { color: '#71717a', opacity: 0.35 },
-                    {
-                        color: '#ffffff',
-                        opacity: 1,
-                        stagger: 0.02,
-                        duration: 0.12,
-                        ease: 'none',
-                    },
-                    p2Start
-                );
-            }
-
-            const p2Duration = 0.12 + (p2Words.length - 1) * 0.02;
-            const p2End = p2Start + p2Duration;
-
-            // 4. Action button reveal
-            const btnStart = p2End + 0.12;
+            // 3. Action button reveal
+            const btnStart = pEnd + 0.12;
             if (actionBtn) {
                 tl.fromTo(actionBtn,
                     { y: 18, opacity: 0 },
@@ -162,8 +116,8 @@ const AboutPage = () => {
                 );
             }
 
-            // 5. Comfortable settle hold before unpinning to the next section
-            tl.to({}, { duration: 0.4 });
+            // 4. Comfortable settle hold before unpinning to the next section
+            tl.to({}, { duration: 0.3 });
 
             return () => tl.kill();
         });
@@ -185,7 +139,7 @@ const AboutPage = () => {
                     {/* ── Main 2-Column Split Composition: Text on Left, Cat on Right ── */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
-                        {/* ── Left Column: [ About me ], 2 Paragraphs & Stats ── */}
+                        {/* ── Left Column: [ About me ], Bio narrative & Stats ── */}
                         <div className="lg:col-span-7 flex flex-col justify-between space-y-5 sm:space-y-6">
                             <div>
                                 {/* Micro Header Tag */}
@@ -218,61 +172,29 @@ const AboutPage = () => {
                                     </span>
                                 </h2>
 
-                                {/* Editorial narrative: mono index + scroll-scrubbed word illumination */}
+                                {/* Editorial narrative: single concise block in one go */}
                                 <div
                                     data-narrative
-                                    className="space-y-4 sm:space-y-5 text-sm sm:text-base lg:text-[1.05rem] leading-relaxed font-normal"
+                                    className="text-base sm:text-lg lg:text-[1.18rem] leading-relaxed font-normal"
                                 >
-                                    <div className="flex gap-3.5 sm:gap-4">
-                                        <span
-                                            aria-hidden="true"
-                                            data-p1-num
-                                            className="label pt-1 shrink-0 select-none text-[#71717a] transition-colors font-mono"
-                                            style={{ color: '#71717a', opacity: 0.4 }}
-                                        >
-                                            01
-                                        </span>
-                                        <p className="leading-relaxed">
-                                            {P1_WORDS.map((word, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    data-p1-word
-                                                    className="inline-block mr-[0.28em] text-[#71717a] transition-colors duration-150 select-text"
-                                                    style={{ color: '#71717a', opacity: 0.35 }}
-                                                >
-                                                    {word}
-                                                </span>
-                                            ))}
-                                        </p>
-                                    </div>
-                                    <div className="flex gap-3.5 sm:gap-4">
-                                        <span
-                                            aria-hidden="true"
-                                            data-p2-num
-                                            className="label pt-1 shrink-0 select-none text-[#71717a] transition-colors font-mono"
-                                            style={{ color: '#71717a', opacity: 0.4 }}
-                                        >
-                                            02
-                                        </span>
-                                        <p className="leading-relaxed">
-                                            {P2_WORDS.map((word, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    data-p2-word
-                                                    className="inline-block mr-[0.28em] text-[#71717a] transition-colors duration-150 select-text"
-                                                    style={{ color: '#71717a', opacity: 0.35 }}
-                                                >
-                                                    {word}
-                                                </span>
-                                            ))}
-                                        </p>
-                                    </div>
+                                    <p className="leading-relaxed">
+                                        {BIO_WORDS.map((word, idx) => (
+                                            <span
+                                                key={idx}
+                                                data-bio-word
+                                                className="inline-block mr-[0.28em] text-[#71717a] transition-colors duration-150 select-text"
+                                                style={{ color: '#71717a', opacity: 0.35 }}
+                                            >
+                                                {word}
+                                            </span>
+                                        ))}
+                                    </p>
                                 </div>
 
                                 {/* Mini Stats Strip */}
                                 <div className="mt-6 grid grid-cols-3 gap-2.5 sm:gap-3 border-t border-white/[0.08] pt-4 sm:pt-5">
                                     <div className="p-2.5 sm:p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-all">
-                                        <span className="block font-bold text-lg sm:text-xl text-white">17+</span>
+                                        <span className="block font-bold text-lg sm:text-xl text-white">15+</span>
                                         <span className="font-mono text-[10px] text-paper/50 uppercase tracking-wider">Shipped Builds</span>
                                     </div>
                                     <Link
@@ -312,7 +234,7 @@ const AboutPage = () => {
                             </div>
                         </div>
 
-                        {/* ── Right Column: Pure Floating ASCII Cat Visual (No Box) ── */}
+                        {/* ── Right Column: Pure Floating ASCII Cat Visual ── */}
                         <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center">
                             <div
                                 data-cat-frame
