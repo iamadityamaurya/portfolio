@@ -43,6 +43,7 @@
     "categorySlug": "extension",
     "badge": "Autonomous AI Pipeline",
     "image": "reelflowBanner",
+    "project video:": "/reelflow-promo-20s.mp4",
     "fullDescription": "I built an end-to-end Instagram content pipeline that starts by fetching an idea from the internet, then researches it using an AI agent, generates a few visual concepts, creates image assets, uses human-like voice generation for narration, combines the selected scenes into a final video, and pushes it directly to the content channel for publishing. The workflow is fully automated through a Telegram bot and runs through an internal production pipeline where each stage is validated before the final upload. It also handles rendering, subtitle generation, audio mixing, and direct publishing to Instagram, so the entire process works with minimal manual intervention.",
     "highlights": [
       "Idea discovery starts from online research and is expanded through AI-driven topic analysis before content generation",
@@ -79,6 +80,7 @@
     "category": "Extensions & AI",
     "categorySlug": "extension",
     "badge": "Autonomous Tool-Using AI",
+    "project video:": "/deepquery-promo-30s.mp4",
     "image": "deepResearchBanner",
     "fullDescription": "DeepQuery is not a single prompt sent to a model and it is not a fixed chain of searches. It uses LangChain for the model and tool layer, and LangGraph.js to coordinate the full research workflow as a state graph. A user question enters the graph and the planning agent decides which tools are relevant. Tool nodes run searches and analysis, then return their results into the shared research state. A synthesis node summarizes the evidence and checks what is still missing. LangGraph conditional edges then decide whether to route the state back into planning for another round or move forward to report generation. Once the evidence is sufficient, the graph produces and streams a grounded research report with the collected findings and reasoning steps visible in the workspace.",
     "highlights": [
@@ -151,6 +153,7 @@
     "categorySlug": "extension",
     "badge": "Telegram Automation",
     "image": "opencodebotBanner",
+    "project video:": "/opencodebot-promo-25s.mp4",
     "fullDescription": "OpenCodeBot wraps the OpenCode CLI in a Telegram-controlled workflow. Instead of sitting at the terminal for every task, you can send instructions through a Telegram bot and let it start, manage, and monitor the work for you. The bot acts as the remote control layer while OpenCode handles the underlying CLI work, making it possible to drive the full process from a chat interface.",
     "highlights": [
       "Control OpenCode CLI workflows directly from Telegram",
@@ -177,6 +180,7 @@
     "category": "Full Stack",
     "categorySlug": "fullstack",
     "badge": "Production Web & Mobile",
+    "project video:": "/bunkmait-promo-20s.mp4",
     "image": "bunkmaitBanner",
     "fullDescription": "BunkMAIT was built to solve the real frustrations students face during the semester: manually calculating attendance, guessing which classes can be skipped, finding faculty cabins, tracking assignments, and keeping up with academic schedules. The platform lets students set any threshold they want \u2014 30%, 50%, 75%, or even 90% \u2014 and instantly calculates how much attendance is safe to lose while still meeting the target. It includes automated timetable access, teacher and cabin lookup, syllabus tracking, academic calendar views, exam schedules, upcoming holidays, and attendance updates from students across the campus. This app was designed especially for students of Maharaja Agrasen Institute Of Technology, Delhi, and has been adopted by 1,000+ students in college, with students actively updating their attendance and academic details on the platform. A special thanks goes to my friends Swayam Bansal and Arun Kukrety for helping build this app.\n\nThe web app is available at bunkmait.adityamaurya.dev, the Android app is available via the linked APK, and the WhatsApp community helps students stay connected and updated.",
     "highlights": [

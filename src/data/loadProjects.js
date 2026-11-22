@@ -45,9 +45,14 @@ const imageMap = {
 
 export const projectsData = [...rawData]
   .sort((a, b) => (a.index ?? Infinity) - (b.index ?? Infinity))
-  .map((project) => ({
-    ...project,
-    image: imageMap[project.image] || project.image,
-  }));
+  .map((project) => {
+    const videoUrl = project['project video:'] || project['project video'] || project.projectVideo || project.video;
+    return {
+      ...project,
+      image: imageMap[project.image] || project.image,
+      video: videoUrl || null,
+      'project video:': videoUrl || null,
+    };
+  });
 
 export const shortTitle = (title) => title.split(/:| - | – | — /)[0];

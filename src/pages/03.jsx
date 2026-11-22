@@ -26,7 +26,11 @@ export const ProjectsPage = () => {
             const list = pin.querySelector('[data-list]');
             const n = panels.length;
             const rowH = () => rows[0].offsetHeight;
-            const panelH = () => window.innerHeight - NAV_H - rowH() * 2;
+            const panelH = () => {
+                const videoH = Math.ceil((window.innerWidth * 0.71) / (16 / 9));
+                const availableH = window.innerHeight - NAV_H - Math.floor(rowH() * 0.6);
+                return Math.max(availableH, videoH);
+            };
 
             gsap.set(panels, { height: (i) => (i === 0 ? panelH() : 0) });
             gsap.set(wraps, { left: (i) => (i === 0 ? '29%' : '0%'), width: (i) => (i === 0 ? '71%' : '0%') });
@@ -98,15 +102,28 @@ export const ProjectsPage = () => {
                                     data-wrap
                                     data-cursor="view"
                                     onClick={() => navigate('/projects', { state: { projectId: project.id } })}
-                                    className="overflow-hidden pin:absolute pin:top-0 pin:h-full nopin:aspect-video cursor-pointer"
+                                    className="overflow-hidden pin:absolute pin:top-0 pin:h-full nopin:aspect-video cursor-pointer relative"
                                 >
-                                    <img
-                                        src={project.image}
-                                        alt={shortTitle(project.title)}
-                                        loading="lazy"
-                                        decoding="async"
-                                        className="h-full w-full object-cover pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
-                                    />
+                                    {project.video ? (
+                                        <video
+                                            src={project.video}
+                                            poster={project.image}
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            preload="metadata"
+                                            className="h-full w-full object-contain object-right-top pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
+                                        />
+                                    ) : (
+                                        <img
+                                            src={project.image}
+                                            alt={shortTitle(project.title)}
+                                            loading="lazy"
+                                            decoding="async"
+                                            className="h-full w-full object-cover pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </article>

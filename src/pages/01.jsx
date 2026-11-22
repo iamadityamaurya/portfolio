@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
-import Donut from '../components/Donut';
 import { gsap, reducedMotion, scrollToTarget } from '../lib/scroll';
 
 const lines = [
@@ -28,9 +27,6 @@ const HomePage = ({ ready }) => {
 
     return (
         <section ref={rootRef} id="home" className="relative h-[100svh] min-h-[560px] overflow-hidden bg-ink">
-            <div className="absolute inset-0 z-0">
-                <Donut />
-            </div>
             <div
                 className="pointer-events-none absolute inset-0 z-[1] opacity-[0.12] mix-blend-overlay"
                 style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27160%27 height=%27160%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%272%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")' }}
