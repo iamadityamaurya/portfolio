@@ -208,8 +208,8 @@ const AboutPage = () => {
                                         <span className="font-mono text-[10px] text-cyan-300/70 uppercase tracking-wider group-hover:text-cyan-200 transition-colors">Hackathon Wins</span>
                                     </Link>
                                     <div className="p-2.5 sm:p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-all">
-                                        <span className="block font-bold text-lg sm:text-xl text-white">&lt;0.4s</span>
-                                        <span className="font-mono text-[10px] text-paper/50 uppercase tracking-wider">Voice AI Latency</span>
+                                        <span className="block font-bold text-lg sm:text-xl text-white">1k+</span>
+                                        <span className="font-mono text-[10px] text-paper/50 uppercase tracking-wider">Active Users</span>
                                     </div>
                                 </div>
 
