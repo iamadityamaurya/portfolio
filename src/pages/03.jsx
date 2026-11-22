@@ -68,7 +68,7 @@ export const ProjectsPage = () => {
                     <h2 className="display mt-4 text-[clamp(2.5rem,8vw,7rem)]">Builds</h2>
                 </div>
                 <Link to="/projects" className="label pb-2 text-paper/80 transition-colors hover:text-accent">
-                    All projects ({projectsData.length}) →
+                    All projects ({projectsData.filter((p) => p.projectPageShow !== false).length}) →
                 </Link>
             </div>
 

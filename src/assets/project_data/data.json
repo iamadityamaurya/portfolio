@@ -210,71 +210,6 @@
     "index": 6
   },
   {
-    "id": "alpha-line-follower",
-    "title": "Alpha Line Follower",
-    "tagline": "High-speed autonomous tracking robot with PID control & custom AVR registers",
-    "category": "IoT & Robotics",
-    "categorySlug": "iot",
-    "badge": "Hardware Champion",
-    "image": "lineFollowerBanner",
-    "fullDescription": "Alpha Line Follower was engineered for high-precision, high-speed line tracking across complex loops, hairpin turns, and intersecting courses. By bypassing standard Arduino digitalRead calls with direct AVR port manipulation, sensor polling latency was reduced to microseconds.",
-    "highlights": [
-      "8-Channel TCRT5000 IR sensor array for high-resolution edge detection",
-      "Fixed-point PID steering loop with dynamic Kp gain scaling on sharp curves",
-      "Dual N20 micro metal gearmotors (600 RPM) driven via TB6612FNG dual H-bridge",
-      "EEPROM storage for instant track calibration without reflashing firmware"
-    ],
-    "tech": [
-      "Arduino Nano",
-      "ATmega328P",
-      "C++",
-      "8-Channel IR Array",
-      "Fixed-Point PID",
-      "EEPROM Tuning",
-      "3D CAD"
-    ],
-    "links": {
-      "github": "https://github.com/iamadityamaurya/hardware_code/tree/main/Line%20follower/Alpha"
-    },
-    "featured": false,
-    "mainPageShow": false,
-    "projectPageShow": true,
-    "index": 7
-  },
-  {
-    "id": "fireshield",
-    "title": "FireShield Smart Safety",
-    "tagline": "Real-time smart home fire, smoke & gas detection with mobile telemetry",
-    "category": "IoT & Robotics",
-    "categorySlug": "iot",
-    "badge": "1st Prize Winner",
-    "image": "fireshieldBanner",
-    "fullDescription": "FireShield is an end-to-end IoT safety platform integrating an ESP32 edge device with MQ-2 gas/smoke sensors and DHT22 temperature tracking. Real-time telemetry is streamed over WebSockets to a React Native mobile application and cloud dashboard, dispatching immediate emergency text-to-speech audio alerts and Expo push notifications.",
-    "highlights": [
-      "Dual-core ESP32 edge processing with asynchronous sensor sampling",
-      "Real-time WebSocket streaming with sub-50ms emergency latency",
-      "React Native companion app with live environmental gauges and push alarms",
-      "Active hardware 85dB piezo buzzer and emergency failsafe triggers"
-    ],
-    "tech": [
-      "React Native",
-      "Expo",
-      "Node.js",
-      "Socket.IO",
-      "ESP32",
-      "Arduino C++",
-      "MQ-2 Gas Sensor"
-    ],
-    "links": {
-      "demo": "https://fire-1-l13l.onrender.com/health",
-      "github": "https://github.com/iamadityamaurya/fire"
-    },
-    "featured": false,
-    "mainPageShow": false,
-    "projectPageShow": true,
-    "index": 8
-  },
-  {
     "id": "nexgenquery",
     "title": "NexGenQuery",
     "tagline": "Local CSV visualizer and no-code SQL query generator",
@@ -304,7 +239,7 @@
     "featured": true,
     "mainPageShow": false,
     "projectPageShow": true,
-    "index": 9
+    "index": 7
   },
   {
     "id": "nexgenstorage",
@@ -338,7 +273,7 @@
     "featured": true,
     "mainPageShow": false,
     "projectPageShow": true,
-    "index": 10
+    "index": 8
   },
   {
     "id": "medscrapper",
@@ -370,7 +305,7 @@
     "featured": true,
     "mainPageShow": false,
     "projectPageShow": true,
-    "index": 11
+    "index": 9
   },
   {
     "id": "ai-filler-google-form",
@@ -403,7 +338,7 @@
     "featured": true,
     "mainPageShow": false,
     "projectPageShow": true,
-    "index": 12
+    "index": 10
   },
   {
     "id": "drive-stream-downloader",
@@ -435,7 +370,7 @@
     "mainPageShow": false,
     "stat": "Lossless 1080p/4K",
     "projectPageShow": true,
-    "index": 13
+    "index": 11
   },
   {
     "id": "restocker",
@@ -468,40 +403,7 @@
     "mainPageShow": false,
     "stat": "-40% Food Waste",
     "projectPageShow": true,
-    "index": 14
-  },
-  {
-    "id": "addybites",
-    "title": "AddyBites Food Network",
-    "tagline": "Modern full-stack food delivery experience with real-time checkout & order state",
-    "category": "Full Stack",
-    "categorySlug": "fullstack",
-    "badge": "E-Commerce",
-    "image": "addyBitesBanner",
-    "fullDescription": "AddyBites provides a seamless food ordering pipeline with dynamic menu filtering, secure JWT session management, MongoDB order history, and instant order state updates.",
-    "highlights": [
-      "Full authentication and role-based customer/admin dashboard",
-      "Optimistic cart updates with persistent storage",
-      "RESTful Express and MongoDB backend API architecture",
-      "Responsive mobile-first UI with smooth micro-animations"
-    ],
-    "tech": [
-      "React",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Tailwind CSS",
-      "JWT"
-    ],
-    "links": {
-      "demo": "https://addybites.adityamaurya.dev",
-      "github": "https://github.com/iamadityamaurya/addyBites"
-    },
-    "featured": true,
-    "mainPageShow": false,
-    "stat": "Full E2E Stack",
-    "projectPageShow": true,
-    "index": 15
+    "index": 12
   },
   {
     "id": "motia-onboarding",
@@ -534,6 +436,104 @@
     "mainPageShow": false,
     "stat": "Event-Driven",
     "projectPageShow": true,
+    "index": 13
+  },
+  {
+    "id": "alpha-line-follower",
+    "title": "Alpha Line Follower",
+    "tagline": "High-speed autonomous tracking robot with PID control & custom AVR registers",
+    "category": "IoT & Robotics",
+    "categorySlug": "iot",
+    "badge": "Hardware Champion",
+    "image": "lineFollowerBanner",
+    "fullDescription": "Alpha Line Follower was engineered for high-precision, high-speed line tracking across complex loops, hairpin turns, and intersecting courses. By bypassing standard Arduino digitalRead calls with direct AVR port manipulation, sensor polling latency was reduced to microseconds.",
+    "highlights": [
+      "8-Channel TCRT5000 IR sensor array for high-resolution edge detection",
+      "Fixed-point PID steering loop with dynamic Kp gain scaling on sharp curves",
+      "Dual N20 micro metal gearmotors (600 RPM) driven via TB6612FNG dual H-bridge",
+      "EEPROM storage for instant track calibration without reflashing firmware"
+    ],
+    "tech": [
+      "Arduino Nano",
+      "ATmega328P",
+      "C++",
+      "8-Channel IR Array",
+      "Fixed-Point PID",
+      "EEPROM Tuning",
+      "3D CAD"
+    ],
+    "links": {
+      "github": "https://github.com/iamadityamaurya/hardware_code/tree/main/Line%20follower/Alpha"
+    },
+    "featured": false,
+    "mainPageShow": false,
+    "projectPageShow": true,
+    "index": 14
+  },
+  {
+    "id": "fireshield",
+    "title": "FireShield Smart Safety",
+    "tagline": "Real-time smart home fire, smoke & gas detection with mobile telemetry",
+    "category": "IoT & Robotics",
+    "categorySlug": "iot",
+    "badge": "1st Prize Winner",
+    "image": "fireshieldBanner",
+    "fullDescription": "FireShield is an end-to-end IoT safety platform integrating an ESP32 edge device with MQ-2 gas/smoke sensors and DHT22 temperature tracking. Real-time telemetry is streamed over WebSockets to a React Native mobile application and cloud dashboard, dispatching immediate emergency text-to-speech audio alerts and Expo push notifications.",
+    "highlights": [
+      "Dual-core ESP32 edge processing with asynchronous sensor sampling",
+      "Real-time WebSocket streaming with sub-50ms emergency latency",
+      "React Native companion app with live environmental gauges and push alarms",
+      "Active hardware 85dB piezo buzzer and emergency failsafe triggers"
+    ],
+    "tech": [
+      "React Native",
+      "Expo",
+      "Node.js",
+      "Socket.IO",
+      "ESP32",
+      "Arduino C++",
+      "MQ-2 Gas Sensor"
+    ],
+    "links": {
+      "demo": "https://fire-1-l13l.onrender.com/health",
+      "github": "https://github.com/iamadityamaurya/fire"
+    },
+    "featured": false,
+    "mainPageShow": false,
+    "projectPageShow": true,
+    "index": 15
+  },
+  {
+    "id": "addybites",
+    "title": "AddyBites Food Network",
+    "tagline": "Modern full-stack food delivery experience with real-time checkout & order state",
+    "category": "Full Stack",
+    "categorySlug": "fullstack",
+    "badge": "E-Commerce",
+    "image": "addyBitesBanner",
+    "fullDescription": "AddyBites provides a seamless food ordering pipeline with dynamic menu filtering, secure JWT session management, MongoDB order history, and instant order state updates.",
+    "highlights": [
+      "Full authentication and role-based customer/admin dashboard",
+      "Optimistic cart updates with persistent storage",
+      "RESTful Express and MongoDB backend API architecture",
+      "Responsive mobile-first UI with smooth micro-animations"
+    ],
+    "tech": [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Tailwind CSS",
+      "JWT"
+    ],
+    "links": {
+      "demo": "https://addybites.adityamaurya.dev",
+      "github": "https://github.com/iamadityamaurya/addyBites"
+    },
+    "featured": true,
+    "mainPageShow": false,
+    "stat": "Full E2E Stack",
+    "projectPageShow": false,
     "index": 16
   },
   {
@@ -565,7 +565,7 @@
     "featured": false,
     "mainPageShow": false,
     "stat": "60 FPS Motion",
-    "projectPageShow": true,
+    "projectPageShow": false,
     "index": 17
   }
 ]
