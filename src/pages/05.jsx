@@ -224,7 +224,7 @@ const ContactPage = () => {
 
     return (
         <section id="contact" className="relative bg-ink text-paper">
-            <div ref={sectionRef} className="relative motion-safe:h-[200dvh] md:motion-safe:h-[250dvh]">
+            <div ref={sectionRef} className="relative motion-safe:h-[125dvh] sm:motion-safe:h-[180dvh] md:motion-safe:h-[250dvh]">
                 <div className="sticky top-0 grid h-[100dvh] place-items-center overflow-hidden" style={{ perspective: '1000px' }}>
                     <div className="pointer-events-none absolute inset-0 motion-reduce:hidden" style={{ transformStyle: 'preserve-3d' }} aria-hidden="true">
                         {slots.map((_, i) => (
@@ -238,22 +238,22 @@ const ContactPage = () => {
                         ))}
                     </div>
 
-                    <div data-contact-content className="relative z-10 flex w-[min(90%,50rem)] flex-col items-center gap-8 text-center">
-                        <h2 className="display text-[clamp(3.5rem,13vw,12.5rem)]">Contact</h2>
-                        <p className="max-w-[30em] text-base leading-relaxed text-paper/70 sm:text-lg">
+                    <div data-contact-content className="relative z-10 flex w-[min(92%,50rem)] flex-col items-center gap-6 sm:gap-8 text-center px-4">
+                        <h2 className="display text-[clamp(3.2rem,13vw,12.5rem)]">Contact</h2>
+                        <p className="max-w-[30em] text-sm sm:text-lg leading-relaxed text-paper/70">
                             Open to internships, freelance builds and hackathon teams. Have an idea? Let&apos;s talk.
                         </p>
-                        <div className="flex flex-wrap items-center justify-center gap-3">
+                        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
                             <button
                                 onClick={copyEmail}
-                                className="flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-sm text-white transition-transform hover:scale-[1.03] cursor-pointer"
+                                className="flex items-center gap-2 rounded-full bg-accent px-5 sm:px-6 py-2.5 sm:py-3 font-mono text-xs sm:text-sm text-white transition-transform hover:scale-[1.03] cursor-pointer"
                             >
-                                {copied ? <Check size={16} /> : <Copy size={16} />}
+                                {copied ? <Check size={15} /> : <Copy size={15} />}
                                 {copied ? 'Copied' : EMAIL}
                             </button>
                             {socials.map((s) => (
                                 <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer"
-                                   className="rounded-full border border-paper/25 px-5 py-3 font-mono text-sm transition-colors hover:border-paper hover:bg-paper hover:text-ink">
+                                   className="rounded-full border border-paper/25 px-4 sm:px-5 py-2.5 sm:py-3 font-mono text-xs sm:text-sm transition-colors hover:border-paper hover:bg-paper hover:text-ink">
                                     {s.name}
                                 </a>
                             ))}
@@ -262,13 +262,12 @@ const ContactPage = () => {
                 </div>
             </div>
 
-            <div className="mx-auto grid max-w-6xl gap-10 px-4 py-24 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div className="mx-auto grid max-w-6xl gap-8 sm:gap-10 px-4 py-14 sm:px-8 sm:py-24 lg:grid-cols-[0.8fr_1.2fr]">
                 <div>
-                    
-                    <h3 className="display mt-4 text-[clamp(2rem,5vw,4rem)]">Send a<br />message</h3>
+                    <h3 className="display mt-2 sm:mt-4 text-[clamp(2rem,6vw,4rem)]">Send a<br className="hidden sm:inline" /> message</h3>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid gap-6 sm:grid-cols-2">
+                <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+                    <div className="grid gap-5 sm:gap-6 sm:grid-cols-2">
                         <input name="name" value={formData.name} onChange={handleChange} required placeholder="Name" aria-label="Name" className={fieldClass} />
                         <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Email" aria-label="Email" className={fieldClass} />
                     </div>
@@ -277,7 +276,7 @@ const ContactPage = () => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="group label flex items-center gap-2.5 text-paper transition-colors hover:text-accent disabled:opacity-50 cursor-pointer"
+                        className="group label flex items-center gap-2.5 text-paper transition-colors hover:text-accent disabled:opacity-50 cursor-pointer text-xs sm:text-sm"
                     >
                         {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                         {isSubmitting ? (

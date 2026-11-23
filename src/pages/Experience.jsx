@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Building2, Code, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Calendar, Building2, Code, ExternalLink, ArrowLeft } from 'lucide-react';
 
 const ExperiencePage = () => {
     const experiences = [
@@ -25,6 +26,12 @@ const ExperiencePage = () => {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
             <div className="container mx-auto max-w-4xl relative z-10">
+                {/* Back Link */}
+                <Link to="/" className="group inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-400 transition-colors hover:text-white mb-6 sm:mb-8 font-mono">
+                    <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                    Back to home
+                </Link>
+
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

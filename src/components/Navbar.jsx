@@ -32,15 +32,15 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between px-3 sm:px-6 md:px-8 py-3 sm:py-4 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.5)] py-3.5'
-          : 'bg-transparent py-5'
+          ? 'bg-[#0a0a0a]/85 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.5)] py-2.5 sm:py-3.5'
+          : 'bg-transparent py-3.5 sm:py-5'
       } text-white`}
     >
       <Link
         to="/"
-        className="group flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight select-none cursor-pointer"
+        className="group flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base md:text-lg font-bold tracking-tight select-none cursor-pointer shrink-0"
         aria-label="Aditya Kumar Maurya, home"
       >
         <span className="transition-transform duration-300 group-hover:scale-105">
@@ -49,7 +49,7 @@ export const Navbar = () => {
       </Link>
 
       <nav
-        className="flex items-center gap-1 sm:gap-2 font-mono text-xs sm:text-sm"
+        className="flex items-center gap-0.5 sm:gap-1 md:gap-2 font-mono text-[11px] sm:text-xs md:text-sm"
         onMouseLeave={() => setHoveredIndex(null)}
       >
         {navItems.map((item, idx) => {
@@ -57,7 +57,7 @@ export const Navbar = () => {
           const isHovered = hoveredIndex === idx;
 
           const content = (
-            <span className="relative z-10 px-3 py-1.5 block">
+            <span className="relative z-10 px-2 sm:px-3 py-1 sm:py-1.5 block">
               {item.label}
               {isHovered && (
                 <motion.span
@@ -67,7 +67,7 @@ export const Navbar = () => {
                 />
               )}
               {isCurrent && !isHovered && (
-                <span className="absolute bottom-0 inset-x-3 h-[2px] bg-[#2b4bff] rounded-full shadow-[0_0_6px_#2b4bff]" />
+                <span className="absolute bottom-0 inset-x-2 sm:inset-x-3 h-[2px] bg-[#2b4bff] rounded-full shadow-[0_0_6px_#2b4bff]" />
               )}
             </span>
           );

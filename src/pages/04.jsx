@@ -266,11 +266,32 @@ const SkillsPage = () => {
                         </div>
                     </header>
 
+                    {/* ── Mobile/Tablet Quick Category Tabs (< lg) ── */}
+                    <div className="lg:hidden mb-5 -mx-4 px-4 overflow-x-auto flex items-center gap-2 pb-2 scrollbar-none no-scrollbar">
+                        {categories.map((cat, idx) => {
+                            const isActive = idx === activeIndex;
+                            return (
+                                <button
+                                    key={cat.number}
+                                    onClick={() => goToCategory(idx, false)}
+                                    className={`px-3.5 py-1.5 rounded-full font-mono text-xs whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-2 shrink-0 ${
+                                        isActive
+                                            ? 'bg-[#2b4bff] text-white font-bold shadow-[0_0_12px_rgba(43,75,255,0.4)]'
+                                            : 'border border-white/10 bg-white/5 text-white/70 hover:text-white hover:border-white/20'
+                                    }`}
+                                >
+                                    <span className={isActive ? 'text-white/80' : 'text-[#2b4bff]'}>{cat.number}</span>
+                                    <span>{cat.name}</span>
+                                </button>
+                            );
+                        })}
+                    </div>
+
                     {/* ── 2-Column Layout: Left List & Right Bento Card ── */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-stretch">
                         
-                        {/* ── Left Column: Categories List ── */}
-                        <div className="lg:col-span-5 flex flex-col justify-center divide-y divide-white/10 border-t border-b border-white/10">
+                        {/* ── Left Column: Categories List (Desktop only) ── */}
+                        <div className="hidden lg:flex lg:col-span-5 flex-col justify-center divide-y divide-white/10 border-t border-b border-white/10">
                             {categories.map((cat, idx) => {
                                 const isActive = idx === activeIndex;
                                 return (
@@ -308,7 +329,7 @@ const SkillsPage = () => {
 
                         {/* ── Right Column: Clean Modern Bento Showcase ── */}
                         <div className="lg:col-span-7">
-                            <div className="relative rounded-[26px] border border-white/[0.12] bg-[#0d0d10] p-6 sm:p-8 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between min-h-[500px] h-[500px]">
+                            <div className="relative rounded-2xl sm:rounded-[26px] border border-white/[0.12] bg-[#0d0d10] p-4 sm:p-7 lg:p-8 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between min-h-[420px] sm:min-h-[460px] lg:h-[500px]">
                                 
                                 {/* Crisp blueprint grid pattern */}
                                 <div
@@ -330,16 +351,21 @@ const SkillsPage = () => {
 
                                 {/* ── Card Top Header ── */}
                                 <div className="relative z-10">
-                                    <h3 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-tight">
-                                        {activeCategory.name}
-                                    </h3>
+                                    <div className="flex items-center justify-between">
+                                        <h3 className="text-2xl sm:text-3xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-tight">
+                                            {activeCategory.name}
+                                        </h3>
+                                        <span className="lg:hidden font-mono text-xs text-[#2b4bff] font-bold px-2 py-0.5 rounded bg-[#2b4bff]/10 border border-[#2b4bff]/20">
+                                            {activeCategory.number}
+                                        </span>
+                                    </div>
                                     <p className="mt-1 text-xs sm:text-sm text-white/55 font-sans max-w-xl">
                                         {activeCategory.description}
                                     </p>
                                 </div>
 
                                 {/* ── Animated 2-Column List of Technologies ── */}
-                                <div className="relative z-10 my-6 sm:my-8 flex-1 flex flex-col justify-center">
+                                <div className="relative z-10 my-4 sm:my-8 flex-1 flex flex-col justify-center">
                                     <AnimatePresence mode="wait">
                                         <motion.div
                                             key={activeCategory.number}
@@ -347,22 +373,22 @@ const SkillsPage = () => {
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -10 }}
                                             transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-                                            className="grid grid-cols-2 gap-x-8 sm:gap-x-14 gap-y-7 sm:gap-y-8 py-3 sm:py-5"
+                                            className="grid grid-cols-2 gap-x-4 sm:gap-x-12 gap-y-4 sm:gap-y-8 py-2 sm:py-5"
                                         >
                                             {activeCategory.technologies.map((tech) => (
                                                 <div
                                                     key={tech.name}
-                                                    className="group flex items-center gap-4 sm:gap-4.5 select-none cursor-default"
+                                                    className="group flex items-center gap-2.5 sm:gap-4 select-none cursor-default min-w-0"
                                                 >
-                                                    <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
+                                                    <div className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
                                                         <img
                                                             src={tech.icon}
                                                             alt={tech.name}
-                                                            className="w-6 h-6 sm:w-7 sm:h-7 object-contain group-hover:scale-110 transition-transform duration-200"
+                                                            className="w-5 h-5 sm:w-7 sm:h-7 object-contain group-hover:scale-110 transition-transform duration-200"
                                                             loading="lazy"
                                                         />
                                                     </div>
-                                                    <span className="text-base sm:text-lg font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors">
+                                                    <span className="text-xs sm:text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors truncate">
                                                         {tech.name}
                                                     </span>
                                                 </div>
@@ -372,7 +398,7 @@ const SkillsPage = () => {
                                 </div>
 
                                 {/* ── Card Bottom Footer Bar ── */}
-                                <div className="relative z-10 flex items-center justify-between pt-4 border-t border-white/[0.06]">
+                                <div className="relative z-10 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 pt-3 sm:pt-4 border-t border-white/[0.06]">
                                     {/* Pagination pill segments */}
                                     <div className="flex items-center gap-1.5">
                                         {categories.map((c, i) => (
@@ -381,8 +407,8 @@ const SkillsPage = () => {
                                                 onClick={() => goToCategory(i)}
                                                 className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                                                     i === activeIndex
-                                                        ? 'w-7 sm:w-8 bg-[#2b4bff] shadow-[0_0_8px_rgba(43,75,255,0.6)]'
-                                                        : 'w-2 bg-white/20 hover:bg-white/40'
+                                                        ? 'w-5 sm:w-8 bg-[#2b4bff] shadow-[0_0_8px_rgba(43,75,255,0.6)]'
+                                                        : 'w-1.5 sm:w-2 bg-white/20 hover:bg-white/40'
                                                 }`}
                                                 aria-label={`Switch to ${c.name}`}
                                             />
@@ -390,30 +416,30 @@ const SkillsPage = () => {
                                     </div>
 
                                     {/* Controls: status + play/pause + prev/next */}
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono text-[11px] tracking-widest text-white/40 uppercase select-none">
+                                    <div className="flex items-center gap-2 sm:gap-3">
+                                        <span className="font-mono text-[10px] sm:text-[11px] tracking-widest text-white/40 uppercase select-none">
                                             {isPlaying ? 'AUTOPLAY' : 'PAUSED'}
                                         </span>
                                         <button
                                             onClick={togglePlay}
-                                            className="w-8 h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
                                             aria-label={isPlaying ? 'Pause auto-cycle' : 'Start auto-cycle'}
                                         >
-                                            {isPlaying ? <Pause size={12} /> : <Play size={12} className="ml-0.5" />}
+                                            {isPlaying ? <Pause size={11} /> : <Play size={11} className="ml-0.5" />}
                                         </button>
                                         <button
                                             onClick={prevCategory}
-                                            className="w-8 h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
                                             aria-label="Previous category"
                                         >
-                                            <ArrowLeft size={13} />
+                                            <ArrowLeft size={12} />
                                         </button>
                                         <button
                                             onClick={nextCategory}
-                                            className="w-8 h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
+                                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all cursor-pointer"
                                             aria-label="Next category"
                                         >
-                                            <ArrowRight size={13} />
+                                            <ArrowRight size={12} />
                                         </button>
                                     </div>
                                 </div>

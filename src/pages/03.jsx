@@ -62,12 +62,12 @@ export const ProjectsPage = () => {
 
     return (
         <section id="projects" className="relative bg-ink text-paper">
-            <div className="flex items-end justify-between px-4 pb-8 pt-24 sm:px-8 sm:pt-32">
+            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-4 pb-6 sm:pb-8 pt-20 sm:pt-32">
                 <div>
-                    <p className="label text-muted">( Selected work )</p>
-                    <h2 className="display mt-4 text-[clamp(2.5rem,8vw,7rem)]">Builds</h2>
+                    <p className="label text-muted text-[11px] sm:text-xs">( Selected work )</p>
+                    <h2 className="display mt-2 sm:mt-4 text-[clamp(2.5rem,8vw,7rem)]">Builds</h2>
                 </div>
-                <Link to="/projects" className="label pb-2 text-paper/80 transition-colors hover:text-accent">
+                <Link to="/projects" className="label pb-1 sm:pb-2 text-paper/80 transition-colors hover:text-accent text-[11px] sm:text-xs">
                     All projects ({projectsData.filter((p) => p.projectPageShow !== false).length}) →
                 </Link>
             </div>
@@ -82,23 +82,23 @@ export const ProjectsPage = () => {
                                 onClick={() => {
                                     navigate('/projects', { state: { projectId: project.id } });
                                 }}
-                                className="flex w-full items-center justify-between gap-6 border-t border-paper/20 px-4 py-5 text-left sm:px-8 cursor-pointer group hover:bg-white/[0.015] transition-colors"
+                                className="flex w-full items-center justify-between gap-4 sm:gap-6 border-t border-paper/20 px-4 py-4 sm:py-5 text-left sm:px-8 cursor-pointer group hover:bg-white/[0.015] transition-colors"
                             >
                                 <div className="flex items-center gap-4">
                                     <span className="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
                                         View case study →
                                     </span>
                                 </div>
-                                <span className="display truncate text-right text-[clamp(1.6rem,4.4vw,4rem)] transition-colors group-hover:text-accent">
+                                <span className="display truncate text-right text-[clamp(1.5rem,5vw,4rem)] transition-colors group-hover:text-accent">
                                     {shortTitle(project.title)}
                                 </span>
                             </button>
                             <div data-panel className="relative overflow-hidden nopin:px-4 nopin:pb-10">
-                                <p data-desc className="max-w-md text-sm leading-relaxed text-paper/70 pin:absolute pin:bottom-8 pin:left-8 pin:w-[25%] nopin:mb-5">
-                                    <span className="flex items-center gap-2 mb-3">
-                                        <span className="label text-accent">{project.category}</span>
+                                <p data-desc className="max-w-md text-sm leading-relaxed text-paper/70 pin:absolute pin:bottom-8 pin:left-8 pin:w-[25%] nopin:mb-4">
+                                    <span className="flex items-center gap-2 mb-2 sm:mb-3">
+                                        <span className="label text-accent text-[11px] sm:text-xs">{project.category}</span>
                                         {project.badge && (
-                                            <span className="font-mono text-[10px] px-2 py-0.5 rounded-full border border-white/10 bg-white/5 text-paper/80 uppercase tracking-wider">
+                                            <span className="font-mono text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full border border-white/10 bg-white/5 text-paper/80 uppercase tracking-wider">
                                                 {project.badge}
                                             </span>
                                         )}
@@ -109,7 +109,7 @@ export const ProjectsPage = () => {
                                     data-wrap
                                     data-cursor="view"
                                     onClick={() => navigate('/projects', { state: { projectId: project.id } })}
-                                    className="overflow-hidden pin:absolute pin:top-0 pin:h-full nopin:aspect-video cursor-pointer relative"
+                                    className="overflow-hidden rounded-2xl border border-white/10 pin:border-0 pin:rounded-none pin:absolute pin:top-0 pin:h-full nopin:aspect-video cursor-pointer relative shadow-lg"
                                 >
                                     {project.video ? (
                                         <video
@@ -120,7 +120,7 @@ export const ProjectsPage = () => {
                                             muted
                                             playsInline
                                             preload="metadata"
-                                            className="h-full w-full object-contain object-right-top pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
+                                            className="h-full w-full object-cover sm:object-contain object-center sm:object-right-top pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
                                         />
                                     ) : (
                                         <img
@@ -128,7 +128,7 @@ export const ProjectsPage = () => {
                                             alt={shortTitle(project.title)}
                                             loading="lazy"
                                             decoding="async"
-                                            className="h-full w-full object-cover pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
+                                            className="h-full w-full object-cover object-center sm:object-right-top pin:absolute pin:right-0 pin:top-0 pin:w-[71vw] transition-transform duration-700 ease-out group-hover:scale-105"
                                         />
                                     )}
                                 </div>

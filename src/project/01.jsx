@@ -53,12 +53,14 @@ export const AllProjectsPage = () => {
     return null;
   });
 
+  const [mobileTab, setMobileTab] = useState('detail');
   const [copied, setCopied] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState('all');
 
   // Sync selection with URL search parameters
   const selectProject = (project) => {
     setSelected(project);
+    setMobileTab('detail');
     if (project) {
       setSearchParams({ view: project.id }, { replace: true });
     } else {
@@ -406,19 +408,21 @@ export const AllProjectsPage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-[72px] sm:top-[80px] z-40 flex flex-col lg:flex-row bg-[#08090d] text-paper overflow-hidden"
+            className="fixed inset-0 top-[56px] sm:top-[72px] lg:top-[80px] z-40 flex flex-col lg:flex-row bg-[#08090d] text-paper overflow-hidden"
           >
             {/* ---------------------------------------------------- */}
-            {/* LEFT COLUMN: PROJECTS RAIL (Goes to the side)        */}
+            {/* LEFT COLUMN: PROJECTS RAIL                           */}
             {/* ---------------------------------------------------- */}
             <motion.aside
               initial={{ x: -40, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full lg:w-[380px] xl:w-[440px] h-[38vh] lg:h-full border-b lg:border-b-0 lg:border-r border-paper/10 flex flex-col bg-[#06080c] shrink-0 z-10"
+              className={`w-full lg:w-[380px] xl:w-[440px] h-full lg:border-r border-paper/10 flex flex-col bg-[#06080c] shrink-0 z-10 ${
+                mobileTab === 'list' ? 'flex' : 'hidden lg:flex'
+              }`}
             >
               {/* Top Rail Control Bar */}
-              <div className="p-4 sm:p-5 border-b border-paper/10 flex items-center justify-between bg-[#06080c]/95 backdrop-blur-md shrink-0">
+              <div className="p-3.5 sm:p-5 border-b border-paper/10 flex items-center justify-between bg-[#06080c]/95 backdrop-blur-md shrink-0">
                 <button
                   onClick={() => selectProject(null)}
                   className="group inline-flex items-center gap-2 font-mono text-xs font-semibold text-paper/80 hover:text-orange transition-colors cursor-pointer"
@@ -435,6 +439,14 @@ export const AllProjectsPage = () => {
                   <span className="font-mono text-xs text-orange font-semibold">
                     {String(selectedIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
                   </span>
+                  {selected && (
+                    <button
+                      onClick={() => setMobileTab('detail')}
+                      className="lg:hidden px-2.5 py-1 rounded-full border border-orange/40 bg-orange/10 text-orange font-mono text-[11px] font-semibold"
+                    >
+                      View Details →
+                    </button>
+                  )}
                   <button
                     onClick={() => selectProject(null)}
                     className="p-1.5 rounded-full border border-paper/15 text-muted hover:text-paper hover:border-orange transition-all cursor-pointer"
@@ -473,7 +485,10 @@ export const AllProjectsPage = () => {
                     <div
                       key={p.id}
                       ref={isActive ? activeRailCardRef : null}
-                      onClick={() => selectProject(p)}
+                      onClick={() => {
+                        selectProject(p);
+                        setMobileTab('detail');
+                      }}
                       className={`group relative p-3 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center gap-3 ${
                         isActive
                           ? 'border-orange bg-orange/[0.08] shadow-[0_4px_24px_rgba(255,106,61,0.18)]'
@@ -540,13 +555,23 @@ export const AllProjectsPage = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               data-lenis-prevent="true"
-              className="flex-1 h-[62vh] lg:h-full overflow-y-auto bg-[#090b10] flex flex-col overscroll-contain"
+              className={`flex-1 h-full overflow-y-auto bg-[#090b10] flex-col overscroll-contain ${
+                mobileTab === 'detail' ? 'flex' : 'hidden lg:flex'
+              }`}
             >
               {/* Sticky Detail Top Control Bar */}
-              <div className="sticky top-0 z-30 px-5 sm:px-8 py-3.5 bg-[#090b10]/95 backdrop-blur-xl border-b border-paper/10 flex items-center justify-between shrink-0">
-                {/* Left: Category & Badge */}
-                <div className="flex items-center gap-2.5">
-                  <span className="font-mono text-xs font-semibold text-orange uppercase tracking-wider">
+              <div className="sticky top-0 z-30 px-4 sm:px-8 py-3 sm:py-3.5 bg-[#090b10]/95 backdrop-blur-xl border-b border-paper/10 flex items-center justify-between shrink-0">
+                {/* Left: Mobile switch to list or Category & Badge */}
+                <div className="flex items-center gap-2 sm:gap-2.5">
+                  <button
+                    onClick={() => setMobileTab('list')}
+                    className="lg:hidden flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-paper/20 bg-paper/5 font-mono text-[11px] text-paper/80 hover:text-white hover:border-orange cursor-pointer"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span>Projects</span>
+                  </button>
+
+                  <span className="font-mono text-[11px] sm:text-xs font-semibold text-orange uppercase tracking-wider truncate max-w-[120px] sm:max-w-none">
                     [ {selected.category} ]
                   </span>
                   <span className="hidden sm:inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 font-mono text-[11px] text-emerald-400">
