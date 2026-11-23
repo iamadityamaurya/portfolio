@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { gsap, reducedMotion, scrollToTarget } from '../lib/scroll';
+import { BackgroundCubesGrid } from '../components/ui/background-cubes-grid';
 
 const lines = [
     { text: 'Aditya', className: 'text-paper' },
@@ -26,9 +27,31 @@ const HomePage = ({ ready }) => {
     }, [ready]);
 
     return (
-        <section ref={rootRef} id="home" className="relative h-[100svh] min-h-[560px] overflow-hidden bg-ink">
+        <section ref={rootRef} id="home" className="relative h-[100svh] min-h-[560px] overflow-hidden bg-[#0a0a0c]">
+            {/* 3D Perspective Cubes Grid Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-85">
+                <BackgroundCubesGrid
+                    variant="perspective"
+                    baseColor="#161822"
+                    waveColor="#2b4bff"
+                    backgroundColor="#0a0a0c"
+                    glow={1.1}
+                    amplitude={0.65}
+                    tilt={0.6}
+                    gridSize={48}
+                    gap={0.07}
+                />
+            </div>
+
+            {/* Radial vignette overlay to keep text ultra-readable */}
             <div
-                className="pointer-events-none absolute inset-0 z-[1] opacity-[0.12] mix-blend-overlay"
+                className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,10,12,0.4)_50%,rgba(10,10,12,0.92)_100%)]"
+                aria-hidden="true"
+            />
+
+            {/* Subtle grain texture overlay */}
+            <div
+                className="pointer-events-none absolute inset-0 z-[3] opacity-[0.08] mix-blend-overlay"
                 style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27160%27 height=%27160%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%272%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")' }}
                 aria-hidden="true"
             />
@@ -37,14 +60,14 @@ const HomePage = ({ ready }) => {
                 {/* Live Availability Status Badge */}
                 
 
-                <h1 className="display text-[clamp(3.4rem,15vw,14rem)]" aria-label="Aditya Kumar Maurya">
+                <h1 className="display text-[clamp(3.4rem,15vw,14rem)] drop-shadow-2xl" aria-label="Aditya Kumar Maurya">
                     {lines.map((line) => (
                         <span key={line.text} className="mask pb-[0.04em]">
                             <span data-rise className={line.className}>{line.text}</span>
                         </span>
                     ))}
                 </h1>
-                <p data-fade className="label mt-6 text-paper/80 sm:mt-8">
+                <p data-fade className="label mt-6 text-paper/90 sm:mt-8 tracking-widest drop-shadow-md">
                     Full Stack &amp; Android Developer
                 </p>
             </div>

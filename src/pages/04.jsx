@@ -214,7 +214,9 @@ const SkillsPage = () => {
                     pin: true,
                     start: 'top top',
                     end: () => `+=${window.innerHeight * (categories.length - 1) * 0.3}`,
-                    scrub: 0.3,
+                    scrub: 0.2,
+                    anticipatePin: 1,
+                    fastScrollEnd: true,
                     invalidateOnRefresh: true,
                     onUpdate: (self) => {
                         if (isProgrammaticRef.current) return;

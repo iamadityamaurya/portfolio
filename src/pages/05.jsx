@@ -183,16 +183,16 @@ const ContactPage = () => {
         if (reducedMotion()) return;
         const ctx = gsap.context(() => {
             gsap.fromTo('[data-contact-content]',
-                { opacity: 0, yPercent: 25, scale: 0.96, filter: 'blur(8px)' },
-                { opacity: 1, yPercent: 0, scale: 1, filter: 'blur(0px)', ease: 'none',
-                  scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: true } });
+                { opacity: 0, y: 35, scale: 0.98 },
+                { opacity: 1, y: 0, scale: 1, ease: 'none',
+                  scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'top 25%', scrub: 0.3 } });
 
             const words = gsap.utils.toArray('[data-word]');
             const n = words.length;
             if (!n) return;
 
             const tl = gsap.timeline({
-                scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
+                scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 0.4 },
             });
 
             words.forEach((word, i) => {
@@ -231,7 +231,7 @@ const ContactPage = () => {
                             <span
                                 key={i}
                                 data-word
-                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[clamp(1.1rem,2vw,2.5rem)] font-light uppercase tracking-wider text-paper/75 opacity-0 select-none pointer-events-none"
+                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[clamp(1.1rem,2vw,2.5rem)] font-light uppercase tracking-wider text-paper/75 opacity-0 select-none pointer-events-none will-change-transform"
                             >
                                 {WORDS[i % WORDS.length]}
                             </span>
