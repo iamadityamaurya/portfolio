@@ -313,7 +313,7 @@ export const AllProjectsPage = () => {
                         <h2
                           data-title
                           onClick={() => selectProject(project)}
-                          className="mt-3 text-[clamp(2.5rem,6vw,5.5rem)] font-medium uppercase leading-[0.95] tracking-tight transition-colors hover:text-orange cursor-pointer"
+                          className="mt-3 text-[clamp(2.2rem,5vw,4.5rem)] font-medium uppercase leading-[0.98] tracking-tight transition-colors hover:text-orange cursor-pointer break-normal"
                         >
                           {shortTitle(project.title)}
                         </h2>

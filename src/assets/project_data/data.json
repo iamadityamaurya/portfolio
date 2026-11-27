@@ -114,7 +114,7 @@
   },
   {
     "id": "live-text-ocr",
-    "title": "Live Text OCR for Ubuntu",
+    "title": "Live Text OCR",
     "tagline": "Native, lightweight utility bringing macOS \"Live Text\" experience to Linux desktop environments",
     "category": "Extensions & AI",
     "categorySlug": "extension",
