@@ -147,7 +147,7 @@
   },
   {
     "id": "opencodebot",
-    "title": "OpenCodeBot",
+    "title": "OpenCode Bot",
     "tagline": "Telegram-controlled wrapper around the OpenCode CLI",
     "category": "Extensions & AI",
     "categorySlug": "extension",

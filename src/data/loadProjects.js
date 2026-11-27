@@ -21,7 +21,7 @@ import nexgenqueryBanner from '../assets/project_png/nexgenquery-showcase.png';
 import dsdBanner from '../assets/project_png/dsd-showcase.png';
 import lineFollowerBanner from '../assets/project_png/line-follower-alpha.png';
 import unlimitedStorageBanner from '../assets/project_png/unlimited-storage-showcase.png';
-import opencodebotBanner from '../assets/project_png/opencodebot-showcase.svg';
+import opencodebotBanner from '../assets/project_png/opencodebot-showcase.png';
 
 const imageMap = {
   openwhisprBanner,
