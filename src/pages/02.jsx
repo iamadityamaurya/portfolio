@@ -143,16 +143,9 @@ const AboutPage = () => {
                     {/* ── Main 2-Column Split Composition: Text on Left, Cat on Right ── */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
-                        {/* ── Left Column: [ About me ], Bio narrative & Stats ── */}
+                        {/* ── Left Column: Bio narrative & Stats ── */}
                         <div className="lg:col-span-7 flex flex-col justify-between space-y-4 sm:space-y-6">
                             <div>
-                                {/* Micro Header Tag */}
-                                <div className="mask mb-2 sm:mb-3">
-                                    <p data-rise-line className="label text-muted text-[11px] sm:text-xs">
-                                        ( Engineering &amp; Philosophy )
-                                    </p>
-                                </div>
-
                                 {/* Section Display Heading */}
                                 <h2
                                     className="display mb-4 sm:mb-6 text-[clamp(2.5rem,7vw,5.5rem)] tracking-tight text-paper"
