@@ -64,8 +64,7 @@ export const ProjectsPage = () => {
         <section id="projects" className="relative bg-ink text-paper">
             <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-4 pb-6 sm:pb-8 pt-20 sm:pt-32">
                 <div>
-                    <p className="label text-muted text-[11px] sm:text-xs">( Selected work )</p>
-                    <h2 className="display mt-2 sm:mt-4 text-[clamp(2.5rem,8vw,7rem)]">Builds</h2>
+                    <h2 className="display text-[clamp(2.5rem,8vw,7rem)]">Builds</h2>
                 </div>
                 <Link to="/projects" className="label pb-1 sm:pb-2 text-paper/80 transition-colors hover:text-accent text-[11px] sm:text-xs">
                     All projects ({projectsData.filter((p) => p.projectPageShow !== false).length}) →
