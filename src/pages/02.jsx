@@ -22,10 +22,10 @@ const AboutPage = () => {
                     el.style.color = '#ece9e2';
                     el.style.opacity = '1';
                 });
-                const bLeft = rootRef.current.querySelector('[data-bracket-left]');
-                const bRight = rootRef.current.querySelector('[data-bracket-right]');
-                if (bLeft) { bLeft.style.opacity = '1'; bLeft.style.transform = 'none'; }
-                if (bRight) { bRight.style.opacity = '1'; bRight.style.transform = 'none'; }
+                rootRef.current.querySelectorAll('[data-rise-line]').forEach((el) => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                });
                 const catFrame = rootRef.current.querySelector('[data-cat-frame]');
                 if (catFrame) { catFrame.style.opacity = '1'; catFrame.style.transform = 'none'; }
                 const actionBtn = rootRef.current.querySelector('[data-action-btn]');
@@ -147,33 +147,19 @@ const AboutPage = () => {
                         <div className="lg:col-span-7 flex flex-col justify-between space-y-4 sm:space-y-6">
                             <div>
                                 {/* Micro Header Tag */}
-                                <div className="overflow-hidden mb-2 sm:mb-2.5">
-                                    <span data-rise-line className="label text-cyan-400/90 text-[11px] sm:text-xs font-mono tracking-widest uppercase flex items-center gap-2">
-                                        <span className="w-2.5 h-0.5 bg-cyan-400" />
-                                        Engineering &amp; Philosophy
-                                    </span>
+                                <div className="mask mb-2 sm:mb-3">
+                                    <p data-rise-line className="label text-muted text-[11px] sm:text-xs">
+                                        ( Engineering &amp; Philosophy )
+                                    </p>
                                 </div>
 
-                                {/* Distinctive [ About me ] Marker */}
+                                {/* Section Display Heading */}
                                 <h2
-                                    data-bracket-heading
-                                    className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-paper mb-4 sm:mb-6 overflow-visible flex items-baseline font-sans uppercase"
+                                    className="display mb-4 sm:mb-6 text-[clamp(2.5rem,7vw,5.5rem)] tracking-tight text-paper"
                                 >
-                                    <span
-                                        data-bracket-left
-                                        aria-hidden="true"
-                                        className="inline-block text-[#2b4bff] mr-2 sm:mr-3 select-none"
-                                    >
-                                        [
-                                    </span>
-                                    <span>About me</span>
-                                    <span
-                                        data-bracket-right
-                                        aria-hidden="true"
-                                        className="inline-block text-[#2b4bff] ml-2 sm:mr-3 select-none"
-                                    >
-                                        ]
-                                    </span>
+                                    <div className="mask pb-[0.05em]">
+                                        <span data-rise-line className="block">About</span>
+                                    </div>
                                 </h2>
 
                                 {/* Editorial narrative: single concise block in one go */}
